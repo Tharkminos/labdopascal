@@ -1,0 +1,176 @@
+/* ================= RESET ================= */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+
+/* ================= TOPO ================= */
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #1e293b;
+    color: white;
+
+    padding: 12px 20px;
+
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    font-weight: bold;
+}
+
+.login a {
+    color: white;
+    text-decoration: none;
+}
+
+
+/* ================= BOTÃO MOBILE ================= */
+.menu-mobile {
+    display: none;
+    font-size: 22px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+
+/* ================= MENU ================= */
+.menu {
+    background: #334155;
+}
+
+.menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+}
+
+/* Item principal */
+.menu-item {
+    position: relative;
+}
+
+.menu-item > span,
+.menu-item > a {
+    display: block;
+    padding: 15px;
+    color: white;
+    cursor: pointer;
+}
+
+
+/* ================= DROPDOWN ================= */
+
+/* Caixa do dropdown */
+.dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+
+    background: #475569;
+    min-width: 200px;
+
+    border-radius: 6px;
+    overflow: hidden;
+
+    /* 🔒 escondido */
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+
+    transition: 0.25s ease;
+}
+
+/* Quando ativo */
+.menu-item.open .dropdown {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* Itens internos */
+.dropdown a {
+    display: block;
+    padding: 12px;
+    color: white;
+    text-decoration: none;
+}
+
+/* Hover bonito */
+.dropdown a:hover {
+    background: #64748b;
+}
+
+
+/* ================= CONTEÚDO ================= */
+.conteudo {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+}
+
+
+/* ================= RODAPÉ ================= */
+.rodape {
+    text-align: center;
+    padding: 20px;
+}
+
+
+/* ================= MOBILE ================= */
+@media (max-width: 768px) {
+
+    .menu-mobile {
+        display: inline;
+    }
+
+    /* menu vira coluna */
+    .menu ul {
+        flex-direction: column;
+        display: none;
+    }
+
+    .menu.active ul {
+        display: flex;
+    }
+
+    .menu-item {
+        border-top: 1px solid #555;
+    }
+
+    /* dropdown vira parte do fluxo */
+    .dropdown {
+        position: relative;
+        transform: none;
+        opacity: 1;
+
+        display: none;
+    }
+
+    .menu-item.open .dropdown {
+        display: block;
+    }
+
+    .topo {
+        position: fixed;
+        width: 100%;
+    }
+
+    .conteudo {
+        margin-top: 70px;
+    }
+}
+

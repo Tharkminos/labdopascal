@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+<title>Teste WebVPython</title>
+
+<script src="/static/js/jquery-3.6.0.min.js"></script>
+<script src="/static/js/glow.3.2.min.js"></script>
+<script src="/static/js/RScompiler.3.2.min.js"></script>
+<script src="/static/js/RSrun.3.2.min.js"></script>
+<style>
+
+body{
+background:#111;
+color:white;
+text-align:center;
+font-family:Arial;
+}
+
+#glowscript{
+width:700px;
+height:450px;
+margin:auto;
+border:3px solid cyan;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h2>Teste WebVPython</h2>
+
+<div id="glowscript"></div>
+<script>
+
+window.__context = {
+    glowscript_container: document.getElementById("glowscript")
+}
+
+</script>
+<script type="text/glowscript">
+
+GlowScript 3.2 VPython
+
+scene = canvas()
+
+sphere(
+    pos = vec(0,0,0),
+    radius = 1,
+    color = color.red
+)
+
+</script>
+
+<script>
+window.__context = { glowscript_container: document.getElementById("glowscript") }
+</script>
+
+</body>
+</html>

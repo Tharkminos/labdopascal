@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}Atividade Nº04{% endblock %}
+
+{% block content %}
+
+<h1>Refazer essa atividade no p5JS e entregar o código via Classroom</h1>
+
+<!
+-p5.js -->
+<script src="{{ url_for('static', filename='js/p5.min.js') }}"></script>
+<!
+-container -->
+<div id="meu-container"></div>
+<!
+-sua simulação -->
+<script src="{{ url_for('static', filename='sim/n04.js') }}"></script>
+{% endblock %}

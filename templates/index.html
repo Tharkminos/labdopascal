@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="UTF-8">
+
+<title>Laboratório do Pascal</title>
+
+<script src="/static/js/brython.min.js"></script>
+<script src="/static/js/brython_stdlib.js"></script>
+
+</head>
+
+<body onload="brython()">
+
+<h1>Laboratório do Pascal</h1>
+
+<canvas id="tela" width="600" height="400"></canvas>
+
+<script type="text/python">
+
+from browser import document, timer
+
+canvas = document["tela"]
+ctx = canvas.getContext("2d")
+
+y = 50
+v = 0
+g = 0.5
+
+def update():
+
+    global y,v
+
+    ctx.clearRect(0,0,600,400)
+
+    v += g
+    y += v
+
+    if y > 350:
+        y = 350
+        v = -v*0.9
+
+    ctx.beginPath()
+    ctx.arc(300,y,20,0,6.28)
+    ctx.fill()
+
+timer.set_interval(update,16)
+
+</script>
+
+</body>
+</html>
