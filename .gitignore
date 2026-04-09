@@ -1,0 +1,5 @@
+Downloads/
+*.deb
+*.run
+__pycache__/
+bd.db
