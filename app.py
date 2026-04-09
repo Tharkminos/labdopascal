@@ -10,7 +10,9 @@ def index():
 @app.route("/simulacao/<nome>")
 def simulacao(nome):
     return render_template("simulacao.html", nome=nome)
-
+@app.route("/atividades/egito")
+def egito():
+    return render_template("egito.html")
 @app.route("/n04")
 def atv04():
     return render_template("n04.html")
