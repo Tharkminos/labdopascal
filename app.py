@@ -13,6 +13,9 @@ def simulacao(nome):
 @app.route("/atividades/egito")
 def egito():
     return render_template("egito.html")
+@app.route("/mec")
+def mec():
+    return render_template("mec.html")
 @app.route("/n04")
 def atv04():
     return render_template("n04.html")
