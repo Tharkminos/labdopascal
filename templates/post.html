@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{{ titulo }}
+
+{% endblock %}
+
+{% block content %}
+
+<article class="post">
+
+    <h1 class="post-titulo">
+
+        {{ titulo }}
+
+    </h1>
+
+    {% if autor %}
+
+    <p class="post-autor">
+
+        Por: {{ autor }}
+
+    </p>
+
+    {% endif %}
+
+    <section class="post-conteudo">
+
+        {{ conteudo | safe }}
+
+    </section>
+
+</article>
+
+{% endblock %}
+
+{% block scripts %}
+
+{% for sim in simulacoes %}
+
+<script src="{{ url_for('static', filename='show/' + sim + '.js') }}"></script>
+
+{% endfor %}
+
+{% endblock %}

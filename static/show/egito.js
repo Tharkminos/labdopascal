@@ -7,7 +7,9 @@
 
         function setup() {
           frameRate(30)
-          createCanvas(600, 600);
+          canvas = createCanvas(600, 600);
+          canvas.parent("canvas-egito");
+
         }
         let rp = 0;
         let gp = 0;
@@ -130,7 +132,6 @@
           fill(255,150,30,30-night);
           circle(450,550,50)
           fill(110+(1-mp)*(50));
-          console.log(1-mp)
           triangle(415,550,440,550,425,525)
           //Tenda fim
           //Noite Inicio

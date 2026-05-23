@@ -42,15 +42,16 @@
             <span>Simulações</span>
 
             <!-- 🔥 preenchido via JS -->
-            <div class="dropdown" id="dropdown-simulacoes"></div>
+            <div class="dropdown" id="dropdown-simulacoes">
+                <a href="/teste"> Teste </a>
+            </div>
         </li>
 
         <!-- OUTROS -->
         <li class="menu-item">
             <span>Física</span>
             <div class="dropdown">
-                <a href="#">Cinemática</a>
-                <a href="#">Dinâmica</a>
+                <a href="/">Eletricidade e Magnetismo</a>
             </div>
         </li>
 
@@ -76,10 +77,9 @@
 <!-- ================= JS GLOBAL ================= -->
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-<!-- 🔥 GERENCIADOR DE SIMULAÇÕES (menu + loader) -->
-<script src="{{ url_for('static', filename='sim/index.js') }}"></script>
 
 <!-- 🔥 SCRIPTS DAS PÁGINAS -->
+<script src="{{ url_for('static', filename='js/p5.min.js') }}"></script>
 {% block scripts %}{% endblock %}
 
 </body>
