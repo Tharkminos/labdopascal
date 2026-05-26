@@ -24,6 +24,37 @@ def atv04():
     return render_template("n04.html")
 
 import re
+
+@app.route("/posts/atom")
+def atom():
+    with open("posts/atom.md", encoding="utf-8") as f:
+        md = f.read()
+
+    simulacoes = re.findall(
+        r"\[simulacao=(.*?)\]",
+        md
+    )
+
+    for sim in simulacoes:
+
+        bloco = f'''
+<div id="canvas-{sim}"></div>
+'''
+
+        md = md.replace(
+            f"[simulacao={sim}]",
+            bloco
+        )
+
+    html = markdown.markdown(md)
+
+    return render_template(
+        "post.html",
+        titulo="Átomo",
+        conteudo=html,
+        simulacoes=simulacoes
+    )
+
 @app.route("/adm/fe")
 def adm_fe():
     with open("posts/adm_fe.md", encoding="utf-8") as f:
