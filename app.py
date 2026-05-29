@@ -3,7 +3,8 @@ from flask import (
     render_template,
     request,
     redirect,
-    session
+    session,
+    flash
 )
 
 from flask_bcrypt import Bcrypt
@@ -147,7 +148,7 @@ def login():
 
     if request.method == "POST":
 
-        usuario = request.form["usuario"]
+        email = request.form["email"]
 
         senha = request.form["senha"]
 
@@ -156,8 +157,11 @@ def login():
         cursor = conn.cursor()
 
         cursor.execute(
-            "SELECT * FROM usuarios WHERE usuario = ?",
-            (usuario,)
+            """
+            SELECT * FROM usuarios
+            WHERE email = ?
+            """,
+            (email,)
         )
 
         user = cursor.fetchone()
@@ -166,24 +170,30 @@ def login():
 
         if user:
 
-            senha_db = user[2]
+            senha_db = user[3]
 
             if bcrypt.check_password_hash(
                 senha_db,
                 senha
             ):
 
-                session["usuario"] = usuario
+                session["usuario"] = user[1]
+
+                session["email"] = user[2]
+
+                session["id"] = user[0]
 
                 return redirect("/")
+        flash(
+                "Email ou senha incorretos",
+                "erro"
+              )
 
-        return "Login inválido"
+        return redirect("/login")
 
     return render_template("login.html")
 
-
 # ================= REGISTER =================
-
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
@@ -191,35 +201,96 @@ def register():
 
         usuario = request.form["usuario"]
 
-        senha = request.form["senha"]
+        email = request.form["email"]
 
-        senha_hash = bcrypt.generate_password_hash(
-            senha
-        ).decode("utf-8")
+        senha = request.form["senha"]
 
         conn = sqlite3.connect("site.db")
 
         cursor = conn.cursor()
 
+        # verifica username
+        cursor.execute(
+            """
+            SELECT id FROM usuarios
+            WHERE usuario = ?
+            """,
+            (usuario,)
+        )
+
+        usuario_existente = cursor.fetchone()
+
+        # verifica email
+        cursor.execute(
+            """
+            SELECT id FROM usuarios
+            WHERE email = ?
+            """,
+            (email,)
+        )
+
+        email_existente = cursor.fetchone()
+
+        # usuário já existe
+        if usuario_existente:
+
+            conn.close()
+
+            flash(
+                "Nome de usuário já existe",
+                "erro"
+            )
+
+            return redirect("/register")
+
+        # email já existe
+        if email_existente:
+
+            conn.close()
+
+            flash(
+                "Email já cadastrado",
+                "erro"
+            )
+
+            return redirect("/register")
+
+        # senha hash
+        senha_hash = bcrypt.generate_password_hash(
+            senha
+        ).decode("utf-8")
+
+        # insert
         cursor.execute(
             """
             INSERT INTO usuarios (
+
                 usuario,
+                email,
                 senha
+
             )
-            VALUES (?, ?)
+            VALUES (?, ?, ?)
             """,
-            (usuario, senha_hash)
+            (
+                usuario,
+                email,
+                senha_hash
+            )
         )
 
         conn.commit()
 
         conn.close()
 
+        flash(
+            "Conta criada com sucesso!",
+            "sucesso"
+        )
+
         return redirect("/login")
 
     return render_template("register.html")
-
 
 # ================= ADMIN =================
 

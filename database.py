@@ -16,6 +16,8 @@ CREATE TABLE IF NOT EXISTS usuarios (
 
     usuario TEXT UNIQUE,
 
+    email TEXT UNIQUE,
+
     senha TEXT,
 
     xp INTEGER DEFAULT 0,
