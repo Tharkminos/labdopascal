@@ -147,7 +147,49 @@ a{
     display: flex;
 }
 
+/* ================= FLASH ================= */
 
+.flash-area{
+
+    max-width: 900px;
+
+    margin: 20px auto;
+}
+
+.flash{
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    margin-bottom: 10px;
+
+    font-weight: bold;
+}
+
+
+/* erro */
+
+.flash.erro{
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    border: 1px solid #fecaca;
+}
+
+
+/* sucesso */
+
+.flash.sucesso{
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    border: 1px solid #bbf7d0;
+}
 /* ================= ITEM MENU ================= */
 
 .menu-item{
