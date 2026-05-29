@@ -1,44 +1,42 @@
-from flask import Flask, render_template
-import markdown
-app = Flask(__name__)
-from flask import Flask, render_template, request, redirect, session
+from flask import (
+    Flask,
+    render_template,
+    request,
+    redirect,
+    session
+)
+
 from flask_bcrypt import Bcrypt
+
 import sqlite3
-app = Flask(__name__)
-app.secret_key = "B@tman"
-bcrypt = Bcrypt(app)
-
-# Página inicial
-@app.route("/")
-def index():
-    return render_template("base.html")
-
-# 🔥 ROTA DINÂMICA
-@app.route("/simulacao/<nome>")
-def simulacao(nome):
-    return render_template("simulacao.html", nome=nome)
-@app.route("/atividades/egito")
-def egito():
-    return render_template("egito.html")
-@app.route("/mec")
-def mec():
-    return render_template("mec.html")
-@app.route("/n04")
-def atv04():
-    return render_template("n04.html")
-
+import markdown
 import re
 
-@app.route("/posts/atom")
-def atom():
-    with open("posts/atom.md", encoding="utf-8") as f:
+
+# ================= APP =================
+
+app = Flask(__name__)
+
+app.secret_key = "B@tman"
+
+bcrypt = Bcrypt(app)
+
+
+# ================= FUNÇÃO POSTS =================
+
+def carregar_post(arquivo, titulo):
+
+    with open(f"posts/{arquivo}", encoding="utf-8") as f:
+
         md = f.read()
 
+    # procura [simulacao=nome]
     simulacoes = re.findall(
         r"\[simulacao=(.*?)\]",
         md
     )
 
+    # substitui pelo container
     for sim in simulacoes:
 
         bloco = f'''
@@ -50,14 +48,100 @@ def atom():
             bloco
         )
 
-    html = markdown.markdown(md)
+    # markdown -> html
+    html = markdown.markdown(
+        md,
+        extensions=[
+            "fenced_code",
+            "tables"
+        ]
+    )
 
     return render_template(
         "post.html",
-        titulo="Átomo",
+        titulo=titulo,
         conteudo=html,
         simulacoes=simulacoes
     )
+
+
+# ================= PÁGINA INICIAL =================
+
+@app.route("/")
+def index():
+
+    return render_template("base.html")
+
+
+# ================= SIMULAÇÕES =================
+
+@app.route("/simulacao/<nome>")
+def simulacao(nome):
+
+    return render_template(
+        "simulacao.html",
+        nome=nome
+    )
+
+
+@app.route("/atividades/egito")
+def egito():
+
+    return render_template("egito.html")
+
+
+@app.route("/mec")
+def mec():
+
+    return render_template("mec.html")
+
+
+@app.route("/n04")
+def atv04():
+
+    return render_template("n04.html")
+
+
+# ================= POSTS =================
+
+@app.route("/teste")
+def teste():
+
+    return carregar_post(
+        "teste.md",
+        "Teste"
+    )
+
+
+@app.route("/posts/atom")
+def atom():
+
+    return carregar_post(
+        "atom.md",
+        "Átomo"
+    )
+
+
+@app.route("/adm/fe")
+def adm_fe():
+
+    return carregar_post(
+        "adm_fe.md",
+        "2ºTRI - FINANÇAS EMPRESARIAIS"
+    )
+
+
+@app.route("/adm/rh")
+def adm_rh():
+
+    return carregar_post(
+        "adm_rh.md",
+        "2ºTRI - RECURSOS HUMANOS"
+    )
+
+
+# ================= LOGIN =================
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
@@ -72,11 +156,8 @@ def login():
         cursor = conn.cursor()
 
         cursor.execute(
-
             "SELECT * FROM usuarios WHERE usuario = ?",
-
             (usuario,)
-
         )
 
         user = cursor.fetchone()
@@ -87,7 +168,10 @@ def login():
 
             senha_db = user[2]
 
-            if bcrypt.check_password_hash(senha_db, senha):
+            if bcrypt.check_password_hash(
+                senha_db,
+                senha
+            ):
 
                 session["usuario"] = usuario
 
@@ -96,20 +180,10 @@ def login():
         return "Login inválido"
 
     return render_template("login.html")
-@app.route("/admin")
-def admin():
 
-    if "usuario" not in session:
 
-        return redirect("/login")
+# ================= REGISTER =================
 
-    return "PAINEL ADMIN"
-@app.route("/logout")
-def logout():
-
-    session.pop("usuario", None)
-
-    return redirect("/")
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
@@ -119,18 +193,23 @@ def register():
 
         senha = request.form["senha"]
 
-        senha_hash = bcrypt.generate_password_hash(senha).decode("utf-8")
+        senha_hash = bcrypt.generate_password_hash(
+            senha
+        ).decode("utf-8")
 
         conn = sqlite3.connect("site.db")
 
         cursor = conn.cursor()
 
         cursor.execute(
-
-            "INSERT INTO usuarios (usuario, senha) VALUES (?, ?)",
-
+            """
+            INSERT INTO usuarios (
+                usuario,
+                senha
+            )
+            VALUES (?, ?)
+            """,
             (usuario, senha_hash)
-
         )
 
         conn.commit()
@@ -140,56 +219,36 @@ def register():
         return redirect("/login")
 
     return render_template("register.html")
-@app.route("/adm/fe")
-def adm_fe():
-    with open("posts/adm_fe.md", encoding="utf-8") as f:
-        md = f.read()
-        html = markdown.markdown(md)
-        return render_template(
-        "post.html",
-        titulo="2ºTRI - FINANÇAS EMPRESARIAIS",
-        conteudo=html)
-@app.route("/adm/rh")
-def adm_rh():
-    with open("posts/adm_rh.md", encoding="utf-8") as f:
-        md = f.read()
-        html = markdown.markdown(md)
-        return render_template(
-        "post.html",
-        titulo="2ºTRI - RECURSOS HUMANOS",
-        conteudo=html)
 
-@app.route("/teste")
-def teste():
 
-    with open("posts/teste.md", encoding="utf-8") as f:
-        md = f.read()
+# ================= ADMIN =================
 
-    simulacoes = re.findall(
-        r"\[simulacao=(.*?)\]",
-        md
-    )
+@app.route("/admin")
+def admin():
 
-    for sim in simulacoes:
+    if "usuario" not in session:
 
-        bloco = f'''
-<div id="canvas-{sim}"></div>
-'''
+        return redirect("/login")
 
-        md = md.replace(
-            f"[simulacao={sim}]",
-            bloco
-        )
+    return "PAINEL ADMIN"
 
-    html = markdown.markdown(md)
 
-    return render_template(
-        "post.html",
-        titulo="Teste",
-        conteudo=html,
-        simulacoes=simulacoes
-    )
+# ================= LOGOUT =================
+
+@app.route("/logout")
+def logout():
+
+    session.pop("usuario", None)
+
+    return redirect("/")
+
+
+# ================= RUN =================
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0",port=8000,debug=True)
 
-
+    app.run(
+        host="0.0.0.0",
+        port=8000,
+        debug=True
+    )
