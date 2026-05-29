@@ -32,7 +32,23 @@
     </div>
 
 </header>
+{% if session.usuario %}
 
+<a href="/logout">
+
+    Logout ({{ session.usuario }})
+
+</a>
+
+{% else %}
+
+<a href="/login">
+
+    Login
+
+</a>
+
+{% endif %}
 <!-- ================= MENU ================= -->
 <nav class="menu" id="menu">
     <ul>
