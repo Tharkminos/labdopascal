@@ -1,102 +1,161 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
 
     <!-- META -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- TÍTULO DINÂMICO -->
-    <title>{% block title %}Laboratório do Pascal{% endblock %}</title>
+    <!-- TÍTULO -->
+    <title>
+        {% block title %}
+            Laboratório do Pascal
+        {% endblock %}
+    </title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
 
 <body>
 
 <!-- ================= TOPO ================= -->
+
 <header class="topo">
 
     <div class="logo-area">
-        <!-- botão mobile -->
-        <span class="menu-mobile" onclick="toggleMenu()">☰</span>
 
-        <!-- nome -->
-        <div class="logo">Laboratório do Pascal</div>
+        <!-- botão mobile -->
+        <span class="menu-mobile"
+              onclick="toggleMenu()">
+
+            ☰
+
+        </span>
+
+        <!-- logo -->
+        <div class="logo">
+
+            Laboratório do Pascal
+
+        </div>
+
     </div>
 
+    <!-- LOGIN -->
     <div class="login">
-        <a href="#">Login</a>
+
+        {% if session.usuario %}
+
+            <a href="/logout">
+
+                Logout ({{ session.usuario }})
+
+            </a>
+
+        {% else %}
+
+            <a href="/login">
+
+                Login
+
+            </a>
+
+        {% endif %}
+
     </div>
 
 </header>
-{% if session.usuario %}
 
-<a href="/logout">
-
-    Logout ({{ session.usuario }})
-
-</a>
-
-{% else %}
-
-<a href="/login">
-
-    Login
-
-</a>
-
-{% endif %}
 <!-- ================= MENU ================= -->
+
 <nav class="menu" id="menu">
+
     <ul>
 
-        <!-- SIMULAÇÕES (DINÂMICO) -->
+        <!-- SIMULAÇÕES -->
         <li class="menu-item">
+
             <span>Simulações</span>
 
-            <!-- 🔥 preenchido via JS -->
-            <div class="dropdown" id="dropdown-simulacoes">
-                <a href="/teste"> Teste </a>
-            </div>
-        </li>
-
-        <!-- OUTROS -->
-        <li class="menu-item">
-            <span>Física</span>
             <div class="dropdown">
-                <a href="/">Eletricidade e Magnetismo</a>
+
+                <a href="/teste">
+
+                    Teste
+
+                </a>
+
             </div>
+
         </li>
 
+        <!-- FÍSICA -->
         <li class="menu-item">
-            <a href="#">Sobre</a>
+
+            <span>Física</span>
+
+            <div class="dropdown">
+
+                <a href="/">
+
+                    Eletricidade e Magnetismo
+
+                </a>
+
+            </div>
+
+        </li>
+
+        <!-- SOBRE -->
+        <li class="menu-item">
+
+            <a href="#">
+
+                Sobre
+
+            </a>
+
         </li>
 
     </ul>
+
 </nav>
 
 <!-- ================= CONTEÚDO ================= -->
+
 <main class="conteudo">
 
-    {% block content %}{% endblock %}
+    {% block content %}
+
+    {% endblock %}
 
 </main>
 
 <!-- ================= RODAPÉ ================= -->
+
 <footer class="rodape">
-    <button onclick="scrollTopo()">⬆ Voltar ao topo</button>
+
+    <button onclick="scrollTopo()">
+
+        ⬆ Voltar ao topo
+
+    </button>
+
 </footer>
 
-<!-- ================= JS GLOBAL ================= -->
+<!-- ================= JS ================= -->
+
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
-
-<!-- 🔥 SCRIPTS DAS PÁGINAS -->
 <script src="{{ url_for('static', filename='js/p5.min.js') }}"></script>
-{% block scripts %}{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
 
 </body>
 </html>
