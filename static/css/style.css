@@ -1,7 +1,15 @@
 /* ================= RESET ================= */
-body {
+
+*{
 
     margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+body{
 
     font-family: Arial, sans-serif;
 
@@ -10,55 +18,18 @@ body {
     color: #111827;
 }
 
-.login-box {
 
-    max-width: 400px;
+/* ================= LINKS ================= */
 
-    margin: 50px auto;
+a{
 
-    background: white;
-
-    padding: 30px;
-
-    border-radius: 16px;
-
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    text-decoration: none;
 }
 
-.login-box form {
 
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 15px;
-}
-
-.login-box input {
-
-    padding: 12px;
-
-    border-radius: 8px;
-
-    border: 1px solid #ccc;
-}
-
-.login-box button {
-
-    padding: 12px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #2563eb;
-
-    color: white;
-
-    cursor: pointer;
-}
 /* ================= TOPO ================= */
-.topo {
+
+.topo{
 
     display: flex;
 
@@ -81,69 +52,111 @@ body {
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
-.logo-area {
+
+/* ================= LOGO ================= */
+
+.logo-area{
 
     display: flex;
 
     align-items: center;
+
+    gap: 10px;
 }
 
-.logo {
-
-    font-weight: bold;
-
-    font-size: 20px;
-}
-
-.login a {
+.logo a{
 
     color: white;
 
-    text-decoration: none;
+    font-size: 22px;
+
+    font-weight: bold;
 }
 
 
-/* ================= BOTÃO MOBILE ================= */
-.menu-mobile {
+/* ================= LOGIN ================= */
+
+.login{
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+}
+
+.login a{
+
+    color: white;
+
+    transition: 0.2s;
+}
+
+.login a:hover{
+
+    opacity: 0.8;
+}
+
+
+/* botão registrar */
+
+.btn-register{
+
+    background: #2563eb;
+
+    padding: 8px 14px;
+
+    border-radius: 8px;
+
+    font-weight: bold;
+
+    transition: 0.2s;
+}
+
+.btn-register:hover{
+
+    background: #1d4ed8;
+}
+
+
+/* ================= MENU MOBILE ================= */
+
+.menu-mobile{
 
     display: none;
 
     font-size: 22px;
-
-    margin-right: 10px;
 
     cursor: pointer;
 }
 
 
 /* ================= MENU ================= */
-.menu {
+
+.menu{
 
     background: #334155;
 
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.menu ul {
+.menu ul{
 
     list-style: none;
-
-    margin: 0;
-
-    padding: 0;
 
     display: flex;
 }
 
 
 /* ================= ITEM MENU ================= */
-.menu-item {
+
+.menu-item{
 
     position: relative;
 }
 
 .menu-item > span,
-.menu-item > a {
+.menu-item > a{
 
     display: block;
 
@@ -153,20 +166,19 @@ body {
 
     cursor: pointer;
 
-    text-decoration: none;
-
     transition: 0.2s;
 }
 
 .menu-item > span:hover,
-.menu-item > a:hover {
+.menu-item > a:hover{
 
     background: #475569;
 }
 
 
 /* ================= DROPDOWN ================= */
-.dropdown {
+
+.dropdown{
 
     position: absolute;
 
@@ -193,7 +205,7 @@ body {
     transition: 0.25s ease;
 }
 
-.menu-item.open .dropdown {
+.menu-item.open .dropdown{
 
     opacity: 1;
 
@@ -204,7 +216,8 @@ body {
 
 
 /* ================= LINKS DROPDOWN ================= */
-.dropdown a {
+
+.dropdown a{
 
     display: block;
 
@@ -212,19 +225,18 @@ body {
 
     color: white;
 
-    text-decoration: none;
-
     transition: 0.2s;
 }
 
-.dropdown a:hover {
+.dropdown a:hover{
 
     background: #64748b;
 }
 
 
 /* ================= CONTEÚDO ================= */
-.conteudo {
+
+.conteudo{
 
     max-width: 1100px;
 
@@ -235,7 +247,8 @@ body {
 
 
 /* ================= POST ================= */
-.post {
+
+.post{
 
     width: 100%;
 
@@ -253,21 +266,23 @@ body {
 }
 
 
-/* ================= TÍTULO PRINCIPAL ================= */
-.post-titulo {
+/* ================= TÍTULO ================= */
+
+.post-titulo{
 
     text-align: center;
 
     font-size: 42px;
 
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 
     color: #0f172a;
 }
 
 
 /* ================= AUTOR ================= */
-.post-autor {
+
+.post-autor{
 
     text-align: center;
 
@@ -278,7 +293,8 @@ body {
 
 
 /* ================= CONTEÚDO DO POST ================= */
-.post-conteudo {
+
+.post-conteudo{
 
     text-align: justify;
 
@@ -289,17 +305,19 @@ body {
 
 
 /* ================= PARÁGRAFOS ================= */
-.post-conteudo p {
+
+.post-conteudo p{
 
     margin-bottom: 20px;
 }
 
 
 /* ================= TÍTULOS DO MARKDOWN ================= */
+
 .post-conteudo h1,
 .post-conteudo h2,
 .post-conteudo h3,
-.post-conteudo h4 {
+.post-conteudo h4{
 
     margin-top: 40px;
 
@@ -310,8 +328,9 @@ body {
 
 
 /* ================= LISTAS ================= */
+
 .post-conteudo ul,
-.post-conteudo ol {
+.post-conteudo ol{
 
     padding-left: 30px;
 
@@ -320,7 +339,8 @@ body {
 
 
 /* ================= IMAGENS ================= */
-.post-conteudo img {
+
+.post-conteudo img{
 
     max-width: 100%;
 
@@ -332,22 +352,22 @@ body {
 }
 
 
-/* ================= LINKS ================= */
-.post-conteudo a {
+/* ================= LINKS DO POST ================= */
+
+.post-conteudo a{
 
     color: #2563eb;
-
-    text-decoration: none;
 }
 
-.post-conteudo a:hover {
+.post-conteudo a:hover{
 
     text-decoration: underline;
 }
 
 
 /* ================= CÓDIGOS ================= */
-.post-conteudo pre {
+
+.post-conteudo pre{
 
     background: #0f172a;
 
@@ -358,35 +378,113 @@ body {
     border-radius: 10px;
 
     overflow-x: auto;
+
+    margin-bottom: 20px;
 }
 
-.post-conteudo code {
+.post-conteudo code{
 
     font-family: monospace;
 }
 
+
 /* ================= SIMULAÇÕES ================= */
 
-[id^="canvas-"] {
+[id^="canvas-"]{
 
     display: flex;
 
     justify-content: center;
 
+    align-items: center;
+
     margin: 35px 0;
 }
 
-canvas {
+canvas{
 
     display: block;
+
+    max-width: 100%;
 
     border-radius: 12px;
 
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+
+/* ================= LOGIN BOX ================= */
+
+.login-box{
+
+    max-width: 400px;
+
+    margin: 50px auto;
+
+    background: white;
+
+    padding: 30px;
+
+    border-radius: 16px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.login-box h1{
+
+    margin-bottom: 20px;
+
+    text-align: center;
+}
+
+.login-box form{
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.login-box input{
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    border: 1px solid #ccc;
+
+    font-size: 16px;
+}
+
+.login-box button{
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.login-box button:hover{
+
+    background: #1d4ed8;
+}
+
+
 /* ================= RODAPÉ ================= */
-.rodape {
+
+.rodape{
 
     text-align: center;
 
@@ -397,31 +495,32 @@ canvas {
 
 
 /* ================= MOBILE ================= */
-@media (max-width: 768px) {
 
-    .menu-mobile {
+@media (max-width: 768px){
+
+    .menu-mobile{
 
         display: inline;
     }
 
-    .menu ul {
+    .menu ul{
 
         flex-direction: column;
 
         display: none;
     }
 
-    .menu.active ul {
+    .menu.active ul{
 
         display: flex;
     }
 
-    .menu-item {
+    .menu-item{
 
         border-top: 1px solid rgba(255,255,255,0.1);
     }
 
-    .dropdown {
+    .dropdown{
 
         position: relative;
 
@@ -434,39 +533,47 @@ canvas {
         border-radius: 0;
     }
 
-    .menu-item.open .dropdown {
+    .menu-item.open .dropdown{
 
         display: block;
     }
 
-    .topo {
+    .topo{
 
         position: fixed;
 
         width: 100%;
-
-        box-sizing: border-box;
     }
 
-    .conteudo {
+    .conteudo{
 
         margin-top: 80px;
 
         padding: 20px 10px;
     }
 
-    .post {
+    .post{
 
         padding: 25px;
     }
 
-    .post-titulo {
+    .post-titulo{
 
         font-size: 30px;
     }
 
-    .post-conteudo {
+    .post-conteudo{
 
         font-size: 16px;
+    }
+
+    .login{
+
+        gap: 10px;
+    }
+
+    .btn-register{
+
+        padding: 6px 10px;
     }
 }

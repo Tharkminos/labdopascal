@@ -5,13 +5,19 @@
 
     <!-- META -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <!-- TÍTULO -->
     <title>
+
         {% block title %}
+
             Laboratório do Pascal
+
         {% endblock %}
+
     </title>
 
     <!-- CSS -->
@@ -26,9 +32,10 @@
 
 <header class="topo">
 
+    <!-- ESQUERDA -->
     <div class="logo-area">
 
-        <!-- botão mobile -->
+        <!-- BOTÃO MOBILE -->
         <span class="menu-mobile"
               onclick="toggleMenu()">
 
@@ -36,19 +43,29 @@
 
         </span>
 
-        <!-- logo -->
+        <!-- LOGO -->
         <div class="logo">
 
-            Laboratório do Pascal
+            <a href="/">
+
+                Laboratório do Pascal
+
+            </a>
 
         </div>
 
     </div>
 
-    <!-- LOGIN -->
+    <!-- DIREITA -->
     <div class="login">
 
         {% if session.usuario %}
+
+            <a href="/admin">
+
+                Painel
+
+            </a>
 
             <a href="/logout">
 
@@ -61,6 +78,13 @@
             <a href="/login">
 
                 Login
+
+            </a>
+
+            <a href="/register"
+               class="btn-register">
+
+                Registrar
 
             </a>
 
@@ -79,13 +103,23 @@
         <!-- SIMULAÇÕES -->
         <li class="menu-item">
 
-            <span>Simulações</span>
+            <span>
+
+                Simulações
+
+            </span>
 
             <div class="dropdown">
 
                 <a href="/teste">
 
                     Teste
+
+                </a>
+
+                <a href="/posts/atom">
+
+                    Átomo
 
                 </a>
 
@@ -96,13 +130,44 @@
         <!-- FÍSICA -->
         <li class="menu-item">
 
-            <span>Física</span>
+            <span>
+
+                Física
+
+            </span>
 
             <div class="dropdown">
 
                 <a href="/">
 
                     Eletricidade e Magnetismo
+
+                </a>
+
+            </div>
+
+        </li>
+
+        <!-- ADMIN -->
+        <li class="menu-item">
+
+            <span>
+
+                Administração
+
+            </span>
+
+            <div class="dropdown">
+
+                <a href="/adm/fe">
+
+                    Finanças Empresariais
+
+                </a>
+
+                <a href="/adm/rh">
+
+                    Recursos Humanos
 
                 </a>
 
@@ -147,11 +212,15 @@
 
 </footer>
 
-<!-- ================= JS ================= -->
+<!-- ================= JS GLOBAL ================= -->
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+<!-- ================= P5 ================= -->
+
 <script src="{{ url_for('static', filename='js/p5.min.js') }}"></script>
+
+<!-- ================= SCRIPTS DAS PÁGINAS ================= -->
 
 {% block scripts %}
 
