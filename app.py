@@ -30,15 +30,24 @@ def renderizar_markdown(arquivo, titulo=None):
         md = f.read()
 
     # procura o primeiro H1
+
     match = re.search(
-        r"^#\s+(.+)$",
-        md,
-        re.MULTILINE
-    )
+    r"^#\s*(.+)$",
+    md,
+    re.MULTILINE
+)
 
     if match:
-        titulo = match.group(1)
+        
+        titulo = match.group(1).strip()
 
+        md = re.sub(
+            r"^#\s*.+$\n?",
+            "",
+            md,
+            count=1,
+            flags=re.MULTILINE
+    )
     simulacoes = re.findall(
         r"\[simulacao=(.*?)\]",
         md
