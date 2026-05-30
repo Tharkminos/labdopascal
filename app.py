@@ -24,13 +24,29 @@ bcrypt = Bcrypt(app)
 
 
 # ================= MARKDOWN =================
-
-def renderizar_markdown(arquivo, titulo):
+def renderizar_markdown(arquivo, titulo=None):
 
     with open(arquivo, encoding="utf-8") as f:
-
         md = f.read()
 
+    # procura o primeiro H1
+    match = re.search(
+    r"^#\s+(.+)$",
+    md,
+    re.MULTILINE
+)
+
+if match:
+
+    titulo = match.group(1)
+
+    md = re.sub(
+        r"^#\s+.+$\n?",
+        "",
+        md,
+        count=1,
+        flags=re.MULTILINE
+    )
     simulacoes = re.findall(
         r"\[simulacao=(.*?)\]",
         md
@@ -51,8 +67,6 @@ def renderizar_markdown(arquivo, titulo):
         conteudo=html,
         simulacoes=simulacoes
     )
-
-
 # ================= PÁGINA INICIAL =================
 
 @app.route("/")
@@ -79,16 +93,7 @@ def post(categoria, nome):
 
     arquivo = f"posts/{categoria}/{nome}.md"
 
-    titulo = nome.replace(
-        "_",
-        " "
-    ).title()
-
-    return renderizar_markdown(
-        arquivo,
-        titulo
-    )
-
+    return renderizar_markdown(arquivo)
 
 # ================= SIMULAÇÕES =================
 
