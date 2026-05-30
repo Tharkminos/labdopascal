@@ -23,7 +23,8 @@ app.secret_key = "B@tman"
 bcrypt = Bcrypt(app)
 
 
-# ================= RENDERIZAR ==================
+# ================= MARKDOWN =================
+
 def renderizar_markdown(arquivo, titulo):
 
     with open(arquivo, encoding="utf-8") as f:
@@ -50,6 +51,29 @@ def renderizar_markdown(arquivo, titulo):
         conteudo=html,
         simulacoes=simulacoes
     )
+
+
+# ================= PÁGINA INICIAL =================
+
+@app.route("/")
+def index():
+
+    return render_template("base.html")
+
+
+# ================= POSTS =================
+
+# Ambiente de testes
+@app.route("/teste")
+def teste():
+
+    return renderizar_markdown(
+        "posts/teste.md",
+        "Teste"
+    )
+
+
+# Posts categorizados
 @app.route("/posts/<categoria>/<nome>")
 def post(categoria, nome):
 
@@ -64,12 +88,6 @@ def post(categoria, nome):
         arquivo,
         titulo
     )
-# ================= PÁGINA INICIAL =================
-
-@app.route("/")
-def index():
-
-    return render_template("base.html")
 
 
 # ================= SIMULAÇÕES =================
@@ -101,54 +119,6 @@ def atv04():
     return render_template("n04.html")
 
 
-# ================= POSTS =================
-
-@app.route("/teste")
-def teste():
-
-    return carregar_post(
-        "teste.md",
-        "Teste"
-    )
-
-
-@app.route("/posts/<categoria>/<post>")
-def carregar_post(categoria, post):
-
-    arquivo = f"posts/{categoria}/{post}.md"
-
-    with open(
-        arquivo,
-        encoding="utf-8"
-    ) as f:
-
-        md = f.read()
-
-    simulacoes = re.findall(
-        r"\[simulacao=(.*?)\]",
-        md
-    )
-
-    for sim in simulacoes:
-
-        bloco = f'''
-<div id="canvas-{sim}"></div>
-'''
-
-        md = md.replace(
-            f"[simulacao={sim}]",
-            bloco
-        )
-
-    html = markdown.markdown(md)
-
-    return render_template(
-        "post.html",
-        titulo=post.replace("_", " ").title(),
-        conteudo=html,
-        simulacoes=simulacoes
-    )
-
 # ================= LOGIN =================
 
 @app.route("/login", methods=["GET", "POST"])
@@ -157,11 +127,9 @@ def login():
     if request.method == "POST":
 
         email = request.form["email"]
-
         senha = request.form["senha"]
 
         conn = sqlite3.connect("site.db")
-
         cursor = conn.cursor()
 
         cursor.execute(
@@ -185,42 +153,41 @@ def login():
                 senha
             ):
 
+                session["id"] = user[0]
                 session["usuario"] = user[1]
-
                 session["email"] = user[2]
 
-                session["id"] = user[0]
-
                 return redirect("/")
+
         flash(
-                "Email ou senha incorretos",
-                "erro"
-              )
+            "Email ou senha incorretos",
+            "erro"
+        )
 
         return redirect("/login")
 
     return render_template("login.html")
 
+
 # ================= REGISTER =================
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
     if request.method == "POST":
 
         usuario = request.form["usuario"]
-
         email = request.form["email"]
-
         senha = request.form["senha"]
 
         conn = sqlite3.connect("site.db")
-
         cursor = conn.cursor()
 
-        # verifica username
+        # verifica usuário
         cursor.execute(
             """
-            SELECT id FROM usuarios
+            SELECT id
+            FROM usuarios
             WHERE usuario = ?
             """,
             (usuario,)
@@ -231,7 +198,8 @@ def register():
         # verifica email
         cursor.execute(
             """
-            SELECT id FROM usuarios
+            SELECT id
+            FROM usuarios
             WHERE email = ?
             """,
             (email,)
@@ -239,7 +207,6 @@ def register():
 
         email_existente = cursor.fetchone()
 
-        # usuário já existe
         if usuario_existente:
 
             conn.close()
@@ -251,7 +218,6 @@ def register():
 
             return redirect("/register")
 
-        # email já existe
         if email_existente:
 
             conn.close()
@@ -263,20 +229,17 @@ def register():
 
             return redirect("/register")
 
-        # senha hash
         senha_hash = bcrypt.generate_password_hash(
             senha
         ).decode("utf-8")
 
-        # insert
         cursor.execute(
             """
-            INSERT INTO usuarios (
-
+            INSERT INTO usuarios
+            (
                 usuario,
                 email,
                 senha
-
             )
             VALUES (?, ?, ?)
             """,
@@ -288,7 +251,6 @@ def register():
         )
 
         conn.commit()
-
         conn.close()
 
         flash(
@@ -299,6 +261,7 @@ def register():
         return redirect("/login")
 
     return render_template("register.html")
+
 
 # ================= ADMIN =================
 
@@ -317,7 +280,7 @@ def admin():
 @app.route("/logout")
 def logout():
 
-    session.pop("usuario", None)
+    session.clear()
 
     return redirect("/")
 
