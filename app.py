@@ -23,40 +23,26 @@ app.secret_key = "B@tman"
 bcrypt = Bcrypt(app)
 
 
-# ================= FUNÇÃO POSTS =================
+# ================= RENDERIZAR ==================
+def renderizar_markdown(arquivo, titulo):
 
-def carregar_post(arquivo, titulo):
-
-    with open(f"posts/{arquivo}", encoding="utf-8") as f:
+    with open(arquivo, encoding="utf-8") as f:
 
         md = f.read()
 
-    # procura [simulacao=nome]
     simulacoes = re.findall(
         r"\[simulacao=(.*?)\]",
         md
     )
 
-    # substitui pelo container
     for sim in simulacoes:
-
-        bloco = f'''
-<div id="canvas-{sim}"></div>
-'''
 
         md = md.replace(
             f"[simulacao={sim}]",
-            bloco
+            f'<div id="canvas-{sim}"></div>'
         )
 
-    # markdown -> html
-    html = markdown.markdown(
-        md,
-        extensions=[
-            "fenced_code",
-            "tables"
-        ]
-    )
+    html = markdown.markdown(md)
 
     return render_template(
         "post.html",
@@ -64,8 +50,20 @@ def carregar_post(arquivo, titulo):
         conteudo=html,
         simulacoes=simulacoes
     )
+@app.route("/posts/<categoria>/<nome>")
+def post(categoria, nome):
 
+    arquivo = f"posts/{categoria}/{nome}.md"
 
+    titulo = nome.replace(
+        "_",
+        " "
+    ).title()
+
+    return renderizar_markdown(
+        arquivo,
+        titulo
+    )
 # ================= PÁGINA INICIAL =================
 
 @app.route("/")
@@ -114,32 +112,42 @@ def teste():
     )
 
 
-@app.route("/posts/atom")
-def atom():
+@app.route("/posts/<categoria>/<post>")
+def carregar_post(categoria, post):
 
-    return carregar_post(
-        "atom.md",
-        "Átomo"
+    arquivo = f"posts/{categoria}/{post}.md"
+
+    with open(
+        arquivo,
+        encoding="utf-8"
+    ) as f:
+
+        md = f.read()
+
+    simulacoes = re.findall(
+        r"\[simulacao=(.*?)\]",
+        md
     )
 
+    for sim in simulacoes:
 
-@app.route("/adm/fe")
-def adm_fe():
+        bloco = f'''
+<div id="canvas-{sim}"></div>
+'''
 
-    return carregar_post(
-        "adm_fe.md",
-        "2ºTRI - FINANÇAS EMPRESARIAIS"
+        md = md.replace(
+            f"[simulacao={sim}]",
+            bloco
+        )
+
+    html = markdown.markdown(md)
+
+    return render_template(
+        "post.html",
+        titulo=post.replace("_", " ").title(),
+        conteudo=html,
+        simulacoes=simulacoes
     )
-
-
-@app.route("/adm/rh")
-def adm_rh():
-
-    return carregar_post(
-        "adm_rh.md",
-        "2ºTRI - RECURSOS HUMANOS"
-    )
-
 
 # ================= LOGIN =================
 
