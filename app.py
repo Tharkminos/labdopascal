@@ -13,6 +13,29 @@ import sqlite3
 import markdown
 import re
 
+def ler_metadados(md):
+
+    dados = {}
+
+    if md.startswith("---"):
+
+        partes = md.split("---", 2)
+
+        if len(partes) >= 3:
+
+            cabecalho = partes[1]
+
+            md = partes[2]
+
+            for linha in cabecalho.splitlines():
+
+                if ":" in linha:
+
+                    chave, valor = linha.split(":", 1)
+
+                    dados[chave.strip()] = valor.strip()
+
+    return dados, md
 
 # ================= APP =================
 
