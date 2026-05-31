@@ -1,0 +1,41 @@
+{
+    "questoes":[
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"facil",
+            "pergunta":"Qual partícula possui carga positiva?",
+            "alternativas":[
+                "Próton",
+                "Elétron",
+                "Nêutron"
+            ],
+            "correta":0
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Qual partícula possui carga negativa?",
+            "alternativas":[
+                "Próton",
+                "Elétron",
+                "Nêutron"
+            ],
+            "correta":1
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"dificil",
+            "pergunta":"Qual partícula determina o número atômico?",
+            "alternativas":[
+                "Prótons",
+                "Elétrons",
+                "Nêutrons"
+            ],
+            "correta":0
+        }
+
+    ]
+}

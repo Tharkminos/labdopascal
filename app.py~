@@ -14,15 +14,6 @@ import sqlite3
 import markdown
 import re
 
-def carregar_questoes(nome):
-
-    with open(
-        f"questoes/fisica/{nome}.json",
-        encoding="utf-8"
-    ) as f:
-
-        return json.load(f)
-
 def ler_metadados(md):
 
     dados = {}
@@ -62,70 +53,6 @@ def renderizar_markdown(arquivo, titulo=None):
     with open(arquivo, encoding="utf-8") as f:
         md = f.read()
         meta, md = ler_metadados(md)
-        if "questoes" in meta:
-            banco = carregar_questoes(
-                meta["questoes"]
-            )
-
-            checkpoints = re.findall(
-                r"\[checkpoint=(.*?)\]",
-                md
-            )
-
-            for dificuldade in checkpoints:
-
-                possiveis = [
-
-                    q
-
-                    for q in banco["questoes"]
-
-                    if q["dificuldade"] == dificuldade
-
-                ]
-
-                if possiveis:
-
-                    questao = random.choice(
-                        possiveis
-                    )
-
-                    alternativas_html = ""
-
-for i, alternativa in enumerate(
-    questao["alternativas"]
-):
-
-    correta = int(
-        i == questao["correta"]
-    )
-
-    alternativas_html += f"""
-    <button
-        class="alternativa"
-        data-correta="{correta}"
-    >
-        {alternativa}
-    </button>
-    """
-
-    html_questao = f"""
-    <div class="checkpoint">
-
-        <p class="checkpoint-pergunta">
-            {questao["pergunta"]}
-        </p>
-
-        <div class="checkpoint-alternativas">
-
-            {alternativas_html}
-
-        </div>
-
-        <div class="checkpoint-feedback"></div>
-
-    </div>
-    """)
 
     # procura o primeiro H1
 
