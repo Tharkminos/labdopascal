@@ -51,6 +51,7 @@ def renderizar_markdown(arquivo, titulo=None):
 
     with open(arquivo, encoding="utf-8") as f:
         md = f.read()
+        meta, md = ler_metadados(md)
 
     # procura o primeiro H1
 
@@ -89,7 +90,8 @@ def renderizar_markdown(arquivo, titulo=None):
         "post.html",
         titulo=titulo,
         conteudo=html,
-        simulacoes=simulacoes
+        simulacoes=simulacoes,
+        meta=meta
     )
 # ================= PÁGINA INICIAL =================
 
