@@ -9,12 +9,15 @@
 {% block content %}
 
 <article class="post">
-
     <h1 class="post-titulo">
-
         {{ titulo }}
-
     </h1>
+    
+    {% if meta.xp %}
+    <div class="xp-info">
+        XP: {{ meta.xp }}
+    </div>
+    {% endif %}
 
     {% if autor %}
 
