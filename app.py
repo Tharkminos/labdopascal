@@ -6,13 +6,26 @@ from flask import (
     session,
     flash
 )
-import json
-import random
+
 from flask_bcrypt import Bcrypt
 
 import sqlite3
 import markdown
 import re
+import json
+import random
+
+
+# ================= APP =================
+
+app = Flask(__name__)
+
+app.secret_key = "B@tman"
+
+bcrypt = Bcrypt(app)
+
+
+# ================= UTIL =================
 
 def carregar_questoes(nome):
 
@@ -22,6 +35,7 @@ def carregar_questoes(nome):
     ) as f:
 
         return json.load(f)
+
 
 def ler_metadados(md):
 
@@ -47,105 +61,48 @@ def ler_metadados(md):
 
     return dados, md
 
-# ================= APP =================
-
-app = Flask(__name__)
-
-app.secret_key = "B@tman"
-
-bcrypt = Bcrypt(app)
-
 
 # ================= MARKDOWN =================
+
 def renderizar_markdown(arquivo, titulo=None):
 
-    with open(arquivo, encoding="utf-8") as f:
+    with open(
+        arquivo,
+        encoding="utf-8"
+    ) as f:
+
         md = f.read()
-        meta, md = ler_metadados(md)
-        if "questoes" in meta:
-            banco = carregar_questoes(
-                meta["questoes"]
-            )
 
-            checkpoints = re.findall(
-                r"\[checkpoint=(.*?)\]",
-                md
-            )
+    meta, md = ler_metadados(md)
 
-            for dificuldade in checkpoints:
+    # ================= TÍTULO =================
 
-                possiveis = [
+    if titulo is None:
 
-                    q
-
-                    for q in banco["questoes"]
-
-                    if q["dificuldade"] == dificuldade
-
-                ]
-
-                if possiveis:
-
-                    questao = random.choice(
-                        possiveis
-                    )
-
-                    alternativas_html = ""
-
-for i, alternativa in enumerate(
-    questao["alternativas"]
-):
-
-    correta = int(
-        i == questao["correta"]
-    )
-
-    alternativas_html += f"""
-    <button
-        class="alternativa"
-        data-correta="{correta}"
-    >
-        {alternativa}
-    </button>
-    """
-
-    html_questao = f"""
-    <div class="checkpoint">
-
-        <p class="checkpoint-pergunta">
-            {questao["pergunta"]}
-        </p>
-
-        <div class="checkpoint-alternativas">
-
-            {alternativas_html}
-
-        </div>
-
-        <div class="checkpoint-feedback"></div>
-
-    </div>
-    """)
-
-    # procura o primeiro H1
-
-    match = re.search(
-    r"^#\s*(.+)$",
-    md,
-    re.MULTILINE
-)
-
-    if match:
-        
-        titulo = match.group(1).strip()
-
-        md = re.sub(
-            r"^#\s*.+$\n?",
-            "",
+        match = re.search(
+            r"^#\s*(.+)$",
             md,
-            count=1,
-            flags=re.MULTILINE
-    )
+            re.MULTILINE
+        )
+
+        if match:
+
+            titulo = match.group(1).strip()
+
+            md = re.sub(
+                r"^#\s*.+$\n?",
+                "",
+                md,
+                count=1,
+                flags=re.MULTILINE
+            )
+
+        else:
+
+            titulo = "Sem título"
+
+    # ================= SIMULAÇÕES =================
+
     simulacoes = re.findall(
         r"\[simulacao=(.*?)\]",
         md
@@ -158,7 +115,88 @@ for i, alternativa in enumerate(
             f'<div id="canvas-{sim}"></div>'
         )
 
-    html = markdown.markdown(md)
+    # ================= CHECKPOINTS =================
+
+    if "questoes" in meta:
+
+        banco = carregar_questoes(
+            meta["questoes"]
+        )
+
+        checkpoints = re.findall(
+            r"\[checkpoint=(.*?)\]",
+            md
+        )
+
+        for dificuldade in checkpoints:
+
+            possiveis = [
+
+                q
+
+                for q in banco["questoes"]
+
+                if q["dificuldade"] == dificuldade
+
+            ]
+
+            if not possiveis:
+
+                continue
+
+            questao = random.choice(
+                possiveis
+            )
+
+            alternativas_html = ""
+
+            for i, alternativa in enumerate(
+                questao["alternativas"]
+            ):
+
+                correta = int(
+                    i == questao["correta"]
+                )
+
+                alternativas_html += f"""
+                <button
+                    class="alternativa"
+                    data-correta="{correta}"
+                >
+                    {alternativa}
+                </button>
+                """
+
+            html_questao = f"""
+            <div class="checkpoint">
+
+                <p class="checkpoint-pergunta">
+                    {questao["pergunta"]}
+                </p>
+
+                <div class="checkpoint-alternativas">
+
+                    {alternativas_html}
+
+                </div>
+
+                <div class="checkpoint-feedback"></div>
+
+            </div>
+            """
+
+            md = md.replace(
+                f"[checkpoint={dificuldade}]",
+                html_questao,
+                1
+            )
+
+    # ================= HTML =================
+
+    html = markdown.markdown(
+        md,
+        extensions=["extra"]
+    )
 
     return render_template(
         "post.html",
@@ -167,7 +205,9 @@ for i, alternativa in enumerate(
         simulacoes=simulacoes,
         meta=meta
     )
-# ================= PÁGINA INICIAL =================
+
+
+# ================= HOME =================
 
 @app.route("/")
 def index():
@@ -177,7 +217,6 @@ def index():
 
 # ================= POSTS =================
 
-# Ambiente de testes
 @app.route("/teste")
 def teste():
 
@@ -187,13 +226,15 @@ def teste():
     )
 
 
-# Posts categorizados
 @app.route("/posts/<categoria>/<nome>")
 def post(categoria, nome):
 
     arquivo = f"posts/{categoria}/{nome}.md"
 
-    return renderizar_markdown(arquivo)
+    return renderizar_markdown(
+        arquivo
+    )
+
 
 # ================= SIMULAÇÕES =================
 
@@ -232,14 +273,17 @@ def login():
     if request.method == "POST":
 
         email = request.form["email"]
+
         senha = request.form["senha"]
 
         conn = sqlite3.connect("site.db")
+
         cursor = conn.cursor()
 
         cursor.execute(
             """
-            SELECT * FROM usuarios
+            SELECT *
+            FROM usuarios
             WHERE email = ?
             """,
             (email,)
@@ -251,10 +295,8 @@ def login():
 
         if user:
 
-            senha_db = user[3]
-
             if bcrypt.check_password_hash(
-                senha_db,
+                user[3],
                 senha
             ):
 
@@ -282,13 +324,15 @@ def register():
     if request.method == "POST":
 
         usuario = request.form["usuario"]
+
         email = request.form["email"]
+
         senha = request.form["senha"]
 
         conn = sqlite3.connect("site.db")
+
         cursor = conn.cursor()
 
-        # verifica usuário
         cursor.execute(
             """
             SELECT id
@@ -298,21 +342,7 @@ def register():
             (usuario,)
         )
 
-        usuario_existente = cursor.fetchone()
-
-        # verifica email
-        cursor.execute(
-            """
-            SELECT id
-            FROM usuarios
-            WHERE email = ?
-            """,
-            (email,)
-        )
-
-        email_existente = cursor.fetchone()
-
-        if usuario_existente:
+        if cursor.fetchone():
 
             conn.close()
 
@@ -323,7 +353,16 @@ def register():
 
             return redirect("/register")
 
-        if email_existente:
+        cursor.execute(
+            """
+            SELECT id
+            FROM usuarios
+            WHERE email = ?
+            """,
+            (email,)
+        )
+
+        if cursor.fetchone():
 
             conn.close()
 
@@ -356,6 +395,7 @@ def register():
         )
 
         conn.commit()
+
         conn.close()
 
         flash(
