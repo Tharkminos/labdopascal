@@ -6,7 +6,7 @@ questoes: atomo
 
 # Átomo
 ##O que é?
-&emsp;&emsp O átomo é uma partícula muito pequena que forma toda a matéria do universo, como o ar, a água, as plantas, os animais e os objetos ao nosso redor. Possui um núcleo, e algumas camadas mais externas.
+&emsp;&emsp O átomo é uma partícula muito pequena que forma toda a matéria do universo, como o ar, a água, as plantas, os animais e os objetos ao nosso redor. Possui um núcleo, e algumas camadas mais externas, onde ficam os elétrons chamadas de elestrosfera.
 
 ##Composição
 Os atomos são compostos de 3 estruturas menores. 
