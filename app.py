@@ -63,7 +63,6 @@ def ler_metadados(md):
 
 
 # ================= MARKDOWN =================
-
 def renderizar_markdown(arquivo, titulo=None):
 
     with open(
@@ -117,6 +116,8 @@ def renderizar_markdown(arquivo, titulo=None):
 
     # ================= CHECKPOINTS =================
 
+    checkpoints_html = {}
+
     if "questoes" in meta:
 
         banco = carregar_questoes(
@@ -128,7 +129,7 @@ def renderizar_markdown(arquivo, titulo=None):
             md
         )
 
-        for dificuldade in checkpoints:
+        for indice, dificuldade in enumerate(checkpoints):
 
             possiveis = [
 
@@ -185,9 +186,15 @@ def renderizar_markdown(arquivo, titulo=None):
             </div>
             """
 
+            marcador = (
+                f"@@CHECKPOINT_{dificuldade.upper()}_{indice}@@"
+            )
+
+            checkpoints_html[marcador] = html_questao
+
             md = md.replace(
                 f"[checkpoint={dificuldade}]",
-                html_questao,
+                marcador,
                 1
             )
 
@@ -198,6 +205,13 @@ def renderizar_markdown(arquivo, titulo=None):
         extensions=["extra"]
     )
 
+    for marcador, html_questao in checkpoints_html.items():
+
+        html = html.replace(
+            marcador,
+            html_questao
+        )
+
     return render_template(
         "post.html",
         titulo=titulo,
@@ -205,7 +219,6 @@ def renderizar_markdown(arquivo, titulo=None):
         simulacoes=simulacoes,
         meta=meta
     )
-
 
 # ================= HOME =================
 
