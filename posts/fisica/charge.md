@@ -1,7 +1,6 @@
 ---
 xp: 50
 nivel: 1
-questoes: bateria
 ---
 
 # Movimento das Cargas
