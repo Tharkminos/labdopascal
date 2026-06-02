@@ -29,11 +29,23 @@
 
     {% endif %}
 
-    <section class="post-conteudo">
+    <div class="post-conteudo">
 
-        {{ conteudo | safe }}
+    {% for etapa in etapas %}
 
-    </section>
+        <h2>{{ etapa.titulo }}</h2>
+
+        <div>
+
+            {{ etapa.conteudo|safe }}
+
+        </div>
+
+        <hr>
+
+    {% endfor %}
+
+</div>
 
 </article>
 
