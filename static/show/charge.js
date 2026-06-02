@@ -1,6 +1,6 @@
 function setup() {
   canvas = createCanvas(300,400)
-  canvas.parent('canvas-bateria')
+  canvas.parent('canvas-charge')
 }
 let grid = []
 let cable1 = [[50,240],[50,120],[143,120]]
