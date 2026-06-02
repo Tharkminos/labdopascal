@@ -11,5 +11,5 @@ nivel: 1
 
 **Abaixo uma demonstração das cargas negativas saindo do polo negativo da bateria em direção ao positivo**
 
-[simulacao=bateria]
+[simulacao=charge]
 
