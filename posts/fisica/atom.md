@@ -15,12 +15,14 @@ Os atomos são compostos de 3 estruturas menores.
 - Os elétrons as negativas;
 - Os neutrons, as cargas nulas.
 
-[checkpoint=facil]
+
 
 *Abaixo está representado um modelo clássico do átomo(proposto no inicio do século XX), com seu núcleo bem definido e os elétrons orbitando essa estrutura.*
 
 **Clique nas cargas abaixo para ver que informações podemos descobrir:**
 [simulacao=atom]
+
+[checkpoint=facil]
 
 ## Curiosidade
 &emsp; **Demócrito**, no século V antes de Cristo (a.C.), propôs a existência do átomo, como sendo a menor estrutura da matéria. Seu nome vem do grego, *a* que para eles erá uma negação e de *tomos* que significa divísivel. Sendo assim, o nome dado como **átomo** → Significa o que não pode ser dividido
