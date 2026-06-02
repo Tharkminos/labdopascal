@@ -70,7 +70,7 @@ def dividir_etapas(md):
     etapas = []
 
     etapas.append({
-        "titulo": "Introdução",
+        "titulo": titulo,
         "conteudo": partes[0]
     })
 
