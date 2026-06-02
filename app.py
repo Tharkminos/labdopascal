@@ -60,7 +60,7 @@ def ler_metadados(md):
                     dados[chave.strip()] = valor.strip()
 
     return dados, md
-def dividir_etapas(md):
+def dividir_etapas(md, titulo):
 
     partes = re.split(
         r"\[etapa=(.*?)\]",
@@ -94,7 +94,6 @@ def renderizar_markdown(arquivo, titulo=None):
         md = f.read()
 
     meta, md = ler_metadados(md)
-    etapas = dividir_etapas(md)
     # ================= TÍTULO =================
 
     if titulo is None:
@@ -108,6 +107,7 @@ def renderizar_markdown(arquivo, titulo=None):
         if match:
 
             titulo = match.group(1).strip()
+            etapas = dividir_etapas(md,titulo)
 
             md = re.sub(
                 r"^#\s*.+$\n?",
