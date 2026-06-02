@@ -107,7 +107,6 @@ def renderizar_markdown(arquivo, titulo=None):
         if match:
 
             titulo = match.group(1).strip()
-            etapas = dividir_etapas(md,titulo)
 
             md = re.sub(
                 r"^#\s*.+$\n?",
@@ -120,6 +119,7 @@ def renderizar_markdown(arquivo, titulo=None):
         else:
 
             titulo = "Sem título"
+        etapas = dividir_etapas(md,titulo)
 
     # ================= SIMULAÇÕES =================
 
