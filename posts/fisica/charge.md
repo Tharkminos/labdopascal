@@ -5,7 +5,7 @@ nivel: 1
 
 # Movimento das Cargas
 
-## Movimento das Cargas :)
+## Movimento das Cargas:
 
 &emsp; Quando exposto sobre um potencial as cargas, saem do polo negativo e se movem em direção ao polo positivo, percorrendo o caminho do circuito. Por convenção dizemos que o sentido da corrente elétrica, é o oposto dos das cargas.
 
