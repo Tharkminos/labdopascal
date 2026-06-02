@@ -33,15 +33,19 @@
 
     {% for etapa in etapas %}
 
+        {% if not loop.first %}
         <h2>{{ etapa.titulo }}</h2>
+        {% endif %}
 
-        <div>
+        <section class="etapa">
 
             {{ etapa.conteudo|safe }}
 
-        </div>
+        </section>
 
+        {% if not loop.last %}
         <hr>
+        {% endif %}
 
     {% endfor %}
 
