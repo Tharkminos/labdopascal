@@ -60,7 +60,28 @@ def ler_metadados(md):
                     dados[chave.strip()] = valor.strip()
 
     return dados, md
+def dividir_etapas(md):
 
+    partes = re.split(
+        r"\[etapa=(.*?)\]",
+        md
+    )
+
+    etapas = []
+
+    etapas.append({
+        "titulo": "Introdução",
+        "conteudo": partes[0]
+    })
+
+    for i in range(1, len(partes), 2):
+
+        etapas.append({
+            "titulo": partes[i],
+            "conteudo": partes[i + 1]
+        })
+
+    return etapas
 
 # ================= MARKDOWN =================
 def renderizar_markdown(arquivo, titulo=None):
@@ -73,7 +94,7 @@ def renderizar_markdown(arquivo, titulo=None):
         md = f.read()
 
     meta, md = ler_metadados(md)
-
+    etapas = dividir_etapas(md)
     # ================= TÍTULO =================
 
     if titulo is None:
@@ -211,9 +232,14 @@ def renderizar_markdown(arquivo, titulo=None):
             marcador,
             html_questao
         )
-
+    for etapa in etapas:
+        etapa["conteudo"] = markdown.markdown(
+            etapa["conteudo"],
+            extensions=["extra"]
+    )
     return render_template(
         "post.html",
+        etapas=etapas,
         titulo=titulo,
         conteudo=html,
         simulacoes=simulacoes,
