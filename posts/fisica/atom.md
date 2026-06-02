@@ -10,13 +10,11 @@ questoes: atomo
 
 [etapa=Composição]
 
-## Composição
 Os atomos são compostos de 3 estruturas menores. 
 
 - Os prótons são as cargas posítivas do átomo;
 - Os elétrons as negativas;
 - Os neutrons, as cargas nulas.
-
 
 *Abaixo está representado um modelo clássico do átomo(proposto no inicio do século XX), com seu núcleo bem definido e os elétrons orbitando essa estrutura.*
 
