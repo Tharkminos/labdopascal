@@ -70,8 +70,8 @@ def dividir_etapas(md, titulo):
     etapas = []
 
     etapas.append({
-        "titulo": titulo,
-        "conteudo": partes[0]
+    "titulo": "",
+    "conteudo": partes[0]
     })
 
     for i in range(1, len(partes), 2):
@@ -213,23 +213,8 @@ def renderizar_markdown(arquivo, titulo=None):
 
             titulo = "Sem título"
         etapas = dividir_etapas(md,titulo)
-    etapas = dividir_etapas(
-    md,
-    titulo)
-    
 
-
-    for marcador, html_questao in checkpoints_html.items():
-
-        html = html.replace(
-            marcador,
-            html_questao
-        )
-    for etapa in etapas:
-        etapa["conteudo"] = markdown.markdown(
-            etapa["conteudo"],
-            extensions=["extra"]
-    )
+   
     banco = None
 
     if "questoes" in meta:

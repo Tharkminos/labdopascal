@@ -33,7 +33,7 @@
 
     {% for etapa in etapas %}
 
-        {% if not loop.first %}
+        {% if etapa.titulo %}
         <h2>{{ etapa.titulo }}</h2>
         {% endif %}
 
