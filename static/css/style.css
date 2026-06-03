@@ -742,3 +742,39 @@ canvas{
 
     font-weight: bold;
 }
+
+navegacao-etapas{
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin: 30px 0;
+
+}
+
+.navegacao-etapas button{
+
+    padding: 8px 16px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+}
+
+#contador-etapas{
+
+    font-weight: bold;
+
+    min-width: 50px;
+
+    text-align: center;
+
+}
