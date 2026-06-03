@@ -87,6 +87,8 @@ def dividir_etapas(md, titulo):
     return etapas
 def processar_etapa(conteudo, banco=None):
 
+    checkpoints_html = {}
+
     # ================= SIMULAÇÕES =================
 
     simulacoes = re.findall(
@@ -110,7 +112,7 @@ def processar_etapa(conteudo, banco=None):
             conteudo
         )
 
-        for dificuldade in checkpoints:
+        for indice, dificuldade in enumerate(checkpoints):
 
             possiveis = [
 
@@ -149,33 +151,44 @@ def processar_etapa(conteudo, banco=None):
                 """
 
             html_questao = f"""
-            <div class="checkpoint">
+<div class="checkpoint">
 
-                <p class="checkpoint-pergunta">
-                    {questao["pergunta"]}
-                </p>
+    <p class="checkpoint-pergunta">
+        {questao["pergunta"]}
+    </p>
 
-                <div class="checkpoint-alternativas">
+    <div class="checkpoint-alternativas">
+        {alternativas_html}
+    </div>
 
-                    {alternativas_html}
+    <div class="checkpoint-feedback"></div>
 
-                </div>
+</div>
+"""
 
-                <div class="checkpoint-feedback"></div>
+            marcador = f"@@CHECKPOINT_{indice}@@"
 
-            </div>
-            """
+            checkpoints_html[marcador] = html_questao
 
             conteudo = conteudo.replace(
                 f"[checkpoint={dificuldade}]",
-                html_questao,
+                marcador,
                 1
             )
 
-    return markdown.markdown(
+    html = markdown.markdown(
         conteudo,
         extensions=["extra"]
     )
+
+    for marcador, html_questao in checkpoints_html.items():
+
+        html = html.replace(
+            marcador,
+            html_questao
+        )
+
+    return html
 # ================= MARKDOWN =================
 def renderizar_markdown(arquivo, titulo=None):
 
