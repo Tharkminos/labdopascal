@@ -76,81 +76,41 @@ def dividir_etapas(md, titulo):
 
     for i in range(1, len(partes), 2):
 
+        if i + 1 >= len(partes):
+            break
+
         etapas.append({
-            "titulo": partes[i],
+            "titulo": partes[i].strip(),
             "conteudo": partes[i + 1]
         })
 
     return etapas
-
-# ================= MARKDOWN =================
-def renderizar_markdown(arquivo, titulo=None):
-
-    with open(
-        arquivo,
-        encoding="utf-8"
-    ) as f:
-
-        md = f.read()
-
-    meta, md = ler_metadados(md)
-    # ================= TÍTULO =================
-
-    if titulo is None:
-
-        match = re.search(
-            r"^#\s*(.+)$",
-            md,
-            re.MULTILINE
-        )
-
-        if match:
-
-            titulo = match.group(1).strip()
-
-            md = re.sub(
-                r"^#\s*.+$\n?",
-                "",
-                md,
-                count=1,
-                flags=re.MULTILINE
-            )
-
-        else:
-
-            titulo = "Sem título"
-        etapas = dividir_etapas(md,titulo)
+def processar_etapa(conteudo, banco=None):
 
     # ================= SIMULAÇÕES =================
 
     simulacoes = re.findall(
         r"\[simulacao=(.*?)\]",
-        md
+        conteudo
     )
 
     for sim in simulacoes:
 
-        md = md.replace(
+        conteudo = conteudo.replace(
             f"[simulacao={sim}]",
             f'<div id="canvas-{sim}"></div>'
         )
 
     # ================= CHECKPOINTS =================
 
-    checkpoints_html = {}
-
-    if "questoes" in meta:
-
-        banco = carregar_questoes(
-            meta["questoes"]
-        )
+    if banco:
 
         checkpoints = re.findall(
             r"\[checkpoint=(.*?)\]",
-            md
+            conteudo
         )
 
-        for indice, dificuldade in enumerate(checkpoints):
+        for dificuldade in checkpoints:
 
             possiveis = [
 
@@ -163,7 +123,6 @@ def renderizar_markdown(arquivo, titulo=None):
             ]
 
             if not possiveis:
-
                 continue
 
             questao = random.choice(
@@ -207,24 +166,58 @@ def renderizar_markdown(arquivo, titulo=None):
             </div>
             """
 
-            marcador = (
-                f"@@CHECKPOINT_{dificuldade.upper()}_{indice}@@"
-            )
-
-            checkpoints_html[marcador] = html_questao
-
-            md = md.replace(
+            conteudo = conteudo.replace(
                 f"[checkpoint={dificuldade}]",
-                marcador,
+                html_questao,
                 1
             )
 
-    # ================= HTML =================
-
-    html = markdown.markdown(
-        md,
+    return markdown.markdown(
+        conteudo,
         extensions=["extra"]
     )
+# ================= MARKDOWN =================
+def renderizar_markdown(arquivo, titulo=None):
+
+    with open(
+        arquivo,
+        encoding="utf-8"
+    ) as f:
+
+        md = f.read()
+
+    meta, md = ler_metadados(md)
+    # ================= TÍTULO =================
+
+    if titulo is None:
+
+        match = re.search(
+            r"^#\s*(.+)$",
+            md,
+            re.MULTILINE
+        )
+
+        if match:
+
+            titulo = match.group(1).strip()
+
+            md = re.sub(
+                r"^#\s*.+$\n?",
+                "",
+                md,
+                count=1,
+                flags=re.MULTILINE
+            )
+
+        else:
+
+            titulo = "Sem título"
+        etapas = dividir_etapas(md,titulo)
+    etapas = dividir_etapas(
+    md,
+    titulo)
+    
+
 
     for marcador, html_questao in checkpoints_html.items():
 
@@ -237,14 +230,30 @@ def renderizar_markdown(arquivo, titulo=None):
             etapa["conteudo"],
             extensions=["extra"]
     )
+    banco = None
+
+    if "questoes" in meta:
+
+        banco = carregar_questoes(
+            meta["questoes"]
+        )
+
+    for etapa in etapas:
+
+        etapa["conteudo"] = processar_etapa(
+            etapa["conteudo"],
+            banco
+        )
     return render_template(
-        "post.html",
-        etapas=etapas,
-        titulo=titulo,
-        conteudo=html,
-        simulacoes=simulacoes,
-        meta=meta
-    )
+    "post.html",
+    titulo=titulo,
+    etapas=etapas,
+    simulacoes=re.findall(
+        r"\[simulacao=(.*?)\]",
+        md
+    ),
+    meta=meta
+)
 
 # ================= HOME =================
 
