@@ -31,23 +31,40 @@
 
     <div class="post-conteudo">
 
-    {% for etapa in etapas %}
+{% for etapa in etapas %}
 
-        {% if etapa.titulo %}
-        <h2>{{ etapa.titulo }}</h2>
-        {% endif %}
+<section
+    class="etapa"
+    id="etapa-{{ loop.index0 }}"
+    {% if not loop.first %}
+    style="display:none"
+    {% endif %}
+>
 
-        <section class="etapa">
+    {% if etapa.titulo %}
+    <h2>{{ etapa.titulo }}</h2>
+    {% endif %}
 
-            {{ etapa.conteudo|safe }}
+    {{ etapa.conteudo|safe }}
 
-        </section>
+</section>
 
-        {% if not loop.last %}
-        <hr>
-        {% endif %}
+{% endfor %}
+</div>
 
-    {% endfor %}
+<div class="navegacao-etapas">
+
+    <button id="btn-anterior">
+        ← Anterior
+    </button>
+
+    <span id="contador-etapas">
+        1 / {{ etapas|length }}
+    </span>
+
+    <button id="btn-proximo">
+        Próxima →
+    </button>
 
 </div>
 
@@ -64,3 +81,66 @@
 {% endfor %}
 
 {% endblock %}
+
+<script>
+
+let etapaAtual = 0
+
+const etapas = document.querySelectorAll(".etapa")
+
+const contador =
+    document.getElementById(
+        "contador-etapas"
+    )
+
+function mostrarEtapa(indice){
+
+    etapas.forEach(etapa => {
+
+        etapa.style.display = "none"
+
+    })
+
+    etapas[indice].style.display = "block"
+
+    contador.textContent =
+        `${indice + 1} / ${etapas.length}`
+
+}
+
+document
+.getElementById("btn-proximo")
+.addEventListener("click", () => {
+
+    if(
+        etapaAtual <
+        etapas.length - 1
+    ){
+
+        etapaAtual++
+
+        mostrarEtapa(
+            etapaAtual
+        )
+
+    }
+
+})
+
+document
+.getElementById("btn-anterior")
+.addEventListener("click", () => {
+
+    if(etapaAtual > 0){
+
+        etapaAtual--
+
+        mostrarEtapa(
+            etapaAtual
+        )
+
+    }
+
+})
+
+</script>
