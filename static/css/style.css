@@ -742,8 +742,7 @@ canvas{
 
     font-weight: bold;
 }
-
-navegacao-etapas{
+.navegacao-etapas{
 
     display: flex;
 
@@ -751,30 +750,14 @@ navegacao-etapas{
 
     align-items: center;
 
-    gap: 15px;
+    gap: 10px;
 
-    margin: 30px 0;
+    margin: 40px 0;
 
-}
+    background: #f5f5f5;
 
-.navegacao-etapas button{
+    padding: 12px;
 
-    padding: 8px 16px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-}
-
-#contador-etapas{
-
-    font-weight: bold;
-
-    min-width: 50px;
-
-    text-align: center;
+    border-radius: 12px;
 
 }
