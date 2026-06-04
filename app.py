@@ -230,11 +230,7 @@ def renderizar_markdown(arquivo, titulo=None):
 
         "titulo": "Resultados",
 
-        "conteudo": """
-    <div id="resultado-aula">
-
-    </div>
-    """
+        "conteudo": ""
     })
 
    
