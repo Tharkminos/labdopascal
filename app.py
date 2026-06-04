@@ -226,6 +226,16 @@ def renderizar_markdown(arquivo, titulo=None):
 
             titulo = "Sem título"
         etapas = dividir_etapas(md,titulo)
+        etapas.append({
+
+            "titulo": "Resultados",
+
+            "conteudo": """
+        <div id="resultado-aula">
+
+        </div>
+        """
+        })
 
    
     banco = None

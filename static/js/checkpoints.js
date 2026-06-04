@@ -1,52 +1,84 @@
-document.addEventListener("click", (e) => {
+let acertos = 0
+let erros = 0
 
-    if (!e.target.classList.contains("alternativa")) {
-        return;
-    }
+document
+.querySelectorAll(".alternativa")
+.forEach(botao => {
 
-    const botao = e.target;
+    botao.addEventListener(
+        "click",
+        () => {
 
-    const bloco = botao.closest(".checkpoint");
+            const checkpoint =
+                botao.closest(
+                    ".checkpoint"
+                )
 
-    const botoes = bloco.querySelectorAll(
-        ".alternativa"
-    );
+            if(
+                checkpoint.dataset
+                .concluido === "true"
+            ){
+                return
+            }
 
-    const feedback = bloco.querySelector(
-        ".checkpoint-feedback"
-    );
+            const correta =
+                botao.dataset.correta
+                === "1"
 
-    botoes.forEach(b => {
+            const feedback =
+                checkpoint.querySelector(
+                    ".checkpoint-feedback"
+                )
 
-        b.disabled = true;
+            if(correta){
 
-        if (
-            b.dataset.correta === "1"
-        ) {
-            b.classList.add(
-                "correta"
-            );
+                acertos++
+
+                checkpoint.dataset
+                .concluido = "true"
+
+                feedback.innerHTML =
+                    "✅ Correto"
+
+                botao.classList.add(
+                    "correta"
+                )
+
+            }else{
+
+                erros++
+
+                feedback.innerHTML =
+                    "❌ Tente novamente"
+
+                botao.classList.add(
+                    "errada"
+                )
+            }
+
         }
-    });
+    )
 
-    if (
-        botao.dataset.correta === "1"
-    ) {
+})
 
-        botao.classList.add(
-            "selecionada"
-        );
+function etapaConcluida(){
 
-        feedback.textContent =
-            "✅ Resposta correta!";
+    const checkpoints =
+        etapas[etapaAtual]
+        .querySelectorAll(
+            ".checkpoint"
+        )
 
-    } else {
-
-        botao.classList.add(
-            "errada"
-        );
-
-        feedback.textContent =
-            "❌ Resposta incorreta.";
+    if(
+        checkpoints.length === 0
+    ){
+        return true
     }
-});
+
+    return [...checkpoints].every(
+        cp =>
+        cp.dataset.concluido
+        === "true"
+    )
+
+}
