@@ -36,16 +36,15 @@
 <section
     class="etapa"
     id="etapa-{{ loop.index0 }}"
-    {% if not loop.first %}
-    style="display:none"
-    {% endif %}
 >
 
-    {% if etapa.titulo %}
     <h2>{{ etapa.titulo }}</h2>
-    {% endif %}
 
     {{ etapa.conteudo|safe }}
+
+    {% if loop.last %}
+    <div id="resultado-aula"></div>
+    {% endif %}
 
 </section>
 
