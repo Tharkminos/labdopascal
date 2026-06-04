@@ -36,6 +36,9 @@
 <section
     class="etapa"
     id="etapa-{{ loop.index0 }}"
+    {% if not loop.first %}
+    style="display:none"
+    {% endif %}
 >
 
     <h2>{{ etapa.titulo }}</h2>
@@ -91,11 +94,7 @@ const contador =
     )
 
 function mostrarEtapa(indice){
-    if(indice === etapas.length - 1){
 
-        gerarResultado()
-
-    }
     etapas.forEach(etapa => {
 
         etapa.style.display = "none"
@@ -106,6 +105,12 @@ function mostrarEtapa(indice){
 
     contador.textContent =
         `${indice + 1} / ${etapas.length}`
+
+    if(indice === etapas.length - 1){
+
+        gerarResultado()
+
+    }
 
 }
 function gerarResultado(){
