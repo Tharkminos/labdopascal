@@ -1,7 +1,6 @@
 function setup() {
-  createCanvas(350, 400);
-  canvas = createCanvas(600, 600);
-  canvas.parent("canvas-just_atom");
+  canvas = createCanvas(350, 400);
+  canvas.parent("canvas-justatom");
 }
 let pi = 3.14
 let atoms = [[207,200,''],
