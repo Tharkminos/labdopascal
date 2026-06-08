@@ -15,7 +15,7 @@
 
         {
             "tipo":"quiz",
-            "dificuldade":"medio",
+            "dificuldade":"facil",
             "pergunta":"Qual partícula possui carga negativa?",
             "alternativas":[
                 "Próton",
@@ -27,7 +27,7 @@
 
         {
             "tipo":"quiz",
-            "dificuldade":"dificil",
+            "dificuldade":"facil",
             "pergunta":"Qual partícula possui carga neutra?",
             "alternativas":[
                 "Prótons",
