@@ -1,3 +1,5 @@
+(()=>{
+
 function setup() {
   canvas = createCanvas(350, 500);
   canvas.parent("canvas-atom");
@@ -132,3 +134,4 @@ function draw() {
 
   
 }
+})();
