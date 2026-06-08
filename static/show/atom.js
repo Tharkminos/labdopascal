@@ -1,4 +1,3 @@
-(()=>{
 
 function setup() {
   canvas = createCanvas(350, 500);
@@ -134,4 +133,4 @@ function draw() {
 
   
 }
-})();
+
