@@ -22,6 +22,7 @@ Os atomos são compostos de 3 estruturas menores.
 
 **Clique nas cargas abaixo para ver que informações podemos descobrir:**
 [simulacao=atom]
+...
 [etapa=Perguntas]
 
 [checkpoint=facil]
