@@ -87,6 +87,9 @@
 const XP_AULA =
     {{ meta.xp|default(0) }};
 
+const NOME_AULA =
+    "{{ nome_aula }}";
+
 let etapaAtual = 0
 
 const etapas = document.querySelectorAll(".etapa")
@@ -117,7 +120,6 @@ function mostrarEtapa(indice){
 
 }
 function gerarResultado(){
-    console.log("gerarResultado");
     const total =
         acertos + erros
 
@@ -127,7 +129,30 @@ function gerarResultado(){
         : Math.round(
             acertos * 100 / total
         )
+    fetch(
+    "/concluir-aula",
+    {
+        method:"POST",
 
+        headers:{
+            "Content-Type":
+            "application/json"
+        },
+
+        body:JSON.stringify({
+
+            aula:NOME_AULA,
+
+            nota:aproveitamento,
+
+            xp:
+                aproveitamento > 40
+                ? XP_AULA
+                : 0
+
+        })
+    }
+)
     let imagem = ""
     let mensagem = ""
     let aprovado = true

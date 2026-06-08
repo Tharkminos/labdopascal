@@ -190,7 +190,7 @@ def processar_etapa(conteudo, banco=None):
 
     return html
 # ================= MARKDOWN =================
-def renderizar_markdown(arquivo, titulo=None):
+def renderizar_markdown(arquivo, titulo=None,nome_aula=None):
 
     with open(
         arquivo,
@@ -256,7 +256,8 @@ def renderizar_markdown(arquivo, titulo=None):
         r"\[simulacao=(.*?)\]",
         md
     ),
-    meta=meta
+    meta=meta,
+    nome_aula=nome_aula
 )
 
 # ================= HOME =================
@@ -268,7 +269,70 @@ def index():
 
 
 # ================= POSTS =================
+@app.route(
+    "/concluir-aula",
+    methods=["POST"]
+)
+def concluir_aula():
 
+    if "id" not in session:
+
+        return {
+            "status":"erro"
+        }, 401
+
+    dados = request.get_json()
+
+    aula = dados["aula"]
+
+    nota = dados["nota"]
+
+    xp = dados["xp"]
+
+    conn = sqlite3.connect(
+        "site.db"
+    )
+
+    cursor = conn.cursor()
+    cursor.execute(
+    """
+    DELETE FROM progresso_aulas
+    WHERE usuario_id = ?
+    AND aula = ?
+    """,
+    (
+        session["id"],
+        aula
+    )
+)
+    cursor.execute(
+        """
+        INSERT INTO progresso_aulas
+        (
+            usuario_id,
+            aula,
+            nota,
+            xp_ganho,
+            concluida
+        )
+        VALUES
+        (?, ?, ?, ?, 1)
+        """,
+        (
+            session["id"],
+            aula,
+            nota,
+            xp
+        )
+    )
+
+    conn.commit()
+
+    conn.close()
+
+    return {
+        "status":"ok"
+    }
 @app.route("/teste")
 def teste():
 
@@ -284,10 +348,9 @@ def post(categoria, nome):
     arquivo = f"posts/{categoria}/{nome}.md"
 
     return renderizar_markdown(
-        arquivo
+        arquivo,
+        nome_aula=nome
     )
-
-
 # ================= SIMULAÇÕES =================
 
 @app.route("/simulacao/<nome>")
