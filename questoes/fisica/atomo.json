@@ -28,13 +28,13 @@
         {
             "tipo":"quiz",
             "dificuldade":"dificil",
-            "pergunta":"Qual partícula determina o número atômico?",
+            "pergunta":"Qual partícula possui carga neutra?",
             "alternativas":[
                 "Prótons",
                 "Elétrons",
                 "Nêutrons"
             ],
-            "correta":0
+            "correta":2
         }
 
     ]
