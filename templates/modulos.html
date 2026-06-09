@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Módulos
+
+{% endblock %}
+
+{% block content %}
+
+<h1>Módulos</h1>
+
+<div class="grade-modulos">
+
+{% for modulo in modulos %}
+
+    <div class="card-modulo">
+
+        <img
+            src="{{ url_for(
+                'static',
+                filename='modulos/' + modulo.slug + '.webp'
+            ) }}"
+            alt="{{ modulo.titulo }}"
+        >
+
+        <h2>
+
+            {{ modulo.titulo }}
+
+        </h2>
+
+        <div class="estrelas">
+
+            ★★★★★
+
+        </div>
+
+        <p>
+
+            {{ modulo.total_aulas }}
+            aulas
+
+        </p>
+
+    </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

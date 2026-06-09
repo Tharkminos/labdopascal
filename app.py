@@ -327,11 +327,9 @@ def modulos():
             "total_aulas": len(aulas)
 
         })
-    return lista_modulos
-    """render_template(
-        "modulos.html",
-        modulos=lista_modulos
-    )"""
+    return render_template(
+    "modulos.html",
+    modulos=lista_modulos)
 
 def obter_titulo(arquivo):
 

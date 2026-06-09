@@ -761,3 +761,62 @@ canvas{
     border-radius: 12px;
 
 }
+/* ============================== MÓDULOS ============================ */
+
+.grade-modulos{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:20px;
+
+}
+
+.card-modulo{
+
+    width:300px;
+
+    background:white;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+    text-align:center;
+
+    box-shadow:
+        0 4px 12px rgba(
+            0,
+            0,
+            0,
+            .15
+        );
+
+}
+
+.card-modulo img{
+
+    width:100%;
+
+    height:180px;
+
+    object-fit:cover;
+
+}
+
+.card-modulo h2{
+
+    margin:15px 0;
+
+}
+
+.estrelas{
+
+    font-size:1.8rem;
+
+    color:gold;
+
+}
