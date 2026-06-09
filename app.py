@@ -376,11 +376,49 @@ def modulo(slug):
             "titulo": titulo
 
         })
-    for i, aula in enumerate(lista_aulas):
-        if i == 0:
+    proxima_liberada = False
+
+    for aula in lista_aulas:
+
+        if aula["slug"] in progresso:
+
+            aula["status"] = "concluida"
+
+        elif not proxima_liberada:
+
             aula["status"] = "proxima"
+
+            proxima_liberada = True
+
         else:
+
             aula["status"] = "bloqueada"
+    progresso = []
+
+    if "id" in session:
+
+        conn = sqlite3.connect(
+            "site.db"
+        )
+
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            SELECT aula
+            FROM progresso_aulas
+            WHERE usuario_id = ?
+            AND concluida = 1
+            """,
+            (session["id"],)
+        )
+
+        progresso = [
+            linha[0]
+            for linha in cursor.fetchall()
+        ]
+
+        conn.close()
 
     return render_template(
 
@@ -415,8 +453,7 @@ def obter_titulo(arquivo):
 # ================= POSTS =================
 @app.route(
     "/concluir-aula",
-    methods=["POST"]
-)
+    methods=["POST"])
 def concluir_aula():
 
     if "id" not in session:
