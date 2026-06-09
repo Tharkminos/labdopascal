@@ -120,6 +120,7 @@ function mostrarEtapa(indice){
 
 }
 function gerarResultado(){
+
     const total =
         acertos + erros
 
@@ -129,7 +130,7 @@ function gerarResultado(){
         : Math.round(
             acertos * 100 / total
         )
-    
+
     let imagem = ""
     let mensagem = ""
     let aprovado = true
@@ -175,30 +176,6 @@ function gerarResultado(){
         "Excelente desempenho."
 
     }
-    if(aprovado){
-
-    fetch(
-        "/concluir-aula",
-        {
-            method:"POST",
-
-            headers:{
-                "Content-Type":
-                "application/json"
-            },
-
-            body:JSON.stringify({
-
-                aula:AULA_ATUAL,
-
-                nota:aproveitamento,
-
-                xp:XP_AULA
-
-            })
-        }
-    )
-}
 
     document
     .getElementById(
@@ -240,32 +217,33 @@ function gerarResultado(){
         }
 
     `
-}
-if(aprovado){
 
-    fetch(
-        "/concluir-aula",
-        {
-            method:"POST",
+    if(aprovado){
 
-            headers:{
-                "Content-Type":
-                "application/json"
-            },
+        fetch(
+            "/concluir-aula",
+            {
+                method:"POST",
 
-            body:JSON.stringify({
+                headers:{
+                    "Content-Type":
+                    "application/json"
+                },
 
-                aula:AULA_ATUAL,
+                body:JSON.stringify({
 
-                nota:aproveitamento,
+                    aula:AULA_ATUAL,
 
-                xp:XP_AULA
+                    nota:aproveitamento,
 
-            })
-        }
-    )
-}
-document
+                    xp:XP_AULA
+
+                })
+            }
+        )
+    }
+
+}document
 .getElementById(
     "btn-proximo"
 )
