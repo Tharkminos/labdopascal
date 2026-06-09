@@ -331,6 +331,62 @@ def modulos():
     "modulos.html",
     modulos=lista_modulos)
 
+@app.route("/modulo/<slug>")
+def modulo(slug):
+
+    pasta = "posts/fisica"
+
+    arquivos = os.listdir(pasta)
+
+    aulas = []
+
+    for arquivo in arquivos:
+
+        if not arquivo.endswith(".md"):
+            continue
+
+        nome = arquivo[:-3]
+
+        if not nome.startswith(
+            slug + "_"
+        ):
+            continue
+
+        aulas.append(nome)
+
+    aulas.sort(
+        key=lambda aula:
+        int(
+            aula.rsplit("_", 1)[1]
+        )
+    )
+
+    lista_aulas = []
+
+    for aula in aulas:
+
+        titulo = obter_titulo(
+            f"{pasta}/{aula}.md"
+        )
+
+        lista_aulas.append({
+
+            "slug": aula,
+
+            "titulo": titulo
+
+        })
+
+    return render_template(
+
+        "modulo.html",
+
+        modulo=slug,
+
+        aulas=lista_aulas
+
+    )
+
 def obter_titulo(arquivo):
 
     with open(

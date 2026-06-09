@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+{{ modulo }}
+
+{% endblock %}
+
+{% block content %}
+
+<h1>
+
+    {{ modulo|capitalize }}
+
+</h1>
+
+<div class="estrelas">
+
+    ★★★★★
+
+</div>
+
+<div class="lista-aulas">
+
+{% for aula in aulas %}
+
+    <a
+        class="card-aula"
+        href="/posts/fisica/{{ aula.slug }}"
+    >
+
+        {{ aula.titulo }}
+
+    </a>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

@@ -813,6 +813,43 @@ canvas{
 
     font-size:1.8rem;
 
+
+
+
+.lista-aulas{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:15px;
+
+    margin-top:20px;
+
+}
+
+.card-aula{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    text-decoration:none;
+
+    color:black;
+
+    box-shadow:
+        0 3px 8px rgba(
+            0,
+            0,
+            0,
+            .15
+        );
+
+}
+
     color:gold;
 
 }
