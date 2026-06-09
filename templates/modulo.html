@@ -24,17 +24,36 @@
 
 {% for aula in aulas %}
 
-    <a
-        class="card-aula"
-        href="/posts/fisica/{{ aula.slug }}"
-    >
+    {% if aula.status == "bloqueada" %}
 
-        {{ aula.titulo }}
+        <div
+            class="card-aula bloqueada"
+        >
 
-    </a>
+            🔒 {{ aula.titulo }}
+
+        </div>
+
+    {% else %}
+
+        <a
+            class="card-aula"
+            href="/posts/fisica/{{ aula.slug }}"
+        >
+
+            {% if aula.status == "concluida" %}
+                ✓
+            {% else %}
+                ★
+            {% endif %}
+
+            {{ aula.titulo }}
+
+        </a>
+
+    {% endif %}
 
 {% endfor %}
-
 </div>
 
 {% endblock %}

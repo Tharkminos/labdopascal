@@ -376,6 +376,11 @@ def modulo(slug):
             "titulo": titulo
 
         })
+    for i, aula in enumerate(lista_aulas):
+        if i == 0:
+            aula["status"] = "proxima"
+        else:
+            aula["status"] = "bloqueada"
 
     return render_template(
 
