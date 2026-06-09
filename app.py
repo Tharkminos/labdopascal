@@ -14,7 +14,7 @@ import markdown
 import re
 import json
 import random
-
+import os
 
 # ================= APP =================
 
@@ -267,7 +267,92 @@ def index():
 
     return render_template("base.html")
 
+def gerar_estrelas(concluidas, total):
 
+    return (
+        "⭐" * concluidas +
+        "★" * (total - concluidas)
+    )
+
+# ================= ROTA MÓDULOS =========
+@app.route("/modulos")
+def modulos():
+
+    pasta = "posts/fisica"
+
+    arquivos = os.listdir(pasta)
+
+    modulos = {}
+
+    for arquivo in arquivos:
+
+        if not arquivo.endswith(".md"):
+            continue
+
+        nome = arquivo[:-3]
+
+        if "_" not in nome:
+            continue
+
+        modulo = nome.rsplit("_", 1)[0]
+
+        if modulo not in modulos:
+
+            modulos[modulo] = []
+
+        modulos[modulo].append(nome)
+    for modulo in modulos:
+        modulos[modulo].sort(
+        key=lambda aula:
+        int(
+            aula.rsplit("_", 1)[1]
+        )
+    )
+    lista_modulos = []
+
+    for slug, aulas in modulos.items():
+
+        primeira_aula = aulas[0]
+
+        titulo = obter_titulo(
+            f"posts/fisica/{primeira_aula}.md"
+        )
+
+        lista_modulos.append({
+
+            "slug": slug,
+
+            "titulo": titulo,
+
+            "total_aulas": len(aulas)
+
+        })
+    return lista_modulos
+    """render_template(
+        "modulos.html",
+        modulos=lista_modulos
+    )"""
+
+def obter_titulo(arquivo):
+
+    with open(
+        arquivo,
+        encoding="utf-8"
+    ) as f:
+
+        texto = f.read()
+
+    match = re.search(
+        r"^#\s*(.+)$",
+        texto,
+        re.MULTILINE
+    )
+
+    if match:
+
+        return match.group(1)
+
+    return "Sem título"
 # ================= POSTS =================
 @app.route(
     "/concluir-aula",
