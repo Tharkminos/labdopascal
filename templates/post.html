@@ -129,30 +129,30 @@ function gerarResultado(){
         : Math.round(
             acertos * 100 / total
         )
+    if(aprovado){
+
     fetch(
-    "/concluir-aula",
-    {
-        method:"POST",
+        "/concluir-aula",
+        {
+            method:"POST",
 
-        headers:{
-            "Content-Type":
-            "application/json"
-        },
+            headers:{
+                "Content-Type":
+                "application/json"
+            },
 
-        body:JSON.stringify({
+            body:JSON.stringify({
 
-            aula:NOME_AULA,
+                aula:AULA_ATUAL,
 
-            nota:aproveitamento,
+                nota:aproveitamento,
 
-            xp:
-                aproveitamento > 40
-                ? XP_AULA
-                : 0
+                xp:XP_AULA
 
-        })
-    }
-)
+            })
+        }
+    )
+}
     let imagem = ""
     let mensagem = ""
     let aprovado = true
@@ -198,30 +198,7 @@ function gerarResultado(){
         "Excelente desempenho."
 
     }
-    if(aprovado){
-
-    fetch(
-        "/concluir-aula",
-        {
-            method:"POST",
-
-            headers:{
-                "Content-Type":
-                "application/json"
-            },
-
-            body:JSON.stringify({
-
-                aula:AULA_ATUAL,
-
-                nota:aproveitamento,
-
-                xp:XP_AULA
-
-            })
-        }
-    )
-}
+    
 
     document
     .getElementById(
@@ -263,6 +240,30 @@ function gerarResultado(){
         }
 
     `
+}
+if(aprovado){
+
+    fetch(
+        "/concluir-aula",
+        {
+            method:"POST",
+
+            headers:{
+                "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+
+                aula:AULA_ATUAL,
+
+                nota:aproveitamento,
+
+                xp:XP_AULA
+
+            })
+        }
+    )
 }
 document
 .getElementById(
@@ -313,6 +314,7 @@ document
     }
 
 })
+
 
 </script>
 
