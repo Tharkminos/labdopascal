@@ -377,6 +377,7 @@ def modulo(slug):
 
         })
     proxima_liberada = False
+    progresso = []
 
     for aula in lista_aulas:
 
@@ -393,7 +394,7 @@ def modulo(slug):
         else:
 
             aula["status"] = "bloqueada"
-    progresso = []
+
 
     if "id" in session:
 
