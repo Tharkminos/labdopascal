@@ -531,7 +531,6 @@ def post(categoria, nome):
 
     return renderizar_markdown(
         arquivo,
-        nome_aula=nome,
         aula_slug=nome
     )
 # ================= SIMULAÇÕES =================
