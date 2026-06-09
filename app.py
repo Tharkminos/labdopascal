@@ -190,7 +190,7 @@ def processar_etapa(conteudo, banco=None):
 
     return html
 # ================= MARKDOWN =================
-def renderizar_markdown(arquivo, titulo=None,nome_aula=None):
+def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
 
     with open(
         arquivo,
@@ -257,7 +257,7 @@ def renderizar_markdown(arquivo, titulo=None,nome_aula=None):
         md
     ),
     meta=meta,
-    nome_aula=nome_aula
+    aula_slug=aula_slug
 )
 
 # ================= HOME =================
@@ -531,7 +531,8 @@ def post(categoria, nome):
 
     return renderizar_markdown(
         arquivo,
-        nome_aula=nome
+        nome_aula=nome,
+        aula_slug=nome
     )
 # ================= SIMULAÇÕES =================
 

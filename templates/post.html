@@ -87,8 +87,8 @@
 const XP_AULA =
     {{ meta.xp|default(0) }};
 
-const NOME_AULA =
-    "{{ nome_aula }}";
+const AULA_ATUAL =
+    "{{ aula_slug }}";
 
 let etapaAtual = 0
 
@@ -198,6 +198,30 @@ function gerarResultado(){
         "Excelente desempenho."
 
     }
+    if(aprovado){
+
+    fetch(
+        "/concluir-aula",
+        {
+            method:"POST",
+
+            headers:{
+                "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+
+                aula:AULA_ATUAL,
+
+                nota:aproveitamento,
+
+                xp:XP_AULA
+
+            })
+        }
+    )
+}
 
     document
     .getElementById(
