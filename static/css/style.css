@@ -776,17 +776,13 @@ canvas{
 }
 
 .card-modulo{
-
+    text-decoration:none;
+    color:inherit;
     width:300px;
-
     background:white;
-
     border-radius:20px;
-
     overflow:hidden;
-
     text-align:center;
-
     box-shadow:
         0 4px 12px rgba(
             0,
