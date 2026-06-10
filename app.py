@@ -413,10 +413,21 @@ def modulo(slug):
             """,
             (session["id"],)
         )
+        resultado = cursor.fetchall()
+
+        print(
+            "Usuario:",
+            session["id"]
+        )
+
+        print(
+            "Banco:",
+            resultado
+        )
 
         progresso = [
             linha[0]
-            for linha in cursor.fetchall()
+            for linha in resultado
         ]
 
         conn.close()
@@ -585,7 +596,7 @@ def login():
             """,
             (email,)
         )
-
+        
         user = cursor.fetchone()
 
         conn.close()
