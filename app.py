@@ -331,7 +331,7 @@ def modulos():
     "modulos.html",
     modulos=lista_modulos)
 
-@app.route("/modulos/<slug>")
+@app.route("/modulo/<slug>")
 def modulo(slug):
 
     pasta = "posts/fisica"
