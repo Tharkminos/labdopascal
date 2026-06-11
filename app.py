@@ -333,6 +333,7 @@ def modulos():
 
 @app.route("/modulo/<slug>")
 def modulo(slug):
+    print("ENTREI NA ROTA")
 
     pasta = "posts/fisica"
 
@@ -435,6 +436,7 @@ def modulo(slug):
     print("Slug:", slug)
     print("Aulas:", lista_aulas)
     print("Progresso:", progresso)
+
     return render_template(
 
         "modulo.html",
