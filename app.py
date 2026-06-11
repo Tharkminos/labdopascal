@@ -363,7 +363,7 @@ def modulo(slug):
     )
 
     lista_aulas = []
-
+    progresso = []
     for aula in aulas:
 
         titulo = obter_titulo(
@@ -421,7 +421,7 @@ def modulo(slug):
 
         conn.close()
     proxima_liberada = False
-    progresso = []
+
 
     for aula in lista_aulas:
 
