@@ -333,7 +333,6 @@ def modulos():
 
 @app.route("/modulo/<slug>")
 def modulo(slug):
-    print("ENTREI NA ROTA")
 
     pasta = "posts/fisica"
 
@@ -363,7 +362,7 @@ def modulo(slug):
     )
 
     lista_aulas = []
-    progresso = []
+
     for aula in aulas:
 
         titulo = obter_titulo(
@@ -378,6 +377,7 @@ def modulo(slug):
 
         })
 
+    progresso = []
 
     if "id" in session:
 
@@ -396,23 +396,8 @@ def modulo(slug):
             """,
             (session["id"],)
         )
+
         resultado = cursor.fetchall()
-
-        return {
-            "resultado": resultado,
-            "progresso": progresso
-        }
-        resultado = cursor.fetchall()
-
-        print(
-            "Usuario:",
-            session["id"]
-        )
-
-        print(
-            "Banco:",
-            resultado
-        )
 
         progresso = [
             linha[0]
@@ -420,8 +405,8 @@ def modulo(slug):
         ]
 
         conn.close()
-    proxima_liberada = False
 
+    proxima_liberada = False
 
     for aula in lista_aulas:
 
@@ -438,10 +423,6 @@ def modulo(slug):
         else:
 
             aula["status"] = "bloqueada"
-    return {
-    "usuario": session.get("id"),
-    "progresso": progresso,
-    "aulas": lista_aulas}
 
     return render_template(
 
