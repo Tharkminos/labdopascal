@@ -432,7 +432,10 @@ def modulo(slug):
         else:
 
             aula["status"] = "bloqueada"
-
+    return {
+        "progresso": progresso,
+        "aulas": lista_aulas
+    }
     return render_template(
 
         "modulo.html",
