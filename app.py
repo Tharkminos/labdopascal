@@ -433,9 +433,10 @@ def modulo(slug):
 
             aula["status"] = "bloqueada"
     return {
-        "progresso": progresso,
-        "aulas": lista_aulas
-    }
+    "usuario": session.get("id"),
+    "progresso": progresso,
+    "aulas": lista_aulas}
+
     return render_template(
 
         "modulo.html",
