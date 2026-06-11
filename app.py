@@ -308,6 +308,12 @@ def modulos():
             aula.rsplit("_", 1)[1]
         )
     )
+    concluidas = 0
+    for aula in aulas_do_modulo:
+
+        if aula in progresso:
+
+            concluidas += 1
     lista_modulos = []
 
     for slug, aulas in modulos.items():
@@ -327,6 +333,14 @@ def modulos():
             "total_aulas": len(aulas)
 
         })
+    proxima = None
+
+    for aula in aulas:
+
+        if aula not in progresso:
+
+            proxima = aula
+        break
     return render_template(
     "modulos.html",
     modulos=lista_modulos)
