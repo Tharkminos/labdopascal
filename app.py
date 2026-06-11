@@ -377,24 +377,6 @@ def modulo(slug):
             "titulo": titulo
 
         })
-    proxima_liberada = False
-    progresso = []
-
-    for aula in lista_aulas:
-
-        if aula["slug"] in progresso:
-
-            aula["status"] = "concluida"
-
-        elif not proxima_liberada:
-
-            aula["status"] = "proxima"
-
-            proxima_liberada = True
-
-        else:
-
-            aula["status"] = "bloqueada"
 
 
     if "id" in session:
@@ -432,10 +414,24 @@ def modulo(slug):
         ]
 
         conn.close()
-    print("=== MODULO ===")
-    print("Slug:", slug)
-    print("Aulas:", lista_aulas)
-    print("Progresso:", progresso)
+    proxima_liberada = False
+    progresso = []
+
+    for aula in lista_aulas:
+
+        if aula["slug"] in progresso:
+
+            aula["status"] = "concluida"
+
+        elif not proxima_liberada:
+
+            aula["status"] = "proxima"
+
+            proxima_liberada = True
+
+        else:
+
+            aula["status"] = "bloqueada"
 
     return render_template(
 
