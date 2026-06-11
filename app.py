@@ -399,8 +399,8 @@ def modulo(slug):
         resultado = cursor.fetchall()
 
         return {
-            "session": session.get("id"),
-            "resultado": resultado
+            "resultado": resultado,
+            "progresso": progresso
         }
         resultado = cursor.fetchall()
 
