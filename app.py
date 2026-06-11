@@ -431,7 +431,10 @@ def modulo(slug):
         ]
 
         conn.close()
-
+    print("=== MODULO ===")
+    print("Slug:", slug)
+    print("Aulas:", lista_aulas)
+    print("Progresso:", progresso)
     return render_template(
 
         "modulo.html",
