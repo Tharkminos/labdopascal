@@ -389,9 +389,12 @@ def modulo(slug):
 
         cursor.execute(
             """
-            SELECT usuario_id,aula
+            SELECT aula
             FROM progresso_aulas
-            """
+            WHERE usuario_id = ?
+            AND concluida = 1
+            """,
+            (session["id"],)
         )
         resultado = cursor.fetchall()
 
