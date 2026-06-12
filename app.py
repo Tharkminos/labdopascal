@@ -473,7 +473,7 @@ def modulo(slug):
     return render_template(
 
         "modulo.html",
-        modulo=obter_meta_rapido(f"posts/fisica/{lista_aulas[0]['slug']}")["titulo_modulo"],
+        modulo=obter_meta_rapido(f"posts/fisica/{lista_aulas[0]['slug']}.md")["titulo_modulo"],
 
         aulas=lista_aulas
 
