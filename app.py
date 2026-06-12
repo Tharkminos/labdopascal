@@ -283,6 +283,32 @@ def modulos():
     arquivos = os.listdir(pasta)
 
     modulos = {}
+    progresso = []
+
+    if "id" in session:
+
+       conn = sqlite3.connect(
+        "site.db"
+    )
+
+       cursor = conn.cursor()
+
+       cursor.execute(
+        """
+        SELECT aula
+        FROM progresso_aulas
+        WHERE usuario_id = ?
+        AND concluida = 1
+        """,
+        (session["id"],)
+    )
+
+       progresso = [
+        linha[0]
+        for linha in cursor.fetchall()
+    ]
+
+       conn.close()
 
     for arquivo in arquivos:
 
@@ -308,16 +334,14 @@ def modulos():
             aula.rsplit("_", 1)[1]
         )
     )
-    concluidas = 0
-    for aula in aulas_do_modulo:
-
-        if aula in progresso:
-
-            concluidas += 1
+    
     lista_modulos = []
 
     for slug, aulas in modulos.items():
-
+        concluidas = 0
+        for aula in aulas:
+           if aula in progresso:
+              concluidas += 1
         primeira_aula = aulas[0]
 
         titulo = obter_titulo(
@@ -338,9 +362,8 @@ def modulos():
     for aula in aulas:
 
         if aula not in progresso:
-
             proxima = aula
-        break
+            break
     return render_template(
     "modulos.html",
     modulos=lista_modulos)
@@ -441,7 +464,7 @@ def modulo(slug):
     return render_template(
 
         "modulo.html",
-        modulo=obter_meta_rapido(f"posts/fisica/{lista_aulas[0]["slug"]}")["titulo_modulo"],
+        modulo=obter_meta_rapido(f"posts/fisica/{lista_aulas[0]['slug']}")["titulo_modulo"],
 
         aulas=lista_aulas
 
@@ -482,7 +505,11 @@ def obter_titulo(arquivo):
         arquivo,
         encoding="utf-8"
     ) as f:
-
+       match = re.search(
+       r"^#\s*(.+)$",
+       texto,
+       re.MULTILINE
+)
         texto = f.read()
     if match:
 
