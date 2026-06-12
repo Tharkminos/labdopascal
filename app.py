@@ -437,32 +437,36 @@ def modulo(slug):
         else:
 
             aula["status"] = "bloqueada"
-
+    
     return render_template(
 
         "modulo.html",
-
-        modulo=slug,
+[]
+        modulo=obter_modulo_nome(lista_aulas[0]["slug"]),
 
         aulas=lista_aulas
 
     )
-
-def obter_titulo(arquivo):
-
+def obter_modulo_nome(arquivo):
     with open(
         arquivo,
         encoding="utf-8"
     ) as f:
 
         texto = f.read()
+    for line in texto:
+        if "titulo_modulo" in line:
+            line = line.replace('\n')
+            line = line.split(":")
+            return line[1]
+    return "Sem título"
+def obter_titulo(arquivo):
+    with open(
+        arquivo,
+        encoding="utf-8"
+    ) as f:
 
-    match = re.search(
-        r"^#\s*(.+)$",
-        texto,
-        re.MULTILINE
-    )
-
+        texto = f.read()
     if match:
 
         return match.group(1)
