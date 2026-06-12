@@ -872,12 +872,16 @@ canvas{
 
 .imagem-modulo{
 
-    width:100%;
+    width:180px;
 
-    max-width:500px;
+    height:180px;
 
-    border-radius:12px;
+    object-fit:cover;
 
-    margin-bottom:15px;
+    border-radius:16px;
+
+    display:block;
+
+    margin:auto;
 
 }
