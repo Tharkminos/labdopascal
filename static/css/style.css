@@ -861,3 +861,23 @@ canvas{
     color:gold;
 
 }
+
+.cabecalho-modulo{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.imagem-modulo{
+
+    width:100%;
+
+    max-width:500px;
+
+    border-radius:12px;
+
+    margin-bottom:15px;
+
+}

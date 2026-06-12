@@ -470,13 +470,31 @@ def modulo(slug):
 
             aula["status"] = "bloqueada"
     
+
+    meta_modulo = obter_meta_rapido(
+        f"posts/fisica/{lista_aulas[0]['slug']}.md"
+    )
+
+    titulo_modulo = meta_modulo.get(
+        "titulo_modulo",
+        "Sem título"
+    )
+
+    descricao_modulo = meta_modulo.get(
+        "descricao_modulo",
+        ""
+    )
+
+    imagem_modulo = meta_modulo.get(
+        "imagem_modulo",
+        "generic_module.webp"
+    )
     return render_template(
-
         "modulo.html",
-        modulo=obter_meta_rapido(f"posts/fisica/{lista_aulas[0]['slug']}.md")["titulo_modulo"],
-
+        modulo=titulo_modulo,
+        descricao=descricao_modulo,
+        imagem=imagem_modulo,
         aulas=lista_aulas
-
     )
 def obter_meta_rapido(arquivo):
 
