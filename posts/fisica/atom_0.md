@@ -2,7 +2,6 @@
 xp: 40
 nivel: 1
 titulo_modulo: Átomo
-imagem_modulo: /static/img/modulos/atom.webp
 descricao_modulo: Estrutura básica da matéria
 questoes: atomo
 ---
