@@ -825,6 +825,7 @@ canvas{
     gap:15px;
 
     margin-top:20px;
+    text-align: left;
 
 }
 
@@ -873,7 +874,7 @@ canvas{
 .imagem-modulo{
 
     width:180px;
-
+    text-align: center;
     height:180px;
 
     object-fit:cover;
