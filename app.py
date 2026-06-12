@@ -514,12 +514,13 @@ def obter_titulo(arquivo):
         arquivo,
         encoding="utf-8"
     ) as f:
+       texto = f.read()
        match = re.search(
        r"^#\s*(.+)$",
        texto,
        re.MULTILINE
 )
-        texto = f.read()
+    
     if match:
 
         return match.group(1)

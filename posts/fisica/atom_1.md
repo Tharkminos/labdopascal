@@ -1,6 +1,8 @@
 ---
 xp: 40
 nivel: 1
+titulo_modulo: Átomo
+descricao_modulo: Estrutura básica da matéria
 questoes: atomo
 ---
 

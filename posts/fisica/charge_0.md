@@ -1,6 +1,8 @@
 ---
 xp: 50
 nivel: 1
+titulo_modulo: Cargas
+descricao_modulo: Estrutura básica da matéria
 ---
 
 # Movimento das Cargas
