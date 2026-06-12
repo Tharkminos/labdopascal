@@ -343,22 +343,31 @@ def modulos():
            if aula in progresso:
               concluidas += 1
         primeira_aula = aulas[0]
+        proxima = None
+        total_aulas = len(aulas)
+        percentual = 0
+        nivel = min(5,((total_aulas - 1) // 5) + 1)
+        estrelas = ("⭐" * nivel +"★" * (5 - nivel))
+        if total_aulas > 0:
+            percentual = round(
+                concluidas * 100 /
+                total_aulas
+            )
 
         titulo = obter_titulo(
             f"posts/fisica/{primeira_aula}.md"
         )
 
         lista_modulos.append({
-
             "slug": slug,
-
             "titulo": titulo,
-
-            "total_aulas": len(aulas)
-
+            "total_aulas": total_aulas,
+            "concluidas": concluidas,
+            "percentual": percentual,
+            "estrelas": estrelas,
+            "proxima": proxima
         })
-    proxima = None
-
+    
     for aula in aulas:
 
         if aula not in progresso:
