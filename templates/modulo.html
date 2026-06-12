@@ -8,11 +8,11 @@
 
 {% block content %}
 
-<h1>
-
-    {{ modulo|capitalize }}
-
-</h1>
+<div class="title">
+    <h1>
+        {{ modulo|capitalize }}
+    </h1>
+</div>
 
 <div class="estrelas">
 
@@ -26,9 +26,6 @@
         src="/static/img/modulos/{{ imagem }}"
         class="imagem-modulo"
     >
-
-    <h1>{{ modulo }}</h1>
-
     <p>{{ descricao }}</p>
 
 </div>
