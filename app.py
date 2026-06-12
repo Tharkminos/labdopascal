@@ -441,8 +441,7 @@ def modulo(slug):
     return render_template(
 
         "modulo.html",
-[]
-        modulo=obter_modulo_nome(lista_aulas[0]["slug"]),
+        modulo=obter_modulo_nome(f"posts/fisica/{lista_aulas[0]["slug"]}"),
 
         aulas=lista_aulas
 
@@ -452,8 +451,7 @@ def obter_modulo_nome(arquivo):
         arquivo,
         encoding="utf-8"
     ) as f:
-
-        texto = f.read()
+        texto = f.readlines()
     for line in texto:
         if "titulo_modulo" in line:
             line = line.replace('\n')
