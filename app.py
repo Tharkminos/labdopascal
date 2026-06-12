@@ -441,23 +441,42 @@ def modulo(slug):
     return render_template(
 
         "modulo.html",
-        modulo=obter_modulo_nome(f"posts/fisica/{lista_aulas[0]["slug"]}"),
+        modulo=obter_meta_rapido(f"posts/fisica/{lista_aulas[0]["slug"]}")["titulo_modulo"],
 
         aulas=lista_aulas
 
     )
-def obter_modulo_nome(arquivo):
+def obter_meta_rapido(arquivo):
+
+    meta = {}
+
     with open(
         arquivo,
         encoding="utf-8"
     ) as f:
-        texto = f.readlines()
-    for line in texto:
-        if "titulo_modulo" in line:
-            line = line.replace('\n')
-            line = line.split(":")
-            return line[1]
-    return "Sem título"
+
+        if f.readline().strip() != "---":
+            return meta
+
+        for linha in f:
+
+            linha = linha.strip()
+
+            if linha == "---":
+                break
+
+            if ":" in linha:
+
+                chave, valor = linha.split(
+                    ":",
+                    1
+                )
+
+                meta[
+                    chave.strip()
+                ] = valor.strip()
+
+    return meta
 def obter_titulo(arquivo):
     with open(
         arquivo,
