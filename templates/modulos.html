@@ -36,14 +36,24 @@ Módulos
             ★★★★★
 
         </div>
-        <div class="barra-progresso">
-            <div
-                class="barra-preenchida"
-                style="
-                    width:{{ modulo.percentual }}%;
-                "
-            ></div>
-        </div>
+        <div
+            class="barra-preenchida"
+
+            style="
+                width:{{ percentual }}%;
+
+                background:
+                {% if percentual <= 25 %}
+                    #ef4444
+                {% elif percentual <= 50 %}
+                    #f97316
+                {% elif percentual <= 75 %}
+                    #3b82f6
+                {% else %}
+                    #22c55e
+                {% endif %};
+            "
+        ></div>
 
         <p>
 

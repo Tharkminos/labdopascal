@@ -241,6 +241,21 @@ function gerarResultado(){
                 })
             }
         )
+        .then(
+            response => response.json()
+        )
+        .then(
+            dados => {
+
+                setTimeout(
+                    () => {window.location.href ="/modulo/" +MODULO
+                    },
+                    3000
+                )
+
+            }
+        )
+            
     }
 
 }document
