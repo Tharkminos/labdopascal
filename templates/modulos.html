@@ -40,14 +40,14 @@ Módulos
             class="barra-preenchida"
 
             style="
-                width:{{ percentual }}%;
+                width:{{ modulo.percentual }}%;
 
                 background:
-                {% if percentual <= 25 %}
+                {% if modulo.percentual <= 25 %}
                     #ef4444
-                {% elif percentual <= 50 %}
+                {% elif modulo.percentual <= 50 %}
                     #f97316
-                {% elif percentual <= 75 %}
+                {% elif modulo.percentual <= 75 %}
                     #3b82f6
                 {% else %}
                     #22c55e
@@ -57,7 +57,7 @@ Módulos
 
         <p>
 
-            {{ modulo.total_aulas }}/{{modulo.total_aulas}}
+            {{ modulo.concluidos }}/{{modulo.total_aulas}}
             aulas
 
         </p>
