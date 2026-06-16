@@ -219,7 +219,7 @@ function gerarResultado(){
     `
 
     if(aprovado){
-
+        const MODULO = AULA_ATUAL.split("_")[0]
         fetch(
             "/concluir-aula",
             {
