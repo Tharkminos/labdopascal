@@ -325,6 +325,13 @@ a{
     padding: 30px 20px;
 }
 
+.conteudo h1 {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
+}
+
 
 /* ================= POST ================= */
 
