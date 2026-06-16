@@ -453,7 +453,24 @@ def modulo(slug):
         conn.close()
 
     proxima_liberada = False
+    concluidas = 0
 
+    for aula in lista_aulas:
+
+        if aula["slug"] in progresso:
+
+            concluidas += 1
+
+    total_aulas = len(lista_aulas)
+
+    percentual = 0
+
+    if total_aulas > 0:
+
+        percentual = round(
+            concluidas * 100 /
+            total_aulas
+        )
     for aula in lista_aulas:
 
         if aula["slug"] in progresso:
@@ -494,7 +511,10 @@ def modulo(slug):
         modulo=titulo_modulo,
         descricao=descricao_modulo,
         imagem=imagem_modulo,
-        aulas=lista_aulas
+        aulas=lista_aulas,
+        concluidas=concluidas,
+        total_aulas=total_aulas,
+        percentual=percentual
     )
 def obter_meta_rapido(arquivo):
 
