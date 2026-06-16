@@ -564,6 +564,60 @@ def obter_titulo(arquivo):
         return match.group(1)
 
     return "Sem título"
+def desbloquear_conquista(
+    usuario_id,
+    achievement_id
+):
+
+    conn = sqlite3.connect(
+        "site.db"
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT id
+        FROM user_achievements
+        WHERE usuario_id = ?
+        AND achievement_id = ?
+        """,
+        (
+            usuario_id,
+            achievement_id
+        )
+    )
+
+    if cursor.fetchone():
+
+        conn.close()
+
+        return False
+
+    cursor.execute(
+        """
+        INSERT INTO user_achievements
+        (
+            usuario_id,
+            achievement_id,
+            data_desbloqueio
+        )
+        VALUES
+        (
+            ?, ?, datetime('now')
+        )
+        """,
+        (
+            usuario_id,
+            achievement_id
+        )
+    )
+
+    conn.commit()
+
+    conn.close()
+
+    return True
 # ================= POSTS =================
 @app.route(
     "/concluir-aula",
@@ -623,11 +677,68 @@ def concluir_aula():
 
     conn.commit()
 
+    modulo = aula.split("_")[0]
+
+    total_aulas = 0
+
+    for arquivo in os.listdir(
+        "posts/fisica"
+    ):
+
+        if (
+            arquivo.startswith(
+                modulo + "_"
+            )
+            and
+            arquivo.endswith(".md")
+        ):
+
+            total_aulas += 1   
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM progresso_aulas
+        WHERE usuario_id = ?
+        AND aula LIKE ?
+        AND concluida = 1
+        """,
+        (
+            session["id"],
+            modulo + "_%"
+        )
+    )
+    concluidas = cursor.fetchone()[0]
+    conquista_desbloqueada = False
+    if concluidas >= total_aulas:
+
+        mapa_conquistas = {
+
+            "atom": 1,
+
+            "charge": 2,
+
+            "field": 3
+
+        }
+
+        if modulo in mapa_conquistas:
+
+            conquista_desbloqueada = (
+                desbloquear_conquista(
+                    session["id"],
+                    mapa_conquistas[modulo]
+                )
+            )
     conn.close()
 
     return {
-        "status":"ok"
-    }
+
+    "status":"ok",
+
+    "conquista":
+    conquista_desbloqueada
+
+}
 @app.route("/teste")
 def teste():
 
