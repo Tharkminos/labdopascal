@@ -246,11 +246,45 @@ function gerarResultado(){
         )
         .then(
             dados => {
+                if(dados.conquista){
+                    document
+                    .getElementById(
+                        "resultado-aula"
+                    )
+                    .innerHTML += `
+
+                        <div
+                            class="popup-conquista"
+                        >
+
+                            <h2>
+
+                                🏆 Conquista
+                                Desbloqueada
+
+                            </h2>
+
+                            <p>
+
+                                Módulo concluído
+
+                            </p>
+
+                            <p>
+                                +${dados.xp_bonus}
+                                XP
+
+                            </p>
+
+                        </div>
+
+                    `
+                }
 
                 setTimeout(
                     () => {window.location.href ="/modulo/" +MODULO
                     },
-                    3000
+                    2000
                 )
 
             }

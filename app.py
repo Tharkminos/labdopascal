@@ -710,33 +710,42 @@ def concluir_aula():
     concluidas = cursor.fetchone()[0]
     conquista_desbloqueada = False
     if concluidas >= total_aulas:
-
-        mapa_conquistas = {
-
-            "atom": 1,
-
-            "charge": 2,
-
-            "field": 3
-
-        }
-
         if modulo in mapa_conquistas:
-
             conquista_desbloqueada = (
                 desbloquear_conquista(
                     session["id"],
                     mapa_conquistas[modulo]
                 )
             )
-    conn.close()
 
+            if conquista_desbloqueada:
+
+                xp_bonus = 50
+
+    conn.close()
+    if xp_bonus > 0:
+        cursor.execute(
+            """
+            UPDATE usuarios
+            SET xp = xp + ?
+            WHERE id = ?
+            """,
+            (
+                xp_bonus,
+                session["id"]
+            )
+        )
+
+        conn.commit()
     return {
 
     "status":"ok",
 
     "conquista":
-    conquista_desbloqueada
+        conquista_desbloqueada,
+
+    "xp_bonus":
+        xp_bonus
 
 }
 @app.route("/teste")
