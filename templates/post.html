@@ -252,27 +252,60 @@ function gerarResultado(){
                         "resultado-aula"
                     )
                     .innerHTML += `
+                        <div
+                            class="popup-conquista"
+                        >
 
+                            <div
+                                class="popup-conquista-conteudo"
+                            >
+
+                                <h2>
+
+                                    🏆 Conquista
+                                    Desbloqueada
+
+                                </h2>
+
+                                <p>
+
+                                    Módulo concluído
+
+                                </p>
+
+                                <p>
+
+                                    +${dados.xp_bonus}
+                                    XP
+
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    `
+                }
+                if(dados.nivel_up){
+                    document
+                    .getElementById(
+                        "resultado-aula"
+                    )
+                    .innerHTML += `
                         <div
                             class="popup-conquista"
                         >
 
                             <h2>
 
-                                🏆 Conquista
-                                Desbloqueada
+                                ⭐ Subiu de Nível
 
                             </h2>
 
                             <p>
 
-                                Módulo concluído
-
-                            </p>
-
-                            <p>
-                                +${dados.xp_bonus}
-                                XP
+                                Agora você é
+                                nível ${dados.nivel}
 
                             </p>
 
@@ -280,11 +313,10 @@ function gerarResultado(){
 
                     `
                 }
-
                 setTimeout(
                     () => {window.location.href ="/modulo/" +MODULO
                     },
-                    2000
+                    5000
                 )
 
             }

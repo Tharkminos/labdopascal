@@ -62,6 +62,36 @@ def ler_metadados(md):
                     dados[chave.strip()] = valor.strip()
 
     return dados, md
+def obter_xp_total(
+    usuario_id
+):
+
+    conn = sqlite3.connect(
+        "site.db"
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT
+        COALESCE(
+            SUM(xp_ganho),
+            0
+        )
+        FROM progresso_aulas
+        WHERE usuario_id = ?
+        """,
+        (
+            usuario_id,
+        )
+    )
+
+    xp = cursor.fetchone()[0]
+
+    conn.close()
+
+    return xp
 def calcular_nivel(xp):
 
     niveis = [
@@ -697,7 +727,9 @@ def concluir_aula():
     nota = dados["nota"]
 
     xp = dados["xp"]
+    xp_antes = obter_xp_total(session["id"])
 
+    nivel_antes = calcular_nivel(xp_antes)
     conn = sqlite3.connect(
         "site.db"
     )
@@ -736,7 +768,7 @@ def concluir_aula():
     )
 
     conn.commit()
-
+    
     modulo = aula.split("_")[0]
 
     total_aulas = 0
@@ -797,6 +829,18 @@ def concluir_aula():
         )
 
         conn.commit()
+    xp_depois = obter_xp_total(
+        session["id"]
+    )
+
+    nivel_depois = calcular_nivel(
+        xp_depois
+    )
+
+    nivel_up = (
+        nivel_depois >
+        nivel_antes
+    )
     conn.close()
     return {
 
@@ -806,7 +850,13 @@ def concluir_aula():
         conquista_desbloqueada,
 
     "xp_bonus":
-        xp_bonus
+        xp_bonus,
+
+    "nivel_up":
+        nivel_up,
+
+    "nivel":
+        nivel_depois
 
 }
 @app.route("/teste")
