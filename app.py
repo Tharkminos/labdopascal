@@ -62,6 +62,29 @@ def ler_metadados(md):
                     dados[chave.strip()] = valor.strip()
 
     return dados, md
+def calcular_nivel(xp):
+
+    niveis = [
+        0,
+        100,
+        250,
+        450,
+        700,
+        1000,
+        1400,
+        1900,
+        2500
+    ]
+
+    nivel = 1
+
+    for i, limite in enumerate(niveis):
+
+        if xp >= limite:
+
+            nivel = i + 1
+
+    return nivel
 def dividir_etapas(md, titulo):
 
     partes = re.split(
@@ -275,8 +298,43 @@ def gerar_estrelas(concluidas, total):
         "⭐" * concluidas +
         "★" * (total - concluidas)
     )
+# ============== DEBUG NIVEL ===============
+@app.route("/debug-nivel")
+def debug_nivel():
 
+    conn = sqlite3.connect(
+        "site.db"
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT
+        COALESCE(
+            SUM(xp_ganho),
+            0
+        )
+        FROM progresso_aulas
+        WHERE usuario_id = ?
+        """,
+        (session["id"],)
+    )
+
+    xp = cursor.fetchone()[0]
+
+    conn.close()
+
+    return {
+
+        "xp": xp,
+
+        "nivel":
+        calcular_nivel(xp)
+
+    }
 # ================= ROTA MÓDULOS =========
+
 @app.route("/modulos")
 def modulos():
 
