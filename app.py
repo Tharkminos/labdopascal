@@ -23,7 +23,9 @@ app = Flask(__name__)
 app.secret_key = "B@tman"
 
 bcrypt = Bcrypt(app)
-
+mapa_conquistas = {
+    "atom": 1
+}
 
 # ================= UTIL =================
 
