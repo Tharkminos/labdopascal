@@ -929,6 +929,73 @@ def register():
     return render_template("register.html")
 
 
+
+# ================= CONQUISTAS =================
+@app.route("/conquistas")
+def conquistas():
+
+    if "id" not in session:
+
+        return redirect("/login")
+
+    conn = sqlite3.connect(
+        "site.db"
+    )
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT
+            a.id,
+            a.nome,
+            a.descricao,
+            ua.data_desbloqueio
+        FROM achievements a
+
+        LEFT JOIN
+        user_achievements ua
+
+        ON a.id = ua.achievement_id
+
+        AND ua.usuario_id = ?
+        """,
+        (
+            session["id"],
+        )
+    )
+
+    resultado = cursor.fetchall()
+
+    conn.close()
+
+    lista = []
+
+    for linha in resultado:
+
+        lista.append({
+
+            "id": linha[0],
+
+            "nome": linha[1],
+
+            "descricao": linha[2],
+
+            "desbloqueada":
+                linha[3] is not None,
+
+            "data":
+                linha[3]
+
+        })
+
+    return render_template(
+
+        "conquistas.html",
+
+        conquistas=lista
+
+    )
 # ================= ADMIN =================
 
 @app.route("/admin")
