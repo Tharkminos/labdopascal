@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Conquistas
+
+{% endblock %}
+
+{% block content %}
+
+<h1>
+
+    🏆 Conquistas
+
+</h1>
+
+<div class="grade-conquistas">
+
+{% for conquista in conquistas %}
+
+    <div class="
+        card-conquista
+        {% if conquista.desbloqueada %}
+            desbloqueada
+        {% else %}
+            bloqueada
+        {% endif %}
+    ">
+
+        <div class="icone-conquista">
+
+            {% if conquista.desbloqueada %}
+
+                🏆
+
+            {% else %}
+
+                🔒
+
+            {% endif %}
+
+        </div>
+
+        <h2>
+
+            {{ conquista.nome }}
+
+        </h2>
+
+        <p>
+
+            {{ conquista.descricao }}
+
+        </p>
+
+        {% if conquista.desbloqueada %}
+
+            <small>
+
+                Desbloqueada em
+                {{ conquista.data }}
+
+            </small>
+
+        {% endif %}
+
+    </div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

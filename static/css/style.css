@@ -946,3 +946,46 @@ canvas{
 
 }
 
+.grade-conquistas{
+
+    display:grid;
+
+    gap:20px;
+
+}
+
+.card-conquista{
+
+    padding:20px;
+
+    border-radius:16px;
+
+    text-align:center;
+
+}
+
+.desbloqueada{
+
+    background:#ffffff;
+
+    border:2px solid #22c55e;
+
+}
+
+.bloqueada{
+
+    background:#e5e7eb;
+
+    opacity:0.7;
+
+}
+
+.icone-conquista{
+
+    font-size:3rem;
+
+    margin-bottom:10px;
+
+}
+
+
