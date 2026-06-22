@@ -623,7 +623,7 @@ def desbloquear_conquista(
     "/concluir-aula",
     methods=["POST"])
 def concluir_aula():
-
+    xp_bonus = 0
     if "id" not in session:
 
         return {
@@ -722,7 +722,7 @@ def concluir_aula():
 
                 xp_bonus = 50
 
-    conn.close()
+
     if xp_bonus > 0:
         cursor.execute(
             """
@@ -737,6 +737,7 @@ def concluir_aula():
         )
 
         conn.commit()
+    conn.close()
     return {
 
     "status":"ok",
