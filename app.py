@@ -805,30 +805,51 @@ def desbloquear_conquista(
     "/concluir-aula",
     methods=["POST"])
 def concluir_aula():
-    xp_bonus = 0
-    if "id" not in session:
-
-        return {
-            "status":"erro"
-        }, 401
-
-    dados = request.get_json()
-
-    aula = dados["aula"]
-
-    nota = dados["nota"]
-
-    xp = dados["xp"]
-    xp_antes = obter_xp_total(session["id"])
-
-    nivel_antes = calcular_nivel(xp_antes)
-    conn = sqlite3.connect(
-        "site.db"
-    )
-    cursor.execute(
+    try:
+        xp_bonus = 0
+        if "id" not in session:
+    
+            return {
+                "status":"erro"
+            }, 401
+    
+        dados = request.get_json()
+    
+        aula = dados["aula"]
+    
+        nota = dados["nota"]
+    
+        xp = dados["xp"]
+        xp_antes = obter_xp_total(session["id"])
+    
+        nivel_antes = calcular_nivel(xp_antes)
+        conn = sqlite3.connect(
+            "site.db"
+        )
+        cursor.execute(
+            """
+            SELECT concluida
+            FROM progresso_aulas
+            WHERE usuario_id = ?
+            AND aula = ?
+            """,
+            (
+                session["id"],
+                aula
+            )
+        )
+        registro_existente = cursor.fetchone()
+    
+        revisao = False
+        if registro_existente:
+            revisao = True
+    
+            xp = 5
+    
+        cursor = conn.cursor()
+        cursor.execute(
         """
-        SELECT concluida
-        FROM progresso_aulas
+        DELETE FROM progresso_aulas
         WHERE usuario_id = ?
         AND aula = ?
         """,
@@ -837,153 +858,135 @@ def concluir_aula():
             aula
         )
     )
-    registro_existente = cursor.fetchone()
-
-    revisao = False
-    if registro_existente:
-        revisao = True
-
-        xp = 5
-
-    cursor = conn.cursor()
-    cursor.execute(
-    """
-    DELETE FROM progresso_aulas
-    WHERE usuario_id = ?
-    AND aula = ?
-    """,
-    (
-        session["id"],
-        aula
-    )
-)
-    cursor.execute(
-        """
-        INSERT INTO progresso_aulas
-        (
-            usuario_id,
-            aula,
-            nota,
-            xp_ganho,
-            concluida
-        )
-        VALUES
-        (?, ?, ?, ?, 1)
-        """,
-        (
-            session["id"],
-            aula,
-            nota,
-            xp
-        )
-    )
-
-    conn.commit()
-    cursor.execute(
-    """
-    UPDATE usuarios
-    SET xp = xp + ?
-    WHERE id = ?
-    """,
-    (
-        xp,
-        session["id"]
-        )
-    )
-
-    conn.commit()
-    modulo = aula.split("_")[0]
-
-    total_aulas = 0
-
-    for arquivo in os.listdir(
-        "posts/fisica"
-    ):
-
-        if (
-            arquivo.startswith(
-                modulo + "_"
-            )
-            and
-            arquivo.endswith(".md")
-        ):
-
-            total_aulas += 1   
-    cursor.execute(
-        """
-        SELECT COUNT(*)
-        FROM progresso_aulas
-        WHERE usuario_id = ?
-        AND aula LIKE ?
-        AND concluida = 1
-        """,
-        (
-            session["id"],
-            modulo + "_%"
-        )
-    )
-    concluidas = cursor.fetchone()[0]
-    conquista_desbloqueada = False
-    if concluidas >= total_aulas:
-        if modulo in mapa_conquistas:
-            conquista_desbloqueada = (
-                desbloquear_conquista(
-                    session["id"],
-                    mapa_conquistas[modulo]
-                )
-            )
-
-            if conquista_desbloqueada:
-
-                xp_bonus = 50
-
-
-    if xp_bonus > 0:
         cursor.execute(
             """
-            UPDATE usuarios
-            SET xp = xp + ?
-            WHERE id = ?
+            INSERT INTO progresso_aulas
+            (
+                usuario_id,
+                aula,
+                nota,
+                xp_ganho,
+                concluida
+            )
+            VALUES
+            (?, ?, ?, ?, 1)
             """,
             (
-                xp_bonus,
-                session["id"]
+                session["id"],
+                aula,
+                nota,
+                xp
             )
         )
-
+    
         conn.commit()
-    xp_depois = obter_xp_total(
-        session["id"]
-    )
-
-    nivel_depois = calcular_nivel(
-        xp_depois
-    )
-
-    nivel_up = (
-        nivel_depois >
-        nivel_antes
-    )
-    conn.close()
-    return {
-
-    "status":"ok",
-
-    "conquista":
-        conquista_desbloqueada,
-
-    "revisao":revisao,
-
-    "xp_bonus":
-        xp_bonus,
-
-    "nivel_up":
-        nivel_up,
-
-    "nivel":
-        nivel_depois
-
-}
+        cursor.execute(
+        """
+        UPDATE usuarios
+        SET xp = xp + ?
+        WHERE id = ?
+        """,
+        (
+            xp,
+            session["id"]
+            )
+        )
+    
+        conn.commit()
+        modulo = aula.split("_")[0]
+    
+        total_aulas = 0
+    
+        for arquivo in os.listdir(
+            "posts/fisica"
+        ):
+    
+            if (
+                arquivo.startswith(
+                    modulo + "_"
+                )
+                and
+                arquivo.endswith(".md")
+            ):
+    
+                total_aulas += 1   
+        cursor.execute(
+            """
+            SELECT COUNT(*)
+            FROM progresso_aulas
+            WHERE usuario_id = ?
+            AND aula LIKE ?
+            AND concluida = 1
+            """,
+            (
+                session["id"],
+                modulo + "_%"
+            )
+        )
+        concluidas = cursor.fetchone()[0]
+        conquista_desbloqueada = False
+        if concluidas >= total_aulas:
+            if modulo in mapa_conquistas:
+                conquista_desbloqueada = (
+                    desbloquear_conquista(
+                        session["id"],
+                        mapa_conquistas[modulo]
+                    )
+                )
+    
+                if conquista_desbloqueada:
+    
+                    xp_bonus = 50
+    
+    
+        if xp_bonus > 0:
+            cursor.execute(
+                """
+                UPDATE usuarios
+                SET xp = xp + ?
+                WHERE id = ?
+                """,
+                (
+                    xp_bonus,
+                    session["id"]
+                )
+            )
+    
+            conn.commit()
+        xp_depois = obter_xp_total(
+            session["id"]
+        )
+    
+        nivel_depois = calcular_nivel(
+            xp_depois
+        )
+    
+        nivel_up = (
+            nivel_depois >
+            nivel_antes
+        )
+        conn.close()
+        return {
+    
+        "status":"ok",
+    
+        "conquista":
+            conquista_desbloqueada,
+    
+        "revisao":revisao,
+    
+        "xp_bonus":
+            xp_bonus,
+    
+        "nivel_up":
+            nivel_up,
+    
+        "nivel":
+            nivel_depois
+    
+    }
+    except Exception as error:
+        return {"erro": str(e)}, 500
 @app.route("/teste")
 def teste():
 
