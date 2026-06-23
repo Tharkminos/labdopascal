@@ -328,6 +328,67 @@ def gerar_estrelas(concluidas, total):
         "⭐" * concluidas +
         "★" * (total - concluidas)
     )
+
+# ============== PERFIL ====================
+@app.route("/perfil")
+def perfil():
+    if "id" not in session:
+        return redirect("/login")
+
+    conn = sqlite3.connect("site.db")
+
+    cursor = conn.cursor()
+
+    usuario_id = session["id"]
+
+    cursor.execute(
+        """
+        SELECT nome
+        FROM usuarios
+        WHERE id = ?
+        """,(usuario_id,))
+    nome = cursor.fetchone()[0]
+    cursor.execute(
+        """
+        SELECT
+        COALESCE(
+            SUM(xp_ganho),
+            0
+        )
+        FROM progresso_aulas
+        WHERE usuario_id = ?
+        """,(usuario_id,))
+    xp_total = cursor.fetchone()[0]
+    cursor.execute(
+    """
+    SELECT COUNT(*)
+    FROM progresso_aulas
+    WHERE usuario_id = ?
+    AND concluida = 1
+    """,(usuario_id,))
+    aulas = cursor.fetchone()[0]
+    cursor.execute(
+        """
+        SELECT COUNT(*)
+        FROM user_achievements
+        WHERE usuario_id = ?
+        """,(usuario_id,)
+    )
+    conquistas = cursor.fetchone()[0]
+    nivel = calcular_nivel(xp_total)
+    conn.close()
+    return render_template(
+        "perfil.html",
+        nome=nome,
+        xp_total=xp_total,
+        nivel=nivel,
+        aulas=aulas,
+        conquistas=conquistas
+        )
+@app.route("/ranking")
+def ranking():
+    Cpass
+
 # ============== DEBUG NIVEL ===============
 @app.route("/debug-nivel")
 def debug_nivel():

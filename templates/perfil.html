@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}
+
+Perfil
+
+{% endblock %}
+
+{% block content %}
+
+<h1>
+
+    {{ nome }}
+
+</h1>
+
+<div class="card-perfil">
+
+    <p>
+
+        ⭐ Nível
+        {{ nivel }}
+
+    </p>
+
+    <p>
+
+        ⚡ XP Total
+        {{ xp_total }}
+
+    </p>
+
+    <p>
+
+        📚 Aulas concluídas
+        {{ aulas }}
+
+    </p>
+
+    <p>
+
+        🏆 Conquistas
+        {{ conquistas }}
+
+    </p>
+
+</div>
+
+{% endblock %}
