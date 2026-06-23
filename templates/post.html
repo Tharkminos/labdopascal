@@ -119,19 +119,12 @@ function mostrarEtapa(indice){
     }
 
 }
-function mostrarPopup(
-    titulo,
-    mensagem,
-    modulo,
-    mostrarConquistas=true
-){
-
+function mostrarPopup(titulo,mensagem,modulo,mostrarConquistas=true){
     document
     .querySelector(
         ".popup-conquista"
     )
     ?.remove()
-
     document.body.insertAdjacentHTML(
 
         "beforeend",
@@ -327,8 +320,7 @@ function gerarResultado(){
                         alcançado
                         <br><br>
                         +${dados.xp_bonus} XP
-                        `,MODULO
-                    )
+                        `,MODULO)
 
                 }
                 else if(dados.conquista){
@@ -340,14 +332,10 @@ function gerarResultado(){
                         Módulo concluído
                         <br><br>
                         +${dados.xp_bonus} XP
-                        `, MODULO
-                    )
+                        `, MODULO)
 
                 }
-                else if(
-                    dados.nivel_up
-                ){
-
+                else if(dados.nivel_up){
                     mostrarPopup(
 
                         "⭐ Subiu de Nível",
@@ -355,25 +343,19 @@ function gerarResultado(){
                         `
                         Agora você é
                         nível ${dados.nivel}
-                        `,MODULO
-                    )
-
+                        `,MODULO)
                 }else{mostrarPopup(
                             "Aula concluída",
                             `
                             O que deseja fazer agora?
                             `,
                             MODULO,
-                            false
-
-                        )
-
-                    }
+                            false)}
                         )
                             
-                    }
-
-}document
+                 }
+}
+document
 .getElementById(
     "btn-proximo"
 )
