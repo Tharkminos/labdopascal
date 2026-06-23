@@ -332,10 +332,14 @@ def gerar_estrelas(concluidas, total):
 # ============== PERFIL ====================
 @app.route("/perfil")
 def perfil():
+
     if "id" not in session:
+
         return redirect("/login")
 
-    conn = sqlite3.connect("site.db")
+    conn = sqlite3.connect(
+        "site.db"
+    )
 
     cursor = conn.cursor()
 
@@ -343,49 +347,72 @@ def perfil():
 
     cursor.execute(
         """
-        SELECT nome
+        SELECT
+            usuario,
+            xp,
+            nivel,
+            avatar,
+            bio
         FROM usuarios
         WHERE id = ?
-        """,(usuario_id,))
-    nome = cursor.fetchone()[0]
+        """,
+        (
+            usuario_id,
+        )
+    )
+
+    usuario, xp_total, nivel, avatar, bio = (
+        cursor.fetchone()
+    )
+
     cursor.execute(
         """
-        SELECT
-        COALESCE(
-            SUM(xp_ganho),
-            0
-        )
+        SELECT COUNT(*)
         FROM progresso_aulas
         WHERE usuario_id = ?
-        """,(usuario_id,))
-    xp_total = cursor.fetchone()[0]
-    cursor.execute(
-    """
-    SELECT COUNT(*)
-    FROM progresso_aulas
-    WHERE usuario_id = ?
-    AND concluida = 1
-    """,(usuario_id,))
+        AND concluida = 1
+        """,
+        (
+            usuario_id,
+        )
+    )
+
     aulas = cursor.fetchone()[0]
+
     cursor.execute(
         """
         SELECT COUNT(*)
         FROM user_achievements
         WHERE usuario_id = ?
-        """,(usuario_id,)
-    )
-    conquistas = cursor.fetchone()[0]
-    nivel = calcular_nivel(xp_total)
-    conn.close()
-    return render_template(
-        "perfil.html",
-        nome=nome,
-        xp_total=xp_total,
-        nivel=nivel,
-        aulas=aulas,
-        conquistas=conquistas
+        """,
+        (
+            usuario_id,
         )
-@app.route("/ranking")
+    )
+
+    conquistas = cursor.fetchone()[0]
+
+    conn.close()
+
+    return render_template(
+
+        "perfil.html",
+
+        nome=usuario,
+
+        xp_total=xp_total,
+
+        nivel=nivel,
+
+        avatar=avatar,
+
+        bio=bio,
+
+        aulas=aulas,
+
+        conquistas=conquistas
+
+    )@app.route("/ranking")
 def ranking():
     Cpass
 
