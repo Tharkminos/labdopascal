@@ -1229,7 +1229,7 @@ def admin():
 
         return redirect("/login")
 
-    return "PAINEL ADMIN"
+    return redirect("/perfil")
 
 
 # ================= LOGOUT =================
