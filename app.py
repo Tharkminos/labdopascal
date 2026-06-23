@@ -332,86 +332,89 @@ def gerar_estrelas(concluidas, total):
 # ============== PERFIL ====================
 @app.route("/perfil")
 def perfil():
+    try:
+        if "id" not in session:
 
-    if "id" not in session:
+            return redirect("/login")
 
-        return redirect("/login")
-
-    conn = sqlite3.connect(
-        "site.db"
-    )
-
-    cursor = conn.cursor()
-
-    usuario_id = session["id"]
-
-    cursor.execute(
-        """
-        SELECT
-            usuario,
-            xp,
-            nivel,
-            avatar,
-            bio
-        FROM usuarios
-        WHERE id = ?
-        """,
-        (
-            usuario_id,
+        conn = sqlite3.connect(
+            "site.db"
         )
-    )
 
-    resultado = cursor.fetchone()
+        cursor = conn.cursor()
 
-    return str(resultado)
+        usuario_id = session["id"]
 
-    cursor.execute(
-        """
-        SELECT COUNT(*)
-        FROM progresso_aulas
-        WHERE usuario_id = ?
-        AND concluida = 1
-        """,
-        (
-            usuario_id,
+        cursor.execute(
+            """
+            SELECT
+                usuario,
+                xp,
+                nivel,
+                avatar,
+                bio
+            FROM usuarios
+            WHERE id = ?
+            """,
+            (
+                usuario_id,
+            )
         )
+
+        resultado = cursor.fetchone()
+
+        usuario, xp_total, nivel, avatar, bio = (
+        resultado
     )
 
-    aulas = cursor.fetchone()[0]
-
-    cursor.execute(
-        """
-        SELECT COUNT(*)
-        FROM user_achievements
-        WHERE usuario_id = ?
-        """,
-        (
-            usuario_id,
+        cursor.execute(
+            """
+            SELECT COUNT(*)
+            FROM progresso_aulas
+            WHERE usuario_id = ?
+            AND concluida = 1
+            """,
+            (
+                usuario_id,
+            )
         )
-    )
 
-    conquistas = cursor.fetchone()[0]
+        aulas = cursor.fetchone()[0]
 
-    conn.close()
+        cursor.execute(
+            """
+            SELECT COUNT(*)
+            FROM user_achievements
+            WHERE usuario_id = ?
+            """,
+            (
+                usuario_id,
+            )
+        )
 
-    return render_template(
+        conquistas = cursor.fetchone()[0]
 
-        "perfil.html",
+        conn.close()
 
-        nome=usuario,
+        return render_template(
 
-        xp_total=xp_total,
+            "perfil.html",
 
-        nivel=nivel,
+            nome=usuario,
 
-        avatar=avatar,
+            xp_total=xp_total,
 
-        bio=bio,
+            nivel=nivel,
 
-        aulas=aulas,
+            avatar=avatar,
 
-        conquistas=conquistas
+            bio=bio,
 
+            aulas=aulas,
+
+            conquistas=conquistas
+    except Exception as error:
+        return(str(error))
     )@app.route("/ranking")
 def ranking():
     pass
