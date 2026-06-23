@@ -121,7 +121,9 @@ function mostrarEtapa(indice){
 }
 function mostrarPopup(
     titulo,
-    mensagem
+    mensagem,
+    modulo,
+    mostrarConquistas=true
 ){
 
     document
@@ -136,13 +138,9 @@ function mostrarPopup(
 
         `
 
-        <div
-            class="popup-conquista"
-        >
+        <div class="popup-conquista">
 
-            <div
-                class="popup-conquista-conteudo"
-            >
+            <div class="popup-conquista-conteudo">
 
                 <h2>
 
@@ -158,8 +156,22 @@ function mostrarPopup(
 
                 <button
                     onclick="
+                        document
+                        .querySelector(
+                            '.popup-conquista'
+                        )
+                        .remove()
+                    "
+                >
+
+                    Permanecer na página
+
+                </button>
+
+                <button
+                    onclick="
                         window.location.href=
-                        '/modulo/' + MODULO
+                        '/modulo/${modulo}'
                     "
                 >
 
@@ -174,7 +186,8 @@ function mostrarPopup(
         `
     )
 
-}function gerarResultado(){
+}
+function gerarResultado(){
 
     const total =
         acertos + erros
@@ -314,7 +327,7 @@ function mostrarPopup(
                         alcançado
                         <br><br>
                         +${dados.xp_bonus} XP
-                        `
+                        `,MODULO
                     )
 
                 }
@@ -327,7 +340,7 @@ function mostrarPopup(
                         Módulo concluído
                         <br><br>
                         +${dados.xp_bonus} XP
-                        `
+                        `, MODULO
                     )
 
                 }
@@ -342,12 +355,20 @@ function mostrarPopup(
                         `
                         Agora você é
                         nível ${dados.nivel}
-                        `
+                        `,MODULO
                     )
 
-                }else{
-                    window.location.href = "/modulo/" + MODULO}
-                            }
+                }else{mostrarPopup(
+                            "Aula concluída",
+                            `
+                            O que deseja fazer agora?
+                            `,
+                            MODULO,
+                            false
+
+                        )
+
+                    }
                         )
                             
                     }
