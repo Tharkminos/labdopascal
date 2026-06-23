@@ -360,7 +360,7 @@ def perfil():
             usuario_id,
         )
     )
-
+    print(cursos.fetchone())
     usuario, xp_total, nivel, avatar, bio = (
         cursor.fetchone()
     )
