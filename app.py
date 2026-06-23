@@ -843,7 +843,7 @@ def concluir_aula():
 
         xp = 5
 
-registro_existente = cursor.fetchone()
+    registro_existente = cursor.fetchone()
     cursor = conn.cursor()
     cursor.execute(
     """
