@@ -860,7 +860,19 @@ def concluir_aula():
     )
 
     conn.commit()
-    
+    cursor.execute(
+    """
+    UPDATE usuarios
+    SET xp = xp + ?
+    WHERE id = ?
+    """,
+    (
+        xp,
+        session["id"]
+        )
+    )
+
+    conn.commit()
     modulo = aula.split("_")[0]
 
     total_aulas = 0
