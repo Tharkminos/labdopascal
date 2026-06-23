@@ -837,13 +837,14 @@ def concluir_aula():
             aula
         )
     )
+    registro_existente = cursor.fetchone()
+
     revisao = False
     if registro_existente:
         revisao = True
 
         xp = 5
 
-    registro_existente = cursor.fetchone()
     cursor = conn.cursor()
     cursor.execute(
     """
