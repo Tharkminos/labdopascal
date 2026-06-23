@@ -360,10 +360,10 @@ def perfil():
             usuario_id,
         )
     )
-    print(cursor.fetchone())
-    usuario, xp_total, nivel, avatar, bio = (
-        cursor.fetchone()
-    )
+
+    resultado = cursor.fetchone()
+
+    return str(resultado)
 
     cursor.execute(
         """
@@ -414,7 +414,7 @@ def perfil():
 
     )@app.route("/ranking")
 def ranking():
-    Cpass
+    pass
 
 # ============== DEBUG NIVEL ===============
 @app.route("/debug-nivel")
