@@ -413,9 +413,10 @@ def perfil():
             aulas=aulas,
 
             conquistas=conquistas
+)
     except Exception as error:
         return(str(error))
-    )@app.route("/ranking")
+@app.route("/ranking")
 def ranking():
     pass
 
