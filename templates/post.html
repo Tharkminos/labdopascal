@@ -344,16 +344,18 @@ function gerarResultado(){
                         Agora você é
                         nível ${dados.nivel}
                         `,MODULO)
-                }else{mostrarPopup(
-                            "Aula concluída",
-                            `
-                            O que deseja fazer agora?
-                            `,
-                            MODULO,
-                            false)}
-                        )
-                            
-                 }
+                }else{
+                    mostrarPopup(
+                        "Aula concluída",
+                        `
+                        O que deseja fazer agora?
+                        `,
+                        MODULO,
+                        false)
+                }
+            }
+        )
+    }
 }
 document
 .getElementById(
