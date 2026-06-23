@@ -345,6 +345,19 @@ function gerarResultado(){
                         nível ${dados.nivel}
                         `,MODULO)
                 }else{
+                    if(dados.revisao){
+                        mostrarPopup(
+                            "📖 Revisão concluída",
+                            `
+                            Você revisou uma aula.
+                            <br><br>
+                            +5 XP
+                            `,
+
+                            MODULO
+
+                        )
+                    }else{
                     mostrarPopup(
                         "Aula concluída",
                         `
@@ -352,6 +365,7 @@ function gerarResultado(){
                         `,
                         MODULO,
                         false)
+                    }
                 }
             }
         )

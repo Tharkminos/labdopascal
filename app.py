@@ -825,7 +825,25 @@ def concluir_aula():
     conn = sqlite3.connect(
         "site.db"
     )
+    cursor.execute(
+        """
+        SELECT concluida
+        FROM progresso_aulas
+        WHERE usuario_id = ?
+        AND aula = ?
+        """,
+        (
+            session["id"],
+            aula
+        )
+    )
+    revisao = False
+    if registro_existente:
+        revisao = True
 
+        xp = 5
+
+registro_existente = cursor.fetchone()
     cursor = conn.cursor()
     cursor.execute(
     """
@@ -952,6 +970,8 @@ def concluir_aula():
 
     "conquista":
         conquista_desbloqueada,
+
+    "revisao":revisao,
 
     "xp_bonus":
         xp_bonus,
