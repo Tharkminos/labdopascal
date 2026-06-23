@@ -119,7 +119,62 @@ function mostrarEtapa(indice){
     }
 
 }
-function gerarResultado(){
+function mostrarPopup(
+    titulo,
+    mensagem
+){
+
+    document
+    .querySelector(
+        ".popup-conquista"
+    )
+    ?.remove()
+
+    document.body.insertAdjacentHTML(
+
+        "beforeend",
+
+        `
+
+        <div
+            class="popup-conquista"
+        >
+
+            <div
+                class="popup-conquista-conteudo"
+            >
+
+                <h2>
+
+                    ${titulo}
+
+                </h2>
+
+                <p>
+
+                    ${mensagem}
+
+                </p>
+
+                <button
+                    onclick="
+                        window.location.href=
+                        '/modulo/' + MODULO
+                    "
+                >
+
+                    Voltar ao módulo
+
+                </button>
+
+            </div>
+
+        </div>
+
+        `
+    )
+
+}function gerarResultado(){
 
     const total =
         acertos + erros
@@ -246,83 +301,56 @@ function gerarResultado(){
         )
         .then(
             dados => {
-                if(dados.conquista){
-                    document
-                    .getElementById(
-                        "resultado-aula"
+                //
+                if(dados.conquista && dados.nivel_up){
+                    mostrarPopup(
+
+                        "🏆 Conquista Desbloqueada",
+
+                        `
+                        Módulo concluído
+                        <br><br>
+                        ⭐ Nível ${dados.nivel}
+                        alcançado
+                        <br><br>
+                        +${dados.xp_bonus} XP
+                        `
                     )
-                    .innerHTML += `
-                        <div
-                            class="popup-conquista"
-                        >
 
-                            <div
-                                class="popup-conquista-conteudo"
-                            >
-
-                                <h2>
-
-                                    🏆 Conquista
-                                    Desbloqueada
-
-                                </h2>
-
-                                <p>
-
-                                    Módulo concluído
-
-                                </p>
-
-                                <p>
-
-                                    +${dados.xp_bonus}
-                                    XP
-
-                                </p>
-
-                            </div>
-
-                        </div>
-
-                    `
                 }
-                if(dados.nivel_up){
-                    document
-                    .getElementById(
-                        "resultado-aula"
+                else if(dados.conquista){
+                    mostrarPopup(
+
+                        "🏆 Conquista Desbloqueada",
+
+                        `
+                        Módulo concluído
+                        <br><br>
+                        +${dados.xp_bonus} XP
+                        `
                     )
-                    .innerHTML += `
-                        <div
-                            class="popup-conquista"
-                        >
 
-                            <h2>
-
-                                ⭐ Subiu de Nível
-
-                            </h2>
-
-                            <p>
-
-                                Agora você é
-                                nível ${dados.nivel}
-
-                            </p>
-
-                        </div>
-
-                    `
                 }
-                setTimeout(
-                    () => {window.location.href ="/modulo/" +MODULO
-                    },
-                    5000
-                )
+                else if(
+                    dados.nivel_up
+                ){
 
-            }
-        )
-            
-    }
+                    mostrarPopup(
+
+                        "⭐ Subiu de Nível",
+
+                        `
+                        Agora você é
+                        nível ${dados.nivel}
+                        `
+                    )
+
+                }else{
+                    window.location.href = "/modulo/" + MODULO}
+                            }
+                        )
+                            
+                    }
 
 }document
 .getElementById(

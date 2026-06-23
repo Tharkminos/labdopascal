@@ -1016,7 +1016,25 @@ canvas{
     z-index:9999;
 
 }
+.popup-conquista button{
 
+    margin-top:20px;
+
+    padding:12px 24px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:white;
+
+    color:#22c55e;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
 .popup-conquista-conteudo{
 
     background:
@@ -1068,3 +1086,5 @@ canvas{
     }
 
 }
+
+
