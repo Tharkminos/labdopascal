@@ -12,6 +12,13 @@ let atoms = [[207,200,''],
             [0,0,'+'],
             [0,0,'+']
 ]
+let finished = false
+
+function simulacaoConcluida(){
+
+    return finished
+
+}
 function mouseClicked(){
   Mx = mouseX
   My = mouseY
@@ -130,7 +137,9 @@ function draw() {
     text("→",tx+10,ty+85)
     text(" Elétron",tx+30,ty+10+80)
   }
-
+    if (interact === [true,true,true]){
+        finished = true        
+    }
   
 }
 

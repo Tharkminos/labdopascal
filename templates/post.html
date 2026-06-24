@@ -399,6 +399,25 @@ document
     () => {
 
         if(
+            typeof simulacaoConcluida ===
+            "function"
+        ){
+
+            if(
+                !simulacaoConcluida()
+            ){
+
+                alert(
+                    "Conclua a atividade da simulação antes de avançar."
+                )
+
+                return
+
+            }
+
+        }
+
+        if(
             !etapaConcluida()
         ){
 
@@ -407,6 +426,7 @@ document
             )
 
             return
+
         }
 
         if(
