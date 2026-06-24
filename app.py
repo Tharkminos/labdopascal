@@ -826,6 +826,8 @@ def concluir_aula():
         conn = sqlite3.connect(
             "site.db"
         )
+        cursor = conn.cursor()
+
         cursor.execute(
             """
             SELECT concluida
