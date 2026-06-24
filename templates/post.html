@@ -244,37 +244,60 @@ function gerarResultado(){
     )
     .innerHTML = `
 
-        <img
-            src="${imagem}"
-            class="personagem-resultado"
+    <img
+        src="${imagem}"
+        class="personagem-resultado"
+    >
+
+    <h2>
+        ${aproveitamento}%
+    </h2>
+
+    <p>
+        ${mensagem}
+    </p>
+
+    <p>
+        Acertos: ${acertos}
+    </p>
+
+    <p>
+        Erros: ${erros}
+    </p>
+
+    ${
+        aprovado
+        ?
+        `<p>+${XP_AULA} XP</p>`
+        :
+        ``
+    }
+
+    <div class="acoes-resultado">
+
+        <button
+            onclick="
+                window.location.href=
+                '/modulo/' +
+                AULA_ATUAL.split('_')[0]
+            "
         >
 
-        <h2>
-            ${aproveitamento}%
-        </h2>
+            📚 Voltar ao módulo
 
-        <p>
-            ${mensagem}
-        </p>
+        </button>
 
-        <p>
-            Acertos: ${acertos}
-        </p>
+        <button
+            onclick="location.reload()"
+        >
 
-        <p>
-            Erros: ${erros}
-        </p>
+            🔄 Refazer Aula
 
-        ${
-            aprovado
-            ?
-            `<p>+${XP_AULA} XP</p>`
-            :
-            `<button
-                onclick="location.reload()"
-            >
-                Refazer Aula
-            </button>`
+        </button>
+
+    </div>
+
+`
         }
 
     `
