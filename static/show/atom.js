@@ -15,7 +15,6 @@ let atoms = [[207,200,''],
 let finished = false
 
 function simulacaoConcluida(){
-
     return finished
 
 }
@@ -139,6 +138,7 @@ function draw() {
   }
     if (interact === [true,true,true]){
         finished = true        
+        console.log("FINISH")
     }
   
 }
