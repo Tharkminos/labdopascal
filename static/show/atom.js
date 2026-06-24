@@ -13,7 +13,7 @@ let atoms = [[207,200,''],
             [0,0,'+']
 ]
 let finished = false
-
+let contabilizar = false
 function simulacaoConcluida(){
     return finished
 
@@ -137,8 +137,11 @@ function draw() {
     text(" Elétron",tx+30,ty+10+80)
   }
     if (interact[0] &&     interact[1] &&     interact[2]){
-        finished = true        
-        console.log("FINISH")
+        finished = true
+        if(contabilizada === false){
+            acertos++;
+            contabilizada = true        
+        }        
     }
   
 }
