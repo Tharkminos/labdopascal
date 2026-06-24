@@ -136,7 +136,7 @@ function draw() {
     text("→",tx+10,ty+85)
     text(" Elétron",tx+30,ty+10+80)
   }
-    if (interact === [true,true,true]){
+    if (interact[0] &&     interact[1] &&     interact[2]){
         finished = true        
         console.log("FINISH")
     }
