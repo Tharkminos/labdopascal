@@ -986,7 +986,7 @@ def concluir_aula():
     
     }
     except Exception as error:
-        return {"erro": str(e)}, 500
+        return {"erro": str(error)}, 500
 @app.route("/teste")
 def teste():
 
