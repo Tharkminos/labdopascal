@@ -13,7 +13,7 @@ let atoms = [[207,200,''],
             [0,0,'+']
 ]
 let finished = false
-let contabilizar = false
+let contabilizada = false
 function simulacaoConcluida(){
     return finished
 
