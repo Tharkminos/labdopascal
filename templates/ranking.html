@@ -1,104 +1,98 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 
-<html>
+{% block content %}
 
-<head>
+<div class="container-ranking">
 
-    <title>
-        Ranking
-    </title>
+    <h1>
 
-    <link
-        rel="stylesheet"
-        href="/static/style.css"
-    >
+        🏆 Ranking Geral
 
-</head>
+    </h1>
 
-<body>
+    <table>
 
-    <div class="container-ranking">
+        <tr>
 
-        <h1>
+            <th>#</th>
 
-            🏆 Ranking Geral
+            <th>Usuário</th>
 
-        </h1>
+            <th>XP</th>
 
-        <table>
+            <th>🔥</th>
 
-            <tr>
+        </tr>
 
-                <th>
+        {% for jogador in ranking %}
 
-                    #
+        <tr
+        {% if usuario_logado
+        and jogador[0] ==
+        usuario_logado[0] %}
+        class="usuario-logado"
+        {% endif %}
+        >
 
-                </th>
+            <td>
 
-                <th>
+                {{ loop.index }}
 
-                    Usuário
+            </td>
 
-                </th>
+            <td>
 
-                <th>
+                {{ jogador[0] }}
 
-                    XP
+            </td>
 
-                </th>
+            <td>
 
-                <th>
+                {{ jogador[1] }}
 
-                    🔥
+            </td>
 
-                </th>
+            <td>
 
-            </tr>
+                {{ jogador[2] }}
 
-            {% for jogador in ranking %}
+            </td>
 
-            <tr>
+        </tr>
 
-                <td>
+        {% endfor %}
 
-                    {{ loop.index }}
+    </table>
 
-                </td>
+    {% if usuario_logado %}
 
-                <td>
+    <div class="minha-posicao">
 
-                    {{ jogador[0] }}
+        <h2>
 
-                </td>
+            Sua posição
 
-                <td>
+        </h2>
 
-                    {{ jogador[1] }}
+        <p>
 
-                </td>
+            #{{ posicao_usuario }}
 
-                <td>
+            —
+            {{ usuario_logado[0] }}
 
-                    {{ jogador[2] }}
+            —
+            {{ usuario_logado[1] }} XP
 
-                </td>
+            —
+            🔥 {{ usuario_logado[2] }}
 
-            </tr>
-
-            {% endfor %}
-
-        </table>
-
-        <br>
-
-        <a href="/perfil">
-
-            Voltar ao perfil
-
-        </a>
+        </p>
 
     </div>
 
-</body>
+    {% endif %}
 
-</html>
+</div>
+
+{% endblock %}

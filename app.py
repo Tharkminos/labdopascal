@@ -443,7 +443,9 @@ def perfil():
 @app.route("/ranking")
 def ranking():
 
-    conn = sqlite3.connect("site.db")
+    conn = sqlite3.connect(
+        "site.db"
+    )
 
     cursor = conn.cursor()
 
@@ -455,20 +457,71 @@ def ranking():
             streak
         FROM usuarios
         ORDER BY xp DESC
-        LIMIT 100
+        LIMIT 10
         """
     )
 
     ranking = cursor.fetchall()
 
+    posicao_usuario = None
+
+    if "id" in session:
+
+        cursor.execute(
+            """
+            SELECT COUNT(*) + 1
+            FROM usuarios
+            WHERE xp >
+            (
+                SELECT xp
+                FROM usuarios
+                WHERE id = ?
+            )
+            """,
+            (
+                session["id"],
+            )
+        )
+
+        posicao_usuario = (
+            cursor.fetchone()[0]
+        )
+
+        cursor.execute(
+            """
+            SELECT
+                usuario,
+                xp,
+                streak
+            FROM usuarios
+            WHERE id = ?
+            """,
+            (
+                session["id"],
+            )
+        )
+
+        usuario_logado = (
+            cursor.fetchone()
+        )
+
+    else:
+
+        usuario_logado = None
+
     conn.close()
 
     return render_template(
-        "ranking.html",
-        ranking=ranking
-    )
 
-# ============== DEBUG NIVEL ===============
+        "ranking.html",
+
+        ranking=ranking,
+
+        usuario_logado=usuario_logado,
+
+        posicao_usuario=posicao_usuario
+
+    )# ============== DEBUG NIVEL ===============
 @app.route("/debug-nivel")
 def debug_nivel():
 

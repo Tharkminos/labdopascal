@@ -1117,3 +1117,62 @@ canvas{
     font-size:1.1rem;
 
 }
+
+
+.container-ranking{
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding:20px;
+
+}
+
+.container-ranking table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.container-ranking th{
+
+    padding:12px;
+
+    background:#4caf50;
+
+    color:white;
+
+}
+
+.container-ranking td{
+
+    padding:10px;
+
+    text-align:center;
+
+    border-bottom:1px solid #ddd;
+
+}
+
+.usuario-logado{
+
+    background:#d4edda;
+
+    font-weight:bold;
+
+}
+
+.minha-posicao{
+
+    margin-top:25px;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    background:#f5f5f5;
+
+}
