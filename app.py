@@ -26,9 +26,46 @@ bcrypt = Bcrypt(app)
 mapa_conquistas = {
     "atom": 1
 }
-
+atualizar_banco()
 # ================= UTIL =================
+def atualizar_banco():
 
+    conn = sqlite3.connect("site.db")
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "PRAGMA table_info(usuarios)"
+    )
+
+    colunas = [
+        coluna[1]
+        for coluna in cursor.fetchall()
+    ]
+
+    if "streak" not in colunas:
+
+        cursor.execute(
+            """
+            ALTER TABLE usuarios
+            ADD COLUMN streak
+            INTEGER DEFAULT 0
+            """
+        )
+
+    if "ultimo_acesso" not in colunas:
+
+        cursor.execute(
+            """
+            ALTER TABLE usuarios
+            ADD COLUMN ultimo_acesso
+            TEXT
+            """
+        )
+
+    conn.commit()
+
+    conn.close()
 def carregar_questoes(nome):
 
     with open(
@@ -352,7 +389,8 @@ def perfil():
                 xp,
                 nivel,
                 avatar,
-                bio
+                bio,
+                streak
             FROM usuarios
             WHERE id = ?
             """,
@@ -363,7 +401,7 @@ def perfil():
 
         resultado = cursor.fetchone()
 
-        usuario, xp_total, nivel, avatar, bio = (
+        usuario, xp_total, nivel, avatar, bio, streak = (
         resultado
     )
 
@@ -412,7 +450,9 @@ def perfil():
 
             aulas=aulas,
 
-            conquistas=conquistas
+            conquistas=conquistas,
+            
+            streak=streak
 )
     except Exception as error:
         return(str(error))
@@ -805,14 +845,14 @@ def desbloquear_conquista(
     "/concluir-aula",
     methods=["POST"])
 def concluir_aula():
-    try:
+    try:        
         xp_bonus = 0
         if "id" not in session:
     
             return {
                 "status":"erro"
             }, 401
-    
+        
         dados = request.get_json()
     
         aula = dados["aula"]
@@ -840,6 +880,58 @@ def concluir_aula():
                 aula
             )
         )
+
+        from datetime import date, timedelta
+        cursor.execute(
+            """
+            SELECT streak,
+                   ultimo_acesso
+            FROM usuarios
+            WHERE id = ?
+            """,
+            (
+                session["id"],
+            )
+        )
+
+        streak_atual, ultimo_acesso = (
+            cursor.fetchone()
+        )
+        hoje = date.today()
+        ontem = hoje - timedelta(days=1)
+        novo_streak = streak_atual
+        if ultimo_acesso is None:
+
+            novo_streak = 1
+
+        elif ultimo_acesso == str(hoje):
+
+            novo_streak = streak_atual
+
+        elif ultimo_acesso == str(ontem):
+
+            novo_streak = streak_atual + 1
+
+        else:
+            novo_streak = 1
+        cursor.execute(
+            """
+            UPDATE usuarios
+            SET streak = ?,
+                ultimo_acesso = ?
+            WHERE id = ?
+            """,
+            (
+                novo_streak,
+                str(hoje),
+                session["id"]
+            )
+        )
+
+        conn.commit()
+    
+        
+
         registro_existente = cursor.fetchone()
     
         revisao = False
