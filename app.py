@@ -26,7 +26,7 @@ bcrypt = Bcrypt(app)
 mapa_conquistas = {
     "atom": 1
 }
-atualizar_banco()
+
 # ================= UTIL =================
 def atualizar_banco():
 
@@ -66,6 +66,7 @@ def atualizar_banco():
     conn.commit()
 
     conn.close()
+atualizar_banco()
 def carregar_questoes(nome):
 
     with open(
