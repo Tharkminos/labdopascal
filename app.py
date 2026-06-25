@@ -442,7 +442,31 @@ def perfil():
         return(str(error))
 @app.route("/ranking")
 def ranking():
-    pass
+
+    conn = sqlite3.connect("site.db")
+
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT
+            usuario,
+            xp,
+            streak
+        FROM usuarios
+        ORDER BY xp DESC
+        LIMIT 100
+        """
+    )
+
+    ranking = cursor.fetchall()
+
+    conn.close()
+
+    return render_template(
+        "ranking.html",
+        ranking=ranking
+    )
 
 # ============== DEBUG NIVEL ===============
 @app.route("/debug-nivel")

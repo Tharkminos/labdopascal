@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>
+        Ranking
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="container-ranking">
+
+        <h1>
+
+            🏆 Ranking Geral
+
+        </h1>
+
+        <table>
+
+            <tr>
+
+                <th>
+
+                    #
+
+                </th>
+
+                <th>
+
+                    Usuário
+
+                </th>
+
+                <th>
+
+                    XP
+
+                </th>
+
+                <th>
+
+                    🔥
+
+                </th>
+
+            </tr>
+
+            {% for jogador in ranking %}
+
+            <tr>
+
+                <td>
+
+                    {{ loop.index }}
+
+                </td>
+
+                <td>
+
+                    {{ jogador[0] }}
+
+                </td>
+
+                <td>
+
+                    {{ jogador[1] }}
+
+                </td>
+
+                <td>
+
+                    {{ jogador[2] }}
+
+                </td>
+
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+        <br>
+
+        <a href="/perfil">
+
+            Voltar ao perfil
+
+        </a>
+
+    </div>
+
+</body>
+
+</html>
