@@ -881,6 +881,8 @@ def concluir_aula():
                 aula
             )
         )
+        registro_existente = cursor.fetchone()
+
 
         from datetime import date, timedelta
         cursor.execute(
@@ -933,7 +935,7 @@ def concluir_aula():
     
         
 
-        registro_existente = cursor.fetchone()
+
     
         revisao = False
         if registro_existente:
