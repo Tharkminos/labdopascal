@@ -100,35 +100,19 @@ def ler_metadados(md):
                     dados[chave.strip()] = valor.strip()
 
     return dados, md
-def obter_xp_total(
-    usuario_id
-):
-
-    conn = sqlite3.connect(
-        "site.db"
-    )
-
+def obter_xp_total(usuario_id):
+    conn = sqlite3.connect("site.db")
     cursor = conn.cursor()
-
     cursor.execute(
         """
-        SELECT
-        COALESCE(
-            SUM(xp_ganho),
-            0
-        )
-        FROM progresso_aulas
-        WHERE usuario_id = ?
+        SELECT xp
+        FROM usuarios
+        WHERE id = ?
         """,
-        (
-            usuario_id,
-        )
+        (usuario_id,)
     )
-
     xp = cursor.fetchone()[0]
-
     conn.close()
-
     return xp
 def calcular_nivel(xp):
 
@@ -402,9 +386,8 @@ def perfil():
 
         resultado = cursor.fetchone()
 
-        usuario, xp_total, nivel, avatar, bio, streak = (
-        resultado
-    )
+        usuario, xp_total, _, avatar, bio, streak = (resultado)
+        nivel = calcular_nivel(xp_total)
 
         cursor.execute(
             """
@@ -465,28 +448,9 @@ def ranking():
 @app.route("/debug-nivel")
 def debug_nivel():
 
-    conn = sqlite3.connect(
-        "site.db"
+    xp = obter_xp_total(
+        session["id"]
     )
-
-    cursor = conn.cursor()
-
-    cursor.execute(
-        """
-        SELECT
-        COALESCE(
-            SUM(xp_ganho),
-            0
-        )
-        FROM progresso_aulas
-        WHERE usuario_id = ?
-        """,
-        (session["id"],)
-    )
-
-    xp = cursor.fetchone()[0]
-
-    conn.close()
 
     return {
 
