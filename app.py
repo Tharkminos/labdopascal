@@ -8,7 +8,7 @@ from flask import (
 )
 
 from admin import admin_bp
-app.register_blueprint(admin_bp, url_prefix="/admin")
+
 
 from flask_bcrypt import Bcrypt
 
@@ -29,7 +29,7 @@ bcrypt = Bcrypt(app)
 mapa_conquistas = {
     "atom": 1
 }
-
+app.register_blueprint(admin_bp, url_prefix="/admin")
 # ================= UTIL =================
 def atualizar_banco():
 
