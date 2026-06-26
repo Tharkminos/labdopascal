@@ -356,8 +356,10 @@ def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
         banco = carregar_questoes(
             meta["questoes"]
         )
+    print("APÓS DIVIDIR")
 
     for etapa in etapas:
+        print(etapa)
         etapa["conteudo"] = processar_etapa(
             etapa["conteudo"],
             banco
