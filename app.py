@@ -344,7 +344,8 @@ def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
 
         "titulo": "Resultados",
 
-        "conteudo": ""
+        "conteudo": "",
+        "tipo":"resultado"
     })
 
    
