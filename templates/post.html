@@ -36,7 +36,7 @@
 <section
     class="etapa"
     id="etapa-{{ loop.index0 }}"
-    data-tipo="{{ etapa.tipo }}"
+    data-tipo="{{ etapa['tipo'] }}"
     {% if not loop.first %}
     style="display:none"
     {% endif %}
