@@ -3,14 +3,14 @@ from . import admin_bp
 
 
 @admin_bp.route("/")
-@admin_required("admin")
+@permission_required("admin")
 def index():
     return render_template("admin/index.html")
 
 
 from .utils import get_system_info 
 @admin_bp.route("/dashboard")
-@admin_required("admin")
+@permission_required("admin")
 def dashboard():
 
     info = get_system_info()
