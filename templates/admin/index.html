@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+Administração
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1>Painel Administrativo</h1>
+
+    <hr>
+
+    <div class="row">
+
+        <div class="col-md-3">
+            <a href="/admin/dashboard" class="btn btn-primary w-100 mb-3">
+                Dashboard
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/admin/git" class="btn btn-success w-100 mb-3">
+                Git
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/admin/logs" class="btn btn-warning w-100 mb-3">
+                Logs
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="/terminal/" target="_blank"
+               class="btn btn-dark w-100 mb-3">
+                Terminal
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

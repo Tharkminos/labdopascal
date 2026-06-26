@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Painel Administrativo</h1>
+
+<div class="card">
+
+CPU: {{info.cpu}} %
+
+<br>
+
+RAM:
+{{info.ram_used}}
+/
+{{info.ram_total}} GB
+
+<br>
+
+Disco:
+{{info.disk_percent}} %
+
+<br>
+
+Python:
+{{info.python}}
+
+</div>
+
+{% endblock %}

@@ -6,6 +6,8 @@ from flask import (
     session,
     flash
 )
+from app.admin import admin_bp
+app.register_blueprint(admin_bp, url_prefix="/admin")
 
 from flask_bcrypt import Bcrypt
 
@@ -1187,14 +1189,18 @@ def login():
 
         cursor = conn.cursor()
 
-        cursor.execute(
-            """
-            SELECT *
-            FROM usuarios
-            WHERE email = ?
-            """,
-            (email,)
-        )
+        cursor.execute("""
+        SELECT
+            id,
+            usuario,
+            email,
+            senha,
+            admin,
+            professor,
+            monitor
+        FROM usuarios
+        WHERE email = ?
+        """, (email,))
         
         user = cursor.fetchone()
 
@@ -1211,8 +1217,9 @@ def login():
                 session["usuario"] = user[1]
                 session["email"] = user[2]
 
-                return redirect("/")
-
+                session["admin"] = bool(user[4])
+                session["professor"] = bool(user[5])
+                session["monitor"] = bool(user[6])
         flash(
             "Email ou senha incorretos",
             "erro"
