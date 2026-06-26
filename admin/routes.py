@@ -10,7 +10,7 @@ def index():
 
 from .utils import get_system_info 
 @admin_bp.route("/dashboard")
-@admin_required
+@admin_required("admin")
 def dashboard():
 
     info = get_system_info()

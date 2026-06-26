@@ -6,7 +6,8 @@ from flask import (
     session,
     flash
 )
-from app.admin import admin_bp
+
+from admin import admin_bp
 app.register_blueprint(admin_bp, url_prefix="/admin")
 
 from flask_bcrypt import Bcrypt
