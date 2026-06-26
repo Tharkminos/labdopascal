@@ -36,6 +36,7 @@
 <section
     class="etapa"
     id="etapa-{{ loop.index0 }}"
+    data-tipo="{{ etapa.tipo }}"
     {% if not loop.first %}
     style="display:none"
     {% endif %}
@@ -390,6 +391,7 @@ function gerarResultado(){
         )
     }
 }
+
 document
 .getElementById(
     "btn-proximo"
@@ -398,25 +400,36 @@ document
     "click",
     () => {
 
+    const etapaAtualElemento =
+    document.getElementById(
+        "etapa-" + etapaAtual
+    )
+
+    if(
+
+        etapaAtualElemento.dataset.tipo ===
+        "simulacao"
+
+        &&
+
+        typeof simulacaoConcluida ===
+        "function"
+
+    ){
+
         if(
-            typeof simulacaoConcluida ===
-            "function"
+            !simulacaoConcluida()
         ){
 
-            if(
-                !simulacaoConcluida()
-            ){
+            alert(
+                "Conclua a atividade da simulação antes de avançar."
+            )
 
-                alert(
-                    "Conclua a atividade da simulação antes de avançar."
-                )
-
-                return
-
-            }
+            return
 
         }
 
+    }
         if(
             !etapaConcluida()
         ){

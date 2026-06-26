@@ -3,7 +3,7 @@
 
         {
             "tipo":"quiz",
-            "dificuldade":"facil",
+            "dificuldade":"id0",
             "pergunta":"Qual partícula possui carga positiva?",
             "alternativas":[
                 "Próton",
@@ -15,7 +15,7 @@
 
         {
             "tipo":"quiz",
-            "dificuldade":"facil",
+            "dificuldade":"id1",
             "pergunta":"Qual partícula possui carga negativa?",
             "alternativas":[
                 "Próton",

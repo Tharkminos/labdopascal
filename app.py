@@ -323,7 +323,11 @@ def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
         )
 
     for etapa in etapas:
-
+        etapa["tipo"] = "texto"
+        if "[simulacao=" in etapa["conteudo"]:
+            etapa["tipo"] = "simulacao"
+        elif "[checkpoint" in etapa["conteudo"]:
+            etapa["tipo"] = "checkpoint"
         etapa["conteudo"] = processar_etapa(
             etapa["conteudo"],
             banco
