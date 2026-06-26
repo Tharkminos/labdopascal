@@ -141,7 +141,6 @@ def calcular_nivel(xp):
 
     return nivel
 def dividir_etapas(md, titulo):
-
     partes = re.split(
         r"\[etapa=(.*?)\]",
         md
@@ -149,19 +148,54 @@ def dividir_etapas(md, titulo):
 
     etapas = []
 
+    conteudo = partes[0]
+
+    tipo = "texto"
+
+    if "[simulacao=" in conteudo:
+
+        tipo = "simulacao"
+
+    elif "[checkpoint" in conteudo:
+
+        tipo = "checkpoint"
+
     etapas.append({
-    "titulo": "",
-    "conteudo": partes[0]
+
+        "titulo": "",
+
+        "conteudo": conteudo,
+
+        "tipo": tipo
+
     })
 
     for i in range(1, len(partes), 2):
 
         if i + 1 >= len(partes):
+
             break
 
+        conteudo = partes[i + 1]
+
+        tipo = "texto"
+
+        if "[simulacao=" in conteudo:
+
+            tipo = "simulacao"
+
+        elif "[checkpoint" in conteudo:
+
+            tipo = "checkpoint"
+
         etapas.append({
+
             "titulo": partes[i].strip(),
-            "conteudo": partes[i + 1]
+
+            "conteudo": conteudo,
+
+            "tipo": tipo
+
         })
 
     return etapas
@@ -323,11 +357,6 @@ def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
         )
 
     for etapa in etapas:
-        etapa["tipo"] = "texto"
-        if "[simulacao=" in etapa["conteudo"]:
-            etapa["tipo"] = "simulacao"
-        elif "[checkpoint" in etapa["conteudo"]:
-            etapa["tipo"] = "checkpoint"
         etapa["conteudo"] = processar_etapa(
             etapa["conteudo"],
             banco
