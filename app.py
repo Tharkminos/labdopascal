@@ -1390,16 +1390,7 @@ def conquistas():
         conquistas=lista
 
     )
-# ================= ADMIN =================
 
-@app.route("/admin")
-def admin():
-
-    if "usuario" not in session:
-
-        return redirect("/login")
-
-    return redirect("/perfil")
 
 
 # ================= LOGOUT =================
