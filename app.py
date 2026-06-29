@@ -188,14 +188,13 @@ def dividir_etapas(md, titulo):
 
             tipo = "checkpoint"
 
+        titulo = partes[i].strip()
+
         etapas.append({
-
-            "titulo": partes[i].strip(),
-
+            "titulo": titulo,
             "conteudo": conteudo,
-
-            "tipo": tipo
-
+            "tipo": tipo,
+            "simulacao": titulo if tipo == "simulacao" else None
         })
 
     return etapas
