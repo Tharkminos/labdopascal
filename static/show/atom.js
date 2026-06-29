@@ -1,6 +1,7 @@
 function atom(sim){
 
 let pi = 3.14;
+let frameInicial = 0;
 
 let atoms = [
     [207,200,''],
@@ -37,7 +38,7 @@ sim.setup = function(){
 }
 
 sim.mouseClicked = function(){
-        console.log("Clique detectado");
+    if(frameInicial > 60){
     let Mx = sim.mouseX;
     let My = sim.mouseY;
 
@@ -86,10 +87,10 @@ sim.mouseClicked = function(){
 
     }
 
-}
+}}
 
 sim.draw = function(){
-
+    frameInicial=sim.frameCount
     for(let n=0;n<7;n++){
 
         if(n<6){
