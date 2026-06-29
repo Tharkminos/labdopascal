@@ -101,29 +101,37 @@ const contador =
     )
 
 function mostrarEtapa(indice){
-    if (etapa.tipo === "simulacao") {
-    simulacaoAtual = new p5(window[etapa.simulacao]);
-}
+
+    // Remove a simulação anterior
+    if(simulacaoAtual){
+        simulacaoAtual.remove();
+        simulacaoAtual = null;
+    }
+
     etapas.forEach(etapa => {
+        etapa.style.display = "none";
+    });
 
-        etapa.style.display = "none"
+    etapas[indice].style.display = "block";
 
-    })
+    contador.textContent = `${indice + 1} / ${etapas.length}`;
 
-    etapas[indice].style.display = "block"
+    // Agora a etapa já está visível
+    const canvas = etapas[indice].querySelector("[id^='canvas-']");
 
-    contador.textContent =
-        `${indice + 1} / ${etapas.length}`
+    if(canvas){
+        const nome = canvas.id.replace("canvas-", "");
+
+        if(typeof window[nome] === "function"){
+            simulacaoAtual = new p5(window[nome]);
+        }else{
+            console.error(`Simulação '${nome}' não encontrada.`);
+        }
+    }
 
     if(indice === etapas.length - 1){
-
-        gerarResultado()
-
+        gerarResultado();
     }
-    if(etapas[indice].tipo === "simulacao"){
-        simulacaoAtual = new p5(criarSimulacao);
-    }
-
 
 }
 function mostrarPopup(titulo,mensagem,modulo,mostrarConquistas=true){
