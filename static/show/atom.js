@@ -218,6 +218,6 @@ sim.draw = function(){
     }
 
 }
-let simulacaoAtual = p5(criarSimulacao)
 
 }
+let simulacaoAtual = p5(criarSimulacao)
