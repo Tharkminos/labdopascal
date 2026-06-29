@@ -1,4 +1,4 @@
-function criarSimulacao(sim){
+function atom(sim){
 
 let pi = 3.14;
 

@@ -5,7 +5,7 @@ function seno(angle){
 function cos(angle){
   return Math.cos(angle)
 }
-function criarSimulacao(sim) {
+function show_atom(sim) {
     let x = 100;
     let y = 100;
     let angle=0

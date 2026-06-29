@@ -99,7 +99,6 @@ const contador =
     document.getElementById(
         "contador-etapas"
     )
-
 function mostrarEtapa(indice){
 
     // Remove a simulação anterior
@@ -108,33 +107,34 @@ function mostrarEtapa(indice){
         simulacaoAtual = null;
     }
 
+    // Esconde todas
     etapas.forEach(etapa => {
         etapa.style.display = "none";
     });
 
+    // Mostra a etapa atual
     etapas[indice].style.display = "block";
 
-    contador.textContent = `${indice + 1} / ${etapas.length}`;
-
-    // Agora a etapa já está visível
+    // Procura um canvas nesta etapa
     const canvas = etapas[indice].querySelector("[id^='canvas-']");
 
     if(canvas){
+
         const nome = canvas.id.replace("canvas-", "");
 
         if(typeof window[nome] === "function"){
             simulacaoAtual = new p5(window[nome]);
-        }else{
-            console.error(`Simulação '${nome}' não encontrada.`);
         }
+
     }
+
+    contador.textContent = `${indice + 1} / ${etapas.length}`;
 
     if(indice === etapas.length - 1){
         gerarResultado();
     }
 
-}
-function mostrarPopup(titulo,mensagem,modulo,mostrarConquistas=true){
+}function mostrarPopup(titulo,mensagem,modulo,mostrarConquistas=true){
     document
     .querySelector(
         ".popup-conquista"
