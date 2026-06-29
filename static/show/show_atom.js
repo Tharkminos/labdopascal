@@ -25,6 +25,7 @@ sim.setup = function () {
     };
 
 sim.draw = function () {
+        sim.simulacaoConcluida()
         sim.fill(220)
         sim.background(220)
         sim.circle(180, 200, 280);
