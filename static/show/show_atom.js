@@ -22,6 +22,8 @@ let nucleus_radio = 24
 sim.simulacaoConcluida = function (){return true}
 sim.setup = function () {
         sim.createCanvas(370, 370);
+        sim.canvas.parent("canvas-show_atom");
+
     };
 
 sim.draw = function () {
