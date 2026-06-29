@@ -101,10 +101,9 @@ const contador =
     )
 
 function mostrarEtapa(indice){
-    if(simulacaoAtual){
-        simulacaoAtual.remove();
-        simulacaoAtual = null;
-    }
+    if (etapa.tipo === "simulacao") {
+    simulacaoAtual = new p5(window[etapa.simulacao]);
+}
     etapas.forEach(etapa => {
 
         etapa.style.display = "none"
