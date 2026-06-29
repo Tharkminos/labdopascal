@@ -71,4 +71,4 @@ sim.draw = function () {
     } // Atomo  
   } // DRAW
 } // SIMULAçÃO
-new p5(criarSimulacao);
+let simulacaoAtual = new p5(criarSimulacao,canvasId);
