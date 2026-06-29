@@ -101,7 +101,10 @@ const contador =
     )
 
 function mostrarEtapa(indice){
-
+    if(simulacaoAtual){
+        simulacaoAtual.remove();
+        simulacaoAtual = null;
+    }
     etapas.forEach(etapa => {
 
         etapa.style.display = "none"
@@ -118,6 +121,10 @@ function mostrarEtapa(indice){
         gerarResultado()
 
     }
+    if(etapas[indice].tipo === "simulacao"){
+        simulacaoAtual = new p5(criarSimulacao);
+    }
+
 
 }
 function mostrarPopup(titulo,mensagem,modulo,mostrarConquistas=true){
