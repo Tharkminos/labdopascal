@@ -405,20 +405,14 @@ document
         "etapa-" + etapaAtual
     )
 
-    if(
-
-        etapaAtualElemento.dataset.tipo ===
-        "simulacao"
-
-        &&
-
-        typeof simulacaoConcluida ===
-        "function"
-
-    ){
+    if (
+    etapaAtualElemento.dataset.tipo === "simulacao" &&
+    simulacaoAtual &&
+    typeof simulacaoAtual.simulacaoConcluida === "function"
+){
 
         if(
-            !simulacaoConcluida()
+            !simulacaoAtual.simulacaoConcluida()
         ){
 
             alert(
