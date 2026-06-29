@@ -21,7 +21,7 @@ let atoms = [[207,200,''],
 let nucleus_radio = 24
 sim.simulacaoConcluida = function (){return true}
 sim.setup = function () {
-        sim.canvas = createCanvas(370, 370);
+        sim.canvas = sim.createCanvas(370, 370);
         sim.canvas.parent("canvas-show_atom");
 
     };
@@ -68,8 +68,7 @@ sim.draw = function () {
       sim.circle(x,y,22)
       sim.fill(0)
       sim.text("-",x-8,y+12);
-    } // Atomo
-
-  
+    } // Atomo  
   } // DRAW
-} // SIMULAÇÃO
+} // SIMULAçÃO
+new p5(criarSimulacao);
