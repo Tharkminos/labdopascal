@@ -13,6 +13,8 @@ questoes: atomo
 
 [simulacao=show_atom]
 *Acima o modelo proposto por Rutherford-Bohr, onde o átomo é exibido em níveis energéticos*
+
+
 [etapa=Composição]
 *Abaixo está representado um modelo clássico do átomo(proposto no inicio do século XX), com seu núcleo bem definido e os elétrons orbitando essa estrutura.*
 **Clique nas cargas abaixo para ver que informações podemos descobrir:**
