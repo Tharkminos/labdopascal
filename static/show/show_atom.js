@@ -73,4 +73,3 @@ sim.draw = function () {
   
   } // DRAW
 } // SIMULAÇÃO
-new p5(criarSimulacao);
