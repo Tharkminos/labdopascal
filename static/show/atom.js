@@ -37,7 +37,7 @@ sim.setup = function(){
 }
 
 sim.mouseClicked = function(){
-
+        console.log("Clique detectado");
     let Mx = sim.mouseX;
     let My = sim.mouseY;
 
@@ -48,7 +48,7 @@ sim.mouseClicked = function(){
 
         let dS = sim.dist(Mx,My,Obx,Oby);
 
-        if(dS < 10){
+        if(dS < 20){
 
             if(at[2] === '+'){
                 interact[0] = true;
