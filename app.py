@@ -227,22 +227,13 @@ def processar_etapa(conteudo, banco=None):
 
         for indice, dificuldade in enumerate(checkpoints):
 
-            possiveis = [
-
-                q
-
-                for q in banco["questoes"]
-
-                if q["dificuldade"] == dificuldade
-
-            ]
+            possiveis = [q for q in banco["questoes"] if q["dificuldade"] == dificuldade]
 
             if not possiveis:
                 continue
 
-            questao = random.choice(
-                possiveis
-            )
+            questao = random.choice(possiveis)
+            possiveis.remove(questao)
 
             alternativas_html = ""
 
