@@ -161,8 +161,6 @@
 <script src="{{ url_for('static', filename='js/p5.min.js') }}"></script>
 
 <!-- ================= SCRIPTS DAS PÁGINAS ================= -->
-
-{% block scripts %}
 <script>
 
 function toggleMenu(){
@@ -172,14 +170,12 @@ function toggleMenu(){
         .classList
         .toggle("aberto")
 
-    document
-        .getElementById("fundo-menu")
-        .classList
-        .toggle("aberto")
 
 }
 
 </script>
+
+{% block scripts %}
 {% endblock %}
 
 </body>
