@@ -60,13 +60,15 @@
     <div class="login">
 
         {% if session.usuario %}
-
-            <a href="/admin">
-
-                Painel
-
-            </a>
-
+            {% if session.admin %}
+                <a href="/admin">
+                    Admin
+                </a>
+            {% else %}
+                <a href="/perfil">
+                    Perfil
+                </a>
+            {% endif %}                
             <a href="/logout">
 
                 Logout ({{ session.usuario }})
