@@ -49,7 +49,7 @@ sim.mouseClicked = function(){
 
         let dS = sim.dist(Mx,My,Obx,Oby);
 
-        if(dS < 20){
+        if(dS < 12){
 
             if(at[2] === '+'){
                 interact[0] = true;

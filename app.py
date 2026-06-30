@@ -1137,19 +1137,16 @@ def concluir_aula():
     
         "status":"ok",
     
-        "conquista":
-            conquista_desbloqueada,
+        "conquista":conquista_desbloqueada,
     
         "revisao":revisao,
     
-        "xp_bonus":
-            xp_bonus,
+        "xp_bonus":xp_bonus,
     
-        "nivel_up":
-            nivel_up,
+        "nivel_up":nivel_up,
     
-        "nivel":
-            nivel_depois
+        "nivel":nivel_depois,
+         "xp":xp
     
     }
     except Exception as error:

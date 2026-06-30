@@ -284,7 +284,9 @@ function gerarResultado(){
     ${
         aprovado
         ?
-        `<p>+${Math.floor(XP_AULA*aproveitamento/100)} XP</p>`
+        `<p id="xp-resultado">
+            +${Math.floor(XP_AULA*aproveitamento/100)} XP
+        </p>`
         :
         ``
     }
@@ -343,6 +345,9 @@ function gerarResultado(){
         .then(
             dados => {
                 console.log(dados)
+                document
+                .getElementById("xp-resultado")
+                .textContent ='+${dados.xp} XP'
                 if(dados.conquista && dados.nivel_up){
                     mostrarPopup(
 
