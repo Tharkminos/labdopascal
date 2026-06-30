@@ -117,81 +117,37 @@ a{
 
     background: #1d4ed8;
 }
-/* ================= MENU ================= */
-
-.menu {
-    width: 100%;
-    background: #222;
-    padding: 10px 20px;
-}
-
-.menu ul {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.menu li {
-    display: inline-block;
-}
-
-.menu a {
-    color: white;
-    text-decoration: none;
-    font-size: 1rem;
-
-    padding: 10px 15px;
-    border-radius: 8px;
-
-    transition: background .2s;
-}
-
-.menu a:hover {
-    background: rgba(30,41,59,255);
-}
 
 
 /* ================= MENU MOBILE ================= */
-@media(max-width:768px){
 
-    .menu ul{
+.menu-mobile{
 
-        display:flex;
-        flex-direction:column;
+    display: none;
 
-        width:100%;
-        margin:0;
-        padding:0;
+    font-size: 22px;
 
-    }
+    cursor: pointer;
+}
 
 
-    .menu li{
+/* ================= MENU ================= */
 
-        list-style:none;
-        width:100%;
+.menu{
 
-    }
+    background: #334155;
 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
 
-    .menu a{
+.menu ul{
 
-        display:block;
+    list-style: none;
 
-        width:100%;
+    display: flex;
+}
 
-        color:white;
-
-        padding:15px;
-
-    }
-
-}/* ================= FLASH ================= */
+/* ================= FLASH ================= */
 
 .flash-area{
 
@@ -258,7 +214,7 @@ a{
 .menu-item > span:hover,
 .menu-item > a:hover{
 
-    background: #0f172a;
+    background: #475569;
 }
 
 
