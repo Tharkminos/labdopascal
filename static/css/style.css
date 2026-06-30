@@ -119,34 +119,149 @@ a{
 }
 
 
-/* ================= MENU MOBILE ================= */
+/* ================= BOTÃO MENU MOBILE ================= */
 
 .menu-mobile{
 
-    display: none;
+    display:none;
 
-    font-size: 22px;
+    font-size:28px;
 
-    cursor: pointer;
+    cursor:pointer;
+
+    color:white;
+
+    user-select:none;
+
 }
-
 
 /* ================= MENU ================= */
 
 .menu{
 
-    background: #334155;
+    background:#334155;
 
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow:0 2px 5px rgba(0,0,0,.15);
+
 }
 
 .menu ul{
 
-    list-style: none;
+    display:flex;
 
-    display: flex;
+    list-style:none;
+
+    margin:0;
+
+    padding:0;
+
 }
 
+.menu li{
+
+    list-style:none;
+
+}
+
+.menu li a{
+
+    display:block;
+
+    padding:15px 22px;
+
+    color:white;
+
+    transition:.2s;
+
+}
+
+.menu li a:hover{
+
+    background:#475569;
+
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width:768px){
+
+    .topo{
+
+        position:fixed;
+
+        width:100%;
+
+        left:0;
+
+        top:0;
+
+    }
+
+    .menu-mobile{
+
+        display:block;
+
+    }
+
+    .login{
+
+        display:none;
+
+    }
+
+    .menu{
+
+        display:none;
+
+        width:100%;
+
+        background:#334155;
+
+    }
+
+    .menu.active{
+
+        display:block;
+
+    }
+
+    .menu ul{
+
+        flex-direction:column;
+
+    }
+
+    .menu li{
+
+        width:100%;
+
+        border-top:1px solid rgba(255,255,255,.1);
+
+    }
+
+    .menu li a{
+
+        width:100%;
+
+        padding:16px 20px;
+
+        color:white;
+
+    }
+
+    .menu li a:hover{
+
+        background:#475569;
+
+    }
+
+    .conteudo{
+
+        margin-top:90px;
+
+    }
+
+}
 /* ================= FLASH ================= */
 
 .flash-area{
