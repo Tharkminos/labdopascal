@@ -117,131 +117,107 @@ a{
 
     background: #1d4ed8;
 }
+/* ================= MENU ================= */
+
+.menu {
+    width: 100%;
+    background: #222;
+    padding: 10px 20px;
+}
+
+.menu ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu li {
+    display: inline-block;
+}
+
+.menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+
+    padding: 10px 15px;
+    border-radius: 8px;
+
+    transition: background .2s;
+}
+
+.menu a:hover {
+    background: rgba(255,255,255,.15);
+}
 
 
 /* ================= MENU MOBILE ================= */
-/* Desktop */
-
-.menu-mobile{
-
-    display:none;
-
-}
-
-/* ---------- Mobile ---------- */
 
 @media (max-width:768px){
 
-    .menu-mobile{
+    .menu {
 
         display:block;
-
-        font-size:28px;
-
-        cursor:pointer;
-
-        color:white;
-
-    }
-
-    .menu{
 
         position:fixed;
 
         top:0;
-
         left:-260px;
 
         width:240px;
-
         height:100vh;
 
-        background:#334155;
+        background:#222;
+
+        padding:20px;
 
         transition:left .3s;
 
         z-index:1000;
 
-        padding-top:70px;
-
+        overflow-y:auto;
     }
 
-    .menu.aberto{
+
+    .menu.aberto {
 
         left:0;
 
     }
 
-    .menu ul{
 
-        display:flex;
+    .menu ul {
 
         flex-direction:column;
 
+        align-items:stretch;
+
+        gap:10px;
+
     }
 
-    .menu li{
+
+    .menu li {
 
         width:100%;
 
     }
 
-    .menu a{
+
+    .menu a {
 
         display:block;
 
-        padding:18px;
-
-        color:white;
-
-        text-decoration:none;
+        width:100%;
 
     }
 
-    .menu a:hover{
-
-        background:#475569;
-
-    }
-
-    #fundo-menu{
-
-        display:none;
-
-        position:fixed;
-
-        inset:0;
-
-        background:rgba(0,0,0,.45);
-
-        z-index:999;
-
-    }
-
-    #fundo-menu.aberto{
-
-        display:block;
-
-    }
-
-}
-/* ================= MENU ================= */
-
-.menu{
-
-    background: #334155;
-
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.menu ul{
-
-    list-style: none;
-
-    display: flex;
-}
-
-/* ================= FLASH ================= */
+}/* ================= FLASH ================= */
 
 .flash-area{
 
