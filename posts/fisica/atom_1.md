@@ -30,6 +30,6 @@ Quando um íon possui mais prótons que elétrons, dizemos que ele tem uma **car
 
 [etapa=Ânion]
 Quando um íon possui mais elétrons que prótons, dizemos que ele tem uma **carga negativa** e seu nome se torna **ânion**.O átomo abaixo por exemplo, contém 10 elétrons e 4 prótons o tornando um **ânion**.
-[simulacao=show_atom]
+[simulacao=show_cation]
 
 
