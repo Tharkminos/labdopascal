@@ -1,5 +1,5 @@
 ---
-xp: 15
+xp: 20
 nivel: 1
 titulo_modulo: Átomo
 descricao_modulo: Estrutura básica da matéria
@@ -7,12 +7,10 @@ imagem_modulo:atom.webp
 questoes: atomo
 ---
 
-# Ions
+# Íons
 
-&emsp;&emsp; Quando um átomo, possui um número diferente de prótons (carga positiva) e elétrons(carga negativa)
-[simulacao=show_atom]
-*Acima o modelo proposto por Rutherford-Bohr, onde o átomo é exibido em níveis energéticos*
-
+&emsp;&emsp; Quando um átomo, possui um número diferente de prótons (carga positiva) e elétrons(carga negativa), ele é chamado de **Íon**. O átomo abaixo por exemplo, possui *4 prótons* e *10 elétrons*.
+[simulacao=charge_eq]
 
 [etapa=Composição]
 *Abaixo está representado um modelo clássico do átomo(proposto no inicio do século XX), com seu núcleo bem definido e os elétrons orbitando essa estrutura.*
