@@ -26,10 +26,10 @@ questoes: atomo
 
 [etapa=Cátion]
 Quando um íon possui mais prótons que elétrons, dizemos que ele tem uma **carga positiva** e seu nome se torna **cátion**.
-[simulacao=show_anion]
+[simulacao=show_cation]
 
 [etapa=Ânion]
-Quando um íon possui mais elétrons que prótons, dizemos que ele tem uma **carga negativa** e seu nome se torna **ânion**.O átomo abaixo por exemplo, contém 10 elétrons e 4 prótons o tornando um **ânion**.
-[simulacao=show_atom]
+Quando um íon possui mais elétrons que prótons, dizemos que ele tem uma **carga negativa** e seu nome se torna **ânion**. O átomo abaixo por exemplo, contém 10 elétrons e 4 prótons o tornando um **ânion**.
+[simulacao=show_anion]
 
 
