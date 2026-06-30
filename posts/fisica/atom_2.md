@@ -10,7 +10,7 @@ questoes: atomo
 # Lista de Questões
 ## Equilibre o átomo
 
-**Escolha o número de elétrons adequado para equilibrar o átomo(manter o mesmo número de prótons e elétrons)**
+Escolha o número de elétrons adequado para equilibrar o átomo(manter o mesmo número de prótons e elétrons)
 [simulacao=charge_eq]
 
 
