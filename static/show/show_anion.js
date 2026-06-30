@@ -5,16 +5,16 @@ function seno(angle){
 function cos(angle){
   return Math.cos(angle)
 }
-function show_cation(sim) {
+function show_anion(sim) {
     let x = 100;
     let y = 100;
     let angle=0
     let pi = 3.14
-let atoms = [[207,200,'+'],
+let atoms = [[207,200,''],
             [155,200,'+'],
-            [180,176,'+'],
+            [180,176,''],
             [180,225,'+'],
-            [0,0,'+'],
+            [0,0,''],
             [0,0,'+'],
             [0,0,'+']
 ]
@@ -22,7 +22,7 @@ let nucleus_radio = 24
 sim.simulacaoConcluida = function (){return true}
 sim.setup = function () {
         sim.canvas = sim.createCanvas(370, 370);
-        sim.canvas.parent("canvas-show_cation");
+        sim.canvas.parent("canvas-show_anion");
 
     };
 
@@ -55,7 +55,7 @@ sim.draw = function () {
       sim.text(atoms[j][2],atoms[j][0]-8,atoms[j][1]+10)
     } // FOR LET J
     let k = 0
-    for(let i = 0;i<5; i++){    if(i<2){
+    for(let i = 0;i<11; i++){    if(i<2){
       x = 180+90*seno(i*3.14+angle)
       y = 200+90*cos(i*3.14+angle)
       sim.textSize(50)
