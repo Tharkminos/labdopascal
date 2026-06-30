@@ -31,28 +31,13 @@
 <!-- ================= TOPO ================= -->
 
 <header class="topo">
-
-    <!-- ESQUERDA -->
     <div class="logo-area">
 
-        <!-- BOTÃO MOBILE -->
-        <span class="menu-mobile"
-              onclick="toggleMenu()">
-
+        <span class="menu-mobile" onclick="toggleMenu()" >
             ☰
-
         </span>
 
-        <!-- LOGO -->
-        <div class="logo">
-
-            <a href="/">
-
-                Laboratório do Pascal
-
-            </a>
-
-        </div>
+        <h1>Laboratório do Pascal</h1>
 
     </div>
 
@@ -106,39 +91,15 @@
     <ul>
 
         <!-- SIMULAÇÕES -->
-        <li class="menu-item">
+        <li><a href="/">🏠 Início</a></li>
+        <li><a href="/modulos">📚 Aulas</a></li>
+        {% if session.usuario %}
 
-            <span>
-
-                Aulas
-
-            </span>
-
-            <div class="dropdown">
-
-                <a href="/teste">
-
-                    Teste
-
-                </a>
-
-                <a href="/modulos">
-
-                    Lista de Módulos
-
-                </a>
-
-            </div>
-
-        </li>
-        <!-- CONQUISTAS -->
-
-        <li class="menu-item">
-            <a href="/conquistas">
-                Conquistas
-            </a>
-        </li>
-       
+            <li><a href="/perfil">👤 Perfil</a></li>
+            <li><a href="/ranking">🏆 Ranking</a></li>
+            <li><a href="/ranking">🏅 Conquistas</a></li>
+            
+        {% endif%}
 
 
     </ul>
@@ -202,7 +163,23 @@
 <!-- ================= SCRIPTS DAS PÁGINAS ================= -->
 
 {% block scripts %}
+<script>
 
+function toggleMenu(){
+
+    document
+        .getElementById("menu")
+        .classList
+        .toggle("aberto")
+
+    document
+        .getElementById("fundo-menu")
+        .classList
+        .toggle("aberto")
+
+}
+
+</script>
 {% endblock %}
 
 </body>

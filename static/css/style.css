@@ -120,17 +120,111 @@ a{
 
 
 /* ================= MENU MOBILE ================= */
+/* Desktop */
 
 .menu-mobile{
 
-    display: none;
+    display:none;
 
-    font-size: 22px;
-
-    cursor: pointer;
 }
 
+/* ---------- Mobile ---------- */
 
+@media (max-width:768px){
+
+    .menu-mobile{
+
+        display:block;
+
+        font-size:28px;
+
+        cursor:pointer;
+
+        color:white;
+
+    }
+
+    .menu{
+
+        position:fixed;
+
+        top:0;
+
+        left:-260px;
+
+        width:240px;
+
+        height:100vh;
+
+        background:#334155;
+
+        transition:left .3s;
+
+        z-index:1000;
+
+        padding-top:70px;
+
+    }
+
+    .menu.aberto{
+
+        left:0;
+
+    }
+
+    .menu ul{
+
+        display:flex;
+
+        flex-direction:column;
+
+    }
+
+    .menu li{
+
+        width:100%;
+
+    }
+
+    .menu a{
+
+        display:block;
+
+        padding:18px;
+
+        color:white;
+
+        text-decoration:none;
+
+    }
+
+    .menu a:hover{
+
+        background:#475569;
+
+    }
+
+    #fundo-menu{
+
+        display:none;
+
+        position:fixed;
+
+        inset:0;
+
+        background:rgba(0,0,0,.45);
+
+        z-index:999;
+
+    }
+
+    #fundo-menu.aberto{
+
+        display:block;
+
+    }
+
+}
 /* ================= MENU ================= */
 
 .menu{
