@@ -28,7 +28,29 @@
         {
             "tipo":"quiz",
             "dificuldade":"facil",
-            "pergunta":"Qual partícula possui carga neutra?",
+            "pergunta":"Qual partícula possui carga positiva?",
+            "alternativas":[
+                "Prótons",
+                "Elétrons",
+                "Nêutrons"
+            ],
+            "correta":0
+        },
+        {
+            "tipo":"quiz",
+            "dificuldade":"facil",
+            "pergunta":"Qual partícula possui carga negativa?",
+            "alternativas":[
+                "Prótons",
+                "Elétrons",
+                "Nêutrons"
+            ],
+            "correta":1
+        },
+        {
+            "tipo":"quiz",
+            "dificuldade":"facil",
+            "pergunta":"Qual partícula possui carga nula?",
             "alternativas":[
                 "Prótons",
                 "Elétrons",
