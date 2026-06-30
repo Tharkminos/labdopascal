@@ -1244,6 +1244,8 @@ def login():
                 session["admin"] = bool(user[4])
                 session["professor"] = bool(user[5])
                 session["monitor"] = bool(user[6])
+                return redirect("/")
+
         flash(
             "Email ou senha incorretos",
             "erro"
