@@ -1199,7 +1199,18 @@ def atv04():
 
 
 # ================= LOGIN =================
+@app.route("/terminal")
+def terminal():
 
+    if "id" not in session:
+
+        return redirect("/login")
+
+    if not session.get("admin"):
+
+        return redirect("/perfil")
+
+    return render_template("terminal.html")
 @app.route("/login", methods=["GET", "POST"])
 def login():
 
