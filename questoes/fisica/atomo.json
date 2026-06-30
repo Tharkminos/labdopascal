@@ -57,6 +57,147 @@
                 "Nêutrons"
             ],
             "correta":2
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Quando um ion tem mais elétrons do que prótons ele é chamado de:",
+            "alternativas":[
+                "Cátion",
+                "Ânion",
+                "Gluon"
+            ],
+            "correta":1
+        },
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Quando um ion tem menos elétrons do que prótons ele é chamado de:",
+            "alternativas":[
+                "Cátion",
+                "Ânion",
+                "Nêutrons"
+            ],
+            "correta":0
+        },
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Se um átomo tem 6 prótons e 4 elétrons, ele é chamado :?",
+            "alternativas":[
+                "Cátion",
+                "Anion",
+                "Muon"
+            ],
+            "correta":0
+        },
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Um átomo possui 8 prótons e 8 elétrons. Sua carga elétrica é:",
+            "alternativas":[
+                "Positiva",
+                "Negativa",
+                "Nula"
+            ],
+            "correta":2
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Um átomo possui 8 prótons e 8 elétrons. Sua carga elétrica é:",
+            "alternativas":[
+                "Positiva",
+                "Negativa",
+                "Nula"
+            ],
+            "correta":2
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Um átomo possui 10 prótons e 12 elétrons. Ele é um:",
+            "alternativas":[
+                "Cátion",
+                "Ânion",
+                "Átomo neutro"
+            ],
+            "correta":1
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Um átomo possui 11 prótons e 9 elétrons. Ele é um:",
+            "alternativas":[
+                "Cátion",
+                "Ânion",
+                "Átomo neutro"
+            ],
+            "correta":0
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Qual partícula pode ser removida do átomo com maior facilidade?",
+            "alternativas":[
+                "Próton",
+                "Elétron",
+                "Nêutron"
+            ],
+            "correta":1
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"medio",
+            "pergunta":"Um átomo deixa de ser neutro quando:",
+            "alternativas":[
+                "O número de prótons é diferente do número de elétrons",
+                "Possui nêutrons no núcleo",
+                "Tem apenas uma camada eletrônica"
+            ],
+            "correta":0
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"dificil",
+            "pergunta":"Um átomo possui 15 prótons e carga +2. Quantos elétrons ele possui?",
+            "alternativas":[
+                "13",
+                "15",
+                "17"
+            ],
+            "correta":0
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"dificil",
+            "pergunta":"Um íon possui 9 prótons e 10 elétrons. Sua carga elétrica é:",
+            "alternativas":[
+                "+1",
+                "-1",
+                "0"
+            ],
+            "correta":1
+        },
+
+        {
+            "tipo":"quiz",
+            "dificuldade":"dificil",
+            "pergunta":"Um íon possui 12 prótons e 10 elétrons. Sua carga elétrica é:",
+            "alternativas":[
+                "+2",
+                "-2",
+                "0"
+            ],
+            "correta":0
         }
 
     ]
