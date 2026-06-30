@@ -47,19 +47,19 @@
         {% if session.usuario %}
             {% if session.admin %}
                 <a href="/admin">
-                    Admin
+                    ⚙️ Admin
                 </a>
                 <a href="/perfil">
-                    Perfil
+                    👤 Perfil
                 </a>
             {% else %}
                 <a href="/perfil">
-                    Perfil
+                    👤 Perfil
                 </a>
             {% endif %}                
             <a href="/logout">
 
-                Logout ({{ session.usuario }})
+                🚫 Logout ({{ session.usuario }})
 
             </a>
 
@@ -67,14 +67,14 @@
 
             <a href="/login">
 
-                Login
+                👤 Login
 
             </a>
 
             <a href="/register"
                class="btn-register">
 
-                Registrar
+                👤 Registrar
 
             </a>
 
