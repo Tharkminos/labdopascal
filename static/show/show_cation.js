@@ -55,14 +55,15 @@ sim.draw = function () {
       sim.text(atoms[j][2],atoms[j][0]-8,atoms[j][1]+10)
     } // FOR LET J
     let k = 0
-    for(let i = 0;i<5; i++){    if(i<2){
+    let max_i = 5
+    for(let i = 0;i<max_i; i++){    if(i<2){
       x = 180+90*seno(i*3.14+angle)
       y = 200+90*cos(i*3.14+angle)
       sim.textSize(50)
         }
       if(i>2){
-      x = 180-140*seno(i*3.14/4+angle)
-      y = 200+140*cos(i*3.14/4+angle)
+      x = 180-140*seno(i*3.14+angle)
+      y = 200+140*cos(i*3.14+angle)
       }
       sim.fill(120,120,255)
       sim.circle(x,y,22)
