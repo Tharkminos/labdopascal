@@ -8,9 +8,8 @@ questoes: atomo
 ---
 
 # Ions
-## O que é?
-&emsp;&emsp; Toda matéria é formada por átomos. O ar que respiramos, a água, os seres vivos e praticamente tudo ao nosso redor é composto por eles. Apesar de extremamente pequenos, os átomos possuem uma estrutura organizada formada por um núcleo e uma região externa chamada eletrosfera.Na eletrosfera ficam os elétrons. Quanto mais distante do núcleo um elétron está, menor é a força que o mantém preso ao átomo, tornando mais fácil sua remoção.
 
+&emsp;&emsp; Quando um átomo, possui um número diferente de prótons (carga positiva) e elétrons(carga negativa)
 [simulacao=show_atom]
 *Acima o modelo proposto por Rutherford-Bohr, onde o átomo é exibido em níveis energéticos*
 
