@@ -1,4 +1,9 @@
-from flask import render_template
+from flask import (
+    render_template,
+    redirect,
+    url_for,
+    request
+)
 from . import admin_bp
 from .auth import *
 from .utils import get_system_info 
@@ -61,19 +66,6 @@ def admin_git():
 
     )
 
-def obter_status_git():
-
-    pasta = "/var/www/labdopascal"
-
-    return {
-
-        "branch": ...,
-
-        "ultimo_commit": ...,
-
-        "arquivos": ...
-
-    }
 @permission_required("admin")
 @admin_bp.route("/git/status",methods=["POST"])
 def git_status():
