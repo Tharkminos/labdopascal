@@ -1291,3 +1291,25 @@ canvas{
     background:#f5f5f5;
 
 }
+
+.mobile-only{
+
+    display:none;
+
+}
+
+@media (max-width:768px){
+
+    .mobile-only{
+
+        display:block;
+
+    }
+
+    .login{
+
+        display:none;
+
+    }
+
+}

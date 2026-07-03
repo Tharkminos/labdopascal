@@ -74,7 +74,7 @@
             <a href="/register"
                class="btn-register">
 
-                👤 Registrar
+                📝 Registrar
 
             </a>
 
@@ -90,19 +90,40 @@
 
     <ul>
 
-        <!-- SIMULAÇÕES -->
-        <li><a href="/">🏠 Início</a></li>
-        <li><a href="/modulos">📚 Aulas</a></li>
-        {% if session.usuario %}
+    <li><a href="/">🏠 Início</a></li>
+    <li><a href="/modulos">📚 Aulas</a></li>
 
-            <li><a href="/perfil">👤 Perfil</a></li>
-            <li><a href="/ranking">🏆 Ranking</a></li>
-            <li><a href="/conquistas">🏅 Conquistas</a></li>
-            
-        {% endif%}
+    {% if session.usuario %}
 
+        <li><a href="/perfil">👤 Perfil</a></li>
+        <li><a href="/ranking">🏆 Ranking</a></li>
+        <li><a href="/conquistas">🏅 Conquistas</a></li>
 
-    </ul>
+        {% if session.admin %}
+            <li class="mobile-only">
+                <a href="/admin">⚙️ Administração</a>
+            </li>
+        {% endif %}
+
+        <li class="mobile-only">
+            <a href="/logout">
+                🚫 Logout ({{ session.usuario }})
+            </a>
+        </li>
+
+    {% else %}
+
+        <li class="mobile-only">
+            <a href="/login">👤 Login</a>
+        </li>
+
+        <li class="mobile-only">
+            <a href="/register">📝 Registrar</a>
+        </li>
+
+    {% endif %}
+
+</ul>
 
 </nav>
 <!-- ================= FLASH ================= -->
