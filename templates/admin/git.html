@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+
+{% block title %}
+Controle de Versão
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h1>📦 Controle de Versão</h1>
+
+    <hr>
+
+    <div class="card mb-4">
+
+        <div class="card-body">
+
+            <h3>Status do Repositório</h3>
+
+            <p>
+                <strong>Branch:</strong>
+                {{ branch }}
+            </p>
+
+            <p>
+                <strong>Último commit:</strong><br>
+                {{ ultimo_commit }}
+            </p>
+
+            <h4>Arquivos modificados</h4>
+
+            {% if arquivos %}
+
+                <pre>{{ arquivos }}</pre>
+
+            {% else %}
+
+                <p>✔ Nenhuma alteração local.</p>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            <form
+                action="{{ url_for('admin.git_status') }}"
+                method="post">
+
+                <button
+                    class="btn btn-primary w-100">
+
+                    📋 Atualizar Status
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <form
+                action="{{ url_for('admin.git_pull') }}"
+                method="post"
+                onsubmit="return confirm('Atualizar o projeto pelo GitHub?')">
+
+                <button
+                    class="btn btn-warning w-100">
+
+                    ⬇️ Git Pull
+
+                </button>
+
+            </form>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <button
+                class="btn btn-success w-100"
+                onclick="abrirPush()">
+
+                ⬆️ Git Push
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div
+        id="push-box"
+        style="display:none;">
+
+        <form
+            action="{{ url_for('admin.git_push') }}"
+            method="post">
+
+            <label>
+
+                Mensagem do commit
+
+            </label>
+
+            <input
+                type="text"
+                name="mensagem"
+                class="form-control"
+                placeholder="Ex.: Correção do sistema de XP"
+                required>
+
+            <br>
+
+            <button
+                class="btn btn-success">
+
+                🚀 Commit + Push
+
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                onclick="fecharPush()">
+
+                Cancelar
+
+            </button>
+
+        </form>
+
+    </div>
+
+    {% if resultado %}
+
+    <hr>
+
+    <h3>Resultado</h3>
+
+    <pre>{{ resultado }}</pre>
+
+    {% endif %}
+
+</div>
+
+<script>
+
+function abrirPush(){
+
+    document
+        .getElementById("push-box")
+        .style.display = "block"
+
+}
+
+function fecharPush(){
+
+    document
+        .getElementById("push-box")
+        .style.display = "none"
+
+}
+
+</script>
+
+{% endblock %}

@@ -2,4 +2,4 @@ Downloads/
 *.deb
 *.run
 __pycache__/
-bd.db
+git_push.sh
