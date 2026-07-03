@@ -138,6 +138,11 @@ def restart_services():
         )
 
     except subprocess.CalledProcessError as e:
+        if '<Signals.SIGTERM: 15>' in str(e):
+            return render_template(
+            "admin/git.html",  # ou seu dashboard admin
+            resultado="🚀 Serviços reiniciados com sucesso!"
+        )
         return render_template(
             "admin/git.html",
             resultado=f"❌ Erro ao reiniciar serviços: {str(e)}"
