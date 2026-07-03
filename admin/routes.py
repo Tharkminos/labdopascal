@@ -118,66 +118,28 @@ def git_pull():
 
     )
 
-@admin_bp.route("/git/push", methods=["POST"])
+@admin_bp.route("/restart", methods=["POST"])
 @permission_required("admin")
-def git_push():
-    pasta = "/var/www/labdopascal"
+def restart_services():
 
-    mensagem = request.form["mensagem"]
-
-    saida = ""
-
-    for comando in [
-
-        ["git","add","."],
-
-        ["git","commit","-m",mensagem],
-
-        ["git","push","origin","main"]
-
-    ]:
-
-        processo = subprocess.run(
-
-            comando,
-
-            cwd=pasta,
-
-            capture_output=True,
-
-            text=True
-
+    try:
+        subprocess.run(
+            ["sudo", "/usr/bin/systemctl", "restart", "pascal.service"],
+            check=True
+        )
+        subprocess.run(
+            ["sudo", "/usr/bin/systemctl", "restart", "nginx.service"],
+            check=True
         )
 
-        saida += processo.stdout
-        saida += processo.stderr
-        saida += "\n"
+        return render_template(
+            "admin/git.html",  # ou seu dashboard admin
+            resultado="🚀 Serviços reiniciados com sucesso!"
+        )
 
-    return render_template(
+    except subprocess.CalledProcessError as e:
+        return render_template(
+            "admin/git.html",
+            resultado=f"❌ Erro ao reiniciar serviços: {str(e)}"
+        )
 
-        "admin/git.html",
-
-        branch=subprocess.run(
-            ["git","branch","--show-current"],
-            cwd=pasta,
-            capture_output=True,
-            text=True
-        ).stdout.strip(),
-
-        ultimo_commit=subprocess.run(
-            ["git","log","-1","--pretty=%B"],
-            cwd=pasta,
-            capture_output=True,
-            text=True
-        ).stdout.strip(),
-
-        arquivos=subprocess.run(
-            ["git","status","--short"],
-            cwd=pasta,
-            capture_output=True,
-            text=True
-        ).stdout.strip(),
-
-        resultado=saida
-
-    )
