@@ -81,64 +81,13 @@ Controle de Versão
 
         </div>
 
-        <div class="col-md-4">
 
-            <button
-                class="btn btn-success w-100"
-                onclick="abrirPush()">
-
-                ⬆️ Git Push
-
-            </button>
-
-        </div>
 
     </div>
 
     <hr>
 
-    <div
-        id="push-box"
-        style="display:none;">
-
-        <form
-            action="{{ url_for('admin.git_push') }}"
-            method="post">
-
-            <label>
-
-                Mensagem do commit
-
-            </label>
-
-            <input
-                type="text"
-                name="mensagem"
-                class="form-control"
-                placeholder="Ex.: Correção do sistema de XP"
-                required>
-
-            <br>
-
-            <button
-                class="btn btn-success">
-
-                🚀 Commit + Push
-
-            </button>
-
-            <button
-                type="button"
-                class="btn btn-secondary"
-                onclick="fecharPush()">
-
-                Cancelar
-
-            </button>
-
-        </form>
-
-    </div>
+ 
 
     {% if resultado %}
 
