@@ -1,4 +1,4 @@
-function electric_field(sim){
+function pos_fields(sim){
 
 let grid = [];
 
