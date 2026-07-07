@@ -1,4 +1,4 @@
-function pos_fields(sim){
+function pos_field(sim){
 
 let grid = [];
 
@@ -183,9 +183,9 @@ sim.setup = function(){
 
     sim.canvas = sim.createCanvas(400,400);
 
-    if(document.getElementById("canvas-electric_field")){
+    if(document.getElementById("canvas-pos_field")){
 
-        sim.canvas.parent("canvas-electric_field");
+        sim.canvas.parent("canvas-pos_field");
 
     }
 
