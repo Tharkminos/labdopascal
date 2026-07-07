@@ -206,7 +206,7 @@ sim.mouseClicked = function(){
 let flow = 0;
 let m1 = 1
 sim.draw = function(){
-    flow += 0.8;
+    flow += m1*0.8;
     if(Math.abs(flow) > grid_size * 2){
         flow = 0;
         m1 = m1 *(-1)
