@@ -86,27 +86,7 @@ function field(){
     }
 
 }
-function drawArrow(px,py,ang,m){
 
-    sim.push();
-
-    sim.translate(px,py);
-    sim.rotate(ang);
-
-    sim.fill(0);
-    sim.noStroke();
-
-    sim.rect(-m,-m*0.08,m*1.56,m*0.16);
-
-    sim.triangle(
-        0.8*m,0,
-        0.2*m,-0.5*m,
-        0.2*m,0.5*m
-    );
-
-    sim.pop();
-
-}
 function paint2(){
 
     const m = grid_size/2;
@@ -155,25 +135,16 @@ function paint2(){
 
                 const ang = Math.atan2(vy,vx);
                 const mag = Math.sqrt(vx*vx + vy*vy);
+                let px = x + m;
+                let py = y + m;
+                if(mag > 0){
+                    px += (vx / mag) * flow;
+                    py += (vy / mag) * flow;
 
-                const comprimento = grid_size * 2;
-                const fase = (i*13 + j*17) % comprimento;
+                }
+                sim.translate(px,py);
+                sim.rotate(ang);
 
-                let offset = (flow + fase) % comprimento;
-
-                drawArrow(
-                    x + m + (vx/mag)*offset,
-                    y + m + (vy/mag)*offset,
-                    ang,
-                    m
-                );
-
-                drawArrow(
-                    x + m + (vx/mag)*(offset-comprimento),
-                    y + m + (vy/mag)*(offset-comprimento),
-                    ang,
-                    m
-                );
                 sim.fill(0);
                 sim.noStroke();
 
@@ -233,10 +204,12 @@ sim.mouseClicked = function(){
 
 }
 let flow = 0;
+let m1 = 1
 sim.draw = function(){
     flow += 0.8;
-    if(flow > grid_size * 2){
+    if(Math.abs(flow) > grid_size * 2){
         flow = 0;
+        m1 = m1 *(-1)
     }
     sim.background(220);
 
