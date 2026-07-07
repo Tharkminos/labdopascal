@@ -133,10 +133,18 @@ function paint2(){
 
             if(!check){
 
-                const ang=Math.atan2(vy,vx);
+                const ang = Math.atan2(vy,vx);
+                const mag = Math.sqrt(vx*vx + vy*vy);
+                let px = x + m;
+                let py = y + m;
+                if(mag > 0){
+                    px += (vx / mag) * flow;
+                    py += (vy / mag) * flow;
 
-                sim.translate(x+m,y+m);
+                }
+                sim.translate(px,py);
                 sim.rotate(ang);
+
 
                 sim.fill(0);
                 sim.noStroke();
@@ -196,9 +204,12 @@ sim.setup = function(){
 sim.mouseClicked = function(){
 
 }
-
+let flow = 0;
 sim.draw = function(){
-
+    flow += 0.8;
+    if(flow > grid_size * 2){
+        flow = 0;
+    }
     sim.background(220);
 
     field();
