@@ -3,8 +3,7 @@ function pos_field(sim){
 let grid = [];
 
 let charges = [
-    [6,10,7,"+"],
-    [14,10,7,"-"]
+    [10,10,10,"+"]
 ];
 
 let row = [];
@@ -181,6 +180,7 @@ function paint2(){
             }
 
         }
+    
 
     }
 
