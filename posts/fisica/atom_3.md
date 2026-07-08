@@ -7,9 +7,10 @@ imagem_modulo:atom.webp
 ---
 
 #  Campo Elétrico 
-## Equilibre o átomo
 
-Escolha o número de elétrons adequado para equilibrar o átomo(manter o mesmo número de prótons e elétrons)
+Quando temos um **Íon**, surge um campo elétrico saindo ou entrando na carga, que depende diretamente do sinal da carga.
+Abaixo uma demonstração do campo de uma carga positiva.
+
 [simulacao=pos_field]
 
 
