@@ -1,220 +1,260 @@
 function pos_field(sim){
 
-let grid = [];
-
-let charges = [
-    [10,10,10,"+"]
+let cargas = [
+    {
+        sinal:"-",
+        x:100,
+        y:201,
+        carga:100
+    },
+    {
+        sinal:"-",
+        x:300,
+        y:199,
+        carga:100
+    }
 ];
 
-let row = [];
+let vetores = [];
 
-let grid_div = 5;
-let grid_size = 20;
+let time = 0;
 
 sim.simulacaoConcluida = function(){
 
-    return false;
-
-}
-
-function Ini(){
-
-    for(let i=0;i<(400/grid_div);i++){
-
-        row = [];
-
-        for(let j=0;j<(400/grid_div);j++){
-
-            row.push([0,0,""]);
-
-        }
-
-        grid.push(row);
-
-    }
-
-}
-
-function field(){
-
-    for(let a=0;a<grid.length;a++){
-
-        for(let b=0;b<grid[a].length;b++){
-
-            grid[a][b][0]=0;
-            grid[a][b][1]=0;
-            grid[a][b][2]="";
-
-        }
-
-    }
-
-    for(let index in charges){
-
-        const i = charges[index][0];
-        const j = charges[index][1];
-        const raio = charges[index][2];
-
-        for(let a=0;a<grid.length;a+=2){
-
-            for(let b=0;b<grid[a].length;b+=2){
-
-                if(sim.dist(a*grid_size,b*grid_size,i*grid_size,j*grid_size)<=raio*grid_size){
-
-                    grid[i][j][2]=charges[index][3];
-
-                    let dx=(a-i)*grid_size;
-                    let dy=(b-j)*grid_size;
-                    let d=Math.sqrt(dx*dx+dy*dy);
-
-                    if(d!==0){
-
-                        let mult = charges[index][3]==="+" ? 1 : -1;
-
-                        grid[a][b][0]+=mult*dx/d;
-                        grid[a][b][1]+=mult*dy/d;
-
-                    }
-
-                }
-
-            }
-
-        }
-
-    }
-
-}
-
-function paint2(){
-
-    const m = grid_size/2;
-
-    for(let i=0;i<grid.length;i++){
-
-        for(let j=0;j<grid[i].length;j++){
-
-            const x=i*grid_size;
-            const y=j*grid_size;
-
-            let check=false;
-            let ch="";
-
-            sim.fill(255);
-            sim.stroke(0);
-
-            const vx=grid[i][j][0];
-            const vy=grid[i][j][1];
-
-            if(grid[i][j][2]==="+"){
-
-                sim.fill(255,90,90);
-                ch="+";
-                check=true;
-
-            }
-
-            if(grid[i][j][2]==="-"){
-
-                sim.fill(90,90,255);
-                ch="-";
-                check=true;
-
-            }
-
-            if(vx===0 && vy===0 && !check){
-
-                continue;
-
-            }
-
-            sim.push();
-
-            if(!check){
-
-                const ang = Math.atan2(vy,vx);
-                const mag = Math.sqrt(vx*vx + vy*vy);
-                let px = x + m;
-                let py = y + m;
-                if(mag > 0){
-                    px += (vx / mag) * flow;
-                    py += (vy / mag) * flow;
-
-                }
-                sim.translate(px,py);
-                sim.rotate(ang);
-
-                sim.fill(0);
-                sim.noStroke();
-
-                sim.rect(-m,-m*0.08,m*1.56,m*0.16);
-
-                sim.triangle(
-                    0.8*m,0,
-                    0.2*m,-0.5*m,
-                    0.2*m,0.5*m
-                );
-
-            }
-
-            sim.pop();
-
-            if(check){
-
-                sim.circle(x+grid_size/2,y+grid_size/2,grid_size*3);
-
-                sim.fill(0);
-
-                if(ch==="-" ){
-
-                    sim.textSize(28);
-                    sim.text(ch,x+grid_size/4,y+grid_size/1.2);
-
-                }else{
-
-                    sim.textSize(24);
-                    sim.text(ch,x+grid_size/6,y+grid_size/1.2);
-
-                }
-
-            }
-
-        }
-    
-
-    }
+    return true;
 
 }
 
 sim.setup = function(){
 
     sim.canvas = sim.createCanvas(400,400);
+    sim.canvas.parent("canvas-pos_field");
 
-    if(document.getElementById("canvas-pos_field")){
-
-        sim.canvas.parent("canvas-pos_field");
-
-    }
-
-    Ini();
+    add(6);
 
 }
 
-sim.mouseClicked = function(){
-
-}
-let flow = 0;
-let m1 = 1
 sim.draw = function(){
-    flow += m1*0.8;
-    if(flow > grid_size|| flow < (-1) * grid_size){
-        m1 = m1 *(-1)
-    }
+
+    time++;
+
     sim.background(220);
 
-    field();
+    drawVectors();
+    drawCargas();
 
-    paint2();
+    if(time > 50){
+
+        add(6);
+        time = 0;
+
+    }
+
+    let temp = [...vetores];
+
+    const any_anion = ifAny("-");
+    const any_cation = ifAny("+");
+
+    for(const carga of cargas){
+
+        for(let v=temp.length-1;v>=0;v--){
+
+            const dx = carga.x-temp[v].x;
+            const dy = carga.y-temp[v].y;
+
+            const S = Math.sqrt(dx*dx+dy*dy);
+
+            if(S < 15 && carga.sinal === "-"){
+
+                temp.splice(v,1);
+
+            }
+
+            if(S > 330 && !any_anion){
+
+                temp.splice(v,1);
+
+            }
+
+        }
+
+    }
+
+    vetores = temp;
+
+}
+
+function add(n){
+
+    const any_cation = ifAny("+");
+
+    for(const q of cargas){
+
+        for(let i=0;i<=n;i++){
+
+            if(q.sinal === "+"){
+
+                vetores.push({
+                    x:q.x+15*Math.sin(i*2*Math.PI/n),
+                    y:q.y+15*Math.cos(i*2*Math.PI/n),
+                    trail:[]
+                });
+
+            }
+
+            if(!any_cation){
+
+                vetores.push({
+                    x:q.x+160*Math.sin(i*2*Math.PI/n),
+                    y:q.y+160*Math.cos(i*2*Math.PI/n),
+                    trail:[]
+                });
+
+            }
+
+        }
+
+    }
+
+}
+
+function ifAny(sinal){
+
+    for(const carga of cargas){
+
+        if(carga.sinal === sinal){
+
+            return true;
+
+        }
+
+    }
+
+    return false;
+
+}
+
+function drawVectors(){
+
+    for(const vector of vetores){
+
+        const field = campo(vector.x,vector.y);
+
+        const norma = Math.hypot(field[0],field[1]);
+
+        if(norma === 0) continue;
+
+        vector.trail.push([vector.x,vector.y]);
+
+        if(vector.trail.length > 200){
+
+            vector.trail.shift();
+
+        }
+
+        vector.x += field[0]/norma;
+        vector.y += field[1]/norma;
+
+        // Linha de campo
+
+        sim.noFill();
+        sim.stroke(0);
+
+        sim.beginShape();
+
+        for(const p of vector.trail){
+
+            sim.vertex(p[0],p[1]);
+
+        }
+
+        sim.endShape();
+
+        // Bolinha
+
+        sim.noStroke();
+        sim.fill(0);
+
+        sim.circle(vector.x,vector.y,10);
+
+    }
+
+}
+
+function drawCargas(){
+
+    for(const q of cargas){
+
+        let size = 0;
+
+        if(q.sinal === "+"){
+
+            sim.fill(255,90,90);
+
+            size = 40;
+
+            sim.circle(q.x,q.y,40);
+
+            sim.fill(0);
+            sim.textSize(size);
+
+            sim.text(
+                q.sinal,
+                q.x-size/3.5,
+                q.y+size/3
+            );
+
+        }
+
+        if(q.sinal === "-"){
+
+            sim.fill(90,90,255);
+
+            size = 80;
+
+            sim.circle(q.x,q.y,40);
+
+            sim.fill(0);
+            sim.textSize(size);
+
+            sim.text(
+                q.sinal,
+                q.x-size/6,
+                q.y+size/4
+            );
+
+        }
+
+    }
+
+}
+
+function campo(x,y){
+
+    let Ex = 0;
+    let Ey = 0;
+
+    for(const c of cargas){
+
+        const dx = x-c.x;
+        const dy = y-c.y;
+
+        const dS = dx*dx+dy*dy;
+
+        if(dS < 1) continue;
+
+        const S = Math.sqrt(dS);
+
+        const sinal = (c.sinal === "+") ? 1 : -1;
+
+        const intensidade = sinal*c.carga;
+
+        Ex += intensidade*dx/(S*S*S);
+        Ey += intensidade*dy/(S*S*S);
+
+    }
+
+    return [Ex,Ey];
 
 }
 
