@@ -14,7 +14,7 @@ let cargas = [
         carga:100
     }
 ];
-
+let fieldLayer;
 let vetores = [];
 
 let time = 0;
@@ -29,8 +29,10 @@ sim.setup = function(){
 
     sim.canvas = sim.createCanvas(400,400);
     sim.canvas.parent("canvas-pos_field");
-
+    fieldLayer = sim.createGraphics(400,400);
+    fieldLayer.clear();
     add(6);
+    createTrails();
 
 }
 
@@ -39,7 +41,7 @@ sim.draw = function(){
     time++;
 
     sim.background(220);
-
+    
     drawVectors();
     drawCargas();
 
@@ -50,7 +52,7 @@ sim.draw = function(){
 
     }
 
-    let temp = [...vetores];
+    let temp = vetores;
 
     const any_anion = ifAny("-");
     const any_cation = ifAny("+");
@@ -83,7 +85,26 @@ sim.draw = function(){
     vetores = temp;
 
 }
+function drawTrails(){
 
+    sim.stroke(0);
+    sim.noFill();
+
+    for(const linha of trails){
+
+        sim.beginShape();
+
+        for(const p of linha){
+
+            sim.vertex(p[0],p[1]);
+
+        }
+
+        sim.endShape();
+
+    }
+
+}
 function add(n){
 
     const any_cation = ifAny("+");
@@ -133,7 +154,67 @@ function ifAny(sinal){
     return false;
 
 }
+function createTrails(){
 
+    trails = [];
+
+    const n = 80;          // pontos iniciais
+    const passo = 1;
+    const maxIter = 500;
+
+    for(const carga of cargas){
+
+        if(carga.sinal !== "+") continue;
+
+        for(let i=0;i<n;i++){
+
+            let x = carga.x + 18*Math.cos(i*2*Math.PI/n);
+            let y = carga.y + 18*Math.sin(i*2*Math.PI/n);
+
+            let linha = [];
+
+            for(let k=0;k<maxIter;k++){
+
+                linha.push([x,y]);
+
+                const campoLocal = campo(x,y);
+
+                const norma = Math.hypot(campoLocal[0],campoLocal[1]);
+
+                if(norma==0) break;
+
+                x += passo*campoLocal[0]/norma;
+                y += passo*campoLocal[1]/norma;
+
+                // chegou numa carga negativa
+                let parar = false;
+
+                for(const c of cargas){
+
+                    if(c.sinal=="-"){
+
+                        if(sim.dist(x,y,c.x,c.y)<15){
+
+                            parar = true;
+                            break;
+
+                        }
+
+                    }
+
+                }
+
+                if(parar) break;
+
+            }
+
+            trails.push(linha);
+
+        }
+
+    }
+
+}
 function drawVectors(){
 
     for(const vector of vetores){
@@ -157,18 +238,22 @@ function drawVectors(){
 
         // Linha de campo
 
-        sim.noFill();
-        sim.stroke(0);
+        fieldLayer.noFill();
+        fieldLayer.stroke(0);
 
-        sim.beginShape();
+        const n = vector.trail.length;
 
-        for(const p of vector.trail){
+        if(n >= 2){
 
-            sim.vertex(p[0],p[1]);
+            const p1 = vector.trail[n-2];
+            const p2 = vector.trail[n-1];
+
+            fieldLayer.line(
+                p1[0],p1[1],
+                p2[0],p2[1]
+            );
 
         }
-
-        sim.endShape();
 
         // Bolinha
 
