@@ -182,7 +182,7 @@ function add(n){
 
                     }
 
-                    if(liner.length >= 6){
+                    if(liner.length >= n){
 
                         break;
 
@@ -220,7 +220,7 @@ function add(n){
 
                         }
 
-                        if(liner.length >= 6){
+                        if(liner.length >= n){
 
                             break;
 
