@@ -17,7 +17,7 @@ let time = 0;
 
 sim.simulacaoConcluida = function(){
 
-    return false;
+    return true;
 
 }
 
