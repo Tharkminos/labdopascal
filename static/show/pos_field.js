@@ -5,8 +5,8 @@ let trail;
 let cargas = [
     {
         sinal:"+",
-        x:200,
-        y:200,
+        x:150,
+        y:150,
         carga:1
     }
 ];
