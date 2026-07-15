@@ -1,27 +1,23 @@
 function pos_field(sim){
 
+let trail;
+
 let cargas = [
     {
-        sinal:"-",
-        x:100,
-        y:201,
-        carga:100
-    },
-    {
-        sinal:"-",
-        x:300,
-        y:199,
-        carga:100
+        sinal:"+",
+        x:200,
+        y:200,
+        carga:1
     }
 ];
-let fieldLayer;
-let vetores = [];
 
+let vetores = [];
+let caminho = [];
 let time = 0;
 
 sim.simulacaoConcluida = function(){
 
-    return true;
+    return false;
 
 }
 
@@ -29,10 +25,13 @@ sim.setup = function(){
 
     sim.canvas = sim.createCanvas(400,400);
     sim.canvas.parent("canvas-pos_field");
-    fieldLayer = sim.createGraphics(400,400);
-    fieldLayer.clear();
+
+    field();
     add(6);
-    createTrails();
+
+    trail = sim.createGraphics(sim.width,sim.height);
+
+    drawPath();
 
 }
 
@@ -41,8 +40,11 @@ sim.draw = function(){
     time++;
 
     sim.background(220);
-    
+
     drawVectors();
+
+    sim.image(trail,0,0);
+
     drawCargas();
 
     if(time > 50){
@@ -52,19 +54,18 @@ sim.draw = function(){
 
     }
 
-    let temp = vetores;
+    let temp = [...vetores];
 
     const any_anion = ifAny("-");
-    const any_cation = ifAny("+");
 
     for(const carga of cargas){
 
-        for(let v=temp.length-1;v>=0;v--){
+        for(let v = temp.length-1; v >= 0; v--){
 
-            const dx = carga.x-temp[v].x;
-            const dy = carga.y-temp[v].y;
+            const dx = carga.x - temp[v].x;
+            const dy = carga.y - temp[v].y;
 
-            const S = Math.sqrt(dx*dx+dy*dy);
+            const S = Math.hypot(dx,dy);
 
             if(S < 15 && carga.sinal === "-"){
 
@@ -85,51 +86,158 @@ sim.draw = function(){
     vetores = temp;
 
 }
-function drawTrails(){
 
-    sim.stroke(0);
-    sim.noFill();
+function field(){
 
-    for(const linha of trails){
+    caminho = [];
 
-        sim.beginShape();
+    for(const q of cargas){
 
-        for(const p of linha){
+        for(let i = 0; i < 6; i++){
 
-            sim.vertex(p[0],p[1]);
+            let linha = [];
+
+            let x = q.x + 10*Math.sin(i*2*Math.PI/6);
+            let y = q.y + 10*Math.cos(i*2*Math.PI/6);
+
+            for(let a = 0; a < 10000/6; a++){
+
+                linha.push({
+                    x:x,
+                    y:y
+                });
+
+                for(let xz = 0; xz < 30; xz++){
+
+                    let cp = campo(x,y);
+
+                    let norma = Math.hypot(cp[0],cp[1]);
+
+                    if(norma === 0){
+
+                        break;
+
+                    }
+
+                    if(ifAny("+")){
+
+                        x += cp[0]/norma;
+                        y += cp[1]/norma;
+
+                    }else{
+
+                        x -= cp[0]/norma;
+                        y -= cp[1]/norma;
+
+                    }
+
+                }
+
+            }
+
+            caminho.push(linha);
 
         }
-
-        sim.endShape();
 
     }
 
 }
+
 function add(n){
 
     const any_cation = ifAny("+");
 
     for(const q of cargas){
 
-        for(let i=0;i<=n;i++){
+        for(let i = 0; i <= n; i++){
 
             if(q.sinal === "+"){
 
                 vetores.push({
-                    x:q.x+15*Math.sin(i*2*Math.PI/n),
-                    y:q.y+15*Math.cos(i*2*Math.PI/n),
-                    trail:[]
+
+                    x:q.x + 15*Math.sin(i*2*Math.PI/n),
+                    y:q.y + 15*Math.cos(i*2*Math.PI/n)
+
                 });
 
             }
 
-            if(!any_cation){
+        }
+        if(!any_cation){
 
-                vetores.push({
-                    x:q.x+160*Math.sin(i*2*Math.PI/n),
-                    y:q.y+160*Math.cos(i*2*Math.PI/n),
-                    trail:[]
-                });
+            if(q === cargas[0]){
+
+                let liner = [];
+
+                for(let px = 0; px < caminho.length; px++){
+
+                    for(const ponto of caminho[px]){
+
+                        if(Math.hypot(q.x-ponto.x,q.y-ponto.y) > 175){
+
+                            liner.push(ponto);
+                            break;
+
+                        }
+
+                    }
+
+                    if(liner.length >= 6){
+
+                        break;
+
+                    }
+
+                }
+
+                for(const p of liner){
+
+                    vetores.push({
+                        x:p.x,
+                        y:p.y
+                    });
+
+                }
+
+            }
+
+            if(cargas.length > 1){
+
+                if(q === cargas[1]){
+
+                    let liner = [];
+
+                    for(let px = caminho.length-1; px >= 0; px--){
+
+                        for(const ponto of caminho[px]){
+
+                            if(Math.hypot(q.x-ponto.x,q.y-ponto.y) > 175){
+
+                                liner.push(ponto);
+                                break;
+
+                            }
+
+                        }
+
+                        if(liner.length >= 6){
+
+                            break;
+
+                        }
+
+                    }
+
+                    for(const p of liner){
+
+                        vetores.push({
+                            x:p.x,
+                            y:p.y
+                        });
+
+                    }
+
+                }
 
             }
 
@@ -154,111 +262,26 @@ function ifAny(sinal){
     return false;
 
 }
-function createTrails(){
 
-    trails = [];
-
-    const n = 80;          // pontos iniciais
-    const passo = 1;
-    const maxIter = 500;
-
-    for(const carga of cargas){
-
-        if(carga.sinal !== "+") continue;
-
-        for(let i=0;i<n;i++){
-
-            let x = carga.x + 18*Math.cos(i*2*Math.PI/n);
-            let y = carga.y + 18*Math.sin(i*2*Math.PI/n);
-
-            let linha = [];
-
-            for(let k=0;k<maxIter;k++){
-
-                linha.push([x,y]);
-
-                const campoLocal = campo(x,y);
-
-                const norma = Math.hypot(campoLocal[0],campoLocal[1]);
-
-                if(norma==0) break;
-
-                x += passo*campoLocal[0]/norma;
-                y += passo*campoLocal[1]/norma;
-
-                // chegou numa carga negativa
-                let parar = false;
-
-                for(const c of cargas){
-
-                    if(c.sinal=="-"){
-
-                        if(sim.dist(x,y,c.x,c.y)<15){
-
-                            parar = true;
-                            break;
-
-                        }
-
-                    }
-
-                }
-
-                if(parar) break;
-
-            }
-
-            trails.push(linha);
-
-        }
-
-    }
-
-}
 function drawVectors(){
+
+    sim.noStroke();
+    sim.fill(0);
 
     for(const vector of vetores){
 
-        const field = campo(vector.x,vector.y);
+        let field = campo(vector.x,vector.y);
 
-        const norma = Math.hypot(field[0],field[1]);
+        let norma = Math.hypot(field[0],field[1]);
 
-        if(norma === 0) continue;
+        if(norma === 0){
 
-        vector.trail.push([vector.x,vector.y]);
-
-        if(vector.trail.length > 200){
-
-            vector.trail.shift();
+            continue;
 
         }
 
         vector.x += field[0]/norma;
         vector.y += field[1]/norma;
-
-        // Linha de campo
-
-        fieldLayer.noFill();
-        fieldLayer.stroke(0);
-
-        const n = vector.trail.length;
-
-        if(n >= 2){
-
-            const p1 = vector.trail[n-2];
-            const p2 = vector.trail[n-1];
-
-            fieldLayer.line(
-                p1[0],p1[1],
-                p2[0],p2[1]
-            );
-
-        }
-
-        // Bolinha
-
-        sim.noStroke();
-        sim.fill(0);
 
         sim.circle(vector.x,vector.y,10);
 
@@ -280,8 +303,9 @@ function drawCargas(){
 
             sim.circle(q.x,q.y,40);
 
-            sim.fill(0);
             sim.textSize(size);
+
+            sim.fill(0);
 
             sim.text(
                 q.sinal,
@@ -300,6 +324,7 @@ function drawCargas(){
             sim.circle(q.x,q.y,40);
 
             sim.fill(0);
+
             sim.textSize(size);
 
             sim.text(
@@ -326,7 +351,11 @@ function campo(x,y){
 
         const dS = dx*dx+dy*dy;
 
-        if(dS < 1) continue;
+        if(dS < 1){
+
+            continue;
+
+        }
 
         const S = Math.sqrt(dS);
 
@@ -340,6 +369,32 @@ function campo(x,y){
     }
 
     return [Ex,Ey];
+
+}
+
+function drawPath(){
+
+    trail.clear();
+
+    trail.stroke(0);
+
+    trail.strokeWeight(0.5);
+
+    trail.noFill();
+
+    for(const linha of caminho){
+
+        trail.beginShape();
+
+        for(const p of linha){
+
+            trail.vertex(p.x,p.y);
+
+        }
+
+        trail.endShape();
+
+    }
 
 }
 
