@@ -288,7 +288,7 @@ function drawVectors(){
         px = -uy
         py = ux
         ponta = 8
-        base  = 4
+        base  = 5
         sim.triangle(
           vector.x + ponta*ux,
           vector.y + ponta*uy,
