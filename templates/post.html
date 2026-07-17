@@ -99,14 +99,12 @@ const contador =
     document.getElementById(
         "contador-etapas"
     )
-let simulacaoAtual = null;
+let simulacaoAtual = [];
 function mostrarEtapa(indice){
 
     // Remove a simulação anterior
-    if(simulacaoAtual){
-        simulacaoAtual.remove();
-        simulacaoAtual = null;
-    }
+    simulacoesAtuais.forEach(sim => sim.remove());
+    simulacoesAtuais = [];
 
     // Esconde todas
     etapas.forEach(etapa => {
@@ -117,17 +115,22 @@ function mostrarEtapa(indice){
     etapas[indice].style.display = "block";
 
     // Procura um canvas nesta etapa
-    const canvas = etapas[indice].querySelector("[id^='canvas-']");
+    const canvases = etapas[indice].querySelectorAll("[id^='canvas-']");
 
-    if(canvas){
+   
+    canvases.forEach(canvas => {
 
         const nome = canvas.id.replace("canvas-", "");
 
         if(typeof window[nome] === "function"){
-            simulacaoAtual = new p5(window[nome]);
+
+            const instancia = new p5(window[nome]);
+
+            simulacoesAtuais.push(instancia);
+
         }
 
-    }
+    });
 
     contador.textContent = `${indice + 1} / ${etapas.length}`;
 
@@ -425,25 +428,21 @@ document
         "etapa-" + etapaAtual
     )
 
-    if (
-    etapaAtualElemento.dataset.tipo === "simulacao" &&
-    simulacaoAtual &&
-    typeof simulacaoAtual.simulacaoConcluida === "function"
-){
+    if (etapaAtualElemento.dataset.tipo === "simulacao") {
 
-        if(
-            !simulacaoAtual.simulacaoConcluida()
-        ){
+    for (const sim of simulacoesAtuais) {
 
-            alert(
-                "Conclua a atividade da simulação antes de avançar."
-            )
-
-            return
-
+        if (
+            typeof sim.simulacaoConcluida === "function" &&
+            !sim.simulacaoConcluida()
+        ) {
+            alert("Conclua todas as simulações antes de avançar.");
+            return;
         }
 
     }
+
+}
         if(
             !etapaConcluida()
         ){
