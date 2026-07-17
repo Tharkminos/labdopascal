@@ -282,8 +282,20 @@ function drawVectors(){
 
         vector.x += field[0]/norma;
         vector.y += field[1]/norma;
-
-        sim.circle(vector.x,vector.y,10);
+         // direção unitária
+        ux = field[0]/norma
+        uy = field[1]/norma
+        px = -uy
+        py = ux
+        ponta = 8
+        base  = 4
+        sim.triangle(
+          vector.x + ponta*ux,
+          vector.y + ponta*uy,
+          vector.x - ponta*ux + base*px,
+          vector.y - ponta*uy + base*py,
+          vector.x - ponta*ux - base*px,
+          vector.y - ponta*uy - base*py)
 
     }
 
