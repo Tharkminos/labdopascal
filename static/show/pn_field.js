@@ -13,7 +13,7 @@ let cargas = [
         sinal:"-",
         x:500-150,
         y:151,
-        carga:6
+        carga:10
     }
 ];
 
