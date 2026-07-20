@@ -230,7 +230,7 @@ def processar_etapa(conteudo, banco=None):
         f'<p style="text-align: right;">{cent}</p>'
 )
     justify = re.findall(r"←(.*?)→",conteudo)
-    for cent in right:
+    for cent in justify:
         conteudo = conteudo.replace(
         f"←{cent}→",
         f'<p style="text-align: justify;">{cent}</p>'
