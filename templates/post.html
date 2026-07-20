@@ -134,6 +134,7 @@ function mostrarEtapa(indice){
 
     contador.textContent = `${indice + 1} / ${etapas.length}`;
     const META = {{ meta|tojson }};
+    console.log(META.results)
     if(META.results === undefined){
         META.results = false
     }
