@@ -334,9 +334,11 @@ def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
 
             titulo = "Sem título"
     etapas = dividir_etapas(md,titulo)
-    if meta.get('results',false) == false:
+    if meta.get('results',False) == False:
         etapas.append({
+
             "titulo": "Resultados",
+
             "conteudo": "",
             "tipo":"resultado"
         })
