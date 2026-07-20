@@ -133,8 +133,11 @@ function mostrarEtapa(indice){
     });
 
     contador.textContent = `${indice + 1} / ${etapas.length}`;
-
-    if(indice === etapas.length - 1){
+    const META = {{ meta|tojson }};
+    if(META.skip === undefined){
+        META.skip = false
+    }
+    if(indice === etapas.length - 1 && META.skip === false){
         gerarResultado();
     }
 
