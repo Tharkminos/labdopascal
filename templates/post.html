@@ -131,14 +131,13 @@ function mostrarEtapa(indice){
         }
 
     });
-
+    const results = "{{ meta.results }}";
     contador.textContent = `${indice + 1} / ${etapas.length}`;
-    const META = {{ meta|tojson }};
-    console.log(META.results)
-    if(META.results === undefined){
-        META.results = false
+    console.log(results)
+    if(results === undefined){
+        results = false
     }
-    if(indice === etapas.length - 1 && META.results === false){
+    if(indice === etapas.length - 1 && results === false){
         gerarResultado();
     }
 
