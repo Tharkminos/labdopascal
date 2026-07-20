@@ -99,9 +99,9 @@ def ler_metadados(md):
                 if ":" in linha:
 
                     chave, valor = linha.split(":", 1)
-                    if (valor.strip().lower() == 'false'):
+                    if (valor.strip()== 'false'):
                         valor = False
-                    elif(valor.strip().lower() == 'true')
+                    elif(valor.strip()== 'true')
                         valor = True
                     else:
                         valor = valor.strip()                    
