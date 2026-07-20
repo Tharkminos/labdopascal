@@ -143,8 +143,11 @@ function mostrarEtapa(indice){
     }else{
         nb.style.display = 'block'
     }
-    const results = Meta.results ?? false    
-    contador.textContent = `${indice + 1} / ${etapas.length}`;
+    const results = Meta.results ?? false 
+    if (etapas.length > 1){
+        contador.textContent = `${indice + 1} / ${etapas.length}`;
+    }   
+
     console.log(results)
     if(results === undefined){
         results = false
