@@ -5,13 +5,13 @@ let trail;
 let cargas = [
     {
         sinal:"+",
-        x:150,
+        x:0+80,
         y:149,
         carga:10
     },
     {
         sinal:"-",
-        x:500-150,
+        x:370-80,
         y:151,
         carga:10
     }
@@ -29,7 +29,7 @@ sim.simulacaoConcluida = function(){
 
 sim.setup = function(){
 
-    sim.canvas = sim.createCanvas(500,300);
+    sim.canvas = sim.createCanvas(370,300);
     sim.canvas.parent("canvas-pn_field");
 
     field();
