@@ -131,7 +131,7 @@ function mostrarEtapa(indice){
         }
 
     });
-    const results =     {{ meta.results|default(0) }};
+    const results =     {{ meta|tojson}}.results;
     contador.textContent = `${indice + 1} / ${etapas.length}`;
     console.log(results)
     if(results === undefined){
