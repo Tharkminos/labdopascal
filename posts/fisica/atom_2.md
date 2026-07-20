@@ -5,7 +5,6 @@ titulo_modulo: Átomos e Cargas
 descricao_modulo: Estrutura básica da matéria
 imagem_modulo:atom.webp
 questoes: atomo
-results = true
 ---
 
 # Lista de Questões
