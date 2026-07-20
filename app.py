@@ -677,7 +677,31 @@ def modulos():
     return render_template(
     "modulos.html",
     modulos=lista_modulos)
+def atualizar_streaks():
 
+    ontem = str(date.today() - timedelta(days=1))
+
+    conn = sqlite3.connect("site.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        UPDATE usuarios
+        SET streak = 0
+        WHERE ultimo_acesso IS NOT NULL
+          AND ultimo_acesso < ?
+          AND streak > 0
+        """,
+        (ontem,)
+    )
+
+    conn.commit()
+
+    alterados = cursor.rowcount
+
+    conn.close()
+
+    return alterados
 @app.route("/modulo/<slug>")
 def modulo(slug):
 
