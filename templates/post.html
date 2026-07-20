@@ -475,10 +475,14 @@ document
 
     }
 )
-document
+nb = document
 .getElementById("btn-anterior")
 .addEventListener("click", () => {
-
+    if(etapaAtual === etapas.length-1){
+    nb.style.display = 'none'
+    else:
+    nb.style.display = 'block'
+    }
     if(etapaAtual > 0){
 
         etapaAtual--
@@ -492,11 +496,7 @@ document
 })
 
 mostrarEtapa(0);
-if(etapaAtual === etapas.length-1){
-    document.getElementById("btn-anterior").style.display = 'none'
-else:
-    document.getElementById("btn-anterior").style.display = 'block'
-}
+
 </script>
 
 {% endblock %}
