@@ -217,6 +217,24 @@ def processar_etapa(conteudo, banco=None):
         f"→{cent}←",
         f'<p style="text-align: center;">{cent}</p>'
 )
+    left = re.findall(r"←(.*?)←",conteudo)
+    for cent in left:
+        conteudo = conteudo.replace(
+        f"←{cent}←",
+        f'<p style="text-align: left;">{cent}</p>'
+)
+    right = re.findall(r"→(.*?)→",conteudo)
+    for cent in right:
+        conteudo = conteudo.replace(
+        f"→{cent}→",
+        f'<p style="text-align: right;">{cent}</p>'
+)
+    justify = re.findall(r"←(.*?)→",conteudo)
+    for cent in right:
+        conteudo = conteudo.replace(
+        f"←{cent}→",
+        f'<p style="text-align: justify;">{cent}</p>'
+)
     for sim in simulacoes:
 
         conteudo = conteudo.replace(
