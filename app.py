@@ -211,7 +211,12 @@ def processar_etapa(conteudo, banco=None):
         r"\[simulacao=(.*?)\]",
         conteudo
     )
-
+    centralizar = re.findall(r"→(.*?)←",conteudo)
+    for cent in centralizar:
+        conteudo = conteudo.replace(
+        f"→{cent}←",
+        f'<p style="text-align: center;">{cent}</p>'
+)
     for sim in simulacoes:
 
         conteudo = conteudo.replace(
