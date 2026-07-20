@@ -84,7 +84,7 @@
 {% endfor %}
 
 <script>
-
+const Meta =     {{ meta|tojson}};
 const XP_AULA =
     {{ meta.xp|default(0) }};
 
@@ -131,7 +131,6 @@ function mostrarEtapa(indice){
         }
 
     });
-    const Meta =     {{ meta|tojson}};
     const results = Meta.results ?? false    
     contador.textContent = `${indice + 1} / ${etapas.length}`;
     console.log(results)
@@ -431,7 +430,9 @@ document
     document.getElementById(
         "etapa-" + etapaAtual
     )
-
+    if(){
+            
+    }
     if (etapaAtualElemento.dataset.tipo === "simulacao") {
 
     for (const sim of simulacoesAtuais) {
@@ -491,6 +492,11 @@ document
 })
 
 mostrarEtapa(0);
+if(etapaAtual === etapas.length-1){
+    document.getElementById("btn-anterior").style.display = 'none'
+else:
+    document.getElementById("btn-anterior").style.display = 'block'
+}
 </script>
 
 {% endblock %}
