@@ -413,19 +413,17 @@ def gerar_estrelas(concluidas, total):
 # ============== PERFIL ====================
 @app.route("/perfil")
 def perfil():
-    try:
-        if "id" not in session:
 
+    try:
+
+        if "id" not in session:
             return redirect("/login")
 
-        conn = sqlite3.connect(
-            "site.db"
-        )
+        usuario_id = session["id"]
 
+        conn = sqlite3.connect("site.db")
         cursor = conn.cursor()
 
-        usuario_id = session["id"]
-        fez_hoje = False
         cursor.execute(
             """
             SELECT
@@ -434,18 +432,30 @@ def perfil():
                 nivel,
                 avatar,
                 bio,
-                streak
+                streak,
+                ultimo_acesso
             FROM usuarios
             WHERE id = ?
             """,
-            (
-                usuario_id,
-            )
+            (usuario_id,)
         )
 
         resultado = cursor.fetchone()
 
-        usuario, xp_total, _, avatar, bio, streak = (resultado)
+        if resultado is None:
+            conn.close()
+            return redirect("/login")
+
+        (
+            usuario,
+            xp_total,
+            _,
+            avatar,
+            bio,
+            streak,
+            ultimo_acesso
+        ) = resultado
+
         nivel = calcular_nivel(xp_total)
 
         cursor.execute(
@@ -455,9 +465,7 @@ def perfil():
             WHERE usuario_id = ?
             AND concluida = 1
             """,
-            (
-                usuario_id,
-            )
+            (usuario_id,)
         )
 
         aulas = cursor.fetchone()[0]
@@ -468,53 +476,31 @@ def perfil():
             FROM user_achievements
             WHERE usuario_id = ?
             """,
-            (
-                usuario_id,
-            )
+            (usuario_id,)
         )
 
         conquistas = cursor.fetchone()[0]
 
         conn.close()
-        
-        conn = sqlite3.connect("site.db")
-        cursor = conn.cursor()
-
-        cursor.execute(
-            """
-            SELECT ultimo_acesso
-            FROM usuarios
-            WHERE id = ?
-            """,
-            (usuario_id,)
-        )
-
-        resultado = cursor.fetchone()
-
-        conn.close()
-        emoji = ''
-        if resultado is None:
-            emoji =  ❌
-
-        ultimo_acesso = resultado[0]
 
         hoje = str(date.today())
         ontem = str(date.today() - timedelta(days=1))
 
         if ultimo_acesso == hoje:
-            emoji = 🔥
+            emoji = "🔥"
+
         elif ultimo_acesso == ontem:
-            emoji = ⏳
-        elif ultimo_acesso is None:
-            emoji = ⏳
+            emoji = "⏳"
+
         else:
-            emoji = ❌
+            emoji = "❌"
+
         return render_template(
 
             "perfil.html",
 
             nome=usuario,
-            
+
             emoji=emoji,
 
             xp_total=xp_total,
@@ -528,11 +514,14 @@ def perfil():
             aulas=aulas,
 
             conquistas=conquistas,
-            
+
             streak=streak
-)
+
+        )
+
     except Exception as error:
-        return(str(error))
+
+        return str(error)
 @app.route("/ranking")
 def ranking():
 
