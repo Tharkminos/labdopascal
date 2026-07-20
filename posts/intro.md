@@ -9,6 +9,5 @@ results:true
 
 
 [simulacao=show_atom]
-[simulacao=show_atom]
-
+[simulacao=pn_field]
 
