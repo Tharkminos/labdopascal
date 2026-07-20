@@ -375,8 +375,11 @@ def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
 
 @app.route("/")
 def index():
+    arquivo = f"posts/intro.md"
 
-    return render_template("base.html")
+    return renderizar_markdown(
+        arquivo)
+    
 
 def gerar_estrelas(concluidas, total):
 
