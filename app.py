@@ -425,7 +425,7 @@ def perfil():
         cursor = conn.cursor()
 
         usuario_id = session["id"]
-
+        fez_hoje = False
         cursor.execute(
             """
             SELECT
@@ -476,12 +476,46 @@ def perfil():
         conquistas = cursor.fetchone()[0]
 
         conn.close()
+        
+        conn = sqlite3.connect("site.db")
+        cursor = conn.cursor()
 
+        cursor.execute(
+            """
+            SELECT ultimo_acesso
+            FROM usuarios
+            WHERE id = ?
+            """,
+            (usuario_id,)
+        )
+
+        resultado = cursor.fetchone()
+
+        conn.close()
+        emoji = ''
+        if resultado is None:
+            emoji =  ❌
+
+        ultimo_acesso = resultado[0]
+
+        hoje = str(date.today())
+        ontem = str(date.today() - timedelta(days=1))
+
+        if ultimo_acesso == hoje:
+            emoji = 🔥
+        elif ultimo_acesso == ontem:
+            emoji = ⏳
+        elif ultimo_acesso is None:
+            emoji = ⏳
+        else:
+            emoji = ❌
         return render_template(
 
             "perfil.html",
 
             nome=usuario,
+            
+            emoji=emoji,
 
             xp_total=xp_total,
 
