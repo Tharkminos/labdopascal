@@ -99,13 +99,8 @@ def ler_metadados(md):
                 if ":" in linha:
 
                     chave, valor = linha.split(":", 1)
-                    if (valor.strip()== 'false'):
-                        valor = False
-                    elif(valor.strip()== 'true')
-                        valor = True
-                    else:
-                        valor = valor.strip()                    
-                    dados[chave.strip()] = valor
+
+                    dados[chave.strip()] = valor.strip()
 
     return dados, md
 def obter_xp_total(usuario_id):
