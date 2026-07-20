@@ -459,7 +459,11 @@ document
             return
 
         }
-
+        if(etapaAtual === etapas.length-1){
+            nb.style.display = 'none'
+            else:
+            nb.style.display = 'block'
+            }
         if(
             etapaAtual <
             etapas.length - 1
@@ -478,11 +482,7 @@ document
 nb = document
 .getElementById("btn-anterior")
 .addEventListener("click", () => {
-    if(etapaAtual === etapas.length-1){
-    nb.style.display = 'none'
-    else:
-    nb.style.display = 'block'
-    }
+    
     if(etapaAtual > 0){
 
         etapaAtual--
