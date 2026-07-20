@@ -60,11 +60,11 @@
     <button id="btn-anterior">
         ← Anterior
     </button>
-
+    {% if etapas|length > 1 %}
     <span id="contador-etapas">
         1 / {{ etapas|length }}
     </span>
-
+    {% endif %}
     <button id="btn-proximo">
         Próxima →
     </button>
@@ -132,6 +132,12 @@ function mostrarEtapa(indice){
 
     });
     nb = document.getElementById("btn-proximo")
+    ab = document.getElementById("btn-anterior")
+    if(etapas.length === 1){
+        ab.style.display = 'none'
+    }else{
+        ab.style.display = 'block'    
+    }
     if(etapaAtual === etapas.length-1){
         nb.style.display = 'none'
     }else{
