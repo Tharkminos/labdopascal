@@ -704,6 +704,7 @@ def modulos():
             f"posts/fisica/{primeira_aula}.md"
         )
         meta,md = ler_metadados("posts/fisica/{primeira_aula}.md")
+        print(meta)
         img = meta.get("imagem_modulo","generic_module.webp")
         lista_modulos.append({
             "slug": slug,
