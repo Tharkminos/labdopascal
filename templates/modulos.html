@@ -18,10 +18,7 @@ Módulos
     href="/modulo/{{ modulo.slug }}">
 
         <img
-            src="{{ url_for(
-                'static',
-                filename='modulos/' + modulo.slug + '.webp'
-            ) }}"
+            src="{{ modulo.img }}"
             alt="{{ modulo.titulo }}"
         >
 

@@ -703,7 +703,10 @@ def modulos():
         titulo = obter_titulo(
             f"posts/fisica/{primeira_aula}.md"
         )
-
+        meta = ler_metadados("posts/fisica/{primeira_aula}.md")
+        img = meta.get("imagem_modulo","static/img/modulos/generic_module.webp")
+        if not "static/img/" in img:
+            img = "static/img/modulos/"+img
         lista_modulos.append({
             "slug": slug,
             "titulo": titulo,
@@ -711,7 +714,8 @@ def modulos():
             "concluidas": concluidas,
             "percentual": percentual,
             "estrelas": estrelas,
-            "proxima": proxima
+            "proxima": proxima,
+            "img":img
         })
     
     for aula in aulas:
