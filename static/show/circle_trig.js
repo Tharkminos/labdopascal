@@ -43,7 +43,7 @@ sim.draw = function() {
       alpha=0
     }
     sim.textSize(24)
-    sim.text("α:"+str(-1*Math.floor(deg(alpha)))+'º',0,20)
+    sim.text("α:"+String(-1*Math.floor(deg(alpha)))+'º',0,20)
     if(work[0]){
       sim.fill(255,90,90)
       sim.stroke(255,90,90)
