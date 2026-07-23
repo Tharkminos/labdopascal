@@ -1,0 +1,4 @@
+---
+
+---
+[simulacoes=circle_trig]
