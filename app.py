@@ -714,7 +714,8 @@ def modulos():
             "percentual": percentual,
             "estrelas": estrelas,
             "proxima": proxima,
-            "img":img
+            "img":img,
+            "meta":meta
         })
     
     for aula in aulas:
