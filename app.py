@@ -703,8 +703,8 @@ def modulos():
         titulo = obter_titulo(
             f"posts/fisica/{primeira_aula}.md"
         )
-        meta = ler_metadados("posts/fisica/{primeira_aula}.md")
-        img, md = meta.get("imagem_modulo","generic_module.webp")
+        meta,md = ler_metadados("posts/fisica/{primeira_aula}.md")
+        img = meta.get("imagem_modulo","generic_module.webp")
         lista_modulos.append({
             "slug": slug,
             "titulo": titulo,
