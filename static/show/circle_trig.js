@@ -98,14 +98,12 @@ sim.circle(X,Y+100*Math.sin(alpha),15)
     sim.text("»",23+3*112,372)
     }
     if(work[2] === true){
-    sim.stroke(90,90,255,255*work[1])  
+    sim.stroke(255,90,90,255*work[0])  
     sim.line(X+100*Math.cos(alpha),
              Y+100*Math.sin(alpha),
              X,
              Y+100*Math.sin(alpha))
-   
-      
-    sim.stroke(255,90,90,255*work[0])  
+    sim.stroke(90,90,255,255*work[1])  
     sim.line(X+100*Math.cos(alpha),Y+100*Math.sin(alpha),X+100*Math.cos(alpha),Y)  
     }
     sim.stroke(0)
