@@ -13,7 +13,7 @@ questoes: atomo
 
 [simulacao=show_atom]
 
-→*Acima o modelo clássico proposto por Rutherford-Bohr, onde o átomo é exibido em níveis energéticos*←
+*→Acima o modelo clássico proposto por Rutherford-Bohr, onde o átomo é exibido em níveis energéticos←*
 
 
 [etapa=Composição]
