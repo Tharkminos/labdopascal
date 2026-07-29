@@ -20,7 +20,17 @@ let cargas = [
 let vetores = [];
 let caminho = [];
 let time = 0;
-
+function first(){
+  for(const linha of caminho){
+    let first_index = 0
+    for(const ponto of linha){
+      first_index += 1
+      if(first_index % 2 === 0){
+        vetores.push({x:ponto.x,y:ponto.y})
+      }
+    }
+  }
+}
 sim.simulacaoConcluida = function(){
 
     return true;
@@ -33,6 +43,7 @@ sim.setup = function(){
     sim.canvas.parent("canvas-pn_field");
 
     field();
+    first();
     add(6);
 
     trail = sim.createGraphics(sim.width,sim.height);
