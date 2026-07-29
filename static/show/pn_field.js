@@ -44,7 +44,6 @@ sim.setup = function(){
 
     field();
     first();
-    add(6);
 
     trail = sim.createGraphics(sim.width,sim.height);
 
