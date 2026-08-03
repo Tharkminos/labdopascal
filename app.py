@@ -235,6 +235,19 @@ def processar_etapa(conteudo, banco=None):
         f"←{cent}→",
         f'<p style="text-align: justify;">{cent}</p>'
 )
+    
+    conteudo = '[cor=256,128,0,1]Teste1[/cor]\n[cor=128,128,128,1]Teste2[/cor]'
+    colors = re.findall(r"\[cor=(\d+),(\d+),(\d+),(\d+)\](.*?)\[/cor\]",conteudo)
+    for cont in colors:
+        r,g,b,a,texto = cont
+        antes = f'[cor={r},{g},{b},{a}]{texto}[/cor]' 
+        if(int(r)>255): r=255
+        if(int(g)>255): g=255
+        if(int(b)>255): b=255
+        if(int(r)>  1): a=1 
+        depois = f'<span style="color: rgba({r},{g},{b},{a});">{texto}</span>'
+        conteudo =  conteudo.replace(antes,depois)
+
     for sim in simulacoes:
 
         conteudo = conteudo.replace(
