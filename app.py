@@ -236,7 +236,6 @@ def processar_etapa(conteudo, banco=None):
         f'<p style="text-align: justify;">{cent}</p>'
 )
     
-    conteudo = '[cor=256,128,0,1]Teste1[/cor]\n[cor=128,128,128,1]Teste2[/cor]'
     colors = re.findall(r"\[cor=(\d+),(\d+),(\d+),(\d+)\](.*?)\[/cor\]",conteudo)
     for cont in colors:
         r,g,b,a,texto = cont
