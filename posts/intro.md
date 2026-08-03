@@ -9,6 +9,6 @@ results:true
 **→Abaixo uma simulação do modelo atômico clássico:←**
 ←[simulacao=show_atom]←
 
-**→Abaixo uma interação do campo elétrico de dois ions de carga oposta:←**
+[cor=50,10,10,1]**→Abaixo uma interação do campo elétrico de dois ions de carga oposta:←**[/cor]
 →[simulacao=pn_field]→
 
