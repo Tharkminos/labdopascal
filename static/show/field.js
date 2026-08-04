@@ -1,5 +1,6 @@
 function field(sim,args={}){
 let cargas = args.cargas || []
+console.log(args)
 let trail;
 
 let vetores = [];
