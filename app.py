@@ -202,7 +202,8 @@ def dividir_etapas(md, titulo):
 
     return etapas
 def processar_etapa(conteudo, banco=None):
-
+    for content in conteudo:
+        content = conteudo.replace("þ","&emsp;&emsp;")
     checkpoints_html = {}
 
     # ================= SIMULAÇÕES =================
