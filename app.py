@@ -207,10 +207,7 @@ def processar_etapa(conteudo, banco=None):
 
     # ================= SIMULAÇÕES =================
 
-    simulacoes = re.findall(
-        r"\[simulacao=(.*?)\]",
-        conteudo
-    )
+    
     centralizar = re.findall(r"→(.*?)←",conteudo)
     for cent in centralizar:
         conteudo = conteudo.replace(
@@ -246,14 +243,25 @@ def processar_etapa(conteudo, banco=None):
         if(int(r)>  1): a=1 
         depois = f'<span style="color: rgba({r},{g},{b},{a});">{texto}</span>'
         conteudo =  conteudo.replace(antes,depois)
-
-    for sim in simulacoes:
-
-        conteudo = conteudo.replace(
-            f"[simulacao={sim}]",
-            f'<div id="canvas-{sim}"></div>'
+    padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
+    simulacoes = re.findall(padrao, conteudo, re.DOTALL)
+    for sim, argumentos in simulacoes:
+        argumentos = argumentos.strip()
+        chamada = f"""
+                      <div id="canvas-{sim}"></div>
+                        <script>
+                            {sim}(
+                                document.getElementById("canvas-{sim}"),
+                                {{ {argumentos} }});
+                        </script>
+                   """
+    
+        conteudo = re.sub(
+            padrao,
+            lambda m: chamada,
+            conteudo,
+            count=1
         )
-
     # ================= CHECKPOINTS =================
 
     if banco:
