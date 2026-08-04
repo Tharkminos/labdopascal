@@ -247,14 +247,13 @@ def processar_etapa(conteudo, banco=None):
     simulacoes = re.findall(padrao, conteudo, re.DOTALL)
     for sim, argumentos in simulacoes:
         argumentos = argumentos.strip()
-        chamada = f"""
-                      <div id="canvas-{sim}"></div>
-                        <script>
-                            {sim}(
-                                document.getElementById("canvas-{sim}"),
-                                {{ {argumentos} }});
-                        </script>
-                   """
+        chamada = f"""<div id="canvas-{sim}"></div>
+<script>
+{sim}(
+    document.getElementById("canvas-{sim}"),
+    {{ {argumentos} }}
+);
+</script>"""
     
         conteudo = re.sub(
             padrao,
