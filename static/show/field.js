@@ -1,5 +1,5 @@
-function field(sim,cargas=[]){
-
+function field(sim,args={}){
+let cargas = args.cargas || []
 let trail;
 
 let vetores = [];
