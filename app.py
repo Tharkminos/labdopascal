@@ -243,27 +243,43 @@ def processar_etapa(conteudo, banco=None):
         if(int(r)>  1): a=1 
         depois = f'<span style="color: rgba({r},{g},{b},{a});">{texto}</span>'
         conteudo =  conteudo.replace(antes,depois)
-    padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
-    simulacoes = re.findall(
-        padrao,
-        conteudo,
-        re.DOTALL
-    )
-    for sim, argumentos in simulacoes:
-        argumentos = argumentos.strip()
-        chamada = f"""<div id="canvas-{sim}"></div>
+   padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
+
+
+    def substituir_simulacao(match):
+    
+        sim = match.group(1).strip()
+        argumentos = (match.group(2) or "").strip()
+    
+        print("SIM:", repr(sim))
+        print("ARGUMENTOS:", repr(argumentos))
+    
+        if argumentos:
+            chamada = f"""<div id="canvas-{sim}"></div>
 <script>
 {sim}(
     document.getElementById("canvas-{sim}"),
     {{ {argumentos} }}
 );
 </script>"""
-        conteudo = re.sub(
-            padrao,
-            lambda m: chamada,
-            conteudo,
-            count=1
-        )
+        else:
+            chamada = f"""<div id="canvas-{sim}"></div>
+    <script>
+    {sim}(
+        document.getElementById("canvas-{sim}"),
+        {{}}
+    );
+    </script>"""
+    
+        return chamada
+    
+    
+    conteudo = re.sub(
+        padrao,
+        substituir_simulacao,
+        conteudo,
+        flags=re.DOTALL
+    )
     # ================= CHECKPOINTS =================
 
     if banco:
