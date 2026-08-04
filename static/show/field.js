@@ -2,7 +2,7 @@ function field(sim,args={}){
 let cargas = args.cargas || []
 console.log("Argumentos:",args)
 console.log("SIM:",sim)
-console.log("Carga",args.carga)
+console.log("Carga",args.cargas)
   
 let trail;
 
