@@ -18,3 +18,7 @@ imagem_modulo: atom.webp
 
 [etapa=Interação entre Cargas]
 
+[simulacao=field]
+:::simulacao
+cargas: {sinal:"+",x:80,y:80,carga;10}
+:::
