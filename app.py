@@ -243,7 +243,7 @@ def processar_etapa(conteudo, banco=None):
         if(int(r)>  1): a=1 
         depois = f'<span style="color: rgba({r},{g},{b},{a});">{texto}</span>'
         conteudo =  conteudo.replace(antes,depois)
-   padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
+    padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
 
 
     def substituir_simulacao(match):
