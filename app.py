@@ -252,12 +252,12 @@ def processar_etapa(conteudo, banco=None):
     for sim, argumentos in simulacoes:
         argumentos = argumentos.strip()
         chamada = f"""<div id="canvas-{sim}"></div>
-    <script>
-    {sim}(
-        document.getElementById("canvas-{sim}"),
-        {{ {argumentos} }}
-    );
-    </script>"""
+<script>
+{sim}(
+    document.getElementById("canvas-{sim}"),
+    {{ {argumentos} }}
+);
+</script>"""
         conteudo = re.sub(
             padrao,
             lambda m: chamada,
