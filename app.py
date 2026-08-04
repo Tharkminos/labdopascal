@@ -257,9 +257,10 @@ def processar_etapa(conteudo, banco=None):
         if argumentos:
             chamada = f"""<div id="canvas-{sim}"></div>
 <script>
+let argumentos = {{ {argumentos} }};
 {sim}(
     document.getElementById("canvas-{sim}"),
-    {{ {argumentos} }}
+    argumentos
 );
 </script>"""
         else:
