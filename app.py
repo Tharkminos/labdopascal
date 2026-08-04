@@ -256,20 +256,20 @@ def processar_etapa(conteudo, banco=None):
     
         if argumentos:
             chamada = f"""<div id="canvas-{sim}"></div>
-    <script>
-    {sim}(
-        document.getElementById("canvas-{sim}"),
-        {{ {argumentos} }}
-    );
-    </script>"""
-        else:
-            chamada = f"""<div id="canvas-{sim}"></div>
-    <script>
-    {sim}(
-        document.getElementById("canvas-{sim}"),
-        {{}}
-    );
-    </script>"""
+<script>
+{sim}(
+    document.getElementById("canvas-{sim}"),
+    {{ {argumentos} }}
+);
+</script>"""
+    else:
+        chamada = f"""<div id="canvas-{sim}"></div>
+<script>
+{sim}(
+    document.getElementById("canvas-{sim}"),
+    {{}}
+);
+</script>"""
     
         return chamada
     
