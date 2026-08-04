@@ -262,8 +262,8 @@ def processar_etapa(conteudo, banco=None):
     {{ {argumentos} }}
 );
 </script>"""
-    else:
-        chamada = f"""<div id="canvas-{sim}"></div>
+        else:
+            chamada = f"""<div id="canvas-{sim}"></div>
 <script>
 {sim}(
     document.getElementById("canvas-{sim}"),
