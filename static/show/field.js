@@ -31,7 +31,7 @@ sim.setup = function(){
     sim.canvas = sim.createCanvas(370,300);
     sim.canvas.parent("canvas-field");
 
-    field();
+    fieldMaker();
     first();
 
     trail = sim.createGraphics(sim.width,sim.height);
@@ -92,7 +92,7 @@ sim.draw = function(){
 
 }
 
-function field(){
+function fieldMaker(){
 
     caminho = [];
 
@@ -275,9 +275,9 @@ function drawVectors(){
 
     for(const vector of vetores){
 
-        let field = campo(vector.x,vector.y);
+        let field1 = campo(vector.x,vector.y);
 
-        let norma = Math.hypot(field[0],field[1]);
+        let norma = Math.hypot(field1[0],field1[1]);
 
         if(norma === 0){
 
@@ -285,11 +285,11 @@ function drawVectors(){
 
         }
 
-        vector.x += field[0]/norma;
-        vector.y += field[1]/norma;
+        vector.x += field1[0]/norma;
+        vector.y += field1[1]/norma;
          // direção unitária
-        ux = field[0]/norma
-        uy = field[1]/norma
+        ux = field1[0]/norma
+        uy = field1[1]/norma
         px = -uy
         py = ux
         ponta = 8
