@@ -244,17 +244,20 @@ def processar_etapa(conteudo, banco=None):
         depois = f'<span style="color: rgba({r},{g},{b},{a});">{texto}</span>'
         conteudo =  conteudo.replace(antes,depois)
     padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
-    simulacoes = re.findall(padrao, conteudo, re.DOTALL)
+    simulacoes = re.findall(
+        padrao,
+        conteudo,
+        re.DOTALL
+    )
     for sim, argumentos in simulacoes:
         argumentos = argumentos.strip()
         chamada = f"""<div id="canvas-{sim}"></div>
-<script>
-{sim}(
-    document.getElementById("canvas-{sim}"),
-    {{ {argumentos} }}
-);
-</script>"""
-    
+    <script>
+    {sim}(
+        document.getElementById("canvas-{sim}"),
+        {{ {argumentos} }}
+    );
+    </script>"""
         conteudo = re.sub(
             padrao,
             lambda m: chamada,
