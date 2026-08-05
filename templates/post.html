@@ -119,18 +119,24 @@ function mostrarEtapa(indice){
 
    
     canvases.forEach(canvas => {
+    const nome = canvas.id.replace("canvas-", "");
+    if(typeof window[nome] === "function"){
+        const argumentos =
+            JSON.parse(
+                canvas.dataset.args || "{}"
+            );
+        const sketch = function(sim) {
+            window[nome](
+                sim,
+                argumentos
+            );
 
-        const nome = canvas.id.replace("canvas-", "");
+        };
+        const instancia = new p5(sketch);
+        simulacoesAtuais.push(instancia);
+    }
 
-        if(typeof window[nome] === "function"){
-
-            const instancia = new p5(window[nome]);
-
-            simulacoesAtuais.push(instancia);
-
-        }
-
-    });
+});
     nb = document.getElementById("btn-proximo")
     ab = document.getElementById("btn-anterior")
     if(etapas.length === 1){
