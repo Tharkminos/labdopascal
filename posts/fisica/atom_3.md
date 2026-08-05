@@ -29,7 +29,7 @@ cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"-",x:270,y:150,carga:10}]
 :::simulacao
 cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"+",x:270,y:150,carga:10}]
 :::
-b
+
 
 [simulacao=field]
 :::simulacao
