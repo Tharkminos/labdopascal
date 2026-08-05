@@ -22,7 +22,8 @@ imagem_modulo: atom.webp
 :::simulacao
 cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"-",x:270,y:150,carga:10}]
 :::
-a
+
+[etapa=Interação Positivo - Positivo]
 
 [simulacao=field]
 :::simulacao
