@@ -261,12 +261,12 @@ def processar_etapa(conteudo, banco=None):
 ></div>"""
 
 
-conteudo = re.sub(
-    padrao,
-    substituir_simulacao,
-    conteudo,
-    flags=re.DOTALL
-)
+        conteudo = re.sub(
+            padrao,
+            substituir_simulacao,
+            conteudo,
+            flags=re.DOTALL
+        )
     # ================= CHECKPOINTS =================
 
     if banco:
