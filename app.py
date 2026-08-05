@@ -261,7 +261,7 @@ def processar_etapa(conteudo, banco=None):
 ></div>"""
 
 
-        conteudo = re.sub(
+    conteudo = re.sub(
             padrao,
             substituir_simulacao,
             conteudo,
