@@ -121,10 +121,9 @@ function mostrarEtapa(indice){
     canvases.forEach(canvas => {
     const nome = canvas.id.replace("canvas-", "");
     if(typeof window[nome] === "function"){
-        const argumentos =
-            JSON.parse(
-                canvas.dataset.args || "{}"
-            );
+        const argumentos = Function(
+    "return (" + (canvas.dataset.args || "{}") + ")"
+)();
         const sketch = function(sim) {
             window[nome](
                 sim,
