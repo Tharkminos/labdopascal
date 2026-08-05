@@ -22,3 +22,15 @@ imagem_modulo: atom.webp
 :::simulacao
 cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"-",x:270,y:150,carga:10}]
 :::
+
+
+[simulacao=field]
+:::simulacao
+cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"+",x:270,y:150,carga:10}]
+:::
+
+
+[simulacao=field]
+:::simulacao
+cargas: [{sinal:"-",x:80,y:150,carga:10},{sinal:"-",x:270,y:150,carga:10}]
+:::
