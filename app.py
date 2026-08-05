@@ -250,37 +250,23 @@ def processar_etapa(conteudo, banco=None):
     
         sim = match.group(1).strip()
         argumentos = (match.group(2) or "").strip()
-    
-        print("SIM:", repr(sim))
-        print("ARGUMENTOS:", repr(argumentos))
-    
         if argumentos:
-            chamada = f"""<div id="canvas-{sim}"></div>
-<script>
-let argumentos = {{ {argumentos} }};
-{sim}(
-    document.getElementById("canvas-{sim}"),
-    argumentos
-);
-</script>"""
+            data_args = "{ " + argumentos + " }"
         else:
-            chamada = f"""<div id="canvas-{sim}"></div>
-<script>
-{sim}(
-    document.getElementById("canvas-{sim}"),
-    {{}}
-);
-</script>"""
+            data_args = "{}"
     
-        return chamada
-    
-    
-    conteudo = re.sub(
-        padrao,
-        substituir_simulacao,
-        conteudo,
-        flags=re.DOTALL
-    )
+        return f"""<div
+    id='canvas-{sim}'
+    data-args='{data_args}'
+></div>"""
+
+
+conteudo = re.sub(
+    padrao,
+    substituir_simulacao,
+    conteudo,
+    flags=re.DOTALL
+)
     # ================= CHECKPOINTS =================
 
     if banco:
