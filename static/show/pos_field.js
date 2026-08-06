@@ -24,7 +24,6 @@ sim.simulacaoConcluida = function(){
 sim.setup = function(){
 
     sim.canvas = sim.createCanvas(300,300);
-    sim.canvas.parent("canvas-pos_field");
 
     field();
     add(6);
