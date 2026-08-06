@@ -14,7 +14,7 @@ function first(){
     let first_index = 0
     for(const ponto of linha){
       first_index += 1
-        if(!isAny("+")){
+        if(!ifAny("+")){
           if(first_index % 2 === 0){
             vetores.push({x:ponto.x,y:ponto.y})
           }
