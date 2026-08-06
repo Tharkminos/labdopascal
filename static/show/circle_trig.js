@@ -15,7 +15,6 @@ deg = function(angle){
 
 sim.setup = function() {
     sim.canvas = sim.createCanvas(400, 400);
-    sim.canvas.parent("canvas-circle_trig");
   
 };
 sim.simulacaoConcluida = function(){
