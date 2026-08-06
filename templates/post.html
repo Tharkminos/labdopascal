@@ -116,22 +116,29 @@ function mostrarEtapa(indice){
 
     // Procura um canvas nesta etapa
     const canvases = etapas[indice].querySelectorAll("[id^='canvas-']");
-
-   
     canvases.forEach(canvas => {
-    const nome = canvas.id.replace("canvas-", "");
-    if(typeof window[nome] === "function"){
+    const nome = canvas.dataset.simulacao;
+
+    if (typeof window[nome] === "function") {
+
         const argumentos = Function(
-    "return (" + (canvas.dataset.args || "{}") + ")"
-)();
+            "return (" + (canvas.dataset.args || "{}") + ")"
+        )();
+
         const sketch = function(sim) {
+
             window[nome](
                 sim,
                 argumentos
             );
 
         };
-        const instancia = new p5(sketch);
+
+        const instancia = new p5(
+            sketch,
+            canvas
+        );
+
         simulacoesAtuais.push(instancia);
     }
 
