@@ -51,7 +51,6 @@ sim.simulacaoConcluida = function(){
 sim.setup = function(){
 
     sim.canvas = sim.createCanvas(350,600);
-    sim.canvas.parent("canvas-charge_eq");
 
     sim.shuffle(answers,true);
 
