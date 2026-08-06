@@ -40,8 +40,6 @@ sim.simulacaoConcluida = function(){
 sim.setup = function(){
 
     sim.canvas = sim.createCanvas(370,300);
-    sim.canvas.parent("canvas-pn_field");
-
     field();
     first();
 
