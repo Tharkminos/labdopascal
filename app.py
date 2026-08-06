@@ -244,10 +244,11 @@ def processar_etapa(conteudo, banco=None):
         depois = f'<span style="color: rgba({r},{g},{b},{a});">{texto}</span>'
         conteudo =  conteudo.replace(antes,depois)
     padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
-
-
-    def substituir_simulacao(match):
     
+    conter = 0
+    def substituir_simulacao(match):
+        global counter
+        counter += 1
         sim = match.group(1).strip()
         argumentos = (match.group(2) or "").strip()
         if argumentos:
@@ -256,7 +257,8 @@ def processar_etapa(conteudo, banco=None):
             data_args = "{}"
     
         return f"""<div
-    id='canvas-{sim}'
+    id='canvas-{sim}-{counter}'
+    data-simulacao='{sim}'
     data-args='{data_args}'
 ></div>"""
 
