@@ -33,7 +33,6 @@ sim.simulacaoConcluida = function(){
 sim.setup = function(){
 
     sim.canvas = sim.createCanvas(350,500);
-    sim.canvas.parent("canvas-atom");
 
 }
 
