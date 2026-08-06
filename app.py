@@ -6,7 +6,19 @@ from flask import (
     session,
     flash
 )
+from itertools import count
 
+contador = count()
+
+def substituir_simulacao(match):
+
+    indice = next(contador)
+
+    sim = match.group(1).strip()
+
+    id_sim = f"{sim}-{indice}"
+
+    ...
 from admin import admin_bp
 from datetime import date, timedelta
 from flask_bcrypt import Bcrypt
@@ -245,10 +257,9 @@ def processar_etapa(conteudo, banco=None):
         conteudo =  conteudo.replace(antes,depois)
     padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
     
-    counter = 0
+    ctr = count()
     def substituir_simulacao(match):
-        global counter
-        counter += 1
+        counter = next(ctr)
         sim = match.group(1).strip()
         argumentos = (match.group(2) or "").strip()
         if argumentos:
