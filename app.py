@@ -245,7 +245,7 @@ def processar_etapa(conteudo, banco=None):
         conteudo =  conteudo.replace(antes,depois)
     padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
     
-    conter = 0
+    counter = 0
     def substituir_simulacao(match):
         global counter
         counter += 1
