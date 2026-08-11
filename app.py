@@ -219,7 +219,7 @@ def processar_etapa(conteudo, banco=None):
 
     # ================= SIMULAÇÕES =================
 
-    
+    conteudo = conteudo.replace("   ","&emsp;&emsp;").replace("   ","&emsp;&emsp;")
     centralizar = re.findall(r"→(.*?)←",conteudo)
     for cent in centralizar:
         conteudo = conteudo.replace(
