@@ -8,7 +8,7 @@ imagem_modulo: atom.webp
 
 #  Campo Elétrico 
 
-þQuando temos um **Íon**, surge um campo elétrico saindo ou entrando na carga, que depende diretamente do sinal da carga. Se a carga é positiva**(Cátion)**, temos que o campo sairá da carga, e se for negativa**(Ânion)**, o campo entrará na carga.
+    Quando temos um **Íon**, surge um campo elétrico saindo ou entrando na carga, que depende diretamente do sinal da carga. Se a carga é positiva**(Cátion)**, temos que o campo sairá da carga, e se for negativa**(Ânion)**, o campo entrará na carga.
 
 **→[cor=120,0,0,1]Campo de uma carga positiva:[/cor]←**
 [simulacao=pos_field]
