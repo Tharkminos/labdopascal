@@ -7,26 +7,7 @@ from flask import (
     flash
 )
 from itertools import count
-from authlib.integrations.flask_client import OAuth
 
-oauth = OAuth(app)
-
-
-google = oauth.register(
-    name="google",
-
-    client_id="364909796536-a4khif03kvppaapc8sdv74i8899gobc9.apps.googleusercontent.com",
-
-    client_secret="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",
-
-    server_metadata_url=
-    "https://accounts.google.com/.well-known/openid-configuration",
-
-    client_kwargs={
-        "scope":
-        "openid email profile"
-    }
-)
 contador = count()
 
 def substituir_simulacao(match):
@@ -52,7 +33,26 @@ import os
 # ================= APP =================
 
 app = Flask(__name__)
+from authlib.integrations.flask_client import OAuth
 
+oauth = OAuth(app)
+
+
+google = oauth.register(
+    name="google",
+
+    client_id="364909796536-a4khif03kvppaapc8sdv74i8899gobc9.apps.googleusercontent.com",
+
+    client_secret="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",
+
+    server_metadata_url=
+    "https://accounts.google.com/.well-known/openid-configuration",
+
+    client_kwargs={
+        "scope":
+        "openid email profile"
+    }
+)
 app.secret_key = "B@tman"
 
 bcrypt = Bcrypt(app)
