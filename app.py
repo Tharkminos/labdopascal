@@ -7,7 +7,26 @@ from flask import (
     flash
 )
 from itertools import count
+from authlib.integrations.flask_client import OAuth
 
+oauth = OAuth(app)
+
+
+google = oauth.register(
+    name="google",
+
+    client_id="364909796536-a4khif03kvppaapc8sdv74i8899gobc9.apps.googleusercontent.com",
+
+    client_secret="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",
+
+    server_metadata_url=
+    "https://accounts.google.com/.well-known/openid-configuration",
+
+    client_kwargs={
+        "scope":
+        "openid email profile"
+    }
+)
 contador = count()
 
 def substituir_simulacao(match):
@@ -357,6 +376,7 @@ def processar_etapa(conteudo, banco=None):
         )
 
     return html
+
 # ================= MARKDOWN =================
 def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
 
@@ -448,6 +468,80 @@ def gerar_estrelas(concluidas, total):
         "★" * (total - concluidas)
     )
 
+@app.route("/login/google")
+def login_google():
+
+    redirect_uri = url_for(
+        "google_callback",
+        _external=True
+    )
+
+    return google.authorize_redirect(
+        redirect_uri
+    )
+
+@app.route("/login/google/callback")
+def google_callback():
+
+    token = google.authorize_access_token()
+
+    user_info = token["userinfo"]
+
+    email = user_info["email"]
+    nome = user_info["name"]
+
+    conn = sqlite3.connect("site.db")
+    cursor = conn.cursor()
+
+    cursor.execute(
+        """
+        SELECT id
+        FROM usuarios
+        WHERE email = ?
+        """,
+        (email,)
+    )
+
+    usuario = cursor.fetchone()
+
+
+    if usuario:
+
+        usuario_id = usuario[0]
+
+    else:
+
+        cursor.execute(
+            """
+            INSERT INTO usuarios
+            (
+                usuario,
+                email,
+                senha
+            )
+            VALUES
+            (?, ?, ?)
+            """,
+            (
+                nome,
+                email,
+                ""
+            )
+        )
+
+        usuario_id = cursor.lastrowid
+
+
+    conn.commit()
+    conn.close()
+
+
+    session["id"] = usuario_id
+    session["usuario"] = nome
+    session["email"] = email
+
+
+    return redirect("/")
 # ============== PERFIL ====================
 @app.route("/perfil")
 def perfil():
