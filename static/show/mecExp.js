@@ -165,7 +165,7 @@ function mecExp(sim) {
       xTorre,
       topoTorre-20,
       larguraTorre,
-      alturaTorre+30
+      alturaTorre+40
     );
 
 
