@@ -41,7 +41,7 @@ sim.setup = function() {
 
   sim.createCanvas(750, 700);
 
-  sim.sim.textFont("Arial");
+  sim.textFont("Arial");
 }
 
 
