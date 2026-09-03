@@ -112,83 +112,128 @@ function mecExp(sim) {
   // TORRE
   // ============================================
 
-  function desenharTorre() {
+  // ============================================
+// TORRE
+// ============================================
 
-    // Corpo da torre
-    sim.fill(205);
-    sim.stroke(70);
-    sim.strokeWeight(2);
+function desenharTorre() {
+
+  // Margem para que as janelas não fiquem
+  // cortadas no topo ou na base
+  let margem = 18;
+
+  let topo = topoTorre + margem;
+
+  let alturaCorpo =
+    alturaInicial * escala;
+
+  let base =
+    topo + alturaCorpo;
+
+
+  // -----------------------------
+  // Corpo da torre
+  // -----------------------------
+
+  sim.fill(205);
+  sim.stroke(70);
+  sim.strokeWeight(2);
+
+  sim.rect(
+    xTorre,
+    topo,
+    larguraTorre,
+    alturaCorpo
+  );
+
+
+  // -----------------------------
+  // Janelas
+  // -----------------------------
+
+  for (
+    let i = 0;
+    i < alturasJanelas.length;
+    i++
+  ) {
+
+    let h = alturasJanelas[i];
+
+
+    // Posição vertical da janela
+    let y =
+      topo +
+      (alturaInicial - h) * escala;
+
+
+    // -----------------------------
+    // Janela
+    // -----------------------------
+
+    sim.fill(70);
+    sim.noStroke();
 
     sim.rect(
-      xTorre,
-      topoTorre,
-      larguraTorre,
-      alturaInicial * escala + 6
+      xTorre + larguraTorre / 2 - 18,
+      y - 15,
+      36,
+      30
     );
 
 
-    // Janelas
-    for (
-      let i = 0;
-      i < alturasJanelas.length;
-      i++
-    ) {
+    // -----------------------------
+    // Nome da janela
+    // -----------------------------
 
-      let h = alturasJanelas[i];
+    sim.fill(30);
 
-      let y =
-        topoTorre +
-        (alturaInicial - h) * escala;
+    sim.textAlign(
+      sim.LEFT,
+      sim.CENTER
+    );
 
+    sim.textSize(16);
 
-      // Janela
-      sim.fill(70);
-      sim.noStroke();
-
-      sim.rect(
-        xTorre + larguraTorre / 2 - 18,
-        y - 15,
-        36,
-        30
-      );
+    sim.text(
+      nomesJanelas[i],
+      xTorre + larguraTorre + 15,
+      y
+    );
 
 
-      // Nome da janela
-      sim.fill(30);
+    // -----------------------------
+    // Altura
+    // -----------------------------
 
-      sim.textAlign(sim.LEFT, sim.CENTER);
-      sim.textSize(16);
+    sim.textAlign(
+      sim.RIGHT,
+      sim.CENTER
+    );
 
-      sim.text(
-        nomesJanelas[i],
-        xTorre + larguraTorre + 15,
-        y
-      );
+    sim.textSize(14);
 
-
-      // Altura
-      sim.textAlign(sim.RIGHT, sim.CENTER);
-      sim.textSize(14);
-
-      sim.text(
-        h + " m",
-        xTorre - 15,
-        y - 4
-      );
-    }
-
-
-    // Chão
-    sim.stroke(60);
-    sim.strokeWeight(4);
-
-    sim.line(
-      80,
-      topoTorre + alturaInicial * escala + 5,
-      650,
-      topoTorre + alturaInicial * escala + 5
+    sim.text(
+      h + " m",
+      xTorre - 15,
+      y
     );
   }
+
+
+  // -----------------------------
+  // Chão
+  // -----------------------------
+
+  sim.stroke(60);
+  sim.strokeWeight(4);
+
+  sim.line(
+    80,
+    base,
+    650,
+    base
+  );
+}
 
 
   // ============================================
