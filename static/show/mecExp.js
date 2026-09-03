@@ -5,9 +5,9 @@
 
 function mecExp(sim) {
 
-  // -----------------------------
+  // ============================================
   // DADOS DO EXPERIMENTO
-  // -----------------------------
+  // ============================================
 
   let massa = 2;              // kg
   let gravidade = 10;         // m/s²
@@ -20,23 +20,37 @@ function mecExp(sim) {
   let rodando = false;
   let terminou = false;
 
-  // Guarda a altura anterior
+  // Altura anterior para detectar
+  // quando a esfera passa pelas janelas
   let alturaAnterior = alturaInicial;
 
 
-  // -----------------------------
-  // TORRE
-  // -----------------------------
+  // ============================================
+  // CONFIGURAÇÃO DA TORRE
+  // ============================================
 
   let xTorre = 170;
   let larguraTorre = 180;
 
-  let topoTorre = 70;
+  // Posição REAL do topo da torre
+  let topoTorre = 85;
+
+  // Quantidade de pixels por metro
   let escala = 25;
 
 
-  // Alturas das janelas
-  let alturasJanelas = [20, 16, 12, 8, 4, 0];
+  // ============================================
+  // JANELAS
+  // ============================================
+
+  let alturasJanelas = [
+    20,
+    16,
+    12,
+    8,
+    4,
+    0
+  ];
 
   let nomesJanelas = [
     "A",
@@ -48,8 +62,9 @@ function mecExp(sim) {
   ];
 
 
-  // Última janela atingida
-  let janelaAtual = -1;
+  // Janela atualmente atingida
+  // Começa em A porque a esfera começa em 20 m
+  let janelaAtual = 0;
 
 
   // ============================================
@@ -61,6 +76,7 @@ function mecExp(sim) {
     sim.createCanvas(750, 700);
 
     sim.textFont("Arial");
+
   };
 
 
@@ -72,10 +88,13 @@ function mecExp(sim) {
 
     sim.background(235);
 
+    // Atualiza a física
     atualizarFisica();
 
+    // Verifica as janelas
     verificarJanela();
 
+    // Desenha a interface
     desenharTitulo();
 
     desenharTorre();
@@ -85,6 +104,7 @@ function mecExp(sim) {
     desenharInformacoes();
 
     desenharBotoes();
+
   };
 
 
@@ -97,7 +117,11 @@ function mecExp(sim) {
     sim.fill(40);
     sim.noStroke();
 
-    sim.textAlign(sim.CENTER);
+    sim.textAlign(
+      sim.CENTER,
+      sim.CENTER
+    );
+
     sim.textSize(28);
 
     sim.text(
@@ -105,144 +129,153 @@ function mecExp(sim) {
       sim.width / 2,
       35
     );
+
   }
 
-// ============================================
-// TORRE
-// ============================================
 
-function desenharTorre() {
+  // ============================================
+  // TORRE
+  // ============================================
 
-  // Uma única referência vertical para toda a torre
-  let margem = 18;
-  let topo = topoTorre + margem;
+  function desenharTorre() {
 
-  let alturaCorpo = alturaInicial * escala;
-  let base = topo + alturaCorpo;
+    // --------------------------------------------
+    // ALTURA TOTAL DA TORRE
+    // --------------------------------------------
 
+    let alturaTorre =
+      alturaInicial * escala;
 
-  // -----------------------------
-  // Corpo da torre
-  // -----------------------------
-
-  sim.fill(205);
-  sim.stroke(70);
-  sim.strokeWeight(2);
-
-  sim.rect(
-    xTorre,
-    topo,
-    larguraTorre,
-    alturaCorpo
-  );
+    // O final da torre corresponde exatamente
+    // à altura 0 m
+    let baseTorre =
+      topoTorre + alturaTorre;
 
 
-  // -----------------------------
-  // Janelas
-  // -----------------------------
+    // --------------------------------------------
+    // CORPO DA TORRE
+    // --------------------------------------------
 
-  for (let i = 0; i < alturasJanelas.length; i++) {
+    sim.fill(205);
 
-    let h = alturasJanelas[i];
-
-    // Mesma referência usada pela esfera
-    let y =
-      topo +
-      (alturaInicial - h) * escala;
-
-
-    // Janela
-    sim.fill(70);
-    sim.noStroke();
+    sim.stroke(70);
+    sim.strokeWeight(2);
 
     sim.rect(
-      xTorre + larguraTorre / 2 - 18,
-      y - 15,
-      36,
-      30
+      xTorre,
+      topoTorre,
+      larguraTorre,
+      alturaTorre
     );
 
 
-    // Nome da janela
-    sim.fill(30);
+    // --------------------------------------------
+    // JANELAS
+    // --------------------------------------------
 
-    sim.textAlign(
-      sim.LEFT,
-      sim.CENTER
+    for (
+      let i = 0;
+      i < alturasJanelas.length;
+      i++
+    ) {
+
+      let h = alturasJanelas[i];
+
+
+      // ------------------------------------------
+      // POSIÇÃO DA JANELA
+      // ------------------------------------------
+
+      let y =
+        topoTorre +
+        (alturaInicial - h) * escala;
+
+
+      // ------------------------------------------
+      // DESTAQUE DA JANELA ATUAL
+      // ------------------------------------------
+
+      if (i === janelaAtual) {
+
+        sim.fill(190, 50, 50);
+
+      } else {
+
+        sim.fill(70);
+
+      }
+
+
+      sim.noStroke();
+
+
+      // ------------------------------------------
+      // DESENHO DA JANELA
+      // ------------------------------------------
+
+      sim.rect(
+        xTorre + larguraTorre / 2 - 18,
+        y - 15,
+        36,
+        30
+      );
+
+
+      // ------------------------------------------
+      // NOME DA JANELA
+      // ------------------------------------------
+
+      sim.fill(30);
+
+      sim.textAlign(
+        sim.LEFT,
+        sim.CENTER
+      );
+
+      sim.textSize(16);
+
+      sim.text(
+        nomesJanelas[i],
+        xTorre + larguraTorre + 15,
+        y
+      );
+
+
+      // ------------------------------------------
+      // ALTURA
+      // ------------------------------------------
+
+      sim.textAlign(
+        sim.RIGHT,
+        sim.CENTER
+      );
+
+      sim.textSize(14);
+
+      sim.text(
+        h + " m",
+        xTorre - 15,
+        y
+      );
+
+    }
+
+
+    // --------------------------------------------
+    // CHÃO
+    // --------------------------------------------
+
+    sim.stroke(60);
+    sim.strokeWeight(4);
+
+    sim.line(
+      80,
+      baseTorre,
+      650,
+      baseTorre
     );
 
-    sim.textSize(16);
-
-    sim.text(
-      nomesJanelas[i],
-      xTorre + larguraTorre + 15,
-      y
-    );
-
-
-    // Altura
-    sim.textAlign(
-      sim.RIGHT,
-      sim.CENTER
-    );
-
-    sim.textSize(14);
-
-    sim.text(
-      h + " m",
-      xTorre - 15,
-      y
-    );
   }
-
-
-  // -----------------------------
-  // Chão
-  // -----------------------------
-
-  sim.stroke(60);
-  sim.strokeWeight(4);
-
-  sim.line(
-    80,
-    base,
-    650,
-    base
-  );
-}
-
-
-// ============================================
-// ESFERA
-// ============================================
-
-function desenharEsfera() {
-
-  let x =
-    xTorre +
-    larguraTorre / 2;
-
-  // IMPORTANTE:
-  // usar exatamente o mesmo "topo"
-  // utilizado pelas janelas
-  let margem = 18;
-  let topo = topoTorre + margem;
-
-  let y =
-    topo +
-    (alturaInicial - altura) * escala;
-
-
-  sim.noStroke();
-
-  sim.fill(190, 50, 50);
-
-  sim.circle(
-    x,
-    y,
-    24
-  );
-}
 
 
   // ============================================
@@ -251,15 +284,42 @@ function desenharEsfera() {
 
   function desenharEsfera() {
 
+    // --------------------------------------------
+    // POSIÇÃO HORIZONTAL
+    // --------------------------------------------
+
     let x =
       xTorre +
       larguraTorre / 2;
 
 
+    // --------------------------------------------
+    // POSIÇÃO VERTICAL
+    // --------------------------------------------
+    //
+    // IMPORTANTE:
+    // A mesma referência "topoTorre"
+    // é utilizada pelas janelas.
+    //
+    // Assim:
+    //
+    // altura = 20 m -> posição A
+    // altura = 16 m -> posição B
+    // altura = 12 m -> posição C
+    // altura = 8 m  -> posição D
+    // altura = 4 m  -> posição E
+    // altura = 0 m  -> posição F
+    //
+    // --------------------------------------------
+
     let y =
       topoTorre +
       (alturaInicial - altura) * escala;
 
+
+    // --------------------------------------------
+    // ESFERA
+    // --------------------------------------------
 
     sim.noStroke();
 
@@ -270,6 +330,7 @@ function desenharEsfera() {
       y,
       24
     );
+
   }
 
 
@@ -279,37 +340,69 @@ function desenharEsfera() {
 
   function atualizarFisica() {
 
+    // Se estiver pausado ou terminado,
+    // não altera os valores
     if (!rodando || terminou) {
+
       return;
+
     }
+
+
+    // --------------------------------------------
+    // INTERVALO DE TEMPO
+    // --------------------------------------------
+
+    let dt = 1 / 60;
 
 
     // Guarda a altura anterior
     alturaAnterior = altura;
 
 
-    // Intervalo de tempo
-    let dt = 1 / 60;
-
+    // Atualiza o tempo
     tempo += dt;
 
 
-    // Velocidade da queda livre
+    // --------------------------------------------
+    // VELOCIDADE
+    // --------------------------------------------
+    //
+    // Movimento de queda livre:
+    //
+    // v = g * t
+    //
+    // --------------------------------------------
+
     velocidade =
       gravidade * tempo;
 
 
-    // Altura em função do tempo
+    // --------------------------------------------
+    // ALTURA
+    // --------------------------------------------
+    //
+    // h = h0 - (g * t²)/2
+    //
+    // --------------------------------------------
+
     altura =
       alturaInicial -
       (gravidade * tempo * tempo) / 2;
 
 
-    // Quando chega ao chão
+    // --------------------------------------------
+    // CHEGOU AO CHÃO
+    // --------------------------------------------
+
     if (altura <= 0) {
 
       altura = 0;
 
+
+      // Velocidade final:
+      //
+      // v = sqrt(2gh)
 
       velocidade =
         sim.sqrt(
@@ -322,7 +415,9 @@ function desenharEsfera() {
       rodando = false;
 
       terminou = true;
+
     }
+
   }
 
 
@@ -332,13 +427,31 @@ function desenharEsfera() {
 
   function verificarJanela() {
 
+    // --------------------------------------------
+    // SE ESTÁ NO INÍCIO
+    // --------------------------------------------
+
+    if (tempo === 0) {
+
+      janelaAtual = 0;
+
+      return;
+
+    }
+
+
+    // --------------------------------------------
+    // VERIFICA CADA JANELA
+    // --------------------------------------------
+
     for (
       let i = 0;
       i < alturasJanelas.length;
       i++
     ) {
 
-      let h = alturasJanelas[i];
+      let h =
+        alturasJanelas[i];
 
 
       // A esfera passou pela altura da janela
@@ -348,8 +461,11 @@ function desenharEsfera() {
       ) {
 
         janelaAtual = i;
+
       }
+
     }
+
   }
 
 
@@ -364,10 +480,18 @@ function desenharEsfera() {
 
 
     sim.fill(35);
+
     sim.noStroke();
 
-    sim.textAlign(sim.LEFT);
+    sim.textAlign(
+      sim.LEFT,
+      sim.TOP
+    );
 
+
+    // --------------------------------------------
+    // TÍTULO
+    // --------------------------------------------
 
     sim.textSize(22);
 
@@ -377,6 +501,10 @@ function desenharEsfera() {
       y
     );
 
+
+    // --------------------------------------------
+    // MASSA
+    // --------------------------------------------
 
     sim.textSize(17);
 
@@ -389,6 +517,10 @@ function desenharEsfera() {
     );
 
 
+    // --------------------------------------------
+    // ALTURA
+    // --------------------------------------------
+
     sim.text(
       "Altura: " +
       altura.toFixed(2) +
@@ -397,6 +529,10 @@ function desenharEsfera() {
       y + 85
     );
 
+
+    // --------------------------------------------
+    // VELOCIDADE
+    // --------------------------------------------
 
     sim.text(
       "Velocidade: " +
@@ -407,6 +543,10 @@ function desenharEsfera() {
     );
 
 
+    // --------------------------------------------
+    // TEMPO
+    // --------------------------------------------
+
     sim.text(
       "Tempo: " +
       tempo.toFixed(2) +
@@ -415,6 +555,10 @@ function desenharEsfera() {
       y + 155
     );
 
+
+    // --------------------------------------------
+    // GRAVIDADE
+    // --------------------------------------------
 
     sim.text(
       "Gravidade: " +
@@ -425,36 +569,23 @@ function desenharEsfera() {
     );
 
 
-    // -----------------------------
+    // --------------------------------------------
     // JANELA ATUAL
-    // -----------------------------
+    // --------------------------------------------
 
-    if (janelaAtual >= 0) {
+    sim.textSize(20);
 
-      sim.textSize(20);
-
-      sim.text(
-        "Janela: " +
-        nomesJanelas[janelaAtual],
-        x,
-        y + 250
-      );
-
-    } else {
-
-      sim.textSize(17);
-
-      sim.text(
-        "Aguardando início...",
-        x,
-        y + 250
-      );
-    }
+    sim.text(
+      "Janela: " +
+      nomesJanelas[janelaAtual],
+      x,
+      y + 250
+    );
 
 
-    // -----------------------------
+    // --------------------------------------------
     // MENSAGEM FINAL
-    // -----------------------------
+    // --------------------------------------------
 
     if (terminou) {
 
@@ -465,7 +596,9 @@ function desenharEsfera() {
         x,
         y + 300
       );
+
     }
+
   }
 
 
@@ -478,6 +611,10 @@ function desenharEsfera() {
     let y = 630;
 
 
+    // --------------------------------------------
+    // INICIAR
+    // --------------------------------------------
+
     desenharBotao(
       150,
       y,
@@ -486,6 +623,10 @@ function desenharEsfera() {
       "INICIAR"
     );
 
+
+    // --------------------------------------------
+    // PAUSAR
+    // --------------------------------------------
 
     desenharBotao(
       290,
@@ -496,6 +637,10 @@ function desenharEsfera() {
     );
 
 
+    // --------------------------------------------
+    // REINICIAR
+    // --------------------------------------------
+
     desenharBotao(
       430,
       y,
@@ -503,8 +648,13 @@ function desenharEsfera() {
       40,
       "REINICIAR"
     );
+
   }
 
+
+  // ============================================
+  // DESENHAR BOTÃO
+  // ============================================
 
   function desenharBotao(
     x,
@@ -514,7 +664,12 @@ function desenharEsfera() {
     textoBotao
   ) {
 
+    // --------------------------------------------
+    // FUNDO
+    // --------------------------------------------
+
     sim.fill(215);
+
     sim.stroke(80);
     sim.strokeWeight(1);
 
@@ -527,7 +682,12 @@ function desenharEsfera() {
     );
 
 
+    // --------------------------------------------
+    // TEXTO
+    // --------------------------------------------
+
     sim.fill(30);
+
     sim.noStroke();
 
     sim.textAlign(
@@ -542,6 +702,7 @@ function desenharEsfera() {
       x + largura / 2,
       y + altura / 2
     );
+
   }
 
 
@@ -551,9 +712,9 @@ function desenharEsfera() {
 
   sim.mousePressed = function () {
 
-    // -----------------------------
+    // ==========================================
     // INICIAR
-    // -----------------------------
+    // ==========================================
 
     if (
       sim.mouseX >= 150 &&
@@ -565,13 +726,15 @@ function desenharEsfera() {
       if (!terminou) {
 
         rodando = true;
+
       }
+
     }
 
 
-    // -----------------------------
+    // ==========================================
     // PAUSAR
-    // -----------------------------
+    // ==========================================
 
     if (
       sim.mouseX >= 290 &&
@@ -581,12 +744,13 @@ function desenharEsfera() {
     ) {
 
       rodando = false;
+
     }
 
 
-    // -----------------------------
+    // ==========================================
     // REINICIAR
-    // -----------------------------
+    // ==========================================
 
     if (
       sim.mouseX >= 430 &&
@@ -595,6 +759,7 @@ function desenharEsfera() {
       sim.mouseY <= 670
     ) {
 
+      // Volta ao estado inicial
       tempo = 0;
 
       velocidade = 0;
@@ -607,7 +772,10 @@ function desenharEsfera() {
 
       terminou = false;
 
-      janelaAtual = -1;
+      janelaAtual = 0;
+
     }
+
   };
+
 }
