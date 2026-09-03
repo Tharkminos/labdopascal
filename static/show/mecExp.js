@@ -1,481 +1,559 @@
-
-
-// -----------------------------
-// DADOS DO EXPERIMENTO
-// -----------------------------
-function mecExp(sim){
-let massa = 2;              // kg
-let gravidade = 10;         // m/s²
-let alturaInicial = 20;     // m
-
-let tempo = 0;
-let velocidade = 0;
-let altura = alturaInicial;
-
-let rodando = false;
-let terminou = false;
-
-// -----------------------------
-// TORRE
-// -----------------------------
-
-let xTorre = 170;
-let larguraTorre = 180;
-
-let topoTorre = 70;
-let escala = 25;
-
-// Alturas das janelas
-let alturasJanelas = [20, 16, 12, 8, 4, 0];
-let nomesJanelas = ["A", "B", "C", "D", "E", "F"];
-
-// Última janela atingida
-let janelaAtual = -1;
-
-
 // ============================================
-// SETUP
+// ATIVIDADE EXPERIMENTAL
+// ENERGIA MECÂNICA
 // ============================================
 
-sim.setup = function() {
+function mecExp(sim) {
 
-  sim.createCanvas(750, 700);
+  // -----------------------------
+  // DADOS DO EXPERIMENTO
+  // -----------------------------
 
-  sim.textFont("Arial");
-}
+  let massa = 2;              // kg
+  let gravidade = 10;         // m/s²
+  let alturaInicial = 20;     // m
 
+  let tempo = 0;
+  let velocidade = 0;
+  let altura = alturaInicial;
 
-// ============================================
-// DRAW
-// ============================================
+  let rodando = false;
+  let terminou = false;
 
-sim.draw = function() {
-
-  sim.background(235);
-
-  desenharTitulo();
-
-  desenharTorre();
-
-  atualizarFisica();
-
-  desenharEsfera();
-
-  desenharInformacoes();
-
-  desenharBotoes();
-
-  verificarJanela();
-}
+  // Guarda a altura anterior
+  let alturaAnterior = alturaInicial;
 
 
-// ============================================
-// TÍTULO
-// ============================================
+  // -----------------------------
+  // TORRE
+  // -----------------------------
 
-function desenharTitulo() {
+  let xTorre = 170;
+  let larguraTorre = 180;
 
-  sim.fill(40);
-  sim.stroke();
-
-  sim.textAlign(CENTER);
-  sim.textSize(28);
-
-  sim.text(
-    "Atividade Experimental Energia Mecânica",
-    width / 2,
-    35
-  );
-}
+  let topoTorre = 70;
+  let escala = 25;
 
 
-// ============================================
-// TORRE
-// ============================================
+  // Alturas das janelas
+  let alturasJanelas = [20, 16, 12, 8, 4, 0];
 
-function desenharTorre() {
-
-  // Corpo da torre
-  sim.fill(205);
-  sim.stroke(70);
-  sim.strokeWeight(2);
-
-  sim.rect(
-    xTorre,
-    topoTorre,
-    larguraTorre,
-    alturaInicial * escala+6
-  );
+  let nomesJanelas = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+  ];
 
 
-  // Janelas
-  for (let i = 0; i < alturasJanelas.length; i++) {
-
-    let h = alturasJanelas[i];
-
-    let y =
-      topoTorre +
-      (alturaInicial - h) * escala;
+  // Última janela atingida
+  let janelaAtual = -1;
 
 
-    // Janela
-    sim.fill(70);
+  // ============================================
+  // SETUP
+  // ============================================
+
+  sim.setup = function () {
+
+    sim.createCanvas(750, 700);
+
+    sim.textFont("Arial");
+  };
+
+
+  // ============================================
+  // DRAW
+  // ============================================
+
+  sim.draw = function () {
+
+    sim.background(235);
+
+    atualizarFisica();
+
+    verificarJanela();
+
+    desenharTitulo();
+
+    desenharTorre();
+
+    desenharEsfera();
+
+    desenharInformacoes();
+
+    desenharBotoes();
+  };
+
+
+  // ============================================
+  // TÍTULO
+  // ============================================
+
+  function desenharTitulo() {
+
+    sim.fill(40);
     sim.noStroke();
 
+    sim.textAlign(sim.CENTER);
+    sim.textSize(28);
+
+    sim.text(
+      "Atividade Experimental - Energia Mecânica",
+      sim.width / 2,
+      35
+    );
+  }
+
+
+  // ============================================
+  // TORRE
+  // ============================================
+
+  function desenharTorre() {
+
+    // Corpo da torre
+    sim.fill(205);
+    sim.stroke(70);
+    sim.strokeWeight(2);
+
     sim.rect(
-      xTorre + larguraTorre / 2 - 18,
-      y - 15,
-      36,
-      30
+      xTorre,
+      topoTorre,
+      larguraTorre,
+      alturaInicial * escala + 6
     );
 
 
-    // Nome da janela
-    sim.fill(30);
+    // Janelas
+    for (
+      let i = 0;
+      i < alturasJanelas.length;
+      i++
+    ) {
 
-    sim.textAlign(LEFT, CENTER);
-    sim.textSize(16);
+      let h = alturasJanelas[i];
+
+      let y =
+        topoTorre +
+        (alturaInicial - h) * escala;
+
+
+      // Janela
+      sim.fill(70);
+      sim.noStroke();
+
+      sim.rect(
+        xTorre + larguraTorre / 2 - 18,
+        y - 15,
+        36,
+        30
+      );
+
+
+      // Nome da janela
+      sim.fill(30);
+
+      sim.textAlign(sim.LEFT, sim.CENTER);
+      sim.textSize(16);
+
+      sim.text(
+        nomesJanelas[i],
+        xTorre + larguraTorre + 15,
+        y
+      );
+
+
+      // Altura
+      sim.textAlign(sim.RIGHT, sim.CENTER);
+      sim.textSize(14);
+
+      sim.text(
+        h + " m",
+        xTorre - 15,
+        y - 4
+      );
+    }
+
+
+    // Chão
+    sim.stroke(60);
+    sim.strokeWeight(4);
+
+    sim.line(
+      80,
+      topoTorre + alturaInicial * escala + 5,
+      650,
+      topoTorre + alturaInicial * escala + 5
+    );
+  }
+
+
+  // ============================================
+  // ESFERA
+  // ============================================
+
+  function desenharEsfera() {
+
+    let x =
+      xTorre +
+      larguraTorre / 2;
+
+
+    let y =
+      topoTorre +
+      (alturaInicial - altura) * escala;
+
+
+    sim.noStroke();
+
+    sim.fill(190, 50, 50);
+
+    sim.circle(
+      x,
+      y,
+      24
+    );
+  }
+
+
+  // ============================================
+  // FÍSICA
+  // ============================================
+
+  function atualizarFisica() {
+
+    if (!rodando || terminou) {
+      return;
+    }
+
+
+    // Guarda a altura anterior
+    alturaAnterior = altura;
+
+
+    // Intervalo de tempo
+    let dt = 1 / 60;
+
+    tempo += dt;
+
+
+    // Velocidade da queda livre
+    velocidade =
+      gravidade * tempo;
+
+
+    // Altura em função do tempo
+    altura =
+      alturaInicial -
+      (gravidade * tempo * tempo) / 2;
+
+
+    // Quando chega ao chão
+    if (altura <= 0) {
+
+      altura = 0;
+
+
+      velocidade =
+        sim.sqrt(
+          2 *
+          gravidade *
+          alturaInicial
+        );
+
+
+      rodando = false;
+
+      terminou = true;
+    }
+  }
+
+
+  // ============================================
+  // VERIFICAR JANELAS
+  // ============================================
+
+  function verificarJanela() {
+
+    for (
+      let i = 0;
+      i < alturasJanelas.length;
+      i++
+    ) {
+
+      let h = alturasJanelas[i];
+
+
+      // A esfera passou pela altura da janela
+      if (
+        alturaAnterior > h &&
+        altura <= h
+      ) {
+
+        janelaAtual = i;
+      }
+    }
+  }
+
+
+  // ============================================
+  // INFORMAÇÕES
+  // ============================================
+
+  function desenharInformacoes() {
+
+    let x = 430;
+    let y = 110;
+
+
+    sim.fill(35);
+    sim.noStroke();
+
+    sim.textAlign(sim.LEFT);
+
+
+    sim.textSize(22);
 
     sim.text(
-      nomesJanelas[i],
-      xTorre + larguraTorre + 15,
+      "Dados do experimento",
+      x,
       y
     );
 
 
-    // Altura
-    sim.textAlign(RIGHT, CENTER);
-    sim.textSize(14);
-
-    sim.text(
-      h + " m",
-      xTorre - 15,
-      y - 4
-    );
-  }
-
-
-  // Chão
-  sim.stroke(60);
-  sim.strokeWeight(4);
-
-  sim.line(
-    80,
-    topoTorre + alturaInicial * escala + 5,
-    650,
-    topoTorre + alturaInicial * escala + 5
-  );
-}
-
-
-// ============================================
-// ESFERA
-// ============================================
-
-function desenharEsfera() {
-
-  let x = xTorre + larguraTorre / 2;
-
-  let y =
-    topoTorre +
-    (alturaInicial - altura) * escala;
-
-
-  sim.stroke();
-
-  sim.fill(190, 50, 50);
-
-  sim.circle(
-    x,
-    y,
-    24
-  );
-}
-
-
-// ============================================
-// FÍSICA
-// ============================================
-
-function atualizarFisica() {
-
-  if (!rodando || terminou) {
-    return;
-  }
-
-
-  // Intervalo de tempo
-  let dt = 1 / 60;
-
-  tempo += dt;
-
-
-  // Velocidade da queda livre
-  velocidade = gravidade * tempo;
-
-
-  // Altura em função do tempo
-  altura =
-    alturaInicial -
-    (gravidade * tempo * tempo) / 2;
-
-
-  // Quando chega ao chão
-  if (altura <= 0) {
-
-    altura = 0;
-
-    velocidade =
-      sqrt(2 * gravidade * alturaInicial);
-
-    rodando = false;
-
-    terminou = true;
-  }
-}
-
-
-// ============================================
-// VERIFICAR JANELAS
-// ============================================
-
-function verificarJanela() {
-
-  for (let i = 0; i < alturasJanelas.length; i++) {
-
-    let h = alturasJanelas[i];
-
-    // A esfera passou pela altura desta janela
-    if (
-      altura <= h + 0.05 &&
-      altura >= h - 0.05
-    ) {
-
-      if (janelaAtual !== i) {
-
-        janelaAtual = i;
-
-      }
-    }
-  }
-}
-
-
-// ============================================
-// INFORMAÇÕES
-// ============================================
-
-function desenharInformacoes() {
-
-  let x = 430;
-  let y = 110;
-
-  sim.fill(35);
-  sim.stroke();
-
-  sim.textAlign(LEFT);
-
-  sim.textSize(22);
-
-  sim.text(
-    "Dados do experimento",
-    x,
-    y
-  );
-
-
-  sim.textSize(17);
-
-  sim.text(
-    "Massa: " + massa.toFixed(1) + " kg",
-    x,
-    y + 50
-  );
-
-  sim.text(
-    "Altura: " + altura.toFixed(2) + " m",
-    x,
-    y + 85
-  );
-
-  sim.text(
-    "Velocidade: " + velocidade.toFixed(2) + " m/s",
-    x,
-    y + 120
-  );
-
-  sim.text(
-    "Tempo: " + tempo.toFixed(2) + " s",
-    x,
-    y + 155
-  );
-
-
-  sim.text(
-    "Gravidade: " + gravidade + " m/s²",
-    x,
-    y + 190
-  );
-
-
-  // Janela atual
-  if (janelaAtual >= 0) {
-
-    sim.textSize(20);
-
-    sim.text(
-      "Janela: " + nomesJanelas[janelaAtual],
-      x,
-      y + 250
-    );
-
-  } else {
-
     sim.textSize(17);
 
     sim.text(
-      "Aguardando início...",
+      "Massa: " +
+      massa.toFixed(1) +
+      " kg",
       x,
-      y + 250
+      y + 50
     );
-  }
 
-
-  // Mensagem final
-  if (terminou) {
-
-    sim.textSize(18);
 
     sim.text(
-      "Objeto chegou ao chão.",
+      "Altura: " +
+      altura.toFixed(2) +
+      " m",
       x,
-      y + 300
+      y + 85
+    );
+
+
+    sim.text(
+      "Velocidade: " +
+      velocidade.toFixed(2) +
+      " m/s",
+      x,
+      y + 120
+    );
+
+
+    sim.text(
+      "Tempo: " +
+      tempo.toFixed(2) +
+      " s",
+      x,
+      y + 155
+    );
+
+
+    sim.text(
+      "Gravidade: " +
+      gravidade +
+      " m/s²",
+      x,
+      y + 190
+    );
+
+
+    // -----------------------------
+    // JANELA ATUAL
+    // -----------------------------
+
+    if (janelaAtual >= 0) {
+
+      sim.textSize(20);
+
+      sim.text(
+        "Janela: " +
+        nomesJanelas[janelaAtual],
+        x,
+        y + 250
+      );
+
+    } else {
+
+      sim.textSize(17);
+
+      sim.text(
+        "Aguardando início...",
+        x,
+        y + 250
+      );
+    }
+
+
+    // -----------------------------
+    // MENSAGEM FINAL
+    // -----------------------------
+
+    if (terminou) {
+
+      sim.textSize(18);
+
+      sim.text(
+        "Objeto chegou ao chão.",
+        x,
+        y + 300
+      );
+    }
+  }
+
+
+  // ============================================
+  // BOTÕES
+  // ============================================
+
+  function desenharBotoes() {
+
+    let y = 630;
+
+
+    desenharBotao(
+      150,
+      y,
+      120,
+      40,
+      "INICIAR"
+    );
+
+
+    desenharBotao(
+      290,
+      y,
+      120,
+      40,
+      "PAUSAR"
+    );
+
+
+    desenharBotao(
+      430,
+      y,
+      120,
+      40,
+      "REINICIAR"
     );
   }
-}
 
 
-// ============================================
-// BOTÕES
-// ============================================
-
-function desenharBotoes() {
-
-  let y = 630;
-
-  desenharBotao(
-    150,
-    y,
-    120,
-    40,
-    "INICIAR"
-  );
-
-  desenharBotao(
-    290,
-    y,
-    120,
-    40,
-    "PAUSAR"
-  );
-
-  desenharBotao(
-    430,
-    y,
-    120,
-    40,
-    "REINICIAR"
-  );
-}
-
-
-function desenharBotao(
-  x,
-  y,
-  largura,
-  altura,
-  textoBotao
-) {
-
-  sim.fill(215);
-  sim.stroke(80);
-  sim.strokeWeight(1);
-
-  sim.rect(
+  function desenharBotao(
     x,
     y,
     largura,
     altura,
-    6
-  );
-
-
-  sim.fill(30);
-  sim.stroke();
-
-  sim.textAlign(CENTER, CENTER);
-  sim.textSize(14);
-
-  sim.text(
-    textoBotao,
-    x + largura / 2,
-    y + altura / 2
-  );
-}
-
-
-// ============================================
-// CLIQUES
-// ============================================
-
-function mousePressed() {
-
-  // INICIAR
-  if (
-    mouseX >= 150 &&
-    mouseX <= 270 &&
-    mouseY >= 630 &&
-    mouseY <= 670
+    textoBotao
   ) {
 
-    if (!terminou) {
+    sim.fill(215);
+    sim.stroke(80);
+    sim.strokeWeight(1);
 
-      rodando = true;
+    sim.rect(
+      x,
+      y,
+      largura,
+      altura,
+      6
+    );
+
+
+    sim.fill(30);
+    sim.noStroke();
+
+    sim.textAlign(
+      sim.CENTER,
+      sim.CENTER
+    );
+
+    sim.textSize(14);
+
+    sim.text(
+      textoBotao,
+      x + largura / 2,
+      y + altura / 2
+    );
+  }
+
+
+  // ============================================
+  // CLIQUES
+  // ============================================
+
+  sim.mousePressed = function () {
+
+    // -----------------------------
+    // INICIAR
+    // -----------------------------
+
+    if (
+      sim.mouseX >= 150 &&
+      sim.mouseX <= 270 &&
+      sim.mouseY >= 630 &&
+      sim.mouseY <= 670
+    ) {
+
+      if (!terminou) {
+
+        rodando = true;
+      }
     }
-  }
 
 
-  // PAUSAR
-  if (
-    mouseX >= 290 &&
-    mouseX <= 410 &&
-    mouseY >= 630 &&
-    mouseY <= 670
-  ) {
+    // -----------------------------
+    // PAUSAR
+    // -----------------------------
 
-    rodando = false;
-  }
+    if (
+      sim.mouseX >= 290 &&
+      sim.mouseX <= 410 &&
+      sim.mouseY >= 630 &&
+      sim.mouseY <= 670
+    ) {
+
+      rodando = false;
+    }
 
 
-  // REINICIAR
-  if (
-    mouseX >= 430 &&
-    mouseX <= 550 &&
-    mouseY >= 630 &&
-    mouseY <= 670
-  ) {
+    // -----------------------------
+    // REINICIAR
+    // -----------------------------
 
-    tempo = 0;
+    if (
+      sim.mouseX >= 430 &&
+      sim.mouseX <= 550 &&
+      sim.mouseY >= 630 &&
+      sim.mouseY <= 670
+    ) {
 
-    velocidade = 0;
+      tempo = 0;
 
-    altura = alturaInicial;
+      velocidade = 0;
 
-    rodando = false;
+      altura = alturaInicial;
 
-    terminou = false;
+      alturaAnterior = alturaInicial;
 
-    janelaAtual = -1;
-  }
-}
+      rodando = false;
+
+      terminou = false;
+
+      janelaAtual = -1;
+    }
+  };
 }
