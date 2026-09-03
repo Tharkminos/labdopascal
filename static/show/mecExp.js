@@ -107,28 +107,18 @@ function mecExp(sim) {
     );
   }
 
-
-  // ============================================
-  // TORRE
-  // ============================================
-
-  // ============================================
+// ============================================
 // TORRE
 // ============================================
 
 function desenharTorre() {
 
-  // Margem para que as janelas não fiquem
-  // cortadas no topo ou na base
+  // Uma única referência vertical para toda a torre
   let margem = 18;
-
   let topo = topoTorre + margem;
 
-  let alturaCorpo =
-    alturaInicial * escala;
-
-  let base =
-    topo + alturaCorpo;
+  let alturaCorpo = alturaInicial * escala;
+  let base = topo + alturaCorpo;
 
 
   // -----------------------------
@@ -141,9 +131,9 @@ function desenharTorre() {
 
   sim.rect(
     xTorre,
-    topo-30,
+    topo,
     larguraTorre,
-    alturaCorpo+50
+    alturaCorpo
   );
 
 
@@ -151,25 +141,17 @@ function desenharTorre() {
   // Janelas
   // -----------------------------
 
-  for (
-    let i = 0;
-    i < alturasJanelas.length;
-    i++
-  ) {
+  for (let i = 0; i < alturasJanelas.length; i++) {
 
     let h = alturasJanelas[i];
 
-
-    // Posição vertical da janela
+    // Mesma referência usada pela esfera
     let y =
       topo +
       (alturaInicial - h) * escala;
 
 
-    // -----------------------------
     // Janela
-    // -----------------------------
-
     sim.fill(70);
     sim.noStroke();
 
@@ -181,10 +163,7 @@ function desenharTorre() {
     );
 
 
-    // -----------------------------
     // Nome da janela
-    // -----------------------------
-
     sim.fill(30);
 
     sim.textAlign(
@@ -201,10 +180,7 @@ function desenharTorre() {
     );
 
 
-    // -----------------------------
     // Altura
-    // -----------------------------
-
     sim.textAlign(
       sim.RIGHT,
       sim.CENTER
@@ -229,9 +205,42 @@ function desenharTorre() {
 
   sim.line(
     80,
-    base+20,
+    base,
     650,
-    base+20
+    base
+  );
+}
+
+
+// ============================================
+// ESFERA
+// ============================================
+
+function desenharEsfera() {
+
+  let x =
+    xTorre +
+    larguraTorre / 2;
+
+  // IMPORTANTE:
+  // usar exatamente o mesmo "topo"
+  // utilizado pelas janelas
+  let margem = 18;
+  let topo = topoTorre + margem;
+
+  let y =
+    topo +
+    (alturaInicial - altura) * escala;
+
+
+  sim.noStroke();
+
+  sim.fill(190, 50, 50);
+
+  sim.circle(
+    x,
+    y,
+    24
   );
 }
 
