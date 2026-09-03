@@ -76,7 +76,7 @@ sim.draw = function() {
 function desenharTitulo() {
 
   sim.fill(40);
-  sim.nosim.stroke();
+  sim.stroke();
 
   sim.textAlign(CENTER);
   sim.textSize(28);
@@ -181,7 +181,7 @@ function desenharEsfera() {
     (alturaInicial - altura) * escala;
 
 
-  sim.nosim.stroke();
+  sim.stroke();
 
   sim.fill(190, 50, 50);
 
@@ -271,7 +271,7 @@ function desenharInformacoes() {
   let y = 110;
 
   sim.fill(35);
-  sim.nosim.stroke();
+  sim.stroke();
 
   sim.textAlign(LEFT);
 
@@ -411,7 +411,7 @@ function desenharBotao(
 
 
   sim.fill(30);
-  sim.nosim.stroke();
+  sim.stroke();
 
   sim.textAlign(CENTER, CENTER);
   sim.textSize(14);
