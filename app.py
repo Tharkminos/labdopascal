@@ -468,6 +468,12 @@ def gerar_estrelas(concluidas, total):
         "★" * (total - concluidas)
     )
 
+@app.route("/mecexp")
+def mec_exp():
+    arquivo = f"posts/atv_exp.md"
+    return renderizar_markdown(
+        arquivo)
+
 @app.route("/login/google")
 def login_google():
 
