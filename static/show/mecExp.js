@@ -270,7 +270,7 @@ function mecExp(sim) {
 
     sim.line(
       80,
-      baseTorre+20,
+      baseTorre+10,
       650,
       baseTorre+10
     );
