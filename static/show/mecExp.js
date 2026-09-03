@@ -165,7 +165,7 @@ function mecExp(sim) {
       xTorre,
       topoTorre-20,
       larguraTorre,
-      alturaTorre+40
+      alturaTorre+30
     );
 
 
@@ -266,7 +266,7 @@ function mecExp(sim) {
     // --------------------------------------------
 
     sim.stroke(60);
-    sim.strokeWeight(4);
+    sim.strokeWeight(10);
 
     sim.line(
       80,
