@@ -39,9 +39,9 @@ let janelaAtual = -1;
 
 sim.setup = function() {
 
-  createCanvas(750, 700);
+  sim.createCanvas(750, 700);
 
-  textFont("Arial");
+  sim.sim.textFont("Arial");
 }
 
 
@@ -51,7 +51,7 @@ sim.setup = function() {
 
 sim.draw = function() {
 
-  background(235);
+  sim.background(235);
 
   desenharTitulo();
 
@@ -75,13 +75,13 @@ sim.draw = function() {
 
 function desenharTitulo() {
 
-  fill(40);
-  noStroke();
+  sim.fill(40);
+  sim.nosim.stroke();
 
-  textAlign(CENTER);
-  textSize(28);
+  sim.textAlign(CENTER);
+  sim.textSize(28);
 
-  text(
+  sim.text(
     "Atividade Experimental Energia Mecânica",
     width / 2,
     35
@@ -96,11 +96,11 @@ function desenharTitulo() {
 function desenharTorre() {
 
   // Corpo da torre
-  fill(205);
-  stroke(70);
-  strokeWeight(2);
+  sim.fill(205);
+  sim.stroke(70);
+  sim.strokeWeight(2);
 
-  rect(
+  sim.rect(
     xTorre,
     topoTorre,
     larguraTorre,
@@ -119,10 +119,10 @@ function desenharTorre() {
 
 
     // Janela
-    fill(70);
-    noStroke();
+    sim.fill(70);
+    sim.noStroke();
 
-    rect(
+    sim.rect(
       xTorre + larguraTorre / 2 - 18,
       y - 15,
       36,
@@ -131,12 +131,12 @@ function desenharTorre() {
 
 
     // Nome da janela
-    fill(30);
+    sim.fill(30);
 
-    textAlign(LEFT, CENTER);
-    textSize(16);
+    sim.textAlign(LEFT, CENTER);
+    sim.textSize(16);
 
-    text(
+    sim.text(
       nomesJanelas[i],
       xTorre + larguraTorre + 15,
       y
@@ -144,10 +144,10 @@ function desenharTorre() {
 
 
     // Altura
-    textAlign(RIGHT, CENTER);
-    textSize(14);
+    sim.textAlign(RIGHT, CENTER);
+    sim.textSize(14);
 
-    text(
+    sim.text(
       h + " m",
       xTorre - 15,
       y - 4
@@ -156,10 +156,10 @@ function desenharTorre() {
 
 
   // Chão
-  stroke(60);
-  strokeWeight(4);
+  sim.stroke(60);
+  sim.strokeWeight(4);
 
-  line(
+  sim.line(
     80,
     topoTorre + alturaInicial * escala + 5,
     650,
@@ -181,11 +181,11 @@ function desenharEsfera() {
     (alturaInicial - altura) * escala;
 
 
-  noStroke();
+  sim.nosim.stroke();
 
-  fill(190, 50, 50);
+  sim.fill(190, 50, 50);
 
-  circle(
+  sim.circle(
     x,
     y,
     24
@@ -270,48 +270,48 @@ function desenharInformacoes() {
   let x = 430;
   let y = 110;
 
-  fill(35);
-  noStroke();
+  sim.fill(35);
+  sim.nosim.stroke();
 
-  textAlign(LEFT);
+  sim.textAlign(LEFT);
 
-  textSize(22);
+  sim.textSize(22);
 
-  text(
+  sim.text(
     "Dados do experimento",
     x,
     y
   );
 
 
-  textSize(17);
+  sim.textSize(17);
 
-  text(
+  sim.text(
     "Massa: " + massa.toFixed(1) + " kg",
     x,
     y + 50
   );
 
-  text(
+  sim.text(
     "Altura: " + altura.toFixed(2) + " m",
     x,
     y + 85
   );
 
-  text(
+  sim.text(
     "Velocidade: " + velocidade.toFixed(2) + " m/s",
     x,
     y + 120
   );
 
-  text(
+  sim.text(
     "Tempo: " + tempo.toFixed(2) + " s",
     x,
     y + 155
   );
 
 
-  text(
+  sim.text(
     "Gravidade: " + gravidade + " m/s²",
     x,
     y + 190
@@ -321,9 +321,9 @@ function desenharInformacoes() {
   // Janela atual
   if (janelaAtual >= 0) {
 
-    textSize(20);
+    sim.textSize(20);
 
-    text(
+    sim.text(
       "Janela: " + nomesJanelas[janelaAtual],
       x,
       y + 250
@@ -331,9 +331,9 @@ function desenharInformacoes() {
 
   } else {
 
-    textSize(17);
+    sim.textSize(17);
 
-    text(
+    sim.text(
       "Aguardando início...",
       x,
       y + 250
@@ -344,9 +344,9 @@ function desenharInformacoes() {
   // Mensagem final
   if (terminou) {
 
-    textSize(18);
+    sim.textSize(18);
 
-    text(
+    sim.text(
       "Objeto chegou ao chão.",
       x,
       y + 300
@@ -397,11 +397,11 @@ function desenharBotao(
   textoBotao
 ) {
 
-  fill(215);
-  stroke(80);
-  strokeWeight(1);
+  sim.fill(215);
+  sim.stroke(80);
+  sim.strokeWeight(1);
 
-  rect(
+  sim.rect(
     x,
     y,
     largura,
@@ -410,13 +410,13 @@ function desenharBotao(
   );
 
 
-  fill(30);
-  noStroke();
+  sim.fill(30);
+  sim.nosim.stroke();
 
-  textAlign(CENTER, CENTER);
-  textSize(14);
+  sim.textAlign(CENTER, CENTER);
+  sim.textSize(14);
 
-  text(
+  sim.text(
     textoBotao,
     x + largura / 2,
     y + altura / 2
