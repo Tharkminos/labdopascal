@@ -143,7 +143,7 @@ function desenharTorre() {
     xTorre,
     topo-30,
     larguraTorre,
-    alturaCorpo+60
+    alturaCorpo+40
   );
 
 
