@@ -272,7 +272,7 @@ function mecExp(sim) {
       80,
       baseTorre+20,
       650,
-      baseTorre+15
+      baseTorre+10
     );
 
   }
