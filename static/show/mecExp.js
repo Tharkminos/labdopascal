@@ -163,9 +163,9 @@ function mecExp(sim) {
 
     sim.rect(
       xTorre,
-      topoTorre,
+      topoTorre-20,
       larguraTorre,
-      alturaTorre
+      alturaTorre+20
     );
 
 
@@ -270,9 +270,9 @@ function mecExp(sim) {
 
     sim.line(
       80,
-      baseTorre,
+      baseTorre+20,
       650,
-      baseTorre
+      baseTorre+20
     );
 
   }
@@ -323,7 +323,7 @@ function mecExp(sim) {
 
     sim.noStroke();
 
-    sim.fill(190, 50, 50);
+    sim.fill(90, 30, 30);
 
     sim.circle(
       x,
