@@ -141,7 +141,7 @@ function desenharTorre() {
 
   sim.rect(
     xTorre,
-    topo,
+    topo-30,
     larguraTorre,
     alturaCorpo
   );
@@ -229,9 +229,9 @@ function desenharTorre() {
 
   sim.line(
     80,
-    base,
+    base+20,
     650,
-    base
+    base+20
   );
 }
 
