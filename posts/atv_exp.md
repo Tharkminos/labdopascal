@@ -8,6 +8,8 @@ results:true
 
 Imagine que estamos no passado, quando a Torre de Pisa ainda era perfeitamente vertical. Para estudar os efeitos de uma possível queda, foi criado um **laboratório virtual** que permite acompanhar a queda de uma esfera a partir do alto da torre.
 
+←[simulacao=mecExp]→
+
 A esfera é abandonada a partir do ponto **A**, localizado a 20 metros de altura. Durante a queda, ela passa por diferentes janelas da torre:
 
 - **A → 20 m**
@@ -32,15 +34,9 @@ Despreze a resistência do ar e considere que não há perda de energia durante 
 1) Execute a simulação e observe o movimento da esfera.
 Para cada uma das posições **A, B, C, D, E e F**, registre os valores de:
 
-| Ponto | Altura (m) | Velocidade (m/s) | Tempo (s) |
-|---|---:|---:|---:|
-| A | | | |
-| B | | | |
-| C | | | |
-| D | | | |
-| E | | | |
-| F | | | |
-
+Altura (m)
+Velocidade (m/s)
+Tempo (s)  
 ---
 
 2)Utilizando os dados obtidos na simulação, calcule a **energia potencial gravitacional** da esfera nos pontos **A, B, C, D e E**.
@@ -67,15 +63,6 @@ Apresente os cálculos.
 
 **Em = Ep + Ec**
 
-Organize os resultados:
-
-| Ponto | Ep (J) | Ec (J) | Em (J) |
-|---|---:|---:|---:|
-| A | | | |
-| B | | | |
-| C | | | |
-| D | | | |
-| E | | | |
 
 
 
@@ -97,4 +84,4 @@ E por fim Responda:
 
 Com base no experimento realizado, escreva um pequeno parágrafo explicando como a **energia potencial gravitacional se transforma em energia cinética durante a queda da esfera** e por que podemos afirmar que a **energia mecânica é conservada** nesse experimento.
 
-←[simulacao=mecExp]→
+
