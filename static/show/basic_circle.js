@@ -11,8 +11,8 @@ x = sim.mouseX
 y = sim.mouseY
 sim.background(220);
 sim.circle(x,y,50)
-sim.textSize(30)
-string = "circle("+x+","+y+50+",50)"
+sim.textSize(18)
+string = "circle("+Math.floor(x)+","+Math.floor(y)+50+",50)"
 sim.text(string,175,20)
 }
 }
