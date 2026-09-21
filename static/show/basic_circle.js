@@ -5,11 +5,13 @@ let string = "";
 sim.setup = function(){
 sim.canvas = sim.createCanvas(400,500)
 }
-
 sim.draw = function(){
-x = sim.mouseX
-y = sim.mouseY
 sim.background(220);
+sim.fill(0);
+if (sim.mouseIsPressed === true) {
+    x = sim.mouseX
+    y = sim.mouseY
+  } 
 sim.circle(x,y,50)
 sim.fill(255);
 sim.rect(0,0,400,100)
