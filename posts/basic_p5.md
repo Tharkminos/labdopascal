@@ -15,6 +15,6 @@ results:true
 [cor=180,80,80,1]circle(x,y,diametro)[/cor]:Desenha um círculo na posição horizontal x, e na posição vertical y, com o tamanho do diâmetro definido.→
 
 **→[cor=10,10,200,1]Exemplo da configuração do círculo[/cor]←**
-←[simulacao=show_atom]←
+←[simulacao=basic_circle]←
 
 
