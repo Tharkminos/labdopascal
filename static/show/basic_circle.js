@@ -14,8 +14,10 @@ if (sim.mouseIsPressed === true) {
   } 
 sim.circle(x,y,50)
 sim.fill(255);
+sim.noStroke();
 sim.rect(0,0,400,100)
-sim.fill(0);
+sim.stroke(0);
+    sim.fill(0);
 sim.textSize(18)
 string = "circle("+Math.floor(x)+","+Math.floor(y-100)+",50)"
 sim.text(string,100,20)
