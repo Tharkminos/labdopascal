@@ -467,6 +467,10 @@ def gerar_estrelas(concluidas, total):
         "⭐" * concluidas +
         "★" * (total - concluidas)
     )
+@app.route("/p5js")
+def p5js():
+    arquivo = f"posts/basic_p5.md"
+    return renderizar_markdown(arquivo)
 
 @app.route("/mecexp")
 def mec_exp():
