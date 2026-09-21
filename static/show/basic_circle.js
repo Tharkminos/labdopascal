@@ -7,10 +7,12 @@ sim.canvas = sim.createCanvas(400,500)
 }
 
 sim.draw = function(){
-x = mouseX
-y = mouseY
+x = sim.mouseX
+y = sim.mouseY
 sim.background(220);
-string = "circle("+x+","+y+")"
-text("circle({x},{y})")
+sim.circle(x,y,50)
+sim.textSize(30)
+string = "circle("+x+","+y+50+",50)"
+sim.text(string,175,20)
 }
 }
