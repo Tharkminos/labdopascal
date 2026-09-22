@@ -34,14 +34,14 @@ sim.text(string,100,20)
 }
 sim.keyPressed = function(){
 if (sim.keyCode === 37) { // Left arrow key
-    size_x+=1;
+    size_x+=5;
   } else if (sim.keyCode === 39) { // Right arrow key
-    size_x-=1;
+    size_x-=5;
   }
 if (sim.keyCode === 36) { // Up arrow key
-    size_y+=1;
-  } else if (sim.keyCode === 38) { // Down arrow key
-    size_y-=1;
+    size_y+=5;
+  } else if (sim.keyCode === 40) { // Down arrow key
+    size_y-=5;
   }
     
 }
