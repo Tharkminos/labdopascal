@@ -9,13 +9,11 @@ sim.canvas = sim.createCanvas(400,450)
 }
 sim.draw = function(){
 if (sim.mouseIsPressed === true) {
-    x = sim.constrain(sim.mouseX,0,400)
-    y = sim.constrain(sim.mouseY,50,450)
+    x = sim.constrain(sim.mouseX,0,400)+5-Math.floor(sim.mouseX)%5
+    y = sim.constrain(sim.mouseY,50,450)+5-Math.floor(sim.mouseY)%5
   } 
 ad_x = 5-Math.floor(x)%5
 ad_y = 5-Math.floor(y)%5
-x += ad_x
-y += ad_y
 sim.background(220);
 sim.fill(200,150,80);
 
