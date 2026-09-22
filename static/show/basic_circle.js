@@ -13,7 +13,7 @@ if (sim.mouseIsPressed === true) {
     y = sim.constrain(sim.mouseY,50,450)
     ad_x = 5-Math.floor(sim.mouseX)%5
     ad_y = 5-Math.floor(sim.mouseY)%5
-    
+}
 
 
 sim.background(220);
