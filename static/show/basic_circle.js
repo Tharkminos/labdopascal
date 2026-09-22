@@ -8,8 +8,8 @@ sim.setup = function(){
 sim.canvas = sim.createCanvas(400,450)
 }
 sim.draw = function(){
-ad_x = Math.floor(x)%5
-ad_y = Math.floor(y)%5
+ad_x = 5-Math.floor(x)%5
+ad_y = 5-Math.floor(y)%5
 sim.background(220);
 sim.fill(200,150,80);
 if (sim.mouseIsPressed === true) {
@@ -19,7 +19,7 @@ if (sim.mouseIsPressed === true) {
 sim.circle(x,y,50)
 sim.fill(255);
 sim.noStroke();
-sim.rect(0,0,400,100)
+sim.rect(0,0,400,50)
 sim.stroke(0);
 sim.fill(0);
 sim.textSize(18)
