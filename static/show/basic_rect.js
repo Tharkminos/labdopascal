@@ -21,7 +21,7 @@ if (sim.mouseIsPressed === true) {
 sim.background(220);
 sim.fill(200,150,80);
 
-sim.rect(x,y,size_x,syze_y)
+sim.rect(x,y,size_x,size_y)
 sim.fill(255);
 sim.noStroke();
 sim.rect(0,0,400,50)
