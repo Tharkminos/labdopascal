@@ -1,4 +1,4 @@
-function basic_circle(sim){
+function basic_triangle(sim){
 let x = 200;
 let y = 200;
 let ad_x = 0;
