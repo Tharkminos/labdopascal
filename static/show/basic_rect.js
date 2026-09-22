@@ -32,7 +32,7 @@ sim.textSize(18)
 string = "rect("+Math.floor(x+ad_x-5)+","+Math.floor(y-50+ad_y-5)+","+size_x+","+size_y+")"
 sim.text(string,100,20)
 }
-sim.keyPressed = function(){
+function keyPressed(){
 if (keyCode === 37) { // Left arrow key
     size_x+=1;
   } else if (keyCode === 39) { // Right arrow key
