@@ -11,17 +11,9 @@ sim.draw = function(){
 if (sim.mouseIsPressed === true) {
     x = sim.constrain(sim.mouseX,0,400)
     y = sim.constrain(sim.mouseY,50,450)
-    if(x<5){
-        x = 0
-        }else{
-        ad_x = 5-Math.floor(sim.mouseX)%5
-        }
-        if(y<5){
-        y = 0
-        }else{
-        ad_y = 5-Math.floor(sim.mouseY)%5
-        }
-  } 
+    ad_x = 5-Math.floor(sim.mouseX)%5
+    ad_y = 5-Math.floor(sim.mouseY)%5
+    
 
 
 sim.background(220);
