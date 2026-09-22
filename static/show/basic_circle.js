@@ -13,8 +13,8 @@ ad_y = 5-Math.floor(y)%5
 sim.background(220);
 sim.fill(200,150,80);
 if (sim.mouseIsPressed === true) {
-    x = constrain(sim.mouseX+ad_x,0,400)
-    y = constrain(sim.mouseY+ad_y,0,400)
+    x = sim.constrain(sim.mouseX+ad_x,0,400)
+    y = sim.constrain(sim.mouseY+ad_y,0,400)
   } 
 sim.circle(x,y,50)
 sim.fill(255);
