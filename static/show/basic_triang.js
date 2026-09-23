@@ -16,9 +16,9 @@ sim.canvas = sim.createCanvas(400,450)
 sim.draw = function(){
 sim.background(220);
 sim.fill(200,150,80);
-p1 = sim.dist(x1,y1,mouseX,mouseY);
-p2 = sim.dist(x1,y1,mouseX,mouseY);
-p3 = sim.dist(x1,y1,mouseX,mouseY);
+p1 = sim.dist(x1,y1,sim.mouseX,sim.mouseY);
+p2 = sim.dist(x1,y1,sim.mouseX,sim.mouseY);
+p3 = sim.dist(x1,y1,sim.mouseX,sim.mouseY);
 if(sim.mouseIsPressed===true){
   if(p1<20){
     x1 = sim.mouseX +5-Math.floor(sim.mouseX)%5
