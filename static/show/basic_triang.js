@@ -9,6 +9,7 @@ let y3 =  50+50;
 let p1 = 100
 let p2 = 100
 let p3 = 100
+let mode = [false,false,false]
 let string = "";
 sim.setup = function(){
 sim.canvas = sim.createCanvas(400,450)
@@ -21,18 +22,29 @@ p2 = sim.dist(x2,y2,sim.mouseX,sim.mouseY);
 p3 = sim.dist(x3,y3,sim.mouseX,sim.mouseY);
 if(sim.mouseIsPressed===true){
   if(p1<30){
-    x1 = Math.floor(sim.mouseX +5-Math.floor(sim.mouseX)%5)
-    y1 = Math.floor(sim.mouseY +5-Math.floor(sim.mouseY)%5)
+    mode[0] = true
   }
   if(p2<30){
-    x2 = Math.floor(sim.mouseX +5-Math.floor(sim.mouseX)%5)
-    y2 = Math.floor(sim.mouseY +5-Math.floor(sim.mouseY)%5)
+    mode[1] = true
   }
   if(p3<30){
+    mode[2] = true
+  }
+  if(mode[0] === true){
+    x1 = Math.floor(sim.mouseX +5-Math.floor(sim.mouseX)%5)
+    y1 = Math.floor(sim.mouseY +5-Math.floor(sim.mouseY)%5)
+  }if(mode[1] === true){
+    x2 = Math.floor(sim.mouseX +5-Math.floor(sim.mouseX)%5)
+    y2 = Math.floor(sim.mouseY +5-Math.floor(sim.mouseY)%5)
+  }if(mode[2] === true){
     x3 = Math.floor(sim.mouseX +5-Math.floor(sim.mouseX)%5)
     y3 = Math.floor(sim.mouseY +5-Math.floor(sim.mouseY)%5)
   }
+    
+}else{
+mode = [false,false,false]
 }
+
 sim.fill(255);
 sim.noStroke();
 sim.rect(0,0,400,50)
