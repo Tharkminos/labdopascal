@@ -20,15 +20,15 @@ p1 = sim.dist(x1,y1,sim.mouseX,sim.mouseY);
 p2 = sim.dist(x2,y2,sim.mouseX,sim.mouseY);
 p3 = sim.dist(x3,y3,sim.mouseX,sim.mouseY);
 if(sim.mouseIsPressed===true){
-  if(p1<15){
+  if(p1<30){
     x1 = Math.floor(sim.mouseX +5-Math.floor(sim.mouseX)%5)
     y1 = Math.floor(sim.mouseY +5-Math.floor(sim.mouseY)%5)
   }
-  if(p2<15){
+  if(p2<30){
     x2 = Math.floor(sim.mouseX +5-Math.floor(sim.mouseX)%5)
     y2 = Math.floor(sim.mouseY +5-Math.floor(sim.mouseY)%5)
   }
-  if(p3<15){
+  if(p3<30){
     x3 = Math.floor(sim.mouseX +5-Math.floor(sim.mouseX)%5)
     y3 = Math.floor(sim.mouseY +5-Math.floor(sim.mouseY)%5)
   }
@@ -45,7 +45,7 @@ sim.circle(x2,y2,10);
 sim.circle(x3,y3,10);
 sim.fill(0,200,0);
 sim.triangle(x1,y1,x2,y2,x3,y3)
-string = "triangle("+x1+","+y1+","+x2+","+y2+","+x3+","+y3+")"
+string = "triangle("+x1+","+(y1-50)+","+x2+","+(y2-50)+","+x3+","+(y3-50)+")"
 
 sim.fill(0);
 sim.text(string,50,20)
