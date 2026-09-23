@@ -17,8 +17,8 @@ sim.draw = function(){
 sim.background(220);
 sim.fill(200,150,80);
 p1 = sim.dist(x1,y1,sim.mouseX,sim.mouseY);
-p2 = sim.dist(x1,y1,sim.mouseX,sim.mouseY);
-p3 = sim.dist(x1,y1,sim.mouseX,sim.mouseY);
+p2 = sim.dist(x2,y2,sim.mouseX,sim.mouseY);
+p3 = sim.dist(x3,y3,sim.mouseX,sim.mouseY);
 if(sim.mouseIsPressed===true){
   if(p1<20){
     x1 = sim.mouseX +5-Math.floor(sim.mouseX)%5
@@ -46,6 +46,8 @@ sim.circle(x3,y3,20);
 sim.fill(0,200,0);
 sim.triangle(x1,y1,x2,y2,x3,y3)
 string = "triangle("+x1+","+y1+","+x2+","+y2+","+x3+","+x3+")"
+
+sim.fill(0);
 sim.text(string,100,20)
 }
 
