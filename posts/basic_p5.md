@@ -27,5 +27,5 @@ x1,y1 é o primeiro canto
 x2,y2 é o segundo canto
 x3,y3 é o terceiro canto
 
-**→[cor=10,10,200,1]Exemplo da configuração do retângulo, clique com o mouse para alterar a posição e as setas para alterar o tamanho[/cor]←**
+**→[cor=10,10,200,1]Exemplo da configuração do triângulo, clique com o mouse para alterar as posições.[/cor]←**
 ←[simulacao=basic_triang]←
