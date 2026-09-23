@@ -48,7 +48,7 @@ sim.triangle(x1,y1,x2,y2,x3,y3)
 string = "triangle("+x1+","+y1+","+x2+","+y2+","+x3+","+x3+")"
 
 sim.fill(0);
-sim.text(string,100,20)
+sim.text(string,50,20)
 }
 
 
