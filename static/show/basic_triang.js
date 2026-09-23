@@ -22,13 +22,13 @@ p2 = sim.dist(x2,y2,sim.mouseX,sim.mouseY);
 p3 = sim.dist(x3,y3,sim.mouseX,sim.mouseY);
 if(sim.mouseIsPressed===true){
   if(p1<30){
-    mode[0] = true
+    mode = [true,false,false]
   }
   if(p2<30){
-    mode[1] = true
+    mode = [false,true,false]
   }
   if(p3<30){
-    mode[2] = true
+    mode = [false,false,true]
   }
   if(mode[0] === true){
     x1 = Math.floor(sim.mouseX +5-Math.floor(sim.mouseX)%5)
