@@ -22,5 +22,10 @@ results:true
 **→[cor=10,10,200,1]Exemplo da configuração do retângulo, clique com o mouse para alterar a posição e as setas para alterar o tamanho[/cor]←**
 ←[simulacao=basic_rect]←
 
+←[cor=180,80,80,1]triangle(x1,y1,x2,y2,x3,y3)[/cor]:Desenha um triângulo escolhendo os três cantos: 
+x1,y1 é o primeiro canto
+x2,y2 é o segundo canto
+x3,y3 é o terceiro canto
 
-
+**→[cor=10,10,200,1]Exemplo da configuração do retângulo, clique com o mouse para alterar a posição e as setas para alterar o tamanho[/cor]←**
+←[simulacao=basic_triang]←
