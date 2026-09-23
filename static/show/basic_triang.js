@@ -28,7 +28,7 @@ if(sim.mouseIsPressed===true){
     x2 = sim.mouseX +5-Math.floor(sim.mouseX)%5
     y2 = sim.mouseY +5-Math.floor(sim.mouseY)%5
   }
-  if(p1<20){
+  if(p3<20){
     x3 = sim.mouseX +5-Math.floor(sim.mouseX)%5
     y3 = sim.mouseY +5-Math.floor(sim.mouseY)%5
   }
