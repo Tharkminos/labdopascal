@@ -38,7 +38,7 @@ if (sim.keyCode === 37) { // Left arrow key
   } else if (sim.keyCode === 39) { // Right arrow key
     size_x-=5;
   }
-if (sim.keyCode === 36) { // Up arrow key
+if (sim.keyCode === 38) { // Up arrow key
     size_y+=5;
   } else if (sim.keyCode === 40) { // Down arrow key
     size_y-=5;
