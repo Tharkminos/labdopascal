@@ -8,7 +8,7 @@ sim.setup = function(){
 sim.canvas = sim.createCanvas(400,450)
 }
 sim.draw = function(){
-if (sim.mouseIsPressed === true) {
+if (sim.mouseIsPressed === true && sim.mouseY < 500 && sim.mouseY>0) {
     x = sim.constrain(sim.mouseX,0,400)
     y = sim.constrain(sim.mouseY,50,450)
     ad_x = 5-Math.floor(sim.mouseX)%5
