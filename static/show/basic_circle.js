@@ -16,15 +16,6 @@ if (sim.mouseIsPressed === true && sim.mouseY < 500 && sim.mouseY>0) {
     ad_y = 5-Math.floor(sim.mouseY)%5
 }
 
-if(sim.mouseIsPressed === true){
-    if(sim.mouseX>410 && sim.mouseX<410-25 && sim.mouseY>50 && sim.mouseY < 50+25){
-     radius+=1   
-    }
-    if(sim.mouseX>410 && sim.mouseX<410-25 && sim.mouseY>80 && sim.mouseY < 80+25){
-     radius+=-1   
-    }
-    
-}
 
 sim.background(220);
 sim.fill(200,150,80);
@@ -50,4 +41,5 @@ if (sim.keyCode === 38) { // Up arrow key
   } else if (sim.keyCode === 40) { // Down arrow key
     radius-=5;
   }
+}
 }
