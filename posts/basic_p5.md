@@ -19,10 +19,10 @@ results:true
 
 ←[cor=180,80,80,1]rect(x,y,tamanho_x,tamanho_y)[/cor]:Desenha um retângulo na posição horizontal x, e na posição vertical y, com o tamanho definido.→
 
-**→[cor=10,10,200,1]Exemplo da configuração do retângulo, clique com o mouse para alterar a posição e as setas para alterar o tamanho[/cor]←**
+**→[cor=10,10,200,1]Exemplo da configuração do retângulo, clique com o mouse para alterar a posição[/cor]←**
 ←[simulacao=basic_rect]←
 
-←[cor=180,80,80,1]triangle(x1,y1,x2,y2,x3,y3)[/cor]:Desenha um triângulo escolhendo os três cantos: 
+**←[cor=180,80,80,1]triangle(x1,y1,x2,y2,x3,y3)[/cor]: Desenha um triângulo escolhendo os três cantos:→**
 x1,y1 é o primeiro canto
 x2,y2 é o segundo canto
 x3,y3 é o terceiro canto
@@ -30,4 +30,5 @@ x3,y3 é o terceiro canto
 **→[cor=10,10,200,1]Exemplo da configuração do triângulo, clique com o mouse para alterar as posições.[/cor]←**
 ←[simulacao=basic_triang]←
 
-[color_picker]
+**→Abaixo, uma ferramenta para escolher a cor do elemento, clique no retângulo abaixo←** 
+→[color_picker]←
