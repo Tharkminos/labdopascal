@@ -29,3 +29,5 @@ x3,y3 é o terceiro canto
 
 **→[cor=10,10,200,1]Exemplo da configuração do triângulo, clique com o mouse para alterar as posições.[/cor]←**
 ←[simulacao=basic_triang]←
+
+[color_picker]
