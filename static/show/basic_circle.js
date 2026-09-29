@@ -40,11 +40,8 @@ sim.textSize(18)
 string = "circle("+Math.floor(x+ad_x-5)+","+Math.floor(y-50+ad_y-5)+","+radius+")"
 sim.text(string,100,20)
 sim.fill(200);
-sim.rect(410,50,25);
-sim.rect(410,80,25);
 sim.fill(0);
-sim.text("↑",410,50);
-sim.text("↓",410,80);
+
 }
     
 sim.keyPressed = function(){
