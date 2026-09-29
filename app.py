@@ -235,9 +235,31 @@ def dividir_etapas(md, titulo):
 def processar_etapa(conteudo, banco=None):
     conteudo = conteudo.replace("þ","&emsp;&emsp;")
     checkpoints_html = {}
+    color_picker = '''
+    <div class="color-picker">
+        <input type="color" id="color-picker" value="#ff0000">
+
+        <code id="color-output">fill(255, 0, 0);</code>
+    </div>
+
+    <script>
+    const colorPicker = document.getElementById("color-picker");
+    const colorOutput = document.getElementById("color-output");
+
+    colorPicker.addEventListener("input", function() {
+        const hex = colorPicker.value;
+
+        const r = parseInt(hex.substring(1, 3), 16);
+        const g = parseInt(hex.substring(3, 5), 16);
+        const b = parseInt(hex.substring(5, 7), 16);
+
+        colorOutput.textContent = `fill(${r}, ${g}, ${b});`;
+    });
+    </script>
+    '''
 
     # ================= SIMULAÇÕES =================
-
+    conteudo = conteudo.replace("[color_picker]",color_picker)
     conteudo = conteudo.replace("   ","&emsp;&emsp;").replace("   ","&emsp;&emsp;")
     centralizar = re.findall(r"→(.*?)←",conteudo)
     for cent in centralizar:
@@ -271,7 +293,7 @@ def processar_etapa(conteudo, banco=None):
         if(int(r)>255): r=255
         if(int(g)>255): g=255
         if(int(b)>255): b=255
-        if(int(r)>  1): a=1 
+        if(int(a)>  1): a=1 
         depois = f'<span style="color: rgba({r},{g},{b},{a});">{texto}</span>'
         conteudo =  conteudo.replace(antes,depois)
     padrao = r"\[simulacao=(.*?)\](?:\s*:::simulacao\s*(.*?)\s*:::)?"
