@@ -31,4 +31,4 @@ x3,y3 é o terceiro canto
 ←[simulacao=basic_triang]←
 
 **→Abaixo, uma ferramenta para escolher a cor do elemento, clique no retângulo abaixo←** 
-→[color_picker]←
+[color_picker]
