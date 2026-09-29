@@ -46,4 +46,11 @@ sim.fill(0);
 sim.text("↑",410,50);
 sim.text("↓",410,80);
 }
+    
+sim.keyPressed = function(){
+if (sim.keyCode === 38) { // Up arrow key
+    radius+=5;
+  } else if (sim.keyCode === 40) { // Down arrow key
+    radius-=5;
+  }
 }
