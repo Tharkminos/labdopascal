@@ -6,7 +6,7 @@ let ad_x = 0;
 let ad_y = 0;
 let string = "";
 sim.setup = function(){
-sim.canvas = sim.createCanvas(450,450)
+sim.canvas = sim.createCanvas(400,450)
 }
 sim.draw = function(){
 if (sim.mouseIsPressed === true && sim.mouseY < 500 && sim.mouseY>0) {
