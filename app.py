@@ -237,28 +237,17 @@ def processar_etapa(conteudo, banco=None):
     checkpoints_html = {}
     color_picker = '''
     <div class="color-picker">
-        <input type="color" id="color-picker" value="#ff0000">
+        <div class="color-picker-title">Escolha uma cor</div>
     
-        <code id="color-output">fill(255, 0, 0);</code>
+        <div class="color-picker-content">
+            <input type="color" id="color-picker" value="#ff0000">
+    
+            <code id="color-output">fill(255, 0, 0);</code>
+        </div>
     </div>
-    
-    <script>
-    const colorPicker = document.getElementById("color-picker");
-    const colorOutput = document.getElementById("color-output");
-    
-    colorPicker.addEventListener("input", function() {
-    
-        const hex = colorPicker.value;
-    
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
-    
-        colorOutput.textContent = `fill(${r}, ${g}, ${b});`;
-    
-    });
-    </script>
     '''
+
+
 
     # ================= SIMULAÇÕES =================
     conteudo = conteudo.replace("[color_picker]",color_picker)
