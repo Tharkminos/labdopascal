@@ -5,6 +5,7 @@ let radius = 50
 let ad_x = 0;
 let ad_y = 0;
 let string = "";
+let time = 0
 sim.setup = function(){
 sim.canvas = sim.createCanvas(400,450)
 }
@@ -15,6 +16,16 @@ if (sim.mouseIsPressed === true && sim.mouseY < 500 && sim.mouseY>0) {
     ad_x = 5-Math.floor(sim.mouseX)%5
     ad_y = 5-Math.floor(sim.mouseY)%5
 }
+if (time >= 10) {
+    time = 0;
+    if (sim.keyIsDown(sim.UP_ARROW)) {
+        radius += 5;
+    }
+    if (sim.keyIsDown(sim.DOWN_ARROW)) {
+        radius -= 5;
+    }
+}
+time++;
 
 
 sim.background(220);
@@ -33,15 +44,5 @@ sim.text(string,100,20)
 sim.fill(200);
 sim.fill(0);
 
-}
-    
-sim.keyPressed = function(){
-if(sim.mouseY<450 && sim.mouseY>0){
-    if (sim.keyCode === 38) { // Up arrow key
-        radius+=5;
-      } else if (sim.keyCode === 40) { // Down arrow key
-        radius-=5;
-      }
-}
 }
 }
