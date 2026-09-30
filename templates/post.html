@@ -522,6 +522,12 @@ mostrarEtapa(0);
 <script>
 document.addEventListener("DOMContentLoaded", function() {
 
+    /* =========================================
+       ELEMENTOS DO COLOR PICKER
+       ========================================= */
+
+    const colorPicker = document.querySelector(".color-picker");
+
     const colorField = document.getElementById("color-field");
     const colorCursor = document.getElementById("color-cursor");
 
@@ -531,24 +537,57 @@ document.addEventListener("DOMContentLoaded", function() {
     const colorOutput = document.getElementById("color-output");
     const selectedColor = document.getElementById("selected-color");
 
-    if (!colorField || !hueBar || !colorOutput) {
+
+    /* =========================================
+       VERIFICA SE O COLOR PICKER EXISTE
+       ========================================= */
+
+    if (
+        !colorPicker ||
+        !colorField ||
+        !colorCursor ||
+        !hueBar ||
+        !hueCursor ||
+        !colorOutput ||
+        !selectedColor
+    ) {
         return;
     }
+
+
+    /* =========================================
+       VALORES INICIAIS
+
+       hue        = matiz
+       saturation = saturacao
+       brightness = brilho
+       ========================================= */
 
     let hue = 0;
     let saturation = 1;
     let brightness = 1;
 
+
+    /* =========================================
+       CONVERTE HSV PARA RGB
+       ========================================= */
+
     function hsvToRgb(h, s, v) {
 
-        let r, g, b;
+        let r;
+        let g;
+        let b;
 
         const i = Math.floor(h * 6);
+
         const f = h * 6 - i;
 
         const p = v * (1 - s);
+
         const q = v * (1 - f * s);
+
         const t = v * (1 - (1 - f) * s);
+
 
         switch (i % 6) {
 
@@ -582,11 +621,13 @@ document.addEventListener("DOMContentLoaded", function() {
                 b = v;
                 break;
 
-            default:
+            case 5:
                 r = v;
                 g = p;
                 b = q;
+                break;
         }
+
 
         return [
             Math.round(r * 255),
@@ -594,6 +635,11 @@ document.addEventListener("DOMContentLoaded", function() {
             Math.round(b * 255)
         ];
     }
+
+
+    /* =========================================
+       ATUALIZA A COR
+       ========================================= */
 
     function atualizarCor() {
 
@@ -603,35 +649,77 @@ document.addEventListener("DOMContentLoaded", function() {
             brightness
         );
 
+
         const r = rgb[0];
         const g = rgb[1];
         const b = rgb[2];
 
+
+        /* Código para o aluno */
+
         colorOutput.textContent =
             "fill(" + r + ", " + g + ", " + b + ");";
+
+
+        /* Mostra a cor escolhida */
 
         selectedColor.style.backgroundColor =
             "rgb(" + r + ", " + g + ", " + b + ")";
 
+
+        /* Atualiza a cor do quadrado */
+
         colorField.style.background =
-            "linear-gradient(to bottom, transparent, #000), " +
-            "linear-gradient(to right, #fff, hsl(" +
+            "linear-gradient(to bottom, transparent, #000000), " +
+            "linear-gradient(to right, #ffffff, hsl(" +
             (hue * 360) +
             ", 100%, 50%))";
     }
 
+
+    /* =========================================
+       SELECIONA UMA POSICAO NO QUADRADO
+       ========================================= */
+
     function selecionarCampo(event) {
 
-        const rect = colorField.getBoundingClientRect();
+        const rect =
+            colorField.getBoundingClientRect();
 
-        let x = event.clientX - rect.left;
-        let y = event.clientY - rect.top;
 
-        x = Math.max(0, Math.min(x, rect.width));
-        y = Math.max(0, Math.min(y, rect.height));
+        let x =
+            event.clientX - rect.left;
 
-        saturation = x / rect.width;
-        brightness = 1 - (y / rect.height);
+        let y =
+            event.clientY - rect.top;
+
+
+        /* Impede sair dos limites */
+
+        x = Math.max(
+            0,
+            Math.min(x, rect.width)
+        );
+
+        y = Math.max(
+            0,
+            Math.min(y, rect.height)
+        );
+
+
+        /* X = saturacao */
+
+        saturation =
+            x / rect.width;
+
+
+        /* Y = brilho */
+
+        brightness =
+            1 - (y / rect.height);
+
+
+        /* Move o cursor */
 
         colorCursor.style.left =
             (saturation * 100) + "%";
@@ -639,76 +727,158 @@ document.addEventListener("DOMContentLoaded", function() {
         colorCursor.style.top =
             ((1 - brightness) * 100) + "%";
 
+
         atualizarCor();
     }
 
+
+    /* =========================================
+       SELECIONA UMA POSICAO NA BARRA DE MATIZ
+       ========================================= */
+
     function selecionarHue(event) {
 
-        const rect = hueBar.getBoundingClientRect();
+        const rect =
+            hueBar.getBoundingClientRect();
 
-        let y = event.clientY - rect.top;
 
-        y = Math.max(0, Math.min(y, rect.height));
+        let y =
+            event.clientY - rect.top;
 
-        hue = y / rect.height;
+
+        /* Impede sair dos limites */
+
+        y = Math.max(
+            0,
+            Math.min(y, rect.height)
+        );
+
+
+        /* Calcula a matiz */
+
+        hue =
+            y / rect.height;
+
+
+        /* Move o cursor */
 
         hueCursor.style.top =
             (hue * 100) + "%";
 
+
         atualizarCor();
     }
 
-    colorField.addEventListener("mousedown", function(event) {
 
-        selecionarCampo(event);
+    /* =========================================
+       QUADRADO DE CORES
+       ========================================= */
 
-        function mover(e) {
-            selecionarCampo(e);
-        }
+    colorField.addEventListener(
+        "pointerdown",
+        function(event) {
 
-        function soltar() {
+            event.preventDefault();
 
-            document.removeEventListener(
-                "mousemove",
-                mover
+
+            /*
+             * Mantem o controle do mouse mesmo
+             * quando o cursor sai do quadrado.
+             */
+
+            colorField.setPointerCapture(
+                event.pointerId
             );
 
-            document.removeEventListener(
-                "mouseup",
-                soltar
-            );
+
+            selecionarCampo(event);
         }
+    );
 
-        document.addEventListener("mousemove", mover);
-        document.addEventListener("mouseup", soltar);
 
-    });
+    colorField.addEventListener(
+        "pointermove",
+        function(event) {
 
-    hueBar.addEventListener("mousedown", function(event) {
+            if (event.buttons === 1) {
 
-        selecionarHue(event);
+                event.preventDefault();
 
-        function mover(e) {
-            selecionarHue(e);
+                selecionarCampo(event);
+            }
         }
+    );
 
-        function soltar() {
 
-            document.removeEventListener(
-                "mousemove",
-                mover
+    /* =========================================
+       BARRA DE MATIZ
+       ========================================= */
+
+    hueBar.addEventListener(
+        "pointerdown",
+        function(event) {
+
+            event.preventDefault();
+
+
+            /*
+             * Mantem o controle do mouse durante
+             * o arraste.
+             */
+
+            hueBar.setPointerCapture(
+                event.pointerId
             );
 
-            document.removeEventListener(
-                "mouseup",
-                soltar
-            );
+
+            selecionarHue(event);
         }
+    );
 
-        document.addEventListener("mousemove", mover);
-        document.addEventListener("mouseup", soltar);
 
-    });
+    hueBar.addEventListener(
+        "pointermove",
+        function(event) {
+
+            if (event.buttons === 1) {
+
+                event.preventDefault();
+
+                selecionarHue(event);
+            }
+        }
+    );
+
+
+    /* =========================================
+       IMPEDE SELECAO DE TEXTO
+       ========================================= */
+
+    colorPicker.addEventListener(
+        "selectstart",
+        function(event) {
+
+            event.preventDefault();
+        }
+    );
+
+
+    /* =========================================
+       IMPEDE ARRASTAR ELEMENTOS
+       ========================================= */
+
+    colorPicker.addEventListener(
+        "dragstart",
+        function(event) {
+
+            event.preventDefault();
+        }
+    );
+
+
+    /* =========================================
+       INICIALIZA O COLOR PICKER
+       ========================================= */
 
     atualizarCor();
 
