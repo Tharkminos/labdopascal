@@ -41,16 +41,16 @@ sim.text(string,100,20)
 }
 sim.keyPressed = function(){
     if(sim.mouseY<450 && sim.mouseY>0){
-        if (sim.keyIsDown(sim.LEFT_ARROW) && time = 0) { // Left arrow key
+        if (sim.keyIsDown(sim.LEFT_ARROW) && time === 0) { // Left arrow key
             size_x+=5;
             start_count = true
-          } else if (sim.keyIsDown(sim.RIGHT_ARROW)  && time = 0) { // Right arrow key
+          } else if (sim.keyIsDown(sim.RIGHT_ARROW)  && time === 0) { // Right arrow key
             size_x-=5;
             start_count = true
-          } else if (sim.keyIsDown(sim.UP_ARROW)  && time = 0) { // Up arrow key
+          } else if (sim.keyIsDown(sim.UP_ARROW)  && time === 0) { // Up arrow key
             size_y+=5;
             start_count = true
-          } else if (sim.keyIsDown(sim.DOWN_ARROW)  && time = 0) { // Down arrow key
+          } else if (sim.keyIsDown(sim.DOWN_ARROW)  && time === 0) { // Down arrow key
             size_y-=5;
             start_count = true
           } else{
