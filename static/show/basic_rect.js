@@ -55,7 +55,7 @@ sim.keyPressed = function(){
             start_count = true
           } else{
             start_count = false
-            time = -1
+            time = 0
           }
             
     }
