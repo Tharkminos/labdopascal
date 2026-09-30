@@ -1453,3 +1453,12 @@ canvas{
     font-family: monospace;
     font-size: 14px;
 }
+.color-picker,
+.color-picker * {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+
+    -webkit-user-drag: none !important;
+}
