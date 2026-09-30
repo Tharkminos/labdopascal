@@ -18,7 +18,22 @@ if (sim.mouseIsPressed === true && sim.mouseY>0 && sim.mouseY<500) {
     ad_x = 5-Math.floor(sim.mouseX)%5
     ad_y = 5-Math.floor(sim.mouseY)%5
 }
-
+if (time >= 30) {
+    time = 0;
+    if (sim.keyIsDown(sim.LEFT_ARROW)) {
+        size_x += 5;
+    }
+    if (sim.keyIsDown(sim.RIGHT_ARROW)) {
+        size_x -= 5;
+    }
+    if (sim.keyIsDown(sim.UP_ARROW)) {
+        size_y += 5;
+    }
+    if (sim.keyIsDown(sim.DOWN_ARROW)) {
+        size_y -= 5;
+    }
+}
+time++;
 
 sim.background(220);
 sim.fill(200,150,80);
@@ -30,35 +45,9 @@ sim.rect(0,0,400,50)
 sim.stroke(0);
 sim.fill(0);
 sim.textSize(18)
-if(time>=30){
-    time = 0
-}
-if(start_count === true){
-    time+=1
-}
 string = "rect("+Math.floor(x+ad_x-5)+","+Math.floor(y-50+ad_y-5)+","+size_x+","+size_y+")"
 sim.text(string,100,20)
 }
-sim.keyPressed = function(){
-    if(sim.mouseY<450 && sim.mouseY>0){
-        if (sim.keyIsDown(sim.LEFT_ARROW) && time === 0) { // Left arrow key
-            size_x+=5;
-            start_count = true
-          } else if (sim.keyIsDown(sim.RIGHT_ARROW)  && time === 0) { // Right arrow key
-            size_x-=5;
-            start_count = true
-          } else if (sim.keyIsDown(sim.UP_ARROW)  && time === 0) { // Up arrow key
-            size_y+=5;
-            start_count = true
-          } else if (sim.keyIsDown(sim.DOWN_ARROW)  && time === 0) { // Down arrow key
-            size_y-=5;
-            start_count = true
-          } else{
-            start_count = false
-            time = 0
-          }
-            
-    }
-}
+
   
 }
