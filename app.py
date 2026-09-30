@@ -237,13 +237,28 @@ def processar_etapa(conteudo, banco=None):
     checkpoints_html = {}
     color_picker = '''
     <div class="color-picker">
-        <div class="color-picker-title">Escolha uma cor</div>
     
-        <div class="color-picker-content">
-            <input type="color" id="color-picker" value="#ff0000">
+        <div class="color-picker-title">
+            Escolha uma cor
+        </div>
     
+        <div class="color-picker-area">
+    
+            <div id="color-field">
+                <div id="color-cursor"></div>
+            </div>
+    
+            <div id="hue-bar">
+                <div id="hue-cursor"></div>
+            </div>
+    
+        </div>
+    
+        <div class="color-selected">
+            <div id="selected-color"></div>
             <code id="color-output">fill(255, 0, 0);</code>
         </div>
+    
     </div>
     '''
 
