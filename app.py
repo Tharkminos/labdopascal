@@ -238,22 +238,24 @@ def processar_etapa(conteudo, banco=None):
     color_picker = '''
     <div class="color-picker">
         <input type="color" id="color-picker" value="#ff0000">
-
+    
         <code id="color-output">fill(255, 0, 0);</code>
     </div>
-
+    
     <script>
     const colorPicker = document.getElementById("color-picker");
     const colorOutput = document.getElementById("color-output");
-
+    
     colorPicker.addEventListener("input", function() {
+    
         const hex = colorPicker.value;
-
-        const r = parseInt(hex.substring(1, 3), 16);
-        const g = parseInt(hex.substring(3, 5), 16);
-        const b = parseInt(hex.substring(5, 7), 16);
-
+    
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+    
         colorOutput.textContent = `fill(${r}, ${g}, ${b});`;
+    
     });
     </script>
     '''
