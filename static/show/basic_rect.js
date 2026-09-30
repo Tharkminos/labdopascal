@@ -6,7 +6,7 @@ let ad_y = 0;
 let size_x = 50
 let size_y = 50
 let string = "";
-let time = -1
+let time = 0
 let start_count = false
 sim.setup = function(){
 sim.canvas = sim.createCanvas(400,450)
@@ -31,7 +31,7 @@ sim.stroke(0);
 sim.fill(0);
 sim.textSize(18)
 if(time>=30){
-    time = -1
+    time = 0
 }
 if(start_count === true){
     time+=1
