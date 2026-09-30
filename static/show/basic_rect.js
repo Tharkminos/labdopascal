@@ -33,18 +33,19 @@ string = "rect("+Math.floor(x+ad_x-5)+","+Math.floor(y-50+ad_y-5)+","+size_x+","
 sim.text(string,100,20)
 }
 sim.keyPressed = function(){
-if (sim.keyCode === 37) { // Left arrow key
-    size_x+=5;
-  } else if (sim.keyCode === 39) { // Right arrow key
-    size_x-=5;
-  }
-if (sim.keyCode === 38) { // Up arrow key
-    size_y+=5;
-  } else if (sim.keyCode === 40) { // Down arrow key
-    size_y-=5;
-  }
-    
+    if(sim.mouseY<450 && sim.mouseY>0){
+        if (sim.keyCode === 37) { // Left arrow key
+            size_x+=5;
+          } else if (sim.keyCode === 39) { // Right arrow key
+            size_x-=5;
+          }
+        if (sim.keyCode === 38) { // Up arrow key
+            size_y+=5;
+          } else if (sim.keyCode === 40) { // Down arrow key
+            size_y-=5;
+          }
+            
+    }
 }
-
   
 }
