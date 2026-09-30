@@ -18,7 +18,7 @@ if (sim.mouseIsPressed === true && sim.mouseY>0 && sim.mouseY<500) {
     ad_x = 5-Math.floor(sim.mouseX)%5
     ad_y = 5-Math.floor(sim.mouseY)%5
 }
-if (time >= 30) {
+if (time >= 10) {
     time = 0;
     if (sim.keyIsDown(sim.LEFT_ARROW)) {
         size_x += 5;
