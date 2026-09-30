@@ -1316,52 +1316,138 @@ canvas{
 
 .color-picker {
     width: 100%;
-    max-width: 420px;
+    max-width: 500px;
     margin: 25px auto;
     padding: 16px;
-    border: 1px solid #d0d0d0;
-    border-radius: 10px;
-    background: #f5f5f5;
     box-sizing: border-box;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #f5f5f5;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
 }
 
 .color-picker-title {
     margin-bottom: 12px;
-    font-weight: bold;
+
     font-size: 15px;
+    font-weight: bold;
 }
 
-.color-picker-content {
+.color-picker-area {
+    display: flex;
+    gap: 12px;
+
+    width: 100%;
+    height: 260px;
+}
+
+/* Quadrado principal */
+#color-field {
+    position: relative;
+
+    flex: 1;
+
+    cursor: crosshair;
+
+    background:
+        linear-gradient(to bottom, transparent 0%, #000000 100%),
+        linear-gradient(to right, #ffffff 0%, #ff0000 100%);
+
+    border: 1px solid #999;
+}
+
+/* Marcador dentro do quadrado */
+#color-cursor {
+    position: absolute;
+
+    width: 14px;
+    height: 14px;
+
+    left: 100%;
+    top: 0%;
+
+    transform: translate(-50%, -50%);
+
+    border: 2px solid white;
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 1px #000,
+        0 1px 3px rgba(0, 0, 0, 0.5);
+
+    pointer-events: none;
+}
+
+/* Barra de matiz */
+#hue-bar {
+    position: relative;
+
+    width: 28px;
+    height: 100%;
+
+    cursor: pointer;
+
+    background: linear-gradient(
+        to bottom,
+        #ff0000 0%,
+        #ffff00 16.6%,
+        #00ff00 33.3%,
+        #00ffff 50%,
+        #0000ff 66.6%,
+        #ff00ff 83.3%,
+        #ff0000 100%
+    );
+
+    border: 1px solid #999;
+}
+
+/* Marcador da matiz */
+#hue-cursor {
+    position: absolute;
+
+    left: -3px;
+    right: -3px;
+
+    top: 0%;
+
+    height: 5px;
+
+    border: 1px solid #000;
+    background: white;
+
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+
+    pointer-events: none;
+}
+
+.color-selected {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
+
+    margin-top: 12px;
 }
 
-#color-picker {
-    width: 90px;
-    height: 55px;
-    padding: 0;
-    border: 1px solid #aaa;
-    border-radius: 5px;
-    background: transparent;
-    cursor: pointer;
-}
+#selected-color {
+    width: 55px;
+    height: 35px;
 
-#color-picker::-webkit-color-swatch-wrapper {
-    padding: 3px;
-}
+    background: rgb(255, 0, 0);
 
-#color-picker::-webkit-color-swatch {
-    border: none;
-    border-radius: 3px;
+    border: 1px solid #888;
+    border-radius: 4px;
 }
 
 #color-output {
     flex: 1;
-    padding: 10px 12px;
-    border-radius: 6px;
+
+    padding: 9px 10px;
+
     background: white;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
     font-family: monospace;
     font-size: 14px;
 }
