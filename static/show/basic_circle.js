@@ -36,10 +36,12 @@ sim.fill(0);
 }
     
 sim.keyPressed = function(){
-if (sim.keyCode === 38) { // Up arrow key
-    radius+=5;
-  } else if (sim.keyCode === 40) { // Down arrow key
-    radius-=5;
-  }
+if(sim.mouseY<450 && sim.mouseY>0){
+    if (sim.keyCode === 38) { // Up arrow key
+        radius+=5;
+      } else if (sim.keyCode === 40) { // Down arrow key
+        radius-=5;
+      }
+}
 }
 }
