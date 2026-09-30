@@ -16,7 +16,7 @@ if (sim.mouseIsPressed === true && sim.mouseY < 500 && sim.mouseY>0) {
     ad_x = 5-Math.floor(sim.mouseX)%5
     ad_y = 5-Math.floor(sim.mouseY)%5
 }
-if (time >= 10) {
+if (time >= 5 && sim.mouseY < 450 && sim.mouseY > 0) {
     time = 0;
     if (sim.keyIsDown(sim.UP_ARROW)) {
         radius += 5;
