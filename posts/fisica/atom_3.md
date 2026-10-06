@@ -1,5 +1,5 @@
 ---
-xp: 30
+xp: 25
 nivel: 2
 titulo_modulo: Átomos e Cargas
 descricao_modulo: Estrutura básica da matéria
@@ -43,7 +43,7 @@ cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"+",x:270,y:150,carga:10}]
 cargas: [{sinal:"-",x:80,y:150,carga:10},{sinal:"-",x:270,y:150,carga:10}]
 :::
 
-[etapa=Teste 1]
+[etapa=Escolha o correto]
 
 **→Escolha o sinal correto da carga abaixo:←**
 [simulacao=game_field001]
