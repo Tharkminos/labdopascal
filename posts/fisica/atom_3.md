@@ -43,7 +43,7 @@ cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"+",x:270,y:150,carga:10}]
 cargas: [{sinal:"-",x:80,y:150,carga:10},{sinal:"-",x:270,y:150,carga:10}]
 :::
 
-[etapa=Sinal Correto]
+[etapa=Teste 1]
 
 **→Escolha o sinal correto da carga abaixo:←**
 [simulacao=game_field001]
