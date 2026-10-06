@@ -17,7 +17,7 @@ imagem_modulo: atom.webp
 [simulacao=neg_field]
 
 [etapa=Interação entre Cargas]
-   Quando temos duas cargas próximas, seus campos interagem entre si, e se forem diferentes resultam em linhas de campo saindo do positivo indo em direção ao negativo. 
+   Quando temos duas cargas próximas, seus campos interagem entre si, e se forem diferentes resultam em linhas de campo saindo do positivo indo em direção ao negativo(o campo sai do positivo e entra no negativo). 
 
 **→Interação entre uma carga [cor=120,0,0,1]positiva[/cor] e uma carga  [cor=0,0,120,1]negativa[/cor]:←**
 
@@ -28,14 +28,16 @@ cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"-",x:270,y:150,carga:10}]
 
 
 
-[etapa=Interação Positivo - Positivo]
+[etapa=Interações Iguais]
 
+←    Já quando ambas as cargas são iguais, o campo "quer" realizar a mesma função, se forem positivos, as linhas de campo saem das cargas, e se forem negativas as linhas de campo entram. Porém nenhuma das cargas irá ceder, fazendo com que campos iguais se afastem. →
+
+**→Carga positiva com carga positiva ←**
 [simulacao=field]
 :::simulacao
 cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"+",x:270,y:150,carga:10}]
 :::
-
-
+**→Carga positiva com carga negativa ←**
 [simulacao=field]
 :::simulacao
 cargas: [{sinal:"-",x:80,y:150,carga:10},{sinal:"-",x:270,y:150,carga:10}]
