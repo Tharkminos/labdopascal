@@ -42,3 +42,8 @@ cargas: [{sinal:"+",x:80,y:150,carga:10},{sinal:"+",x:270,y:150,carga:10}]
 :::simulacao
 cargas: [{sinal:"-",x:80,y:150,carga:10},{sinal:"-",x:270,y:150,carga:10}]
 :::
+
+[etapa: Sinal Correto]
+
+**→Escolha o sinal correto da carga abaixo:←**
+[simulacao=game_field001]
