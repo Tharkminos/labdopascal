@@ -19,7 +19,7 @@ imagem_modulo: atom.webp
 [etapa=Interação entre Cargas]
    Quando temos duas cargas próximas, seus campos interagem entre si, e se forem diferentes resultam em linhas de campo saindo do positivo indo em direção ao negativo. 
 
-**→Interação entre uma carga [cor=120,0,0,1]positiva[/cor] :←**
+**→Interação entre uma carga [cor=120,0,0,1]positiva[/cor] e uma carga  [cor=0,0,120,1]negativa[/cor]:←**
 
 [simulacao=field]
 :::simulacao
