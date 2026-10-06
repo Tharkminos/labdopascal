@@ -1,7 +1,7 @@
 function game_field001(sim){
 
 let trail;
-let choice = ["-","+"][Math.random(0,1)]
+let choice = ["-","+"][Math.floor(Math.random() * 2)]
 let cargas =[{
         sinal:choice,
         x:150,
