@@ -44,8 +44,7 @@ sim.setup = function(){
 
 }
 let cor = sim.color(220,220,220)
-sim.draw = function(){
-    console.log(cor)
+sim.draw = function(){    
     time++;
     if(certo === true){
        cor = sim.color(120,200,120);
@@ -99,6 +98,7 @@ sim.draw = function(){
     vetores = temp;
     b1 = Button(10,250,[130,40], b1_txt,b1)
     b2 = Button(160,250,[130,40],b2_txt,b2)
+    sim.simulacaoConcluida()
     
 }
 
