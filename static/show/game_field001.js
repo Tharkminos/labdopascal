@@ -431,7 +431,7 @@ function Button(x,y,size,txt,md){
         }
         let Mx  = sim.mouseX
         let My  = sim.mouseY
-        sim.textSize(22)
+        sim.textSize(32)
         if((sim.mouseIsPressed && (Mx>x && Mx<x+size[0]) && (My>y && My<y+size[1])) || md === true){
                 sim.stroke(0)
                 sim.fill(100);
