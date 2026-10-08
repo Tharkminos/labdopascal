@@ -95,8 +95,8 @@ sim.draw = function(){
     }
 
     vetores = temp;
-    b1 = Button(10,200,[150,40], b1_text)
-    b2 = Button(160,200,[150,40],b2_text)
+    b1 = Button(10,200,[150,40], b1_txt)
+    b2 = Button(160,200,[150,40],b2_txt)
     
 }
 
