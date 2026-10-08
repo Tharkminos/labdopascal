@@ -510,10 +510,8 @@ def mec_exp():
 @app.route("/login/google")
 def login_google():
 
-    redirect_uri = url_for(
-        "google_callback",
-        _external=True
-    )
+    redirect_uri = "https://labdopascal.com.br/login/google/callback"
+
 
     return google.authorize_redirect(
         redirect_uri
