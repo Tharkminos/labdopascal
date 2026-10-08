@@ -13,11 +13,20 @@ let cargas =[{
 let vetores = [];
 let caminho = [];
 let time = 0;
-
+let b1=false
+let b2=false
+let b1_txt = "+"
+let b2_txt = "-"
+let certo = undefined
 sim.simulacaoConcluida = function(){
-
-    return true;
-
+    if(b1===true || b2===true){
+        if((b1 === true && b1_txt === choice) || (b2 === true && b2_txt === choice)){
+            acertos ++
+            return true
+        }
+        return true
+    }
+        return false;
 }
 
 sim.setup = function(){
@@ -32,12 +41,16 @@ sim.setup = function(){
     drawPath();
 
 }
-
+let cor = sim.color(220,220,220)
 sim.draw = function(){
 
     time++;
-
-    sim.background(220);
+    if(certo === true){
+       cor = sim.color(120,200,120);
+    }if(certo === false){
+        cor = sim.color(200,80,800);
+    }
+    sim.background(cor);
 
     drawVectors();
 
@@ -82,7 +95,9 @@ sim.draw = function(){
     }
 
     vetores = temp;
-    Button(10,200,[120,80],"-")
+    b1 = Button(10,200,[150,40], b1_text)
+    b2 = Button(160,200,[150,40],b2_text)
+    
 }
 
 function field(){
@@ -408,29 +423,28 @@ function drawPath(){
 
 }
 
-function Button(x,y,size,txt){
+function Button(x,y,size,txt,md){
         if(size.length!=2){
                 size = [size,size]
         }
         let Mx  = sim.mouseX
         let My  = sim.mouseY
-        if(sim.mouseIsPressed && (Mx>x && Mx<x+size[0]) && (My>y && My<y+size[1])){
+        if((sim.mouseIsPressed && (Mx>x && Mx<x+size[0]) && (My>y && My<y+size[1])) || md === true){
                 sim.stroke(0)
                 sim.fill(100);
                 sim.rect(x,y,size[0],size[1],10)
                 sim.fill(220);
                 sim.rect(x,y-2,size[0],size[1],10)
+                return true
         }else{
                 sim.stroke(0)
                 sim.fill(100);
                 sim.rect(x,y,size[0],size[1],10)
                 sim.fill(220);
                 sim.rect(x,y-10,size[0],size[1],10)
-                // Se foi pressionado
-                // Retorna o estado do botão
+                return false
                 
-        }
-        return false
-}
+            }
+                   }
 
 }
