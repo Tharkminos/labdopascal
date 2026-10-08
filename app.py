@@ -41,16 +41,15 @@ oauth = OAuth(app)
 google = oauth.register(
     name="google",
 
-    client_id="364909796536-a4khif03kvppaapc8sdv74i8899gobc9.apps.googleusercontent.com",
+    client_id="249390261582-vv1hnsedg7vfpu7tht8t6cklclflaa69.apps.googleusercontent.com",
 
-    client_secret="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",
+    client_secret="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",
 
     server_metadata_url=
     "https://accounts.google.com/.well-known/openid-configuration",
 
     client_kwargs={
-        "scope":
-        "openid email profile"
+        "scope":"openid email profile"
     }
 )
 app.secret_key = "B@tman"
@@ -527,14 +526,20 @@ def google_callback():
     user_info = token["userinfo"]
 
     email = user_info["email"]
-    nome = user_info["name"]
+    nome = user_info.get("name", email)
 
     conn = sqlite3.connect("site.db")
     cursor = conn.cursor()
 
     cursor.execute(
         """
-        SELECT id
+        SELECT
+            id,
+            usuario,
+            email,
+            admin,
+            professor,
+            monitor
         FROM usuarios
         WHERE email = ?
         """,
@@ -543,10 +548,16 @@ def google_callback():
 
     usuario = cursor.fetchone()
 
-
     if usuario:
 
         usuario_id = usuario[0]
+
+        session["id"] = usuario[0]
+        session["usuario"] = usuario[1]
+        session["email"] = usuario[2]
+        session["admin"] = bool(usuario[3])
+        session["professor"] = bool(usuario[4])
+        session["monitor"] = bool(usuario[5])
 
     else:
 
@@ -570,15 +581,15 @@ def google_callback():
 
         usuario_id = cursor.lastrowid
 
+        session["id"] = usuario_id
+        session["usuario"] = nome
+        session["email"] = email
+        session["admin"] = False
+        session["professor"] = False
+        session["monitor"] = False
 
     conn.commit()
     conn.close()
-
-
-    session["id"] = usuario_id
-    session["usuario"] = nome
-    session["email"] = email
-
 
     return redirect("/")
 # ============== PERFIL ====================
