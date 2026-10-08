@@ -19,7 +19,7 @@ let b1_txt = "+"
 let b2_txt = "-"
 let certo = undefined
 sim.simulacaoConcluida = function(){
-    if(b1===true || b2===true){
+    if( (b1===true || b2===true) && certo === undefined ){
         if((b1 === true && b1_txt === choice) || (b2 === true && b2_txt === choice)){
             acertos ++
             certo = true
@@ -438,7 +438,7 @@ function Button(x,y,size,txt,md){
                 sim.fill(220);
                 sim.rect(x,y-2,size[0],size[1],10)
                 sim.fill(0);
-                sim.text(txt,x+size[0]/2-txt.length,y)
+                sim.text(txt,x+size[0]/2-txt.length,y+12)
                 return true
         }else{
                 sim.stroke(0)
@@ -447,7 +447,7 @@ function Button(x,y,size,txt,md){
                 sim.fill(220);
                 sim.rect(x,y-10,size[0],size[1],10)
                 sim.fill(0);
-                sim.text(txt,x+size[0]/2-txt.length,y)
+                sim.text(txt,x+size[0]/2-txt.length,y+12)
                 return false
                 
             }
