@@ -49,7 +49,7 @@ sim.draw = function(){
     if(certo === true){
        cor = sim.color(120,200,120);
     }if(certo === false){
-        cor = sim.color(200,80,800);
+        cor = sim.color(200,80,80);
     }
     sim.background(cor);
 
@@ -437,6 +437,7 @@ function Button(x,y,size,txt,md){
                 sim.rect(x,y,size[0],size[1],10)
                 sim.fill(220);
                 sim.rect(x,y-2,size[0],size[1],10)
+                sim.text(txt,x-size[0]/2-txt.length,y)
                 return true
         }else{
                 sim.stroke(0)
@@ -444,6 +445,7 @@ function Button(x,y,size,txt,md){
                 sim.rect(x,y,size[0],size[1],10)
                 sim.fill(220);
                 sim.rect(x,y-10,size[0],size[1],10)
+                sim.text(txt,x-size[0]/2-txt.length,y)
                 return false
                 
             }
