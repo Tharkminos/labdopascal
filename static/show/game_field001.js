@@ -412,6 +412,11 @@ function Button(x,y,size,txt){
         if(size.length!=2){
                 size = [size,size]
         }
+        let Mx  = sim.mouseX
+        let My  = sim.mouseY
+        if(mouseIsPressed && (Mx>x && Mx<x+size[0]) && (My>y && My<y+size[1]){
+                
+        }else{
                 sim.stroke(0)
                 sim.fill(100);
                 sim.rect(x,y,size[0],size[1],10)
@@ -419,6 +424,8 @@ function Button(x,y,size,txt){
                 sim.rect(x,y-10,size[0],size[1],10)
                 // Se foi pressionado
                 // Retorna o estado do botão
+                
+        }
         return false
 }
 
