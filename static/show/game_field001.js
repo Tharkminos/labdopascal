@@ -412,6 +412,7 @@ function Button(x,y,size,txt){
 if(size.length!=2){
  size = [size,size]
 }
+sim.stroke(0)
 sim.fill(100);
 sim.rect(x,y,size[0],size[1],10)
 sim.fill(220);
