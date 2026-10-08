@@ -22,8 +22,10 @@ sim.simulacaoConcluida = function(){
     if(b1===true || b2===true){
         if((b1 === true && b1_txt === choice) || (b2 === true && b2_txt === choice)){
             acertos ++
+            certo = true
             return true
         }
+        certo = false
         return true
     }
         return false;
@@ -95,8 +97,8 @@ sim.draw = function(){
     }
 
     vetores = temp;
-    b1 = Button(10,200,[150,40], b1_txt)
-    b2 = Button(160,200,[150,40],b2_txt)
+    b1 = Button(10,250,[130,40], b1_txt)
+    b2 = Button(160,250,[130,40],b2_txt)
     
 }
 
