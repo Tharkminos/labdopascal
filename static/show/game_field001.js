@@ -431,6 +431,7 @@ function Button(x,y,size,txt,md){
         }
         let Mx  = sim.mouseX
         let My  = sim.mouseY
+        sim.textSize(22)
         if((sim.mouseIsPressed && (Mx>x && Mx<x+size[0]) && (My>y && My<y+size[1])) || md === true){
                 sim.stroke(0)
                 sim.fill(100);
@@ -438,8 +439,9 @@ function Button(x,y,size,txt,md){
                 sim.fill(220);
                 sim.rect(x,y-2,size[0],size[1],10)
                 sim.fill(0);
-                sim.text(txt,x+size[0]/2-txt.length,y+12)
-                return true
+                sim.text(txt,x+size[0]/2-txt.length,y+24)
+                if(certo === undefined){
+                return true}else{ return false}
         }else{
                 sim.stroke(0)
                 sim.fill(100);
@@ -447,7 +449,7 @@ function Button(x,y,size,txt,md){
                 sim.fill(220);
                 sim.rect(x,y-10,size[0],size[1],10)
                 sim.fill(0);
-                sim.text(txt,x+size[0]/2-txt.length,y+12)
+                sim.text(txt,x+size[0]/2-txt.length,y+24)
                 return false
                 
             }
