@@ -559,7 +559,7 @@ def google_callback():
         session["monitor"] = bool(usuario[5])
 
     else:
-
+        nome = email.split("@")[0]
         cursor.execute(
             """
             INSERT INTO usuarios
