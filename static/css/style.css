@@ -1462,3 +1462,38 @@ canvas{
 
     -webkit-user-drag: none !important;
 }
+.google-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    width: 100%;
+    padding: 11px 16px;
+
+    background: white;
+    color: #3c4043;
+
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+
+    text-decoration: none;
+
+    box-sizing: border-box;
+    transition: background 0.2s, box-shadow 0.2s;
+}
+
+.google-login svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.google-login:hover {
+    background: #f8f9fa;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
