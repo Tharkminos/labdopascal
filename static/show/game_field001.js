@@ -45,7 +45,7 @@ sim.setup = function(){
 }
 let cor = sim.color(220,220,220)
 sim.draw = function(){
-
+    console.log(cor)
     time++;
     if(certo === true){
        cor = sim.color(120,200,120);
