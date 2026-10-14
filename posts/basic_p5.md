@@ -36,6 +36,7 @@ x3,y3 é o terceiro canto
 [etapa=Variáveis]
 # Variáveis
 Variáveis, são espaços nomeados no computador, onde salvamos as informações, para podermos consultar depois. Para criar uma variável, entre [cor=220,50,50,1]function setup(){} e function draw()[/cor]
+
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]nome_variavel[/cor] = [cor=200,150,100,1]valor_salvo[/cor] 
 
 **Exemplo:**
