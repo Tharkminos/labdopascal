@@ -44,6 +44,7 @@ Variáveis, são espaços nomeados no computador, onde salvamos as informações
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]nome[/cor] = [cor=100,200,100,1]"Alberto"[/cor]  [cor=150,150,150,1]// Cria uma variável chamada nome, com o valor de "Alberto" salvo[/cor]
 
 No código, ao nos referirmos ao tempo por exemplo, ao invés dele mostrar a palavra tempo, ele mostrará seu valor:
+
 **Exemplo:**
 
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]tempo[/cor] = [cor=200,150,100,1]50[/cor]
