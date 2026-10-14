@@ -470,8 +470,6 @@ def renderizar_markdown(arquivo, titulo=None, aula_slug=None):
     with open(arquivo, encoding="utf-8") as f:
         md = f.read()
 
-    # ================= METADADOS =================
-
     meta, md = ler_metadados(md)
 
     # ================= TÍTULO =================
@@ -485,7 +483,6 @@ def renderizar_markdown(arquivo, titulo=None, aula_slug=None):
         )
 
         if match:
-
             titulo = match.group(1).strip()
 
             md = re.sub(
@@ -504,7 +501,6 @@ def renderizar_markdown(arquivo, titulo=None, aula_slug=None):
     etapas = dividir_etapas(md, titulo)
 
     if meta.get("results", False) == False:
-
         etapas.append({
             "titulo": "Resultados",
             "conteudo": "",
@@ -516,24 +512,30 @@ def renderizar_markdown(arquivo, titulo=None, aula_slug=None):
     banco = None
 
     if "questoes" in meta:
-        banco = carregar_questoes(
-            meta["questoes"]
-        )
+        banco = carregar_questoes(meta["questoes"])
 
     # ================= PROCESSAMENTO =================
 
     for etapa in etapas:
 
-        # Processa questões e outros marcadores
-        etapa["conteudo"] = processar_etapa(
-            etapa["conteudo"],
+        # 1. Extrai o código p5.js antes do Markdown
+        conteudo, simulacoes_p5 = extrair_p5js(
+            etapa["conteudo"]
+        )
+
+        # 2. Processa normalmente a etapa
+        conteudo = processar_etapa(
+            conteudo,
             banco
         )
 
-        # Converte blocos $$$ p5js em iframes
-        etapa["conteudo"] = processar_p5js(
-            etapa["conteudo"]
+        # 3. Insere os iframes no HTML final
+        conteudo = inserir_p5js(
+            conteudo,
+            simulacoes_p5
         )
+
+        etapa["conteudo"] = conteudo
 
     # ================= TEMPLATE =================
 
