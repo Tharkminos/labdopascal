@@ -62,7 +62,7 @@ No código, ao nos referirmos ao tempo por exemplo, ao invés dele mostrar a pal
   
 }
 
-$$$ p5js
+$$$p5js
 let tempo  = 50
 function setup(){
 createCanvas(400,400);
