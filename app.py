@@ -174,6 +174,87 @@ def calcular_nivel(xp):
             nivel = i + 1
 
     return nivel
+import re
+import html
+
+def extrair_p5js(conteudo):
+
+    simulacoes = []
+
+    def substituir(match):
+        codigo = match.group(1)
+        indice = len(simulacoes)
+
+        simulacoes.append(codigo)
+
+        return f"LABP5SIM{indice}END"
+
+    conteudo = re.sub(
+        r"^[ \t]*\$\$\$[ \t]+p5js[ \t]*\r?\n(.*?)^[ \t]*\$\$\$[ \t]*$",
+        substituir,
+        conteudo,
+        flags=re.MULTILINE | re.DOTALL
+    )
+
+    return conteudo, simulacoes
+
+
+def inserir_p5js(conteudo, simulacoes):
+
+    for indice, codigo in enumerate(simulacoes):
+
+        codigo = codigo.replace("</", "<\\/")
+
+        documento = f"""
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <script src="/static/js/p5.min.js"></script>
+
+    <style>
+        body {{
+            margin: 0;
+            overflow: hidden;
+        }}
+
+        canvas {{
+            display: block;
+            max-width: 100%;
+            height: auto !important;
+            margin: auto;
+        }}
+    </style>
+</head>
+<body>
+<script>
+{codigo}
+</script>
+</body>
+</html>
+"""
+
+        iframe = (
+            '<iframe '
+            'class="simulacao-p5" '
+            'sandbox="allow-scripts" '
+            'loading="lazy" '
+            f'srcdoc="{html.escape(documento, quote=True)}">'
+            '</iframe>'
+        )
+
+        marcador = f"LABP5SIM{indice}END"
+
+        conteudo = re.sub(
+            rf"<p>\s*{marcador}\s*</p>|{marcador}",
+            lambda match: iframe,
+            conteudo
+        )
+
+    return conteudo
 def dividir_etapas(md, titulo):
     partes = re.split(
         r"\[etapa=(.*?)\]",
