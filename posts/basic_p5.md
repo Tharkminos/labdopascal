@@ -92,7 +92,11 @@ $$$
 
 
 [etapa=Alterando valores de variáveis:]
-Para alterar o valor de uma variável, existe diversas formas:
+Para alterar o valor de uma variável, podemos redefinir a variável com:
+
+[cor=200,80,80,1] tempo [/cor] = [cor=80,200,80,1] 20 [/cor]
+
+Ou ainda, utilizando operações matemáticas:
 
 # Operações Matemáticas
 
