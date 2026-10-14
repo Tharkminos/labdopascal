@@ -90,7 +90,7 @@ $$$
 
 Para alterar o valor de uma variável, existe diversas formas:
 
-# **→Operações Matemáticas←**
+[etapa= Operações Matemáticas]
 
 Nas operações matemáticas, utilizamos operadores como:
 
