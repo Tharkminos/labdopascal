@@ -90,21 +90,21 @@ Para alterar o valor de uma variável, existe diversas formas:
 
 Nas operações matemáticas, utilizamos operadores como:
 
-[cor=200,100,100,1] tempo [/cor] [cor=100,255,100]-= [/cor] [cor=100,100,200] 1 [/cor]
+[cor=200,100,100,1] tempo [/cor] [cor=100,255,100,1]-= [/cor] [cor=100,100,200,1] 1 [/cor]
 
 [cor=100,255,100]-= [/cor] → Significa que o a variável da esquerda vai diminuir com o valor da direita. No caso acima, o tempo vai diminuir de 1 em 1, toda vez que a linha for chamada. 
 
-[cor=200,100,100,1] tempo [/cor] [cor=100,255,100]*= [/cor] [cor=100,100,200] 2 [/cor]
+[cor=200,100,100,1] tempo [/cor] [cor=100,255,100,1]*= [/cor] [cor=100,100,200,1] 2 [/cor]
 
 [cor=100,255,100]*= [/cor] → Significa que o a variável da esquerda vai multiplicar pelo valor da direita. No caso acima, o tempo vai multiplicar por 2, toda vez que a linha for chamada. 
 
-[cor=200,100,100,1] tempo [/cor] [cor=100,255,100]/= [/cor] [cor=100,100,200] 2 [/cor]
+[cor=200,100,100,1] tempo [/cor] [cor=100,255,100,1]/= [/cor] [cor=100,100,200,1] 2 [/cor]
 
 [cor=100,255,100]*= [/cor] → Significa que o a variável da esquerda vai dividir pelo valor da direita. No caso acima, o tempo vai dividir por 2, toda vez que a linha for chamada. 
 
-[cor=200,100,100,1] tempo [/cor] [cor=100,255,100]+= [/cor] [cor=100,100,200] 1 [/cor]
+[cor=200,100,100,1] tempo [/cor] [cor=100,255,100,1]+= [/cor] [cor=100,100,200,1] 1 [/cor]
 
-[cor=100,255,100]+= [/cor] → Significa que o a variável da esquerda vai aumentar com o valor da direita. No caso acima, o tempo vai aumentar de 1 em 1, toda vez que a linha for chamada. Se estiver dentro do draw, vai resultar no seguinte resultado. Com o tempo começando em 0.
+[cor=100,255,100,1]+= [/cor] → Significa que o a variável da esquerda vai aumentar com o valor da direita. No caso acima, o tempo vai aumentar de 1 em 1, toda vez que a linha for chamada. Se estiver dentro do draw, vai resultar no seguinte resultado. Com o tempo começando em 0.
 
 
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]tempo[/cor] = [cor=200,150,100,1]0[/cor]
