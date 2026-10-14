@@ -86,11 +86,14 @@ text(tempo,180,200);
 $$$
 
 
-# Alterando valores de variáveis:
 
+
+
+
+[etapa=Alterando valores de variáveis:]
 Para alterar o valor de uma variável, existe diversas formas:
 
-[etapa= Operações Matemáticas]
+# Operações Matemáticas
 
 Nas operações matemáticas, utilizamos operadores como:
 
