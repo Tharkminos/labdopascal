@@ -40,6 +40,7 @@ Variáveis, são espaços nomeados no computador, onde salvamos as informações
 
 **Exemplo:**
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]tempo[/cor] = [cor=200,150,100,1]0[/cor]  [cor=150,150,150,1]//Cria uma variável chamada tempo com o valor de 0 salvo.[/cor]
+
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]nome[/cor] = [cor=100,200,100,1]"Alberto"[/cor]  [cor=150,150,150,1]// Cria uma variável chamada nome, com o valor de "Alberto" salvo[/cor]
 
 No código, ao nos referirmos ao tempo por exemplo, ao invés dele mostrar a palavra tempo, ele mostrará seu valor:
@@ -48,12 +49,26 @@ No código, ao nos referirmos ao tempo por exemplo, ao invés dele mostrar a pal
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]tempo[/cor] = [cor=200,150,100,1]50[/cor]
 
 [cor=20,20,200,1]function[/cor] setup(){
+
   [cor=200,20,20,1]createCanvas(400,400);[/cor]
+  
 }
 
 [cor=20,20,200,1]function[/cor] draw(){
+
   [cor=200,20,20,1]textSize(32);[/cor]
+  
   [cor=200,20,20,1]text(tempo,220,200);[/cor]
+  
 }
 
-
+$$$ p5js
+let tempo  = 50
+function setup(){
+createCanvas(400,400);
+}
+function draw(){
+textSize(32);
+text(tempo,220,200);
+}
+$$$
