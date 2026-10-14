@@ -56,6 +56,8 @@ No código, ao nos referirmos ao tempo por exemplo, ao invés dele mostrar a pal
 
 [cor=20,20,200,1]function[/cor] draw(){
 
+[cor=200,20,20,1] background(220); [/cor]
+
   [cor=200,20,20,1]textSize(32);[/cor]
   
   [cor=200,20,20,1]text(tempo,180,200);[/cor]
@@ -72,6 +74,8 @@ createCanvas(400,400);
 }
 
 function draw(){
+
+background(220);
 
 textSize(32);
 
@@ -117,6 +121,8 @@ Nas operações matemáticas, utilizamos operadores como:
 
 [cor=20,20,200,1]function[/cor] draw(){
 
+  [cor=200,20,20,1] background(220); [/cor]
+
   [cor=200,20,20,1]tempo+=1;[/cor]
   
   [cor=200,20,20,1]textSize(32);[/cor]
@@ -137,7 +143,9 @@ createCanvas(400,400);
 
 function draw(){
 
-tempo+=1
+tempo+=1;
+
+background(220);
 
 textSize(32);
 
