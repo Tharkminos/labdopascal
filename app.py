@@ -174,8 +174,7 @@ def calcular_nivel(xp):
             nivel = i + 1
 
     return nivel
-import re
-import html
+
 
 def extrair_p5js(conteudo):
 
