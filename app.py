@@ -30,7 +30,7 @@ import re
 import json
 import random
 import os
-
+import html
 # ================= APP =================
 
 app = Flask(__name__)
@@ -405,18 +405,75 @@ def processar_etapa(conteudo, banco=None):
         )
 
     return html
+# ================= SIMULAÇÃO IN MARKDOWN ====
+import re
+import html
+import json
 
+def processar_p5js(conteudo):
+    def substituir(match):
+        codigo = match.group(1)
+
+        # Evita que o código encerre a tag script
+        codigo_seguro = codigo.replace("</", "<\\/")
+
+        documento = f"""
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+
+    <style>
+        body {{
+            margin: 0;
+            overflow: hidden;
+        }}
+
+        canvas {{
+            display: block;
+            max-width: 100%;
+            height: auto !important;
+            margin: auto;
+        }}
+    </style>
+
+    <script src="/static/js/p5.min.js"></script>
+</head>
+<body>
+    <script>
+{codigo_seguro}
+    </script>
+</body>
+</html>
+"""
+
+        return (
+            '<iframe '
+            'class="simulacao-p5" '
+            'sandbox="allow-scripts" '
+            'loading="lazy" '
+            f'srcdoc="{html.escape(documento, quote=True)}">'
+            '</iframe>'
+        )
+
+    return re.sub(
+        r"(?m)^[ \t]*\$\$\$[ \t]+p5js[ \t]*\r?\n(.*?)^[ \t]*\$\$\$[ \t]*$",
+        substituir,
+        conteudo,
+        flags=re.DOTALL
+    )
 # ================= MARKDOWN =================
-def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
+def renderizar_markdown(arquivo, titulo=None, aula_slug=None):
 
-    with open(
-        arquivo,
-        encoding="utf-8"
-    ) as f:
-
+    with open(arquivo, encoding="utf-8") as f:
         md = f.read()
 
+    # ================= METADADOS =================
+
     meta, md = ler_metadados(md)
+
     # ================= TÍTULO =================
 
     if titulo is None:
@@ -440,46 +497,57 @@ def renderizar_markdown(arquivo, titulo=None,aula_slug=None):
             )
 
         else:
-
             titulo = "Sem título"
-    etapas = dividir_etapas(md,titulo)
-    if meta.get('results',False) == False:
+
+    # ================= ETAPAS =================
+
+    etapas = dividir_etapas(md, titulo)
+
+    if meta.get("results", False) == False:
+
         etapas.append({
-
             "titulo": "Resultados",
-
             "conteudo": "",
-            "tipo":"resultado"
+            "tipo": "resultado"
         })
 
-   
+    # ================= QUESTÕES =================
+
     banco = None
 
     if "questoes" in meta:
-
         banco = carregar_questoes(
             meta["questoes"]
         )
-    print("APÓS DIVIDIR")
+
+    # ================= PROCESSAMENTO =================
 
     for etapa in etapas:
-        print(etapa)
+
+        # Processa questões e outros marcadores
         etapa["conteudo"] = processar_etapa(
             etapa["conteudo"],
             banco
         )
-    return render_template(
-    "post.html",
-    titulo=titulo,
-    etapas=etapas,
-    simulacoes=re.findall(
-        r"\[simulacao=(.*?)\]",
-        md
-    ),
-    meta=meta,
-    aula_slug=aula_slug
-)
 
+        # Converte blocos $$$ p5js em iframes
+        etapa["conteudo"] = processar_p5js(
+            etapa["conteudo"]
+        )
+
+    # ================= TEMPLATE =================
+
+    return render_template(
+        "post.html",
+        titulo=titulo,
+        etapas=etapas,
+        simulacoes=re.findall(
+            r"\[simulacao=(.*?)\]",
+            md
+        ),
+        meta=meta,
+        aula_slug=aula_slug
+    )
 # ================= HOME =================
 
 @app.route("/")
