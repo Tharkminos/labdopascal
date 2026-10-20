@@ -163,5 +163,61 @@ text(tempo,180,200);
 
 $$$
 
+[etapa=Trabalhando com Variáveis]
+
+Para trabalhar com variáveis, no P5JS, podemos fazer isso de uma forma prática.
+Vamos criar uma nuvem com movimento, e para isso criaremos 3 variáveis:
+
+[cor=50,50,200,1]let[/cor] [cor=100,100,100,1]NuvemX[/cor] = [cor=200,150,100,1]0[/cor]
+
+[cor=50,50,200,1]let[/cor] [cor=100,100,100,1]NuvemY[/cor] = [cor=200,150,100,1]200[/cor]
+
+[cor=50,50,200,1]let[/cor] [cor=100,100,100,1]velocidade[/cor] = [cor=200,150,100,1]1[/cor]
+
+[cor=100,100,100,1]NuvemX[/cor], refere-se a posição X da nuvem, [cor=100,100,100,1]NuvemY[/cor] se refere a posição Y da nuvem e [cor=100,100,100,1]velocidade[/cor] se refere a velocidade de movimento da nuvem
+
+
+$$$ p5js
+
+function setup() {
+  
+  createCanvas(400, 400);
+  
+}
+
+let NuvemX = 0;
+let NuvemY = 200;
+let velocidade = 1;
+
+function draw() {
+  
+  noStroke();// Apaga o contorno
+  background(117,231,255);
+  fill(0,200,41);
+  rect(-1,320,401);
+  fill(160,80,80);
+  triangle(200,200,100,320,100+200,320);
+  fill(240)
+  triangle(200,200,183,220,217,220);
+  fill(255,255,0);
+  circle(0,0,150);
+  
+  //Nuvem, cada circulo da nuvem é desenhado 25 pixeis a frente do anterior
+
+  NuvemX += velocidade; // A velocidade da nuvem é 1, isto é, a cada frame aumenta a posição NuvemX em 1
+  
+  fill(255); // Pinta de branco
+  
+  circle(NuvemX,NuvemY,40);
+  circle(NuvemX+25,NuvemY,40);
+  circle(NuvemX+50,NuvemY,40);
+  
+  fill(0)
+  textSize(20)
+  text("NuvemX = " + NuvemX,0,395)
+}
+
+$$$
+
 
 
