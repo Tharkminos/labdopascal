@@ -239,6 +239,8 @@ def inserir_p5js(conteudo, simulacoes):
         iframe = (
             '<iframe '
             'class="simulacao-p5" '
+            'width="600'
+            'height="600'
             'sandbox="allow-scripts" '
             'loading="lazy" '
             f'srcdoc="{html.escape(documento, quote=True)}">'
