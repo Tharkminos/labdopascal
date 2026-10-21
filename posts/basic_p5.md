@@ -174,7 +174,7 @@ Vamos criar uma nuvem com movimento, e para isso criaremos 3 variáveis:
 
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]velocidade[/cor] = [cor=200,150,100,1]1[/cor]
 
-[cor=200,100,100,1]NuvemX[/cor], refere-se a posição X da nuvem, [cor=200,100,100,1]NuvemY[/cor] se refere a posição Y da nuvem e [cor=200,100,100,1]velocidade[/cor] se refere a velocidade de movimento da nuvem. Para construir a nuvem faremos o seguinte código em draw:
+[cor=200,100,100,1]NuvemX[/cor], refere-se a posição X(horizontal) da nuvem, [cor=200,100,100,1]NuvemY[/cor] se refere a posição Y(vertical) da nuvem e [cor=200,100,100,1]velocidade[/cor] se refere a velocidade de movimento da nuvem. Para construir a nuvem faremos o seguinte código na função [cor=100,100,200,1]draw()[/cor]:
 
 [cor=200,100,100,1] fill(255); [/cor]      [cor=100,100,100,1]// Pinta de branco[/cor]  
 
