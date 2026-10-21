@@ -229,9 +229,29 @@ def inserir_p5js(conteudo, simulacoes):
     </style>
 </head>
 <body>
+
 <script>
 {codigo}
 </script>
+
+<script>
+function ajustarAltura() {{
+    const altura = Math.ceil(
+        document.body.getBoundingClientRect().height
+    );
+
+    window.parent.postMessage({{
+        tipo: "labdopascal-p5-resize",
+        altura: altura + 10
+    }}, "*");
+}}
+
+window.addEventListener("load", ajustarAltura);
+window.addEventListener("resize", ajustarAltura);
+
+new ResizeObserver(ajustarAltura).observe(document.body);
+</script>
+
 </body>
 </html>
 """
