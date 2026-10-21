@@ -179,13 +179,15 @@ Vamos criar uma nuvem com movimento, e para isso criaremos 3 variáveis:
 
 fill(255); // Pinta de branco
 
+NuvemX += velocidade // Aumenta a posição X com o valor da velocidade
+
 circle(NuvemX,NuvemY,40); // Desenha o primeiro círculo
 
 circle(NuvemX+25,NuvemY,40); // Desenha o segundo círculo afastado em 25 pixeis
 
 circle(NuvemX+50,NuvemY,40); // Desenha o terceiro circulo afastado em 50 pixeis do primeiro
   
-
+text("Nuvem:" + NuvemX, 0,395);  // Adiciona a Palavra Nuvem na tela e mostra o valor salvo em Nuvem
 
 $$$ p5js
 
