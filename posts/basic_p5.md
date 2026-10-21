@@ -174,20 +174,21 @@ Vamos criar uma nuvem com movimento, e para isso criaremos 3 variáveis:
 
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]velocidade[/cor] = [cor=200,150,100,1]1[/cor]
 
-[cor=100,100,100,1]NuvemX[/cor], refere-se a posição X da nuvem, [cor=100,100,100,1]NuvemY[/cor] se refere a posição Y da nuvem e [cor=100,100,100,1]velocidade[/cor] se refere a velocidade de movimento da nuvem. Para construir a nuvem faremos o seguinte código em draw:
+[cor=200,100,100,1]NuvemX[/cor], refere-se a posição X da nuvem, [cor=200,100,100,1]NuvemY[/cor] se refere a posição Y da nuvem e [cor=200,100,100,1]velocidade[/cor] se refere a velocidade de movimento da nuvem. Para construir a nuvem faremos o seguinte código em draw:
 
+[cor=200,100,100,1]
+fill(255); [/cor]      [cor=100,100,100,1]// Pinta de branco[/cor]  
 
-fill(255); // Pinta de branco
+[cor=200,100,100,1]NuvemX += velocidade [/cor] [cor=100,100,100,1]// Aumenta a posição X com o valor da velocidade[/cor]
 
-NuvemX += velocidade // Aumenta a posição X com o valor da velocidade
+[cor=200,100,100,1]circle(NuvemX,NuvemY,40);[/cor] [cor=100,100,100,1]// Desenha o primeiro círculo[/cor]
 
-circle(NuvemX,NuvemY,40); // Desenha o primeiro círculo
+[cor=200,100,100,1]circle(NuvemX+25,NuvemY,40);[/cor] [cor=100,100,100,1]// Desenha o segundo círculo afastado em 25 pixeis[/cor]
 
-circle(NuvemX+25,NuvemY,40); // Desenha o segundo círculo afastado em 25 pixeis
-
-circle(NuvemX+50,NuvemY,40); // Desenha o terceiro circulo afastado em 50 pixeis do primeiro
+[cor=200,100,100,1]circle(NuvemX+50,NuvemY,40);[/cor] [cor=100,100,100,1]// Desenha o terceiro circulo afastado em 50 pixeis do primeiro[/cor]
   
-text("Nuvem:" + NuvemX, 0,395);  // Adiciona a Palavra Nuvem na tela e mostra o valor salvo em Nuvem
+[cor=200,100,100,1]text("Nuvem:" + NuvemX, 0,395);[/cor]  [cor=100,100,100,1]// Adiciona a Palavra Nuvem na tela e mostra o valor salvo em Nuvem[/cor]
+
 
 $$$ p5js
 
