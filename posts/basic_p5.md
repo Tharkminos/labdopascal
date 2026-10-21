@@ -10,7 +10,7 @@ results:true
 
 [cor=180,80,80,1]background[/cor]([cor=240,0,0,1]R[/cor],[cor=0,240,0,1]G[/cor],[cor=0,0,240,1]B[/cor]): Pinta o fundo com o sistema RGB.
 
-[cor=180,80,80,1]fill[/cor]([cor=240,0,0,1]R[/cor],[cor=0,240,0,1]G[/cor],[cor=0,0,240,1]B[/cor])Pinta a figura abaixa utilizando a cor no sistema RGB.
+[cor=180,80,80,1]fill[/cor]([cor=240,0,0,1]R[/cor],[cor=0,240,0,1]G[/cor],[cor=0,0,240,1]B[/cor])Pinta a figura abaixo utilizando a cor no sistema RGB.
 
 [cor=180,80,80,1]circle(x,y,diametro)[/cor]:Desenha um círculo na posição horizontal x, e na posição vertical y, com o tamanho do **diâmetro** definido.
 
@@ -43,7 +43,7 @@ Variáveis, são espaços nomeados no computador, onde salvamos as informações
 
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]nome[/cor] = [cor=100,200,100,1]"Alberto"[/cor]  [cor=150,150,150,1]// Cria uma variável chamada nome, com o valor de "Alberto" salvo[/cor]
 
-No código, ao nos referirmos ao tempo por exemplo, ao invés dele mostrar a palavra tempo, ele mostrará seu valor:
+No código, ao nos referirmos ao tempo por exemplo, em vez de mostrar a palavra tempo, ele mostrará seu valor:
 
 **Exemplo:**
 
@@ -104,19 +104,19 @@ Nas operações matemáticas, utilizamos operadores como:
 
 [cor=200,100,100,1] tempo [/cor] [cor=100,200,100,1]-= [/cor] [cor=100,100,200,1] 1 [/cor]
 
-[cor=100,200,100,1]-= [/cor] → Significa que o a variável da esquerda vai diminuir com o valor da direita. No caso acima, o tempo vai diminuir de 1 em 1, toda vez que a linha for chamada. 
+[cor=100,200,100,1]-= [/cor] → Significa que  a variável da esquerda vai diminuir com o valor da direita. No caso acima, o tempo vai diminuir de 1 em 1, toda vez que a linha for chamada. 
 
 [cor=200,100,100,1] tempo [/cor] [cor=100,200,100,1]*= [/cor] [cor=100,100,200,1] 2 [/cor]
 
-[cor=100,200,100,1]*= [/cor] → Significa que o a variável da esquerda vai multiplicar pelo valor da direita. No caso acima, o tempo vai multiplicar por 2, toda vez que a linha for chamada. 
+[cor=100,200,100,1]*= [/cor] → Significa que a variável da esquerda vai multiplicar pelo valor da direita. No caso acima, o tempo vai multiplicar por 2, toda vez que a linha for chamada. 
 
 [cor=200,100,100,1] tempo [/cor] [cor=100,200,100,1]/= [/cor] [cor=100,100,200,1] 2 [/cor]
 
-[cor=100,200,100,1]/= [/cor] → Significa que o a variável da esquerda vai dividir pelo valor da direita. No caso acima, o tempo vai dividir por 2, toda vez que a linha for chamada. 
+[cor=100,200,100,1]/= [/cor] → Significa que a variável da esquerda vai dividir pelo valor da direita. No caso acima, o tempo vai dividir por 2, toda vez que a linha for chamada. 
 
 [cor=200,100,100,1] tempo [/cor] [cor=100,200,100,1]+= [/cor] [cor=100,100,200,1] 1 [/cor]
 
-[cor=100,200,100,1]+= [/cor] → Significa que o a variável da esquerda vai aumentar com o valor da direita. No caso acima, o tempo vai aumentar de 1 em 1 (para cada frame,logo se a tela desenha 60 vezes em um segundo, ele aumentará 60 vezes o valor) , toda vez que a linha for chamada. Se estiver dentro do draw, vai resultar no seguinte resultado. Com o tempo começando em 0.
+[cor=100,200,100,1]+= [/cor] → O símbolo += aumenta o valor da variável. Se utilizarmos tempo += 1 dentro de draw(), o valor aumentará em 1 a cada repetição. Se ocorrerem 60 repetições por segundo, o valor aumentará 60 unidades por segundo. Se estiver dentro da função draw, vai resultar no seguinte resultado. Com o tempo começando em 0.
 
 
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]tempo[/cor] = [cor=200,150,100,1]0[/cor]
