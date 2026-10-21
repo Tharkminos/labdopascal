@@ -6,7 +6,7 @@ results:true
 
 [cor=150,130,0,1]function[/cor] [cor=150,130,0,1]setup(){}[/cor]: Executa o que estiver entre {} apenas uma vez;
 
-[cor=150,130,0,1]function[/cor] [cor=150,130,0,1]draw(){}[/cor]: Executa o que estiver entre {} em looping. O valor padrão é de 60 vezes por segundo;
+[cor=150,130,0,1]function[/cor] [cor=150,130,0,1]draw(){}[/cor]: Executa o que estiver entre {} em looping. O valor padrão que o computador tenta manter é de 60 vezes por segundo;
 
 [cor=180,80,80,1]background[/cor]([cor=240,0,0,1]R[/cor],[cor=0,240,0,1]G[/cor],[cor=0,0,240,1]B[/cor]): Pinta o fundo com o sistema RGB.
 
