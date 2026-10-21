@@ -884,6 +884,30 @@ document.addEventListener("DOMContentLoaded", function() {
 
 });
 </script>
+
+<script>
+window.addEventListener("message", function(event) {
+
+    if (!event.data ||
+        event.data.tipo !== "labdopascal-p5-resize") {
+        return;
+    }
+
+    const iframe = Array.from(
+        document.querySelectorAll(".simulacao-p5")
+    ).find(frame => frame.contentWindow === event.source);
+
+    if (!iframe) return;
+
+    const altura = Number(event.data.altura);
+
+    if (!Number.isFinite(altura) || altura < 50 || altura > 5000) {
+        return;
+    }
+
+    iframe.style.height = altura + "px";
+});
+</script>
 {% endblock %}
 
 
