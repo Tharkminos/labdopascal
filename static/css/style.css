@@ -1503,10 +1503,9 @@ canvas{
 .simulacao-p5 {
     display: block;
     width: 100%;
-    max-width: 650px;
-    height: 350px;
+    max-width: 100%;
+    min-height: 150px;
+    border: none;
     margin: 20px auto;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: white;
+    overflow: hidden;
 }
