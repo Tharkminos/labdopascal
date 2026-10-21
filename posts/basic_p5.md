@@ -34,7 +34,7 @@ x3,y3 é o terceiro canto
 [color_picker]
 
 [etapa=Variáveis]
-Variáveis, são espaços nomeados no computador, onde salvamos as informações, para podermos consultar depois. Eles são salvos de forma **temporária** enquanto o código estiver em funcionamento. Para criar uma variável que funcione tanto em **setup()** como em **draw()**, criamos ela uma primeira vez entre [cor=220,50,50,1]function setup(){} e function draw()[/cor]
+Variáveis, são espaços nomeados no computador, onde salvamos as informações, para podermos consultar depois. Eles são salvos de forma **temporária** enquanto o código estiver em funcionamento. Para criar uma variável que funcione tanto em **setup()** como em **draw()**, criamos ela uma primeira vez fora de [cor=220,50,50,1]function setup(){} e function draw()[/cor]
 
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]nome_variavel[/cor] = [cor=200,150,100,1]valor_salvo[/cor] 
 
@@ -116,7 +116,7 @@ Nas operações matemáticas, utilizamos operadores como:
 
 [cor=200,100,100,1] tempo [/cor] [cor=100,200,100,1]+= [/cor] [cor=100,100,200,1] 1 [/cor]
 
-[cor=100,200,100,1]+= [/cor] → O símbolo += aumenta o valor da variável. Se utilizarmos tempo += 1 dentro de draw(), o valor aumentará em 1 a cada repetição. Se ocorrerem 60 repetições por segundo, o valor aumentará 60 unidades por segundo. Se estiver dentro da função draw, vai resultar no seguinte resultado. Com o tempo começando em 0.
+[cor=100,200,100,1]+= [/cor] → O símbolo += aumenta o valor da variável. Se utilizarmos tempo += 1 dentro de draw(), o valor aumentará em 1 a cada repetição. Se ocorrerem 60 repetições por segundo, o valor aumentará 60 unidades por segundo. Observe o exemplo abaixo, em que a variável tempo começa com o valor 0.
 
 
 [cor=50,50,200,1]let[/cor] [cor=100,100,100,1]tempo[/cor] = [cor=200,150,100,1]0[/cor]
@@ -178,13 +178,13 @@ Vamos criar uma nuvem com movimento, e para isso criaremos 3 variáveis:
 
 [cor=200,100,100,1]fill(255); [/cor]      [cor=100,100,100,1]// Pinta de branco[/cor]  
 
-[cor=200,100,100,1]NuvemX += velocidade [/cor] [cor=100,100,100,1]// A velocidade da nuvem é 1, a cada frame aumenta a variável NuvemX em 1 (elá irá para a direita) [/cor]
+[cor=200,100,100,1]NuvemX += velocidade [/cor] [cor=100,100,100,1]// A velocidade da nuvem é 1, a cada frame aumenta a variável NuvemX em 1 (ela irá para a direita) [/cor]
 
 [cor=200,100,100,1]circle(NuvemX,NuvemY,40);[/cor] [cor=100,100,100,1]// Desenha o primeiro círculo de diâmetro 40[/cor]
 
-[cor=200,100,100,1]circle(NuvemX+25,NuvemY,40);[/cor] [cor=100,100,100,1]// Desenha o segundo círculo afastado em 25 pixeis[/cor]
+[cor=200,100,100,1]circle(NuvemX+25,NuvemY,40);[/cor] [cor=100,100,100,1]// Desenha o segundo círculo afastado em 25 pixels[/cor]
 
-[cor=200,100,100,1]circle(NuvemX+50,NuvemY,40);[/cor] [cor=100,100,100,1]// Desenha o terceiro circulo afastado em 50 pixeis do primeiro[/cor]
+[cor=200,100,100,1]circle(NuvemX+50,NuvemY,40);[/cor] [cor=100,100,100,1]// Desenha o terceiro círculo afastado em 50 pixels do primeiro[/cor]
   
 [cor=200,100,100,1]text("Nuvem:" + NuvemX, 0,395);[/cor]  [cor=100,100,100,1]// Adiciona a Palavra Nuvem na tela e mostra o valor salvo em NuvemX[/cor]
 
@@ -214,7 +214,7 @@ function draw() {
   fill(255,255,0);
   circle(0,0,150);
   
-  //Nuvem, cada circulo da nuvem é desenhado 25 pixeis a frente do anterior
+  //Nuvem, cada círculo da nuvem é desenhado 25 pixels a frente do anterior
 
   NuvemX += velocidade; // A velocidade da nuvem é 1, isto é, a cada frame aumenta a posição NuvemX em 1
   
