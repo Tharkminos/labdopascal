@@ -276,6 +276,7 @@ function draw() {
   background(180); // Pinta o fundo de cinza
   
   Red += velocidade; // A velocidade da nuvem é 1, isto é, a cada frame aumenta a posição NuvemX em 1
+  
   Green -= velocidade; // A velocidade da nuvem é 1, isto é, a cada frame aumenta a posição NuvemX em 1
   
   fill(Red,Green, 0);
