@@ -251,9 +251,9 @@ Vamos criar uma nuvem com movimento, e para isso criaremos 3 variáveis:
 
 [cor=200,100,100,1]circle(200,200,200);[/cor] [cor=100,100,100,1]// Desenha o círculo de diâmetro 200[/cor]
 
-[cor=200,100,100,1]text("Red:" + Red, 0,395);[/cor]  [cor=100,100,100,1]// Adiciona a Palavra Red na tela e mostra o valor salvo em Red[/cor]
+[cor=200,100,100,1]text("Red:" + Red, 0,370);[/cor]  [cor=100,100,100,1]// Adiciona a Palavra Red na tela e mostra o valor salvo em Red[/cor]
 
-[cor=200,100,100,1]text("Green:" + Green, 0,395);[/cor]  [cor=100,100,100,1]// Adiciona a Palavra Green na tela e mostra o valor salvo em Green[/cor]
+[cor=200,100,100,1]text("Green:" + Green, 0,390);[/cor]  [cor=100,100,100,1]// Adiciona a Palavra Green na tela e mostra o valor salvo em Green[/cor]
 
 
 $$$ p5js
