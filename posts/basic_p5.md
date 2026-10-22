@@ -231,5 +231,65 @@ function draw() {
 
 $$$
 
+[etapa=Variáveis aplicadas as cores]
+
+Para trabalhar com variáveis, no P5JS, podemos fazer isso de uma forma prática.
+Vamos criar uma nuvem com movimento, e para isso criaremos 3 variáveis:
+
+[cor=50,50,200,1]let[/cor] [cor=220,100,100,1]Red[/cor] = [cor=200,150,100,1]0[/cor]
+
+[cor=50,50,200,1]let[/cor] [cor=100,220,100,1]Green[/cor] = [cor=200,150,100,1]255[/cor]
+
+[cor=50,50,200,1]let[/cor] [cor=100,100,100,1]velocidade[/cor] = [cor=200,150,100,1]1[/cor]
+
+[cor=220,100,100,1]Red[/cor], refere-se a cor vermelha do círculo, [cor=100,220,100,1]Green[/cor] refere-se a cor verde do círculo. [cor=200,100,100,1]velocidade[/cor] se refere a velocidade da mudança da cor nessa situação. no [cor=100,100,200,1]draw()[/cor], colocamos:
+
+[cor=200,100,100,1]fill(Red, Green, 0); [/cor]      [cor=100,100,100,1]// Pinta o círculo[/cor]  
+
+[cor=200,100,100,1]Red += velocidade [/cor] [cor=100,100,100,1]// A velocidade de mudança da cor vermelha é 1. [/cor]
+
+[cor=200,100,100,1]Green -= velocidade [/cor] [cor=100,100,100,1]// A velocidade de mudança da cor verde é **-1**[/cor]
+
+
+[cor=200,100,100,1]circle(200,200,200);[/cor] [cor=100,100,100,1]// Desenha o círculo de diâmetro 200[/cor]
+
+[cor=200,100,100,1]text("Red:" + Red, 0,395);[/cor]  [cor=100,100,100,1]// Adiciona a Palavra Red na tela e mostra o valor salvo em Red[/cor]
+
+[cor=200,100,100,1]text("Green:" + Green, 0,395);[/cor]  [cor=100,100,100,1]// Adiciona a Palavra Green na tela e mostra o valor salvo em Green[/cor]
+
+
+$$$ p5js
+
+function setup() {
+  
+  createCanvas(400, 400);
+  frameRate(10)
+}
+
+let Red = 0;
+let Green = 255;
+let velocidade = 1;
+
+function draw() {
+  
+  noStroke();// Apaga o contorno
+  background(180); // Pinta o fundo de cinza
+  
+  Red += velocidade; // A velocidade da nuvem é 1, isto é, a cada frame aumenta a posição NuvemX em 1
+  Green -= velocidade; // A velocidade da nuvem é 1, isto é, a cada frame aumenta a posição NuvemX em 1
+  
+  fill(Red,Green, 0);
+  
+  circle(200,200,100);
+
+  fill(0);
+  textSize(20);
+  text("Red = " + Red,0,370);
+  text("Green = " + Green,0,390);
+}
+
+$$$
+
+
 
 
