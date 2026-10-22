@@ -673,6 +673,12 @@ def p5js():
     arquivo = f"posts/basic_p5.md"
     return renderizar_markdown(arquivo)
 
+@app.route("/anchieta")
+def anch():
+    arquivo = f"posts/torque.md"
+    return renderizar_markdown(arquivo)
+
+
 @app.route("/mecexp")
 def mec_exp():
     arquivo = f"posts/atv_exp.md"
