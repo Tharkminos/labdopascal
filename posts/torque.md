@@ -209,7 +209,7 @@ function draw() {
 
   // Posição dos sliders
   posicionar(intensidade, 125, 405);
-  posicionar(distancia, 125, 442);
+  posicionar(distancia, 150, 442);
   posicionar(direcao, 548, 405);
 
   botao.position(28, 503);
