@@ -208,7 +208,7 @@ function draw() {
   rotulo('Desvio da perpendicular', direcao.value() + '°', 375, 422);
 
   // Posição dos sliders
-  posicionar(intensidade, 125, 405);
+  posicionar(intensidade, 150, 405);
   posicionar(distancia, 150, 442);
   posicionar(direcao, 548, 405);
 
