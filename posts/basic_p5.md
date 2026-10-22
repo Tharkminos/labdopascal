@@ -261,11 +261,13 @@ $$$ p5js
 function setup() {
   
   createCanvas(400, 400);
-  frameRate(10)
+  frameRate(20)
 }
 
 let Red = 0;
+
 let Green = 255;
+
 let velocidade = 1;
 
 function draw() {
