@@ -31,8 +31,9 @@
 
 $$$ p5js
 
-let intensidade, distancia, direcao, atrito;
+let intensidade, distancia, direcao;
 let portaAng = 0, velocidade = 0, ativo = false;
+
 
 const larguraPorta = 2;
 const massaPorta = 35;
@@ -48,9 +49,8 @@ function setup() {
   intensidade = createSlider(0, 180, 65, 1);
   distancia = createSlider(0.1, 2, 1.8, 0.05);
   direcao = createSlider(-90, 90, 0, 1);
-  atrito = createSlider(0, 20, 5, 0.5);
 
-  for (let s of [intensidade, distancia, direcao, atrito]) {
+  for (let s of [intensidade, distancia, direcao]) {
     s.style('width', '175px');
   }
 
@@ -83,7 +83,7 @@ function draw() {
   if (ativo) {
     for (let i = 0; i < 5; i++) {
       const tau = moduloTorque
-        - atrito.value() * velocidade
+        - 20 * velocidade
         - (abs(velocidade) > 0.0001
           ? 2 * Math.sign(velocidade)
           : 0);
@@ -206,13 +206,11 @@ function draw() {
   rotulo('Força', F + ' N', 28, 422);
   rotulo('Distância', r.toFixed(2) + ' m', 28, 459);
   rotulo('Desvio da perpendicular', direcao.value() + '°', 375, 422);
-  rotulo('Atrito', atrito.value().toFixed(1), 375, 459);
 
   // Posição dos sliders
   posicionar(intensidade, 125, 405);
   posicionar(distancia, 125, 442);
   posicionar(direcao, 548, 405);
-  posicionar(atrito, 548, 442);
 
   botao.position(28, 503);
   reiniciar.position(205, 503);
