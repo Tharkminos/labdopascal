@@ -236,9 +236,11 @@ $$$
 Para trabalhar com variáveis, no P5JS, podemos fazer isso de uma forma prática.
 Vamos criar uma nuvem com movimento, e para isso criaremos 3 variáveis:
 
-[cor=50,50,200,1]let[/cor] [cor=220,100,100,1]Red[/cor] = [cor=200,150,100,1]0[/cor] \n
-[cor=50,50,200,1]let[/cor] [cor=100,220,100,1]Green[/cor] = [cor=200,150,100,1]255[/cor] \n
-[cor=50,50,200,1]let[/cor] [cor=100,100,100,1]velocidade[/cor] = [cor=200,150,100,1]1[/cor] \n
+[cor=50,50,200,1]let[/cor] [cor=220,100,100,1]Red[/cor] = [cor=200,150,100,1]0[/cor]
+
+[cor=50,50,200,1]let[/cor] [cor=100,220,100,1]Green[/cor] = [cor=200,150,100,1]255[/cor]
+
+[cor=50,50,200,1]let[/cor] [cor=100,100,100,1]velocidade[/cor] = [cor=200,150,100,1]1[/cor]
 
 [cor=220,100,100,1]Red[/cor], refere-se a cor vermelha do círculo, [cor=100,220,100,1]Green[/cor] refere-se a cor verde do círculo. [cor=200,100,100,1]velocidade[/cor] se refere a velocidade da mudança da cor nessa situação. no [cor=100,100,200,1]draw()[/cor], colocamos:
 
