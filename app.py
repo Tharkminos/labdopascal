@@ -39,6 +39,53 @@ from authlib.integrations.flask_client import OAuth
 oauth = OAuth(app)
 
 
+from flask import Response
+from pathlib import Path
+from xml.etree.ElementTree import Element, SubElement, tostring
+
+@app.route("/sitemap.xml")
+def sitemap():
+    dominio = "https://labdopascal.com.br"
+    pasta = Path(__file__).resolve().parent / "posts" / "fisica"
+
+    paginas = {
+        "/",
+        "/p5js",
+        "/anchieta",
+        "/mecexp",
+        "/ranking",
+        "/modulos"
+    }
+
+    # Descobre automaticamente os módulos
+    if pasta.is_dir():
+        for arquivo in pasta.glob("*.md"):
+            nome = arquivo.stem
+
+            if "_" not in nome:
+                continue
+
+            slug = nome.rsplit("_", 1)[0]
+
+            paginas.add(f"/modulo/{slug}")
+
+    raiz = Element(
+        "urlset",
+        xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    )
+
+    for caminho in sorted(paginas):
+        url = SubElement(raiz, "url")
+        SubElement(url, "loc").text = dominio + caminho
+
+    xml = tostring(
+        raiz,
+        encoding="utf-8",
+        xml_declaration=True
+    )
+
+    return Response(xml, mimetype="application/xml")
+
 google = oauth.register(
     name="google",
 
