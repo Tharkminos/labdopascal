@@ -441,7 +441,7 @@ function Button(x,y,size,txt,md,end=false){
                 sim.rect(x,y-2,size[0],size[1],10)
                 sim.fill(0);
                 sim.text(txt,x+size[0]/2-txt.length,y+32)
-                if(end != undefined){
+                if(end !== undefined){
                    return md
                 }else{
                    return true
@@ -454,7 +454,7 @@ function Button(x,y,size,txt,md,end=false){
                 sim.rect(x,y-10,size[0],size[1],10)
                 sim.fill(0);
                 sim.text(txt,x+size[0]/2-txt.length,y+24)
-                if(end != undefined){
+                if(end !== undefined){
                     return md
                 } else {
                     return false
