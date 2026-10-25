@@ -426,7 +426,7 @@ function drawPath(){
 
 }
 
-function Button(x,y,size,txt,md,end=false){
+function Button(x,y,size,txt,md,end){
         if(size.length!=2){
                 size = [size,size]
         }
