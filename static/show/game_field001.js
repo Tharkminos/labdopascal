@@ -440,7 +440,7 @@ function Button(x,y,size,txt,md){
                 sim.fill(220);
                 sim.rect(x,y-2,size[0],size[1],10)
                 sim.fill(0);
-                sim.text(txt,x+size[0]/2-txt.length,y+24)
+                sim.text(txt,x+size[0]/2-txt.length,y+14)
                 return true
         }else{
                 sim.stroke(0)
@@ -449,7 +449,7 @@ function Button(x,y,size,txt,md){
                 sim.fill(220);
                 sim.rect(x,y-10,size[0],size[1],10)
                 sim.fill(0);
-                sim.text(txt,x+size[0]/2-txt.length,y+14)
+                sim.text(txt,x+size[0]/2-txt.length,y+24)
                 return false
                 
             }
