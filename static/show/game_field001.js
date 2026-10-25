@@ -28,8 +28,12 @@ sim.simulacaoConcluida = function(){
         certo = false
         return true
         }
-    }
+    } if(certo === undefined){
         return false;
+      }
+   if(certo !== undefined){
+     return true;
+   }
 }
 
 sim.setup = function(){
