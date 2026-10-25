@@ -97,8 +97,8 @@ sim.draw = function(){
     }
 
     vetores = temp;
-    b1 = Button(10,250,[130,40], b1_txt,b1)
-    b2 = Button(160,250,[130,40],b2_txt,b2)
+    b1 = Button(10,250,[130,40], b1_txt,b1,certo)
+    b2 = Button(160,250,[130,40],b2_txt,b2,certo)
     sim.simulacaoConcluida()
     
 }
@@ -441,7 +441,11 @@ function Button(x,y,size,txt,md,end=false){
                 sim.rect(x,y-2,size[0],size[1],10)
                 sim.fill(0);
                 sim.text(txt,x+size[0]/2-txt.length,y+32)
-                return true
+                if(end != undefined){
+                   return md
+                }else{
+                   return true
+                }
         }else{
                 sim.stroke(0)
                 sim.fill(100);
@@ -450,7 +454,11 @@ function Button(x,y,size,txt,md,end=false){
                 sim.rect(x,y-10,size[0],size[1],10)
                 sim.fill(0);
                 sim.text(txt,x+size[0]/2-txt.length,y+24)
-                return false
+                if(end != undefined){
+                    return md
+                } else {
+                    return false
+                }
                 
             }
                    }
