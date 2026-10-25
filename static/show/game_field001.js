@@ -19,23 +19,19 @@ let b1_txt = "+"
 let b2_txt = "-"
 let certo = undefined
 sim.simulacaoConcluida = function(){
-    if( (b1===true || b2===true) && certo === undefined ){
-        if((b1 === true && b1_txt === choice) || (b2 === true && b2_txt === choice)){
-            acertos ++
-            certo = true
-            return true
-        }else{
-        certo = false
-        return true
-        }
-    } if(certo === undefined){
-        return false;
-      }
-   if(certo !== undefined){
-     return true;
-   }
-}
 
+    if(certo === undefined && (b1 || b2)){
+
+        certo = (b1 && b1_txt === choice) ||
+                (b2 && b2_txt === choice);
+
+        if(certo){
+            acertos++;
+        }
+    }
+
+    return certo !== undefined;
+}
 sim.setup = function(){
 
     sim.canvas = sim.createCanvas(300,300);
