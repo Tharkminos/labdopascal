@@ -1107,7 +1107,7 @@ def modulos():
             )
 
         titulo = obter_titulo(
-            f"posts/fisica/{primeira_aula}.md",true
+            f"posts/fisica/{primeira_aula}.md",True
         )
         with open(f"posts/fisica/{primeira_aula}.md", "r", encoding="utf-8") as f:
             conteudo = f.read()
