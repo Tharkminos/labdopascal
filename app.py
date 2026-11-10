@@ -1327,7 +1327,21 @@ def obter_meta_rapido(arquivo):
                 ] = valor.strip()
 
     return meta
-def obter_titulo(arquivo):
+def obter_titulo(arquivo,n=None):
+    if n != None:
+        with open(
+            arquivo,
+            encoding="utf-8"
+        ) as f:
+           texto = f.read()
+           match = re.search(
+           r"^#\s*(.+)$",
+           texto,
+           re.MULTILINE
+    )
+        if match:
+            return match.group(1)
+        return "Sem título"
     with open(
         arquivo,
         encoding="utf-8"
