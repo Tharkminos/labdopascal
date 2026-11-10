@@ -1335,7 +1335,7 @@ def obter_titulo(arquivo,n=None):
         ) as f:
            texto = f.read()
            match = re.search(
-           r"^#\s*(.+)$",
+           r"^titulo_modulo:\s*(.+)$",
            texto,
            re.MULTILINE
     )
