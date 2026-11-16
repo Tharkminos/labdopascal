@@ -6,12 +6,12 @@ descricao_modulo: Estrutura básica da matéria
 imagem_modulo: atom.webp
 questoes: atomo
 ---
-
-# Equilibre o átomo
+# Íons
+## Equilibre o átomo
 **Escolha o número de elétrons adequado para equilibrar o átomo(manter o mesmo número de prótons e elétrons)**
 [simulacao=charge_eq]
 
-# Íons
+## Íons
 
 &emsp;&emsp; Quando um átomo, possui um número diferente de prótons (carga positiva) e elétrons(carga negativa), ele é chamado de **Íon**. O átomo abaixo por exemplo, possui *4 prótons* e *10 elétrons*.
 [simulacao=show_atom]
