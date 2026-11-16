@@ -7,7 +7,7 @@ imagem_modulo:atom.webp
 questoes: atomo
 ---
 
-# Lista de Questões
+# Processos de Eletrização
 ## Equilibre o átomo
 
 Escolha o número de elétrons adequado para equilibrar o átomo(manter o mesmo número de prótons e elétrons)
