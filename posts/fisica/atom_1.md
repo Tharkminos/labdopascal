@@ -3,7 +3,7 @@ xp: 20
 nivel: 1
 titulo_modulo: Átomos e Cargas
 descricao_modulo: Estrutura básica da matéria
-imagem_modulo:atom.webp
+imagem_modulo: atom.webp
 questoes: atomo
 ---
 
