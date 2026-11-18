@@ -293,6 +293,89 @@ function draw() {
 
 $$$
 
+[etapa=Avaliação]
 
+# Replicar desenho abaixo
+
+$$$ p5js
+function setup() {
+  createCanvas(400, 500);
+  // Help blind or low-vision users understand your sketch
+  describe("A great Exam:");
+}
+let formas = [
+  () => noStroke(),
+  () => fill(220,180,0),
+  () => circle(0,0,150),
+  () => fill(60,220,60),
+  () => rect(-1,300,402,100),
+  () => fill(180,60,60),
+  () => rect(100,300-150,200,150),
+  () => rect(120,80,50,100),
+  () => fill(60,20,0),
+  () => rect(110,70,70,10),
+  () => triangle(75,150,325,150,200,60),
+  () => stroke(0),
+  () => fill(80,40,0),
+  () => rect(220,220,50,80),
+  () => fill(220),
+  () => rect(120,220,20,20),
+  () => rect(140,220,20,20),
+  () => rect(120,220-20,20,20),
+  () => rect(140,220-20,20,20),
+]
+let index = 18
+let last = undefined
+let grid = false
+function draw() {
+  background(0,180,200);
+  for (let i = 0; i <= index;i++){
+    if(formas[i].name === 'fill'){
+      if(last==="Right"){index+=1}
+      if(last==="Left"){index-=1}
+    }
+    formas[i]();
+  }
+  noStroke();
+  fill(220)
+  rect(0,400,400,200)
+  stroke(100, 100, 100, 255);
+  strokeWeight(1);
+  if(grid === true){
+    for (let x = 0; x <= 400; x += 10) {
+      line(x, 0, x, 400);
+    }
+    
+    for (let y = 0; y <= 400; y += 10) {
+      line(0, y, 400, y);
+    };
+  }
+  stroke(0)
+  fill(0)
+  textSize(16)
+  text("Aperte espaço para mostrar as linhas auxiliares",20,415)
+  text("Aperte ← para retroceder no desenho",20,435)
+  text("Aperte → para avançar no desenho",20,455)
+  text("Replicar o desenho acima",20,475)
+  text("Cada quadradinho representa um tamanho de 10x10",20,495)
+  
+  
+}
+
+function keyPressed() {
+  if (key === "ArrowRight") {
+    index = min(index + 1, formas.length - 1);
+    last = "Right"
+  }
+  if (key === " "){
+    grid = !grid
+  }
+  if (key === "ArrowLeft") {
+    index = max(index - 1, 0);
+    last = "Left"
+  }
+  
+}
+$$$
 
 
